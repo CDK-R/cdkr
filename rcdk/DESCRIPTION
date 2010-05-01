@@ -1,0 +1,14 @@
+Package: rcdk
+Version: 2.9.17
+Date: 2010-05-01
+Title: rcdk - Interface to the CDK Libraries
+Author: Rajarshi Guha <rajarshi.guha@gmail.com>
+Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
+Depends: R (>= 2.0.0), rJava, rcdklibs, fingerprint, methods
+Suggests: xtable
+License: LGPL 
+LazyLoad: yes
+Description: This package allows the user to access functionality in the
+ CDK, a Java framework for cheminformatics. This allows the user to load
+ molecules, evaluate fingerprints, calculate molecular descriptors and so on. 
+ In addition the CDK API allows the user to view structures in 2D.

@@ -1,0 +1,11 @@
+citHeader("To cite rcdk in publications use:")
+citEntry(entry = "article",
+	author = personList(person(first="Rajarshi",last="Guha", email="rajarshi.guha@gmail.com")),
+	journal = "Journal of Statistical Software",
+	number = 6,
+	title = "Chemical Informatics Functionality in R",
+	volume = 18,
+	year = 2007,
+	textVersion = "Guha, R. (2007). 'Chemical Informatics Functionality in R'. Journal of Statistical Software 6(18)"
+)
+

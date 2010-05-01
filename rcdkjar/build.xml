@@ -1,0 +1,49 @@
+<project name="Rcdk" default="jar" basedir=".">
+    <property file="build.properties"/>
+
+    <!-- compile options -->
+    <property name="build.sysclasspath" value="ignore"/>
+    <property name="build.compiler" value="javac1.6"/>
+    <property name="java.version" value="1.5"/>
+    <property name="debug" value="on"/>
+    <property name="deprecation" value="off"/>
+    <property name="optimization" value="off"/>
+
+    <property name="version" value="3.0"/>
+
+    <property name="jars" value="jars"/>
+    <property name="build.dir" value="classes"/>
+    <property name="src.dir" value="src"/>
+
+    <path id="project.class.path">
+        <fileset dir="${jars}">
+            <include name="**/*.jar"/>
+        </fileset>
+    </path>
+
+    <target name="compile" id="compile">
+        <mkdir dir="${build.dir}"/>
+        <javac srcdir="${src.dir}" destdir="${build.dir}"
+               debug="${debug}" deprecation="${deprecation}"
+               optimize="${optimization}" source="1.5" verbose="no">
+            <classpath refid="project.class.path"/>
+            <exclude name="org/guha/rcdk/test/**"/>
+            <exclude name="org/guha/rcdk/draw/**"/>
+        </javac>
+    </target>
+
+    <target name="clean" id="clean">
+        <delete quiet="true" dir="${build.dir}"/>
+    </target>
+
+    <target name="jar" id="jar" depends="compile">
+        <jar jarfile="rcdk.jar">
+            <fileset dir="${build.dir}/"
+                     excludes="**/test/*.class"/>
+        </jar>
+        <copy file="rcdk.jar" todir="../rcdk/inst/cont/" verbose="true"/>
+        <copy file="jars/com.objectplanet.image.PngEncoder.jar" todir="../rcdk/inst/cont/" verbose="true"/>
+    </target>
+
+
+</project>

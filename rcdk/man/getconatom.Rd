@@ -1,0 +1,25 @@
+\name{get.connected.atom}
+\alias{get.connected.atom}
+\title{
+	Get the atom connected to an atom in a bond
+}
+\description{
+	This function returns the atom that is connected to a
+	specified in a specified bond. Note that this function assumes
+	2-atom bonds, mainly because the CDK does not currently
+	support other types of bonds
+}
+\usage{
+get.connected.atom(bond, atom)
+}
+\arguments{
+  \item{bond}{A \code{jObjRef} representing an IBond object}
+  \item{atom}{A \code{jObjRef} representing an IAtom object}
+}
+\value{
+	A \code{jObjRef} representing an IAtom object
+}
+\keyword{programming}
+\seealso{
+  \code{\link{get.atoms}}}
+\author{Rajarshi Guha (\email{rajarshi.guha@gmail.com})}
