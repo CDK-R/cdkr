@@ -1,0 +1,2 @@
+v1.0 - Wrap CDK libs as a separate R package. Allows for faster development on the
+       interface package
