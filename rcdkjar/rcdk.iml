@@ -16,9 +16,7 @@
           <root url="jar://$MODULE_DIR$/jars/cdk-1.3.2-jcp.jar!/" />
         </CLASSES>
         <JAVADOC />
-        <SOURCES>
-          <root url="file://$MODULE_DIR$/../cdk/src/main" />
-        </SOURCES>
+        <SOURCES />
       </library>
     </orderEntry>
   </component>
