@@ -127,3 +127,10 @@ view.table <- function(molecules, dat, cellx = 200, celly = 200) {
 
 
 
+view.image.2d <- function(molecule, width=200, height=200) {
+  if (attr(molecule,"jclass") != "org/openscience/cdk/interfaces/IAtomContainer")
+    stop("Must supply an IAtomContainer object")
+  mi <- .jnew("org/guha/rcdk/view/MoleculeImage", molecule)
+  bytes <- .jcall(mi, "[B", "getBytes", as.integer(width), as.integer(height))
+  return(readPNG(bytes))
+}
