@@ -104,7 +104,7 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
     dnames <- .jcall(desc, "[Ljava/lang/String;", "getDescriptorNames")
     dnames <- gsub('-', '.', dnames)
     
-    descvals <- lapply(molecules, function(a,b,c,d) {
+    descvals <- lapply(molecules, function(a,b) {
       .jcall(b, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", a)
     }, b=desc)
 
