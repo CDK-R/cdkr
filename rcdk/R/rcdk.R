@@ -126,12 +126,13 @@ get.fingerprint <- function(molecule, type = 'standard', depth=6, size=1024) {
 
 get.atoms <- function(object) {
   if (is.null(attr(object, 'jclass')))
-    stop("object must be of class IAtomContainer or IObject or IBond")
+    stop("object must be of class IMolecule or IAtomContainer or IObject or IBond")
   
   if (attr(object, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer" &&
+      attr(object, 'jclass') != "org/openscience/cdk/interfaces/IMolecule" &&      
       attr(object, 'jclass') != "org/openscience/cdk/interfaces/IObject" &&
       attr(object, 'jclass') != "org/openscience/cdk/interfaces/IBond")
-    stop("object must be of class IAtomContainer or IObject or IBond")
+    stop("object must be of class IMolecule or IAtomContainer or IObject or IBond")
 
   natom <- .jcall(object, "I", "getAtomCount")
   atoms <- list()
@@ -186,5 +187,33 @@ do.isotopes <- function(molecule) {
                  'Lorg/openscience/cdk/config/IsotopeFactory;',
                  'getInstance', builder)
   .jcall(ifac, 'V', 'configureAtoms', molecule)
+}
 
+is.connected <- function(mol) {
+  .jcall("org.openscience.cdk.graph.ConnectivityChecker",
+         "Z", "isConnected", mol)
+}
+
+get.largest.component <- function(mol) {
+  isConnected <- .jcall("org.openscience.cdk.graph.ConnectivityChecker",
+                        "Z", "isConnected", mol)
+  if (isConnected) return(mol)
+  molSet <- .jcall("org.openscience.cdk.graph.ConnectivityChecker",
+                   "Lorg/openscience/cdk/interfaces/IMoleculeSet;",
+                   "partitionIntoMolecules", mol)
+  ncomp <- .jcall(molSet, "I", "getMoleculeCount")
+  max.idx <- -1
+  max.atom.count <- -1
+  for (i in seq_len(ncomp)) {
+    m <- .jcall(molSet, "Lorg/openscience/cdk/interfaces/IMolecule;",
+                "getMolecule", as.integer(i-1))
+    natom <- .jcall(m, "I", "getAtomCount")
+    if (natom > max.atom.count) {
+      max.idx <- i
+      max.atom.count <- natom
+    }
+  }
+  m <- .jcall(molSet, "Lorg/openscience/cdk/interfaces/IMolecule;",
+              "getMolecule", as.integer(max.idx-1))
+  .jcast(m, "org/openscience/cdk/interfaces/IAtomContainer")
 }
