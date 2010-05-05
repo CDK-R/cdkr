@@ -1,3 +1,4 @@
+\name{is.connected}
 \name{get.largest.component}
 \alias{is.connected}
 \title{
