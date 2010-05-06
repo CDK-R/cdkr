@@ -1,5 +1,5 @@
 \name{is.connected}
-\name{get.largest.component}
+\alias{get.largest.component}
 \alias{is.connected}
 \title{
 Get the Largest Component in a Disconnected Molecule
@@ -25,5 +25,6 @@ For \code{is.connected}, TRUE if the molecule is fully connected, FALSE otherwis
 m <- parse.smiles("CC.CCCCCC.CCCC")
 largest <- get.largest.component(m)
 length(get.atoms(largest)) == 6
+}
 \keyword{programming}
 \author{Rajarshi Guha (\email{rajarshi.guha@gmail.com})}

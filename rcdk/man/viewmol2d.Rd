@@ -52,9 +52,11 @@ PNG version of the 2D depiction.
   }
 \examples{
 m <- parse.smiles('c1ccccc1C(=O)NC')
+\dontrun{
 img <- view.image.2d(m, 100,100)
 plot(1:10, 1:10, pch=19)
 rasterImage(img, 0,8, 2,10)
+}
 }
 \seealso{
   \code{\link{view.table}}, \code{\link{rasterImage}}, \code{link{readPNG}}
