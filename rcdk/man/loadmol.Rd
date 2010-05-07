@@ -27,10 +27,18 @@ load.molecules(molfiles=NA, aromaticity = TRUE, typing = TRUE, isotopes = TRUE, 
 }
 \value{
   A list of CDK \code{Molecule} objects, which can be used in other rcdk 
-  functions
+  functions. 
+}
+\details{
+Note that if molecules are read in from formats that do not have rules for
+handling implicit hydrogens (such as MDL MOL), the molecule will not have
+implicit or explicit hydrogens. To add explicit hydrogens, make sure that the molecule
+has been typed (this is \code{TRUE} by default for this function) and then call 
+\code{\link{convert.implicit.to.explicit}}. On the other hand for a format 
+such as SMILES, implicit or explicit hydrogens will be present.
 }
 \seealso{
-  \code{\link{view.molecule.2d}}
+  \code{\link{view.molecule.2d}}, \code{\linke{convert.implicit.to.explicit}}
 }
 \keyword{programming}
 

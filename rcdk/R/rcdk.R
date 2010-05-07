@@ -88,6 +88,16 @@ convert.implicit.to.explicit <- function(molecule) {
       attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object")
   }
+  if (any(is.null(unlist(lapply(get.atoms(molecule), .jcall, returnSig = "Ljava/lang/Integer;", method="getHydrogenCount"))))) {
+    ## add them in
+    dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
+                   "Lorg/openscience/cdk/DefaultChemObjectBuilder;",
+                   "getInstance")
+    dcob <- .jcast(dcob, "org/openscience/cdk/interfaces/IChemObjectBuilder")  
+    hadder <- .jcall("org/openscience/cdk/tools/CDKHydrogenAdder", "Lorg/openscience/cdk/tools/CDKHydrogenAdder;",
+                     "getInstance", dcob)
+    .jcall(hadder, "V", "addImplicitHydrogens", molecule)
+  }
   .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator', 'V', 'convertImplicitToExplicitHydrogens', molecule)
 }
 

@@ -31,9 +31,15 @@ convert.implicit.to.explicit(molecule)
 
 	\code{convert.implicit.to.explicit} has no return value
 }
+\details{
+In some cases, a molecule may not have any hydrogens (such as when read
+in from an MDL MOL file that did not have hydrogens). In such cases, this method
+will add implicit hydrogens and then convert them to explicit ones. In additio, for
+such cases, make sure that the molecule has been typed beforehand.
+}
 \keyword{programming}
 \seealso{
-  \code{\link{get.atoms}}
+  \code{\link{get.atoms}}, \code{\link{do.typing}}
 }
 \examples{
   m <- parse.smiles('c1ccccc1')
