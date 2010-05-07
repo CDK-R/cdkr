@@ -33,8 +33,9 @@ convert.implicit.to.explicit(molecule)
 }
 \details{
 In some cases, a molecule may not have any hydrogens (such as when read
-in from an MDL MOL file that did not have hydrogens). In such cases, this method
-will add implicit hydrogens and then convert them to explicit ones. In additio, for
+in from an MDL MOL file that did not have hydrogens). In such cases, 
+\code{\link{convert.implicit.to.explicit}} 
+will add implicit hydrogens and then convert them to explicit ones. In addition, for
 such cases, make sure that the molecule has been typed beforehand.
 }
 \keyword{programming}

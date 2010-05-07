@@ -38,7 +38,7 @@ has been typed (this is \code{TRUE} by default for this function) and then call
 such as SMILES, implicit or explicit hydrogens will be present.
 }
 \seealso{
-  \code{\link{view.molecule.2d}}, \code{\linke{convert.implicit.to.explicit}}
+  \code{\link{view.molecule.2d}}, \code{\link{convert.implicit.to.explicit}}
 }
 \keyword{programming}
 
