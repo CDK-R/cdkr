@@ -13,7 +13,7 @@
   return(atom)
 }
 get.point3d <- function(atom) {
-  atom <- valid.atom(atom)
+  atom <- .valid.atom(atom)
   p3d <- .jcall(atom, "Ljavax/vecmath/Point3d;", "getPoint3d")
   if (is.jnull(p3d)) return( c(NA,NA,NA) )
   else {
