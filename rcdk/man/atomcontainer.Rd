@@ -1,6 +1,7 @@
 \name{Molecule}
 \alias{get.exact.mass}
 \alias{get.natural.mass}
+\alias{is.neutral}
 \alias{convert.implicit.to.explicit}
 \title{
 	Operations on molecules
@@ -15,11 +16,15 @@
 	\code{convert.implicit.explicit} converts implicit hydrogens
 	to explicit hydrogens. This function does not return any value
 	but rather modifies the molecule object passed to it
+
+	\code{is.neutral} returns \code{TRUE} if all atoms in the molecule
+	have a formal charge of 0, otherwise \code{FALSE}
 }
 \usage{
 get.exact.mass(molecule)
 get.natural.mass(molecule)
 convert.implicit.to.explicit(molecule)
+is.neutral(molecule)
 }
 \arguments{
   \item{molecule}{A \code{jObjRef} representing an IAtomContainer or IMolecule object}
@@ -30,6 +35,8 @@ convert.implicit.to.explicit(molecule)
 	\code{get.natural.mass} returns a numeric
 
 	\code{convert.implicit.to.explicit} has no return value
+
+	\code{is.neutral} returns a boolean.
 }
 \details{
 In some cases, a molecule may not have any hydrogens (such as when read
@@ -57,5 +64,7 @@ such cases, make sure that the molecule has been typed beforehand.
   get.natural.mass(m) 
   do.isotopes(m) # Configure isotopes of newly added hydrogens
   get.exact.mass(m)
+
+  is.neutral(m)
 }
 \author{Rajarshi Guha (\email{rajarshi.guha@gmail.com})}

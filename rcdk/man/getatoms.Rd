@@ -1,5 +1,6 @@
 \name{get.atoms}
 \alias{get.atoms}
+\alias{get.atom.count}
 \title{
 	Get the atoms from a molecule or bond
 }
@@ -9,13 +10,16 @@
 }
 \usage{
 get.atoms(object)
+get.atom.count(molecule)
 }
 \arguments{
   \item{object}{A \code{jObjRef} representing an \code{IAtomContainer},
   \code{IMolecule} or \code{IBond} object}
+  \item{molecule}{A \code{jobjRef} representing an \code{IAtomContainer}}
 }
 \value{
-  A list containing \code{jobjRef}'s to a CDK \code{IAtom} object
+  A list containing \code{jobjRef}'s to a CDK \code{IAtom} object or else
+the number of atoms in the molecule
 }
 \keyword{programming}
 \seealso{

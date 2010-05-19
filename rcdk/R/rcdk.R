@@ -199,6 +199,16 @@ do.isotopes <- function(molecule) {
   .jcall(ifac, 'V', 'configureAtoms', molecule)
 }
 
+is.neutral <- function(molecule) {
+  if (is.null(attr(molecule, 'jclass')))
+    stop("molecule must be of class IAtomContainer or IMolecule")
+  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
+    stop("molecule must be of class IAtomContainer or IMolecule")
+  atoms <- get.atoms(molecule)
+  fc <- unlist(lapply(atoms, get.formal.charge))
+  return(all(fc == 0))
+}
+
 is.connected <- function(mol) {
   .jcall("org.openscience.cdk.graph.ConnectivityChecker",
          "Z", "isConnected", mol)
@@ -226,4 +236,13 @@ get.largest.component <- function(mol) {
   m <- .jcall(molSet, "Lorg/openscience/cdk/interfaces/IMolecule;",
               "getMolecule", as.integer(max.idx-1))
   .jcast(m, "org/openscience/cdk/interfaces/IAtomContainer")
+}
+
+get.atom.count <- function(molecule) {
+  if (is.null(attr(molecule, 'jclass')))
+    stop("molecule must be of class IAtomContainer or IMolecule")
+  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
+    stop("molecule must be of class IAtomContainer or IMolecule")
+
+  .jcall(molecule, "I", "getAtomCount")
 }

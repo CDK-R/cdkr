@@ -4,6 +4,8 @@
 \alias{get.point2d}
 \alias{get.atomic.number}
 \alias{get.hydrogen.count}
+\alias{get.charge}
+\alias{get.formal.charge}
 \alias{is.aromatic}
 \alias{is.aliphatic}
 \alias{is.in.ring}
@@ -23,6 +25,12 @@
 Depending on where the molecule was read from this may be \code{NULL} or an integer
 greater than or equal to 0
 
+\code{get.charge} returns the partial charge on the atom. If charges have not been set the
+return value is \code{NULL}, otherwise the appropriate charge.
+
+\code{get.formal.charge} is returns the formal charge on the atom. By default the formal
+charge will be 0 (i.e., \code{NULL} is never returned)
+
 \code{is.aromatic} returns \code{TRUE} if the atom is aromatic, \code{FALSE} 
 otherwise
 
@@ -38,12 +46,14 @@ get.point3d(atom)
 get.point2d(atom)
 get.atomic.number(atom)
 get.hydrogen.count(atom)
+get.charge(atom)
+get.formal.charge(atom)
 is.aromatic(atom)
 is.aliphatic(atom)
 is.in.ring(atom)
 }
 \arguments{
-  \item{atom}{A \code{jObjRef} representing an IAtom object}
+  \item{atom}{A \code{jobjRef} representing an IAtom object}
 }
 \value{
 	In the case of \code{get.point3d} the return value is a
