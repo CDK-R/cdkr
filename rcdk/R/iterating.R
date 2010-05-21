@@ -17,7 +17,7 @@ iload.molecules<- function(molfile, type = 'smi', aromaticity = TRUE, typing = T
   hasNx <- function() {
     hasNext <<- .jcall(sreader, "Z", "hasNext")
     if (hasNext) {
-      mol <<-  .jcall(sreader, "Ljava/lang/Object;", "next")
+      mol <<- .jcall(sreader, "Ljava/lang/Object;", "next")
       mol <<- .jcast(mol, "org/openscience/cdk/interfaces/IAtomContainer")
       if (aromaticity) do.aromaticity(mol)
       if (typing) do.typing(mol)
