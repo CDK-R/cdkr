@@ -141,11 +141,10 @@ Molecule visualization is performed using the
 list of multiple molecules, it is simply
 
 <<eval=FALSE>>=
-sp <- get.smiles.parser()
 smiles <- c('CCC', 'CCN', 'CCN(C)(C)',
             'c1ccccc1Cc1ccccc1',
             'C1CCC1CC(CN(C)(C))CC(=O)CC')
-mols <- sapply(smiles, parse.smiles, parser=sp)
+mols <- parse.smiles(smiles)
 view.molecule.2d(mols[[1]])
 view.molecule.2d(mols)
 @ 
@@ -200,7 +199,7 @@ key-value paradigm, where the key should be of class
 \texttt{double}, \texttt{character} or \texttt{jobjRef}. Obviously,
 after setting a property, you can get a property by its key.
 <<>>=
-mol <- parse.smiles('c1ccccc1', parser=sp)
+mol <- parse.smiles('c1ccccc1')[[1]]
 set.property(mol, "title", "Molecule 1")
 set.property(mol, "hvyAtomCount", 6)
 get.property(mol, "title")
@@ -228,7 +227,7 @@ of a molecule. The code below gets the atoms and bonds as lists of
 \Rpackage{rJava} or via other methods of this package.
 
 <<>>=
-mol <- parse.smiles('c1ccccc1C(Cl)(Br)c1ccccc1')
+mol <- parse.smiles('c1ccccc1C(Cl)(Br)c1ccccc1')[[1]]
 atoms <- get.atoms(mol)
 bonds <- get.bonds(mol)
 cat('No. of atoms =', length(atoms), '\n')
@@ -280,7 +279,7 @@ modeled after the same method in the \Rpackage{base} package. An
 example of its usage would be to identify molecules that contain a
 carbon atom that has exactly two bonded neighbors.
 <<<eval=TRUE>>=
-mols <- sapply(c('CC(C)(C)C','c1ccc(Cl)cc1C(=O)O', 'CCC(N)(N)CC'), parse.smiles)
+mols <- parse.smiles(c('CC(C)(C)C','c1ccc(Cl)cc1C(=O)O', 'CCC(N)(N)CC'))
 query <- '[#6D2]'
 hits <- match(query, mols)
 print(hits)
@@ -331,7 +330,7 @@ Also note that since a descriptor might belong to more than one
 category, we should obtain a unique set of descriptor names
 <<>>=
 data(bpdata)
-mols <- sapply(bpdata[,1], parse.smiles, parser=sp)
+mols <- parse.smiles(bpdata[,1])
 descNames <- unique(unlist(sapply(get.desc.categories(), get.desc.names)))
 descs <- eval.desc(mols, descNames) 
 class(descs)
@@ -353,7 +352,7 @@ to go through \texttt{eval.desc}.\footnote{Note that AlogP and XlogP
   may not be true if the molecules were obtained from SMILES}.
 
 <<>>=
-mol <- parse.smiles('CC(=O)CC(=O)NCN')
+mol <- parse.smiles('CC(=O)CC(=O)NCN')[[1]]
 convert.implicit.to.explicit(mol)
 get.tpsa(mol)
 get.xlogp(mol)
@@ -424,11 +423,10 @@ When using \Rpackage{rcdk} to evaluate fingerprints, you will need the
 To generate the fingerprints, we must first obtain molecule
 objects. Thus for example,
 <<>>=
-sp <- get.smiles.parser()
 smiles <- c('CCC', 'CCN', 'CCN(C)(C)', 
             'c1ccccc1Cc1ccccc1',
             'C1CCC1CC(CN(C)(C))CC(=O)CC')
-mols <- sapply(smiles, parse.smiles, parser=sp)
+mols <- parse.smiles(smiles)
 fp <- get.fingerprint(mols[[1]], type='maccs')
 @ 
 
@@ -438,7 +436,7 @@ same name. A simple example is to perform a hierarchical clustering of
 the first 50 structures in the BP dataset.  
 
 <<>>= mols <-
-mols <- sapply(bpdata[1:50,1], parse.smiles, parser=sp) 
+mols <- parse.smiles(bpdata[1:50,1]) 
 fps <- lapply(mols, get.fingerprint, type='extended') 
 fp.sim <- fp.sim.matrix(fps, method='tanimoto') 
 fp.dist <- 1 - fp.sim 
@@ -472,8 +470,8 @@ accomplished with molecular descriptors, in which case you'd probably
 evaluate the Euclidean distance between descriptor vectors.
 
 <<>>=
-query.mol <- parse.smiles('CC(=O)', parser=sp)
-target.mols <- sapply(bpdata[,1], parse.smiles, parser=sp)
+query.mol <- parse.smiles('CC(=O)')[[1]]
+target.mols <- parse.smiles(bpdata[,1])
 query.fp <- get.fingerprint(query.mol, type='maccs')
 target.fps <- lapply(target.mols, get.fingerprint, type='maccs')
 sims <- unlist(lapply(target.fps, 
@@ -516,7 +514,7 @@ function.
 
 <<>>=
 sp <- get.smiles.parser()
-molecule <- sapply('N', parse.smiles, parser=sp)[[1]]
+molecule <- parse.smiles('N')[[1]]
 convert.implicit.to.explicit(molecule)
 formula <- get.mol2formula(molecule,charge=0)
 @ 
