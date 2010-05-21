@@ -95,17 +95,13 @@ Another common way to obtain molecule objects is by parsing SMILES
 strings. The simplest way to do this is
 <<>>=
 smile <- 'c1ccccc1CC(=O)C(N)CC1CCCCOC1'
-mol <- parse.smiles(smile)
+mol <- parse.smiles(smile)[[1]]
 @ 
-While this usage is correct, it is not particularly efficient. This is
-because the method must instantiate a parser each time it is
-called. This takes some time and will also use memory. A better way is
-to create the parser yourself and then supply it to
-\Rfunction{parse.smiles}. This makes parsing multiple SMILES much more efficient:
+Usage is more efficient when multiple SMILE are supplied, since then a single
+SMILES parser object is used to parse all the supplied SMILES.
 <<>>=
 smiles <- c('CCC', 'c1ccccc1', 'CCCC(C)(C)CC(=O)NC')
-sp <- get.smiles.parser()
-mols <- sapply(smiles, parse.smiles, parser=sp)
+mols <- parse.smiles(smiles)
 @ 
 Given a list of molecule objects, it is possible to serialize them to
 a file in some specified format. Currently, the only output formats

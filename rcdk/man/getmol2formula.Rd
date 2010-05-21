@@ -18,8 +18,7 @@ get.mol2formula(molecule, charge=0)
 	Objects of class MolecularFormulaManipulator, from the \code{IMolecularFormulaManipulator} package
 }
 \examples{
-sp <- get.smiles.parser()
-molecule <- sapply('N', parse.smiles, parser=sp)[[1]]
+molecule <- parse.smiles("N")[[1]]
 convert.implicit.to.explicit(molecule)
 formula <- get.mol2formula(molecule,charge=0)
 }

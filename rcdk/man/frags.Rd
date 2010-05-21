@@ -27,7 +27,7 @@ representing the fragments. Otherwise it is a \code{list} of \code{IAtomContaine
 objects}
 }
 \examples{
-mol <- parse.smiles('c1ccc(cc1)CN(c2cc(ccc2[N+](=O)[O-])c3c(nc(nc3CC)N)N)C')
+mol <- parse.smiles('c1ccc(cc1)CN(c2cc(ccc2[N+](=O)[O-])c3c(nc(nc3CC)N)N)C')[[1]]
 f <- get.fragmenter()
 frags.mols <- get.murcko.fragments(mol, f, as.smiles=FALSE)
 frags <- get.murcko.fragments(mol, f, as.smiles=TRUE)

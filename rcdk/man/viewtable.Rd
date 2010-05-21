@@ -31,11 +31,10 @@ view.table(molecules, dat, cellx = 200, celly = 200)
   Linux and Windows.
 }
 \examples{
-sp <- get.smiles.parser()
 smiles <- c('CCC', 'CCN', 'CCN(C)(C)',
             'c1ccccc1Cc1ccccc1',
             'C1CCC1CC(CN(C)(C))CC(=O)CC')
-mols <- sapply(smiles, parse.smiles, parser=sp)
+mols <- parse.smiles(smiles)
 dframe <- data.frame(x = runif(4),
                      toxicity = factor(c('Toxic', 'Toxic', 'Nontoxic', 'Nontoxic')),
                      solubility = c('yes', 'yes', 'no', 'yes'))

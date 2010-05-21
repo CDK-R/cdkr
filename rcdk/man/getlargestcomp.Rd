@@ -22,7 +22,7 @@ largest is returned. Otherwise, the molecule itself is returned.
 For \code{is.connected}, TRUE if the molecule is fully connected, FALSE otherwise
 }
 \examples{
-m <- parse.smiles("CC.CCCCCC.CCCC")
+m <- parse.smiles("CC.CCCCCC.CCCC")[[1]]
 largest <- get.largest.component(m)
 length(get.atoms(largest)) == 6
 }

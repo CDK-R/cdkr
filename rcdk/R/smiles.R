@@ -13,18 +13,19 @@ get.smiles.parser <- function() {
   dcob <- .jcast(dcob, "org/openscience/cdk/interfaces/IChemObjectBuilder")  
   .jnew("org/openscience/cdk/smiles/SmilesParser", dcob)
 }
-parse.smiles <- function(smiles, parser) {
+parse.smiles <- function(smiles) {
   if (!is.character(smiles)) {
-    stop("Must supply a SMILES string")
+    stop("Must supply a character vector of SMILES strings")
   }
-
-  mol <- NA
-  if (missing(parser)) {
-    parser <- get.smiles.parser()
-    mol <- .jcall(parser, "Lorg/openscience/cdk/interfaces/IMolecule;", "parseSmiles", smiles)    
-  } else {
-    mol <- .jcall(parser, "Lorg/openscience/cdk/interfaces/IMolecule;", "parseSmiles", smiles)
-  }
-  if (is.null(mol)) return(NA)
-  else return(.jcast(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+  parser <- get.smiles.parser()
+  returnValue <- sapply(smiles, 
+      function(x) {
+        mol <- .jcall(parser, "Lorg/openscience/cdk/interfaces/IMolecule;", "parseSmiles", x)    
+        if (is.null(mol)){
+          return(NA)
+        } else {
+          return(.jcast(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+        }
+      })
+  return(returnValue)
 }

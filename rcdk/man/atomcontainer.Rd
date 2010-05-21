@@ -50,7 +50,7 @@ such cases, make sure that the molecule has been typed beforehand.
   \code{\link{get.atoms}}, \code{\link{do.typing}}
 }
 \examples{
-  m <- parse.smiles('c1ccccc1')
+  m <- parse.smiles('c1ccccc1')[[1]]
 
   ## Need to configure the molecule
   do.aromaticity(m)

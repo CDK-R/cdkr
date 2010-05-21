@@ -19,7 +19,7 @@ get.property(molecule, key)
 }
 \examples{
 smiles <- 'c1ccccc1'
-mol <- parse.smiles(smiles)
+mol <- parse.smiles(smiles)[[1]]
 set.property(mol, 'prop1', 23.45)
 set.property(mol, 'prop2', 'inactive')
 get.property(mol, 'prop1')

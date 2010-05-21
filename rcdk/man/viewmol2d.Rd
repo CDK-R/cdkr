@@ -51,7 +51,7 @@ PNG version of the 2D depiction.
   Linux and Windows.
   }
 \examples{
-m <- parse.smiles('c1ccccc1C(=O)NC')
+m <- parse.smiles('c1ccccc1C(=O)NC')[[1]]
 \dontrun{
 img <- view.image.2d(m, 100,100)
 plot(1:10, 1:10, pch=19)

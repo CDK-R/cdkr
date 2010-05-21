@@ -1,11 +1,11 @@
 test.set.props <- function() {
-  m <- parse.smiles("CCCC")
+  m <- parse.smiles("CCCC")[[1]]
   set.property(m, "foo", "bar")
   checkEquals(get.property(m,"foo"), "bar")
 }
 
 test.get.properties <- function() {
-  m <- parse.smiles("CCCC")
+  m <- parse.smiles("CCCC")[[1]]
   set.property(m, "foo", "bar")
   set.property(m, "baz", 1.23)  
   props <- get.properties(m)
