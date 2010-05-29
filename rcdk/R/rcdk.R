@@ -118,12 +118,14 @@ get.fingerprint <- function(molecule, type = 'standard', depth=6, size=1024) {
            extended = .jnew('org/openscience/cdk/fingerprint/ExtendedFingerprinter', size, depth),
            graph = .jnew('org/openscience/cdk/fingerprint/GraphOnlyFingerprinter', size, depth),
            maccs = .jnew('org/openscience/cdk/fingerprint/MACCSFingerprinter'),
+           pubchem = .jnew('org/openscience/cdk/fingerprint/PubchemFingerprinter'),
            estate = .jnew('org/openscience/cdk/fingerprint/EStateFingerprinter'))
   if (is.null(fingerprinter)) stop("Invalid fingerprint type specified")
   
   bitset <- .jcall(fingerprinter, "Ljava/util/BitSet;", "getFingerprint", molecule)
   if (type == 'maccs') nbit <- 166
   else if (type == 'estate') nbit <- 79
+  else if (type == 'pubchem') nbit <- 881
   else nbit <- size
   
   bitset <- .jcall(bitset, "S", "toString")

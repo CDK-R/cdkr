@@ -18,6 +18,7 @@
   \item maccs - The popular 166 bit MACCS keys described by MDL
   \item estate - 79 bit fingerprints corresponding to the E-State atom
   types described by Hall and Kier
+  \item pubchem - 881 bit fingerprints defined by PubChem
   }
 
   Depending on whether the input is a single \code{IAtomContainer}

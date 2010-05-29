@@ -1,0 +1,6 @@
+2010-05-29  Rajarshi Guha  <guhar@OfficeMac.local>
+
+	* man/getfp.Rd: Updated docs for the newly included Pubchem fingerprint
+
+	* R/rcdk.R: Updated fingerprinter to support the Pubchem fingerprints
+
