@@ -1,0 +1,28 @@
+8
+
+dir
+5
+svn+ssh://rajarshi@svn.r-forge.r-project.org/svnroot/fingerprint/pkg/tests
+svn+ssh://rajarshi@svn.r-forge.r-project.org/svnroot/fingerprint
+
+
+
+2009-10-31T16:50:14.472574Z
+5
+rajarshi
+
+
+svn:special svn:externals svn:needs-lock
+
+doRUnit.R
+file
+
+
+
+
+2009-10-31T16:45:37.000000Z
+4c2ef966480892f12e79a4c6729efa23
+2009-10-31T16:50:14.472574Z
+5
+rajarshi
+
