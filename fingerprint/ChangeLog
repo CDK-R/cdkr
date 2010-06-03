@@ -1,0 +1,10 @@
+2010-06-02  Rajarshi  Guha  <rguha@Macintosh-5.local>
+
+	* R/balance.R (balance): Added a method to generate balanced fingerprints, which have 
+	50% bit density, but are 2x the size of the input fingerprints.
+
+	* R/bitimp.R (bit.importance): Added a function to evaluate the importance of each bit
+	in a binary fingerprint in terms of the Kullback Liebler divergence between a set of
+	actives and a background collection.
+	
+
