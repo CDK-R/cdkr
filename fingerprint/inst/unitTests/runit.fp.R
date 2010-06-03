@@ -128,6 +128,6 @@ test.fp.sim.matrix <- function() {
 test.fp.balance <- function() {
   fp1 <- new("fingerprint", bits=c(1,2,3), nbit=6)  
   fp2 <- balance(fp1)
-  checkEquals(12, length(fp1))
+  checkTrue(12 == length(fp2))
   checkEquals(c(1,2,3,10,11,12), fp2@bits)
 }
