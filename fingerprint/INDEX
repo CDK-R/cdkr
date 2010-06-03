@@ -15,5 +15,8 @@ fp.sim.matrix           Calculates a Similarity Matrix for a Set of
 fp.to.matrix            Converts a List of Fingerprints to a Matrix
 length                  Fingerprint Bit Length
 random.fingerprint      Generate Randomized Fingerprints
+bit.spectrum		Generate a Bit Spectrum from a List of Fingerprints
+bit.importance		Evaluate the Discriminatory Power of Individual Bits in a Binary Fingerprint
+balance			Generate a Balanced Code Fingerprint
 show,fingerprint-method
                         String Representation of a Fingerprint

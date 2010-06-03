@@ -124,3 +124,10 @@ test.fp.sim.matrix <- function() {
                 c(0.38,0.57,1))
     checkTrue(all(sm == am))
 }
+
+test.fp.balance <- function() {
+  fp1 <- new("fingerprint", bits=c(1,2,3), nbit=6)  
+  fp2 <- balance(fp1)
+  checkEquals(12, length(fp1))
+  checkEquals(c(1,2,3,10,11,12), fp2@bits)
+}
