@@ -103,6 +103,23 @@ SMILES parser object is used to parse all the supplied SMILES.
 smiles <- c('CCC', 'c1ccccc1', 'CCCC(C)(C)CC(=O)NC')
 mols <- parse.smiles(smiles)
 @ 
+If you plan on parsing a large number of SMILES, you may run into
+memory issues, due to the large size of \texttt{IAtomContainer}
+objects. In such a case, it can be useful to call the Java and R garbage
+collectors explicitly at the appropriate time. In addition it can be useful
+to explicitly allocate a large amount of memory for the JVM. For example,
+<<eval=FALSE>>=
+options("java.parameters"=c("-Xmx4000m"))
+library(rcdk)
+
+for (smile in smiles) {
+  m <- parse.smiles(smile)
+  ## perform operations on this molecule
+  
+  jcall("java/lang/System","V","gc")
+  gc()
+}
+@ 
 Given a list of molecule objects, it is possible to serialize them to
 a file in some specified format. Currently, the only output formats
 are SMILES or SDF. To write molecules to a disk file in SDF format:
