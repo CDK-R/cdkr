@@ -55,7 +55,7 @@ get.formal.charge <- function(atom) {
 
 get.hydrogen.count <- function(atom) {
   atom <- .valid.atom(atom)  
-  .jcall(.jcall(atom, "Ljava/lang/Integer;", "getHydrogenCount"), "I", "intValue")
+  .jcall(.jcall(atom, "Ljava/lang/Integer;", "getImplicitHydrogenCount"), "I", "intValue")
 }
 
 is.aromatic <- function(atom) {

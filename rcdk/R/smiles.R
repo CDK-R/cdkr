@@ -8,9 +8,8 @@ get.smiles <- function(molecule) {
 
 get.smiles.parser <- function() {
   dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
-                 "Lorg/openscience/cdk/DefaultChemObjectBuilder;",
+                 "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
                  "getInstance")
-  dcob <- .jcast(dcob, "org/openscience/cdk/interfaces/IChemObjectBuilder")  
   .jnew("org/openscience/cdk/smiles/SmilesParser", dcob)
 }
 parse.smiles <- function(smiles) {

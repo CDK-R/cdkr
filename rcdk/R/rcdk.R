@@ -25,6 +25,9 @@ require(rJava, quietly=TRUE)
 }
 
 
+cdk.version <- function() {
+  .jcall("org.openscience.cdk.CDK", "S", "getVersion")
+}
 
 remove.hydrogens <- function(molecule) {
   if (is.null(attr(molecule, 'jclass')) ||
@@ -88,12 +91,11 @@ convert.implicit.to.explicit <- function(molecule) {
       attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object")
   }
-  if (any(is.null(unlist(lapply(get.atoms(molecule), .jcall, returnSig = "Ljava/lang/Integer;", method="getHydrogenCount"))))) {
+  if (any(is.null(unlist(lapply(get.atoms(molecule), .jcall, returnSig = "Ljava/lang/Integer;", method="getImplicitHydrogenCount"))))) {
     ## add them in
     dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
-                   "Lorg/openscience/cdk/DefaultChemObjectBuilder;",
+                   "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
                    "getInstance")
-    dcob <- .jcast(dcob, "org/openscience/cdk/interfaces/IChemObjectBuilder")  
     hadder <- .jcall("org/openscience/cdk/tools/CDKHydrogenAdder", "Lorg/openscience/cdk/tools/CDKHydrogenAdder;",
                      "getInstance", dcob)
     .jcall(hadder, "V", "addImplicitHydrogens", molecule)

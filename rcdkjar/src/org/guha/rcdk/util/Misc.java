@@ -137,7 +137,7 @@ public class Misc {
                         reader = new SMILESReader(new FileReader(input));
                     }
                 }
-                IChemFile content = (IChemFile) reader.read(builder.newChemFile());
+                IChemFile content = (IChemFile) reader.read(builder.newInstance(IChemFile.class));
                 if (content == null) continue;
 
                 List<IAtomContainer> c = ChemFileManipulator.getAllAtomContainers(content);

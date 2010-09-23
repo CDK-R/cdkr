@@ -11,6 +11,7 @@ import org.openscience.cdk.renderer.Renderer;
 import org.openscience.cdk.renderer.font.AWTFontManager;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator;
 import org.openscience.cdk.renderer.generators.BasicBondGenerator;
+import org.openscience.cdk.renderer.generators.BasicSceneGenerator;
 import org.openscience.cdk.renderer.generators.IGenerator;
 import org.openscience.cdk.renderer.visitor.AWTDrawVisitor;
 import org.openscience.cdk.smiles.SmilesParser;
@@ -50,8 +51,9 @@ public class MoleculeImage {
 
         Rectangle drawArea = new Rectangle(width, height);
         Image image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-
-        List<IGenerator> generators = new ArrayList<IGenerator>();
+        
+        List<IGenerator<IAtomContainer>> generators = new ArrayList<IGenerator<IAtomContainer>>();
+        generators.add(new BasicSceneGenerator());
         generators.add(new BasicBondGenerator());
         generators.add(new BasicAtomGenerator());
 

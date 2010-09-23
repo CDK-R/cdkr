@@ -24,8 +24,7 @@ get.formula <- function(mf, charge=0) {
     stop("Must supply a Formula string");
   }else{
     dcob <- .cdkFormula.createChemObject()
-    molecularformula <- .jcall(dcob,"Lorg/openscience/cdk/interfaces/IMolecularFormula;",
-                               "newMolecularFormula");
+    molecularformula <- .cdkFormula.createFormulaObject()
 ##    molecularformula <- .jcast(.jnew("org/openscience/cdk/formula/MolecularFormula"),
 ##                               "org/openscience/cdk/interfaces/IMolecularFormula")
     molecularFormula <- .jcall(manipulator,
@@ -257,17 +256,19 @@ generate.formula <- function(mass, window=0.01,
 
 .cdkFormula.createChemObject <- function(){
   dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
-                 "Lorg/openscience/cdk/DefaultChemObjectBuilder;",
+                 "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
                  "getInstance")
-  dcob <- .jcast(dcob, "org/openscience/cdk/interfaces/IChemObjectBuilder")  
   dcob
 }
 .cdkFormula.createFormulaObject <- function(){
   dcob <- .cdkFormula.createChemObject()
-  cfob <- .jcall(dcob,"Lorg/openscience/cdk/interfaces/IMolecularFormula;","newMolecularFormula");  
-  cfob
-##  .jcast(.jnew("org/openscience/cdk/formula/MolecularFormula"),
-##         "org/openscience/cdk/interfaces/IMolecularFormula")
+##   cfob <- .jcall(dcob,
+##                  "Lorg/openscience/cdk/interfaces/IMolecularFormula;",
+##                  "newInstance",
+##                  );  
+##   cfob
+ .jcast(.jnew("org/openscience/cdk/formula/MolecularFormula"),
+        "org/openscience/cdk/interfaces/IMolecularFormula")
 }
 
 #############################################################

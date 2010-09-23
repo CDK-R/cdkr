@@ -289,14 +289,14 @@
   </component>
   <component name="ProjectFileVersion" converted="true" />
   <component name="ProjectKey">
-    <option name="state" value="svn+ssh://rajarshi@svn.r-forge.r-project.org/svnroot/rcdk/rcdk.ipr" />
+    <option name="state" value="project:///Users/guhar/src/cdkr/rcdkjar/rcdk.ipr" />
   </component>
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/rcdk.iml" filepath="$PROJECT_DIR$/rcdk.iml" />
     </modules>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_5" assert-keyword="true" jdk-15="true" project-jdk-name="1.5" project-jdk-type="JavaSDK" />
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_6" assert-keyword="true" jdk-15="true" project-jdk-name="1.6" project-jdk-type="JavaSDK" />
   <component name="ResourceManagerContainer">
     <option name="myResourceBundles">
       <value>
@@ -348,14 +348,11 @@
   <component name="libraryTable">
     <library name="Deps">
       <CLASSES>
-        <root url="jar://$PROJECT_DIR$/jars/cdk.jar!/" />
         <root url="jar://$PROJECT_DIR$/jars/com.objectplanet.image.PngEncoder.jar!/" />
-        <root url="jar://$PROJECT_DIR$/jars/cdk-jchempaint-8.jar!/" />
+        <root url="jar://$PROJECT_DIR$/jars/cdk-1.3.6.jar!/" />
       </CLASSES>
       <JAVADOC />
-      <SOURCES>
-        <root url="file://$PROJECT_DIR$/../cdk/src/main" />
-      </SOURCES>
+      <SOURCES />
     </library>
   </component>
 </project>
