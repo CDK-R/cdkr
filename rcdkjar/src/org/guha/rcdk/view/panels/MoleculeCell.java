@@ -1,28 +1,26 @@
 package org.guha.rcdk.view.panels;
 
+import org.openscience.cdk.DefaultChemObjectBuilder;
+import org.openscience.cdk.exception.InvalidSmilesException;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.interfaces.IMolecule;
-import org.openscience.cdk.smiles.SmilesParser;
-import org.openscience.cdk.DefaultChemObjectBuilder;
-import org.openscience.cdk.renderer.Renderer;
-import org.openscience.cdk.renderer.visitor.AWTDrawVisitor;
+import org.openscience.cdk.layout.StructureDiagramGenerator;
+import org.openscience.cdk.renderer.AtomContainerRenderer;
 import org.openscience.cdk.renderer.font.AWTFontManager;
-import org.openscience.cdk.renderer.generators.IGenerator;
-import org.openscience.cdk.renderer.generators.RingGenerator;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator;
 import org.openscience.cdk.renderer.generators.BasicSceneGenerator;
-import org.openscience.cdk.layout.StructureDiagramGenerator;
-import org.openscience.cdk.exception.InvalidSmilesException;
+import org.openscience.cdk.renderer.generators.IGenerator;
+import org.openscience.cdk.renderer.generators.RingGenerator;
+import org.openscience.cdk.renderer.visitor.AWTDrawVisitor;
+import org.openscience.cdk.smiles.SmilesParser;
 
-import javax.swing.JPanel;
-import javax.swing.BorderFactory;
-import javax.swing.JFrame;
-import java.util.ArrayList;
-import java.awt.Dimension;
+import javax.swing.*;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.util.ArrayList;
 
 /**
  * A one line summary.
@@ -37,7 +35,7 @@ public class MoleculeCell extends JPanel {
 
     private IAtomContainer atomContainer;
 
-    private Renderer renderer;
+    private AtomContainerRenderer renderer;
 
     private boolean isNew;
 
@@ -55,7 +53,7 @@ public class MoleculeCell extends JPanel {
         generators.add(new RingGenerator());
         generators.add(new BasicAtomGenerator());
 
-        this.renderer = new Renderer(generators, new AWTFontManager());
+        this.renderer = new AtomContainerRenderer(generators, new AWTFontManager());
         isNew = true;
     }
 
@@ -66,11 +64,11 @@ public class MoleculeCell extends JPanel {
             Rectangle drawArea = new Rectangle(0, 0, this.preferredWidth, this.preferredHeight);
             this.renderer.setup(atomContainer, drawArea);
             this.isNew = false;
-            this.renderer.paintMolecule(this.atomContainer, new AWTDrawVisitor((Graphics2D) g), drawArea, isNew);
+            this.renderer.paint(this.atomContainer, new AWTDrawVisitor((Graphics2D) g), drawArea, isNew);
         } else {
             Rectangle drawArea = new Rectangle(0, 0, this.getWidth(), this.getHeight());
             this.renderer.setup(atomContainer, drawArea);
-            this.renderer.paintMolecule(this.atomContainer, new AWTDrawVisitor((Graphics2D) g), drawArea, false);
+            this.renderer.paint(atomContainer, new AWTDrawVisitor((Graphics2D) g), drawArea, false);
         }
 
     }

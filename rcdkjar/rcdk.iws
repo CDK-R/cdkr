@@ -19,22 +19,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rcdk.ipr" afterPath="$PROJECT_DIR$/rcdk.ipr" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdk/inst/cont/rcdk.jar" afterPath="$PROJECT_DIR$/../rcdk/inst/cont/rcdk.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdklibs/inst/cont/cdk.jar" afterPath="$PROJECT_DIR$/../rcdklibs/inst/cont/cdk.jar" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/guha/rcdk/view/MoleculeImage.java" afterPath="$PROJECT_DIR$/src/org/guha/rcdk/view/MoleculeImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdk/R/formula.R" afterPath="$PROJECT_DIR$/../rcdk/R/formula.R" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdk/R/rcdk.R" afterPath="$PROJECT_DIR$/../rcdk/R/rcdk.R" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/jars/cdk-1.3.2-jcp.jar" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java" afterPath="$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdk/inst/doc/rcdk.pdf" afterPath="$PROJECT_DIR$/../rcdk/inst/doc/rcdk.pdf" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rcdk.iws" afterPath="$PROJECT_DIR$/rcdk.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rcdk.iml" afterPath="$PROJECT_DIR$/rcdk.iml" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/../rcdklibs/inst/cont/jcp15.jar" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/guha/rcdk/view/panels/MoleculeCell.java" afterPath="$PROJECT_DIR$/src/org/guha/rcdk/view/panels/MoleculeCell.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdk/R/smiles.R" afterPath="$PROJECT_DIR$/../rcdk/R/smiles.R" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdklibs/DESCRIPTION" afterPath="$PROJECT_DIR$/../rcdklibs/DESCRIPTION" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/jars/jcp15.jar" afterPath="" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdk/inst/cont/rcdk.jar" afterPath="$PROJECT_DIR$/../rcdk/inst/cont/rcdk.jar" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdk/R/formula.R" afterPath="$PROJECT_DIR$/../rcdk/R/formula.R" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/guha/rcdk/view/MoleculeImage.java" afterPath="$PROJECT_DIR$/src/org/guha/rcdk/view/MoleculeImage.java" />
     </list>
-    <ignored path=".idea/workspace.xml" />
     <ignored path="rcdk.iws" />
+    <ignored path=".idea/workspace.xml" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="Commander">
@@ -93,16 +88,7 @@
       <file leaf-file-name="MoleculeCell.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/view/panels/MoleculeCell.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="15" column="104" selection-start="781" selection-end="781" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MoleculeImage.java" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/view/MoleculeImage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="89" column="0" selection-start="3491" selection-end="3491" vertical-scroll-proportion="0.9223301">
+            <state line="70" column="31" selection-start="2544" selection-end="2544" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -110,38 +96,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="AWTFontManager.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/jars/jcp15.jar!/org/openscience/cdk/renderer/font/AWTFontManager.class">
+      <file leaf-file-name="MoleculeImage.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/view/MoleculeImage.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="5" column="75" selection-start="233" selection-end="233" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Renderer.class" pinned="false" current="false" current-in-tab="false">
-        <entry file="jar://$PROJECT_DIR$/jars/jcp15.jar!/org/openscience/cdk/renderer/Renderer.class">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="8" column="11" selection-start="442" selection-end="442" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="MiscTest.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/test/MiscTest.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="117" column="44" selection-start="4869" selection-end="4869" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Misc.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="118" column="77" selection-start="4605" selection-end="4605" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="85" column="189" selection-start="3487" selection-end="3487" vertical-scroll-proportion="0.87055016">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -192,7 +153,7 @@
     </subPane>
   </component>
   <component name="ProjectReloadState">
-    <option name="STATE" value="2" />
+    <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="0.11111111" version="1" splitterProportion="0.5">
@@ -210,17 +171,17 @@
   </component>
   <component name="PropertiesComponent">
     <property name="project.structure.proportion" value="0.15" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
     <property name="MemberChooser.copyJavadoc" value="false" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="104" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder0" value="0" />
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="GoToFile.includeJavaFiles" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth2" value="104" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth2" value="125" />
+    <property name="GoToFile.includeJavaFiles" value="false" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder2" value="2" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth3" value="35" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder4" value="4" />
-    <property name="GoToClass.includeLibraries" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="GoToClass.includeLibraries" value="false" />
     <property name="MemberChooser.showClasses" value="true" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth0" value="105" />
     <property name="project.structure.side.proportion" value="0.2" />
@@ -234,9 +195,9 @@
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder2" value="2" />
     <property name="project.structure.last.edited" value="Project" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatWidth1" value="157" />
-    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
-    <property name="MemberChooser.sorted" value="false" />
     <property name="options.searchVisible" value="true" />
+    <property name="MemberChooser.sorted" value="false" />
+    <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_flatOrder3" value="3" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth1" value="138" />
     <property name="FileHistory.org.jetbrains.idea.svn.history.SvnHistoryProvider_treeWidth4" value="899" />
@@ -484,7 +445,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="1" y="23" width="2560" height="1515" extended-state="0" />
+    <frame x="1" y="23" width="2560" height="1515" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
@@ -494,14 +455,14 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2346707" sideWeight="0.6647399" order="0" side_tool="false" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32971507" sideWeight="0.5" order="1" side_tool="false" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13296178" sideWeight="0.6720619" order="1" side_tool="false" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1325637" sideWeight="0.6720619" order="1" side_tool="false" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32080925" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.089171976" sideWeight="0.6720619" order="1" side_tool="false" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32301196" sideWeight="0.5" order="2" side_tool="false" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32301196" sideWeight="0.5" order="2" side_tool="false" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39664805" sideWeight="0.5" order="4" side_tool="false" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32971507" sideWeight="0.5" order="8" side_tool="false" />
@@ -667,37 +628,18 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://$PROJECT_DIR$/jars/jcp15.jar!/org/openscience/cdk/renderer/font/AbstractFontManager.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/jars/jcp15.jar!/org/openscience/cdk/renderer/Renderer.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="11" selection-start="442" selection-end="442" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/jars/jcp15.jar!/org/openscience/cdk/renderer/font/AWTFontManager.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="75" selection-start="233" selection-end="233" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/view/panels/MoleculeCell.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="104" selection-start="781" selection-end="781" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="70" column="31" selection-start="2544" selection-end="2544" vertical-scroll-proportion="0.0">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/view/MoleculeImage.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="89" column="0" selection-start="3491" selection-end="3491" vertical-scroll-proportion="0.9223301">
+        <state line="85" column="189" selection-start="3487" selection-end="3487" vertical-scroll-proportion="0.87055016">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>

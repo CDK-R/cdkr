@@ -25,8 +25,6 @@ get.formula <- function(mf, charge=0) {
   }else{
     dcob <- .cdkFormula.createChemObject()
     molecularformula <- .cdkFormula.createFormulaObject()
-##    molecularformula <- .jcast(.jnew("org/openscience/cdk/formula/MolecularFormula"),
-##                               "org/openscience/cdk/interfaces/IMolecularFormula")
     molecularFormula <- .jcall(manipulator,
                                "Lorg/openscience/cdk/interfaces/IMolecularFormula;",
                                "getMolecularFormula",
@@ -261,10 +259,12 @@ generate.formula <- function(mass, window=0.01,
   dcob
 }
 .cdkFormula.createFormulaObject <- function(){
-  dcob <- .cdkFormula.createChemObject()
+##   dcob <- .cdkFormula.createChemObject()
+##   klass <- J("org.openscience.cdk.interfaces.IMolecularFormula")$class
 ##   cfob <- .jcall(dcob,
-##                  "Lorg/openscience/cdk/interfaces/IMolecularFormula;",
+##                  "Lorg/openscience/cdk/interfaces/ICDKObject;",
 ##                  "newInstance",
+##                  klass
 ##                  );  
 ##   cfob
  .jcast(.jnew("org/openscience/cdk/formula/MolecularFormula"),
@@ -272,7 +272,7 @@ generate.formula <- function(mass, window=0.01,
 }
 
 #############################################################
-                                        # extract the molecular formula string form the java object
+## extract the molecular formula string form the java object
 #############################################################
 .cdkFormula.getString <- function(molecularFormula) {
   
@@ -284,7 +284,7 @@ generate.formula <- function(mass, window=0.01,
 }
 
 #############################################################
-                                        # create a formula class from the molecularFormula java object
+## create a formula class from the molecularFormula java object
 #############################################################
 .cdkFormula.createObject <- function(molecularformula){
   

@@ -7,7 +7,7 @@ import org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector;
 import org.openscience.cdk.exception.CDKException;
 import org.openscience.cdk.graph.ConnectivityChecker;
 import org.openscience.cdk.interfaces.IAtomContainer;
-import org.openscience.cdk.renderer.Renderer;
+import org.openscience.cdk.renderer.AtomContainerRenderer;
 import org.openscience.cdk.renderer.font.AWTFontManager;
 import org.openscience.cdk.renderer.generators.BasicAtomGenerator;
 import org.openscience.cdk.renderer.generators.BasicBondGenerator;
@@ -58,7 +58,7 @@ public class MoleculeImage {
         generators.add(new BasicAtomGenerator());
 
         // the renderer needs to have a toolkit-specific font manager
-        Renderer renderer = new Renderer(generators, new AWTFontManager());
+        AtomContainerRenderer renderer = new AtomContainerRenderer(generators, new AWTFontManager());
 
         // the call to 'setup' only needs to be done on the first paint
         renderer.setup(molecule, drawArea);
@@ -69,7 +69,7 @@ public class MoleculeImage {
         g2.fillRect(0, 0, width, height);
 
         // the paint method also needs a toolkit-specific renderer
-        renderer.paintMolecule(molecule, new AWTDrawVisitor(g2), drawArea, true);
+        renderer.paint(molecule, new AWTDrawVisitor(g2), drawArea, true);
 
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         (new PngEncoder()).encode(image, baos);
