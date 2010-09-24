@@ -1,10 +1,10 @@
-matches <- function(query, targets) {
-  if (!is.list(targets)) targets <- list(targets)
-  if (!all(unlist(lapply(targets, class)) == 'jobjRef'))
+matches <- function(query, target) {
+  if (!is.list(target)) target <- list(target)
+  if (!all(unlist(lapply(target, class)) == 'jobjRef'))
     stop("targets must be a list of IAtomContainer objects or a single IAtomContainer object")
 
   ## make an SQT
   sqt <- new(J("org/openscience/cdk/smiles/smarts/SMARTSQueryTool"), query)
-  matchings <- unlist(lapply(targets, function(z) sqt$matches(z)))
+  matchings <- unlist(lapply(target, function(z) sqt$matches(z)))
   matchings
 }
