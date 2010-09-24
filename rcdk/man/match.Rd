@@ -22,12 +22,14 @@ get.mcs(mol1, mol2, method = 'MCSPlus')
   \item{target}{A single IAtomContainer object or a list of IAtomContainer objects}
   \item{mol1}{An IAtomContainer}
   \item{mol2}{An IAtomContainer}
+  \item{method}{The method to employ for MCS detection}
 }
 \details{
 For the case of \code{is.subgraph}, the target molecule must be a single 
 \code{IAtomContainer} or a valid SMILES string. Note that this method can be 
 significantly faster than \code{matches}, but is limited by the fact that SMARTS
-patterns cannot be specified.
+patterns cannot be specified. This uses the "TurboSubStructure" SMSD method and so
+only searches for the first substructure match.
 }
 \examples{
 smiles <- c('CCC', 'c1ccccc1', 'C(C)(C=O)C(CCNC)C1CC1C(=O)')
