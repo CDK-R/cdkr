@@ -21,8 +21,7 @@
     <list default="true" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java" afterPath="$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rcdk.iws" afterPath="$PROJECT_DIR$/rcdk.iws" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/guha/rcdk/test/MiscTest.java" afterPath="$PROJECT_DIR$/src/org/guha/rcdk/test/MiscTest.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/guha/rcdk/draw/Get2DStructureFromJCP.java" afterPath="$PROJECT_DIR$/src/org/guha/rcdk/draw/Get2DStructureFromJCP.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdk/R/smsd.R" afterPath="$PROJECT_DIR$/../rcdk/R/smsd.R" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdk/inst/cont/rcdk.jar" afterPath="$PROJECT_DIR$/../rcdk/inst/cont/rcdk.jar" />
     </list>
     <ignored path="rcdk.iws" />
@@ -105,8 +104,10 @@
       <file leaf-file-name="Misc.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="236" column="23" selection-start="9540" selection-end="9540" vertical-scroll-proportion="0.65632457">
-              <folding />
+            <state line="244" column="107" selection-start="10085" selection-end="10085" vertical-scroll-proportion="0.59904534">
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -114,8 +115,10 @@
       <file leaf-file-name="MiscTest.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/test/MiscTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="117" column="105" selection-start="4930" selection-end="4930" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="111" column="105" selection-start="4649" selection-end="4649" vertical-scroll-proportion="0.0">
+              <folding>
+                <marker date="1285423890000" expanded="false" signature="36:820" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -459,7 +462,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2346707" sideWeight="0.6647399" order="0" side_tool="false" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32971507" sideWeight="0.5" order="1" side_tool="false" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.1317184" sideWeight="0.6676301" order="1" side_tool="false" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2036336" sideWeight="0.6676301" order="1" side_tool="false" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32080925" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
@@ -493,7 +496,7 @@
     <option name="PERFORM_CHECKOUT_IN_BACKGROUND" value="true" />
     <option name="PERFORM_ADD_REMOVE_IN_BACKGROUND" value="true" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="Brought back the bond rendering code" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added some wrapper methods for MCSs" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_PROJECT_COMMIT" value="true" />
     <option name="REFORMAT_BEFORE_FILE_COMMIT" value="false" />
@@ -516,6 +519,7 @@
     <MESSAGE value="Some minor cleanup" />
     <MESSAGE value="Made the molecule image method a little more general" />
     <MESSAGE value="Brought back the bond rendering code" />
+    <MESSAGE value="Added some wrapper methods for MCSs" />
   </component>
   <component name="VssConfiguration">
     <option name="CLIENT_PATH" value="" />
@@ -626,8 +630,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/test/MiscTest.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="117" column="105" selection-start="4930" selection-end="4930" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="111" column="105" selection-start="4649" selection-end="4649" vertical-scroll-proportion="0.0">
+          <folding>
+            <marker date="1285423890000" expanded="false" signature="36:820" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -651,8 +657,10 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="236" column="23" selection-start="9540" selection-end="9540" vertical-scroll-proportion="0.65632457">
-          <folding />
+        <state line="244" column="107" selection-start="10085" selection-end="10085" vertical-scroll-proportion="0.59904534">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
