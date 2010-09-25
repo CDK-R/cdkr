@@ -8,18 +8,12 @@ import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.exception.CDKException;
 import org.openscience.cdk.exception.InvalidSmilesException;
 import org.openscience.cdk.interfaces.IAtomContainer;
-import org.openscience.cdk.interfaces.IChemFile;
-import org.openscience.cdk.io.ISimpleChemObjectReader;
-import org.openscience.cdk.io.MDLV2000Reader;
 import org.openscience.cdk.io.SDFWriter;
 import org.openscience.cdk.isomorphism.UniversalIsomorphismTester;
 import org.openscience.cdk.isomorphism.mcss.RMap;
 import org.openscience.cdk.smiles.SmilesParser;
 import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
-import org.openscience.cdk.tools.manipulator.ChemFileManipulator;
 
-import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashSet;
@@ -115,7 +109,7 @@ public class MiscTest extends TestCase {
 
     public static IAtomContainer getneedle(IAtomContainer a, IAtomContainer q) throws CDKException {
 //        IAtomContainer needle = DefaultChemObjectBuilder.getInstance().newInstance(IAtomContainer.class);
-        IAtomContainer needle = DefaultChemObjectBuilder.getInstance().newAtomContainer();
+        IAtomContainer needle = DefaultChemObjectBuilder.getInstance().newInstance(IAtomContainer.class);
         Vector idlist = new Vector();
 
         List l = UniversalIsomorphismTester.getSubgraphMaps(a, q);

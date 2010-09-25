@@ -3,14 +3,17 @@
  */
 package org.guha.rcdk.util;
 
+import org.guha.rcdk.view.MoleculeImage;
 import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector;
 import org.openscience.cdk.config.IsotopeFactory;
 import org.openscience.cdk.exception.CDKException;
+import org.openscience.cdk.interfaces.IAtom;
 import org.openscience.cdk.interfaces.IAtomContainer;
+import org.openscience.cdk.interfaces.IBond;
 import org.openscience.cdk.interfaces.IChemFile;
-import org.openscience.cdk.interfaces.IMolecule;
 import org.openscience.cdk.interfaces.IChemObjectBuilder;
+import org.openscience.cdk.interfaces.IMolecule;
 import org.openscience.cdk.io.ISimpleChemObjectReader;
 import org.openscience.cdk.io.ReaderFactory;
 import org.openscience.cdk.io.SDFWriter;
@@ -18,14 +21,18 @@ import org.openscience.cdk.io.SMILESReader;
 import org.openscience.cdk.io.listener.PropertiesListener;
 import org.openscience.cdk.layout.StructureDiagramGenerator;
 import org.openscience.cdk.smiles.SmilesGenerator;
+import org.openscience.cdk.smiles.SmilesParser;
+import org.openscience.cdk.smsd.Isomorphism;
 import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 import org.openscience.cdk.tools.manipulator.ChemFileManipulator;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import java.util.Vector;
 
@@ -197,4 +204,49 @@ public class Misc {
         return sdg.getMolecule();
     }
 
+    public static IAtomContainer getMcsAsNewContainer(IAtomContainer mol1, IAtomContainer mol2) throws CDKException, CloneNotSupportedException {
+        Isomorphism mcs = new Isomorphism(org.openscience.cdk.smsd.interfaces.Algorithm.DEFAULT, true);
+        mcs.init(mol1, mol2, true, true);
+        mcs.setChemFilters(true, true, true);
+
+        IAtomContainer mcsmolecule = DefaultChemObjectBuilder.getInstance().newInstance(IAtomContainer.class);
+        for (Map.Entry mapping : mcs.getFirstAtomMapping().entrySet()) {
+            mcsmolecule.addAtom((IAtom) mapping.getKey());
+        }
+        for (Map.Entry mapping : mcs.getFirstBondMap().entrySet()) {
+            mcsmolecule.addBond((IBond) mapping.getKey());
+        }
+        return (IAtomContainer) mcsmolecule.clone();
+    }
+
+    public static int[][] getMcsAsAtomIndexMapping(IAtomContainer mol1, IAtomContainer mol2) throws CDKException {
+        Isomorphism mcs = new Isomorphism(org.openscience.cdk.smsd.interfaces.Algorithm.DEFAULT, true);
+        mcs.init(mol1, mol2, true, true);
+        mcs.setChemFilters(true, true, true);
+        int mcsSize = mcs.getFirstMapping().size();
+        int[][] mapping = new int[mcsSize][2];
+        int i = 0;
+        for (Map.Entry map : mcs.getFirstMapping().entrySet()) {
+            mapping[i][0] = (Integer) map.getKey();
+            mapping[i][1] = (Integer) map.getValue();
+            i++;
+        }
+        return mapping;
+    }
+
+    public static void main(String[] args) throws Exception, CloneNotSupportedException, IOException {
+        SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
+        IAtomContainer mol1 = sp.parseSmiles("NCc1ccccc1OC(=N)CCN");
+        IAtomContainer mol2 = sp.parseSmiles("c1ccccc1OC(=N)");
+        CDKHueckelAromaticityDetector.detectAromaticity(mol1);
+        CDKHueckelAromaticityDetector.detectAromaticity(mol2);
+        AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(mol1);
+        AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(mol2);
+        IAtomContainer mcs = getMcsAsNewContainer(mol1, mol2);
+
+        MoleculeImage mi = new MoleculeImage(mcs);
+        byte[] bytes = mi.getBytes(300, 300);
+        FileOutputStream fos = new FileOutputStream("test.png");
+        fos.write(bytes);
+    }
 }

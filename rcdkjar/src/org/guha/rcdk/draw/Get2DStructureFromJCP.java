@@ -31,9 +31,9 @@ public class Get2DStructureFromJCP {
             exc.printStackTrace();
         }
 
-        IMoleculeSet som = DefaultChemObjectBuilder.getInstance().newMoleculeSet();
+        IMoleculeSet som = DefaultChemObjectBuilder.getInstance().newInstance(IMoleculeSet.class);
         som.addMolecule(localMolecule);
-        chemModel = DefaultChemObjectBuilder.getInstance().newChemModel();
+        chemModel = DefaultChemObjectBuilder.getInstance().newInstance(IChemModel.class);
         chemModel.setMoleculeSet(som);
     }
 
