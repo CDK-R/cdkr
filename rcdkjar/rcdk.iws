@@ -19,6 +19,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java" afterPath="$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rcdk.iws" afterPath="$PROJECT_DIR$/rcdk.iws" />
     </list>
     <ignored path=".idea/workspace.xml" />
