@@ -108,7 +108,7 @@ public class Misc {
     public static String getSmiles(IAtomContainer container) {
         SmilesGenerator sg = new SmilesGenerator();
         sg.setUseAromaticityFlag(true);
-        return sg.createSMILES((IMolecule) container);
+        return sg.createSMILES(container);
     }
 
     /**
