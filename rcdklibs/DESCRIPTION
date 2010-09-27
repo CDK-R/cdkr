@@ -1,6 +1,6 @@
 Package: rcdklibs
-Version: 1.3.6
-Date: 2010-09-23
+Version: 1.3.6.1
+Date: 2010-09-27
 Title: rcdklib - CDK libraries packaged for R
 Author: Rajarshi Guha <rajarshi.guha@gmail.com>
 Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
