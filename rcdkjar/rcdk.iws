@@ -23,7 +23,6 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rcdk.iws" afterPath="$PROJECT_DIR$/rcdk.iws" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdk/inst/unitTests/runit.match.R" afterPath="$PROJECT_DIR$/../rcdk/inst/unitTests/runit.match.R" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdk/DESCRIPTION" afterPath="$PROJECT_DIR$/../rcdk/DESCRIPTION" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdk/inst/cont/rcdk.jar" afterPath="$PROJECT_DIR$/../rcdk/inst/cont/rcdk.jar" />
     </list>
     <ignored path="rcdk.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -91,13 +90,22 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Misc.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Misc.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="236" column="44" selection-start="9361" selection-end="9361" vertical-scroll-proportion="0.24582338">
+            <state line="236" column="44" selection-start="9361" selection-end="9361" vertical-scroll-proportion="0.0">
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ViewMolecule2D.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/view/ViewMolecule2D.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="62" column="32" selection-start="2054" selection-end="2054" vertical-scroll-proportion="1.437788">
+              <folding />
             </state>
           </provider>
         </entry>
@@ -206,9 +214,9 @@
       <recent name="org.guha.rcdk.test" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.Misc">
-    <tempConfiguration default="false" name="Misc" type="Application" factoryName="Application" enabled="false" merge="false" runner="emma">
-      <option name="MAIN_CLASS_NAME" value="org.guha.rcdk.util.Misc" />
+  <component name="RunManager" selected="Application.ViewMolecule2D">
+    <tempConfiguration default="false" name="ViewMolecule2D" type="Application" factoryName="Application" enabled="false" merge="false" runner="emma">
+      <option name="MAIN_CLASS_NAME" value="org.guha.rcdk.view.ViewMolecule2D" />
       <option name="VM_PARAMETERS" />
       <option name="PROGRAM_PARAMETERS" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
@@ -382,7 +390,7 @@
       <item index="0" class="java.lang.String" itemvalue="Application.MoleculeCell" />
       <item index="1" class="java.lang.String" itemvalue="Application.MoleculeImage" />
       <item index="2" class="java.lang.String" itemvalue="JUnit.View2DTest.testMoleculeCell" />
-      <item index="3" class="java.lang.String" itemvalue="Application.Misc" />
+      <item index="3" class="java.lang.String" itemvalue="Application.ViewMolecule2D" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -592,13 +600,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/view/ViewMolecule2D.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="61" column="38" selection-start="2062" selection-end="2062" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar:///System/Library/Frameworks/JavaVM.framework/Versions/1.5.0/Home/src.jar!/src/javax/swing/Renderer.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
@@ -647,10 +648,17 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="236" column="44" selection-start="9361" selection-end="9361" vertical-scroll-proportion="0.24582338">
+        <state line="236" column="44" selection-start="9361" selection-end="9361" vertical-scroll-proportion="0.0">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/view/ViewMolecule2D.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="62" column="32" selection-start="2054" selection-end="2054" vertical-scroll-proportion="1.437788">
+          <folding />
         </state>
       </provider>
     </entry>

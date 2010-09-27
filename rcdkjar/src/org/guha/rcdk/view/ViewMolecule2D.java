@@ -13,7 +13,7 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 
-public class    ViewMolecule2D extends JFrame {
+public class ViewMolecule2D extends JFrame {
     IAtomContainer molecule;
 
     MoleculeCell panel;
@@ -27,6 +27,7 @@ public class    ViewMolecule2D extends JFrame {
             dispose();
         }
     }
+
     public ViewMolecule2D(IAtomContainer molecule) throws Exception {
         this(molecule, 300, 300);
     }
@@ -57,9 +58,9 @@ public class    ViewMolecule2D extends JFrame {
 
     public static void main(String[] arg) throws Exception {
         String home = "/Users/guhar/";
-        String[] fname = {home + "src/rcdk/data/dan001.sdf",
-                home + "src/rcdk/data/dan002.sdf",
-                home + "src/rcdk/data/dan003.sdf"};
+        String[] fname = {home + "src/cdkr/data/dan001.sdf",
+                home + "src/cdkr/data/dan002.sdf",
+                home + "src/cdkr/data/dan003.sdf"};
         IAtomContainer[] acs = null;
         try {
             acs = Misc.loadMolecules(fname, true, true, true);
