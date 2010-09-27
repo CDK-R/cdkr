@@ -229,12 +229,12 @@ public class Misc {
         return mcsmolecule;
     }
 
-    public static Integer[][] getMcsAsAtomIndexMapping(IAtomContainer mol1, IAtomContainer mol2) throws CDKException {
+    public static int[][] getMcsAsAtomIndexMapping(IAtomContainer mol1, IAtomContainer mol2) throws CDKException {
         Isomorphism mcs = new Isomorphism(org.openscience.cdk.smsd.interfaces.Algorithm.DEFAULT, true);
         mcs.init(mol1, mol2, true, true);
         mcs.setChemFilters(true, true, true);
         int mcsSize = mcs.getFirstMapping().size();
-        Integer[][] mapping = new Integer[mcsSize][2];
+        int[][] mapping = new int[mcsSize][2];
         int i = 0;
         for (Map.Entry map : mcs.getFirstMapping().entrySet()) {
             mapping[i][0] = (Integer) map.getKey();
@@ -258,7 +258,7 @@ public class Misc {
         FileOutputStream fos = new FileOutputStream("test.png");
         fos.write(bytes);
 
-        Integer[][] map = getMcsAsAtomIndexMapping(mol1, mol2);
+        int[][] map = getMcsAsAtomIndexMapping(mol1, mol2);
         for (int i = 0; i < map.length; i++) {
             System.out.println(map[i][0] + " <-> " + map[i][1]);
         }
