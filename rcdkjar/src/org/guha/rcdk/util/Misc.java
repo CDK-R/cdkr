@@ -10,7 +10,6 @@ import org.openscience.cdk.config.IsotopeFactory;
 import org.openscience.cdk.exception.CDKException;
 import org.openscience.cdk.interfaces.IAtom;
 import org.openscience.cdk.interfaces.IAtomContainer;
-import org.openscience.cdk.interfaces.IBond;
 import org.openscience.cdk.interfaces.IChemFile;
 import org.openscience.cdk.interfaces.IChemObjectBuilder;
 import org.openscience.cdk.interfaces.IMolecule;
@@ -31,6 +30,7 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -209,14 +209,24 @@ public class Misc {
         mcs.init(mol1, mol2, true, true);
         mcs.setChemFilters(true, true, true);
 
-        IAtomContainer mcsmolecule = DefaultChemObjectBuilder.getInstance().newInstance(IAtomContainer.class);
-        for (Map.Entry mapping : mcs.getFirstAtomMapping().entrySet()) {
-            mcsmolecule.addAtom((IAtom) mapping.getKey());
+        mol1 = mcs.getReactantMolecule();
+        mol2 = mcs.getProductMolecule();
+
+        IAtomContainer mcsmolecule = DefaultChemObjectBuilder.getInstance().newInstance(IAtomContainer.class, mol1);
+
+        List<IAtom> atomsToBeRemoved = new ArrayList<IAtom>();
+        for (IAtom atom : mcsmolecule.atoms()) {
+            int index = mcsmolecule.getAtomNumber(atom);
+            if (!mcs.getFirstMapping().containsKey(index)) {
+                atomsToBeRemoved.add(atom);
+            }
         }
-        for (Map.Entry mapping : mcs.getFirstBondMap().entrySet()) {
-            mcsmolecule.addBond((IBond) mapping.getKey());
+
+        for (IAtom atom : atomsToBeRemoved) {
+            mcsmolecule.removeAtomAndConnectedElectronContainers(atom);
         }
-        return (IAtomContainer) mcsmolecule.clone();
+
+        return mcsmolecule;
     }
 
     public static Integer[][] getMcsAsAtomIndexMapping(IAtomContainer mol1, IAtomContainer mol2) throws CDKException {
@@ -236,17 +246,21 @@ public class Misc {
 
     public static void main(String[] args) throws Exception, CloneNotSupportedException, IOException {
         SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
-        IAtomContainer mol1 = sp.parseSmiles("NCc1ccccc1OC(=N)CCN");
-        IAtomContainer mol2 = sp.parseSmiles("c1ccccc1OC(=N)");
+        IAtomContainer mol1 = sp.parseSmiles("c1cccc(COC(=O)NC(CC(C)C)C(=O)NC(CCc2ccccc2)C(=O)COC)c1");
+        IAtomContainer mol2 = sp.parseSmiles("c1cccc(COC(=O)NC(CC(C)C)C(=O)NCC#N)c1");
         CDKHueckelAromaticityDetector.detectAromaticity(mol1);
         CDKHueckelAromaticityDetector.detectAromaticity(mol2);
-        AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(mol1);
         AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(mol2);
+        AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(mol1);
         IAtomContainer mcs = getMcsAsNewContainer(mol1, mol2);
-
         MoleculeImage mi = new MoleculeImage(mcs);
         byte[] bytes = mi.getBytes(300, 300);
         FileOutputStream fos = new FileOutputStream("test.png");
         fos.write(bytes);
+
+        Integer[][] map = getMcsAsAtomIndexMapping(mol1, mol2);
+        for (int i = 0; i < map.length; i++) {
+            System.out.println(map[i][0] + " <-> " + map[i][1]);
+        }
     }
 }
