@@ -3,9 +3,8 @@ hasNext.iload.molecules <- function(obj, ...) obj$hasNext()
 iload.molecules<- function(molfile, type = 'smi', aromaticity = TRUE, typing = TRUE, isotopes = TRUE) {
   fr <- .jnew("java/io/FileReader", as.character(molfile))
   dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
-                 "Lorg/openscience/cdk/DefaultChemObjectBuilder;",
+                 "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
                  "getInstance")
-  dcob <- .jcast(dcob, "org/openscience/cdk/interfaces/IChemObjectBuilder")
   if (type == 'smi') {
     sreader <- .jnew("org/openscience/cdk/io/iterator/IteratingSMILESReader",.jcast(fr, "java/io/Reader"), dcob)
   } else if (type == 'sdf') {
