@@ -1,58 +1,44 @@
-get.fragmenter <- function() {
-  return(.jnew("org/openscience/cdk/tools/GenerateFragments"))
-}
-
-get.murcko.fragments <- function(mol, fragmenter, min.ring.size = 6, as.smiles = TRUE) {
-  if (is.null(attr(mol, 'jclass')) ||
-      attr(mol, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
+get.murcko.fragments <- function(mols, min.frag.size = 6, as.smiles = TRUE, single.framework = FALSE) {
+  if (!is.list(mols)) mols <- list(mols)
+  klasses <- unlist(lapply(mols, function(x) attr(x, "jclass")))
+  if (!all(klasses ==  "org/openscience/cdk/interfaces/IAtomContainer")) {
     stop("Must supply an IAtomContainer object")
   }
-  
-  if (missing(fragmenter)) {
-    fragmenter <- get.fragmenter()
-  }
 
-  convert.implicit.to.explicit(mol)
+  fragmenter <- .jnew("org/openscience/cdk/fragment/MurckoFragmenter",
+                      single.framework, as.integer(min.frag.size))
   
-  .jcall(fragmenter, "V", "generateMurckoFragments",
-         .jcast(mol, "org/openscience/cdk/interfaces/IMolecule"),
-         TRUE, TRUE, as.integer(min.ring.size))
-
-  if (as.smiles) {
-    frags <- .jcall(fragmenter, "[S", "getMurckoFrameworksAsSmileArray")
-  } else {
-    tmp <- .jcall(fragmenter, "Ljava/util/List;", "getMurckoFrameworks")
-    nfrag <- .jcall(tmp, "I", "size")
-    frags <- list()
-    for (i in seq_len(nfrag)-1) {
-      afrag <- .jcall(tmp, "Ljava/lang/Object;", "get", as.integer(i))
-      afrag <- .jcast(tmp, "org/openscience/cdk/interfaces/IAtomContainer")
-      frags[[i+1]] <- afrag
+  ret <- lapply(mols, function(x) {
+    .jcall(fragmenter, "V", "generateFragments", x)
+    if (as.smiles) {
+      rings <- .jcall(fragmenter, "[S", "getRingSystems")
+      frames <- .jcall(fragmenter, "[S", "getFrameworks")
+    } else {
+      rings <- .jcall(fragmenter, "[Lorg/openscience/cdk/interfaces/IAtomContainer;", "getRingSystemsAsContainers")
+      frames <- .jcall(fragmenter, "[Lorg/openscience/cdk/interfaces/IAtomContainer;", "getFrameworksAsContainers")
     }
-  }
-  return(frags)
+    return(list(rings = rings, frameworks = frames))    
+  })
+  return(ret)
 }
 
-.get.ring.fragments <- function(mol, fragmenter, as.smiles = TRUE) {
-  if (is.null(attr(mol, 'jclass')) ||
-      attr(mol, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
+get.exhaustive.fragments <- function(mols, min.frag.size = 6, as.smiles = TRUE) {
+  if (!is.list(mols)) mols <- list(mols)
+  klasses <- unlist(lapply(mols, function(x) attr(x, "jclass")))
+  if (!all(klasses ==  "org/openscience/cdk/interfaces/IAtomContainer")) {
     stop("Must supply an IAtomContainer object")
   }
-  
-  if (missing(fragmenter)) {
-    fragmenter <- get.fragmenter()
-  }
 
-  convert.implicit.to.explicit(mol)
-  
-  .jcall(fragmenter, "V", "generateRingFragments",
-         .jcast(mol, "org/openscience/cdk/interfaces/IMolecule"))
+  fragmenter <- .jnew("org/openscience/cdk/fragment/ExhaustiveFragmenter", as.integer(min.frag.size))
 
-  if (as.smiles) {
-    frags <- .jcall(fragmenter, "[S", "getRingFragmentsAsSmileArray")
-  } else {
-    tmp <- .jcall(fragmenter, "Ljava/util/List;", "getRingFragments")
-    return(tmp)
-  }
-  return(frags)
+  ret <- lapply(mols, function(x) {
+    .jcall(fragmenter, "V", "generateFragments", x)
+    if (as.smiles) {
+      fragments <- .jcall(fragmenter, "[S", "getFragments")
+    } else {
+      fragments <- .jcall(fragmenter, "[Lorg/openscience/cdk/interfaces/IAtomContainer;", "getFragmentsSystemsAsContainers")
+    }
+    return(fragments)    
+  })
+  return(ret)
 }
