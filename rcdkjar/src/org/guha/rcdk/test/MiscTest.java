@@ -4,30 +4,36 @@ import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.guha.rcdk.util.Misc;
 import org.openscience.cdk.CDKConstants;
+import org.openscience.cdk.ChemFile;
 import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.exception.CDKException;
 import org.openscience.cdk.exception.InvalidSmilesException;
 import org.openscience.cdk.interfaces.IAtomContainer;
+import org.openscience.cdk.io.MDLV2000Reader;
 import org.openscience.cdk.io.SDFWriter;
 import org.openscience.cdk.isomorphism.UniversalIsomorphismTester;
 import org.openscience.cdk.isomorphism.mcss.RMap;
 import org.openscience.cdk.smiles.SmilesParser;
 import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
+import org.openscience.cdk.tools.manipulator.ChemFileManipulator;
 
+import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Vector;
 
 public class MiscTest extends TestCase {
-    String home = "/Users/rguha/";
+    String home = "/Users/guhar/";
 
     public void testLoadMolecules() {
-        String[] fname = {home + "src/R/trunk/rcdk/data/dan001.hin",
-                home + "src/R/trunk/rcdk/data/dan007.xyz",
-                home + "src/R/trunk/rcdk/data/dan008.hin"};
+        String[] fname = {home + "src/cdkr/rcdk/data/dan001.hin",
+                home + "src/cdkr/rcdk/data/dan007.xyz",
+                home + "src/cdkr/rcdk/data/dan008.hin"};
         IAtomContainer[] acs = null;
         try {
             acs = Misc.loadMolecules(fname, true, true, true);
@@ -132,5 +138,28 @@ public class MiscTest extends TestCase {
         double d = AtomContainerManipulator.getTotalExactMass(mol);
         System.out.println("d = " + d);
     }
+
+    public void testGetProps() throws FileNotFoundException, CDKException {
+        String[] fname = {home + "src/cdkr/data/kegg.sdf"};
+        IAtomContainer[] acs = null;
+        try {
+            acs = Misc.loadMolecules(fname, true, true, true);
+        } catch (CDKException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        Assert.assertEquals(10, acs.length);
+
+        MDLV2000Reader reader = new MDLV2000Reader(new FileReader(fname[0]));
+        ChemFile o = reader.read(DefaultChemObjectBuilder.getInstance().newInstance(ChemFile.class));
+        List<IAtomContainer> mols = ChemFileManipulator.getAllAtomContainers(o);
+        Map<Object, Object> props = mols.get(0).getProperties();
+        for (Map.Entry entry : props.entrySet()) {
+            System.out.println(entry.getKey() + " " + entry.getValue());
+        }
+    }
+
 
 }

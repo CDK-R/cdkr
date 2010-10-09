@@ -19,11 +19,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java" afterPath="$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/rcdk.iws" afterPath="$PROJECT_DIR$/rcdk.iws" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/org/guha/rcdk/test/MiscTest.java" afterPath="$PROJECT_DIR$/src/org/guha/rcdk/test/MiscTest.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/../rcdk/inst/cont/rcdk.jar" afterPath="$PROJECT_DIR$/../rcdk/inst/cont/rcdk.jar" />
     </list>
-    <ignored path=".idea/workspace.xml" />
     <ignored path="rcdk.iws" />
+    <ignored path=".idea/workspace.xml" />
   </component>
   <component name="ChangesViewManager" flattened_view="true" show_ignored="false" />
   <component name="Commander">
@@ -79,29 +80,22 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="MoleculeImage.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/view/MoleculeImage.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="57" column="49" selection-start="2251" selection-end="2350" vertical-scroll-proportion="0.0">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="Misc.java" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="Misc.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="110" column="31" selection-start="4054" selection-end="4054" vertical-scroll-proportion="0.3882897">
+            <state line="66" column="106" selection-start="2600" selection-end="2600" vertical-scroll-proportion="0.0">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="ViewMolecule2D.java" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/view/ViewMolecule2D.java">
+      <file leaf-file-name="MiscTest.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/test/MiscTest.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="63" column="28" selection-start="2102" selection-end="2102" vertical-scroll-proportion="0.0">
-              <folding />
+            <state line="159" column="26" selection-start="6611" selection-end="6611" vertical-scroll-proportion="1.1428572">
+              <folding>
+                <marker date="1286584577000" expanded="false" signature="36:1122" placeholder="..." />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -210,23 +204,33 @@
       <recent name="org.guha.rcdk.test" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.ViewMolecule2D">
-    <tempConfiguration default="false" name="ViewMolecule2D" type="Application" factoryName="Application" enabled="false" merge="false" runner="emma">
-      <option name="MAIN_CLASS_NAME" value="org.guha.rcdk.view.ViewMolecule2D" />
-      <option name="VM_PARAMETERS" />
-      <option name="PROGRAM_PARAMETERS" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+  <component name="RunManager" selected="JUnit.MiscTest.testGetProps">
+    <tempConfiguration default="false" name="MiscTest.testGetProps" type="JUnit" factoryName="JUnit" enabled="false" merge="false" sample_coverage="true" runner="emma">
+      <pattern>
+        <option name="PATTERN" value="org.guha.rcdk.test.*" />
+        <option name="ENABLED" value="true" />
+      </pattern>
+      <module name="rcdk" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="false" />
-      <option name="ALTERNATIVE_JRE_PATH" />
-      <option name="ENABLE_SWING_INSPECTOR" value="false" />
+      <option name="ALTERNATIVE_JRE_PATH" value="" />
+      <option name="PACKAGE_NAME" value="org.guha.rcdk.test" />
+      <option name="MAIN_CLASS_NAME" value="org.guha.rcdk.test.MiscTest" />
+      <option name="METHOD_NAME" value="testGetProps" />
+      <option name="TEST_OBJECT" value="method" />
+      <option name="VM_PARAMETERS" value="" />
+      <option name="PARAMETERS" value="" />
+      <option name="WORKING_DIRECTORY" value="file://$PROJECT_DIR$" />
       <option name="ENV_VARIABLES" />
       <option name="PASS_PARENT_ENVS" value="true" />
-      <module name="rcdk" />
+      <option name="ADDITIONAL_CLASS_PATH" />
+      <option name="TEST_SEARCH_SCOPE">
+        <value defaultName="wholeProject" />
+      </option>
       <envs />
       <RunnerSettings RunnerId="Run" />
       <ConfigurationWrapper RunnerId="Run" />
       <method>
-        <option name="Make" value="true" />
+        <option name="Make" value="false" />
       </method>
     </tempConfiguration>
     <configuration default="true" type="Remote" factoryName="Remote">
@@ -383,10 +387,10 @@
       </method>
     </configuration>
     <list size="4">
-      <item index="0" class="java.lang.String" itemvalue="Application.ViewMolecule2D" />
-      <item index="1" class="java.lang.String" itemvalue="Application.MoleculeCell" />
-      <item index="2" class="java.lang.String" itemvalue="Application.MoleculeImage" />
-      <item index="3" class="java.lang.String" itemvalue="JUnit.View2DTest.testMoleculeCell" />
+      <item index="0" class="java.lang.String" itemvalue="Application.MoleculeCell" />
+      <item index="1" class="java.lang.String" itemvalue="Application.MoleculeImage" />
+      <item index="2" class="java.lang.String" itemvalue="JUnit.View2DTest.testMoleculeCell" />
+      <item index="3" class="java.lang.String" itemvalue="JUnit.MiscTest.testGetProps" />
     </list>
     <configuration name="&lt;template&gt;" type="WebApp" default="true" selected="false">
       <Host>localhost</Host>
@@ -446,7 +450,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="12" y="33" width="1369" height="815" extended-state="0" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
       <window_info id="Web Preview" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Dataflow to this" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
@@ -456,14 +460,14 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2346707" sideWeight="0.6647399" order="0" side_tool="false" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32971507" sideWeight="0.5" order="1" side_tool="false" />
-      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2021196" sideWeight="0.6676301" order="1" side_tool="false" />
+      <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2006056" sideWeight="0.6676301" order="1" side_tool="false" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32080925" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Dependency Viewer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.08705526" sideWeight="0.6676301" order="1" side_tool="false" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.085541256" sideWeight="0.6676301" order="1" side_tool="false" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32225433" sideWeight="0.5" order="2" side_tool="false" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32225433" sideWeight="0.5" order="2" side_tool="false" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39664805" sideWeight="0.5" order="4" side_tool="false" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="8" side_tool="false" />
@@ -617,28 +621,12 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/test/MiscTest.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="111" column="105" selection-start="4649" selection-end="4649" vertical-scroll-proportion="0.0">
-          <folding>
-            <marker date="1285423890000" expanded="false" signature="36:820" placeholder="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/view/panels/MoleculeCell.java">
       <provider selected="true" editor-type-id="text-editor">
         <state line="90" column="0" selection-start="3321" selection-end="3321" vertical-scroll-proportion="1.3041475">
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/view/MoleculeImage.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="49" selection-start="2251" selection-end="2350" vertical-scroll-proportion="0.0">
-          <folding />
         </state>
       </provider>
     </entry>
@@ -656,10 +644,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/view/MoleculeImage.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="57" column="49" selection-start="2251" selection-end="2350" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/util/Misc.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="110" column="31" selection-start="4054" selection-end="4054" vertical-scroll-proportion="0.3882897">
+        <state line="66" column="106" selection-start="2600" selection-end="2600" vertical-scroll-proportion="0.0">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/org/guha/rcdk/test/MiscTest.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="159" column="26" selection-start="6611" selection-end="6611" vertical-scroll-proportion="1.1428572">
+          <folding>
+            <marker date="1286584577000" expanded="false" signature="36:1122" placeholder="..." />
+          </folding>
         </state>
       </provider>
     </entry>
