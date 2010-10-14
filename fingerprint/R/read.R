@@ -48,7 +48,7 @@ fp.read <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE, bit
                          name=name)
     } else {
       fplist[[c]] <- new("nfeatvec",
-                         features=dat[[2]],
+                         features=sort(dat[[2]]),
                          provider=provider,
                          name=name)
     }

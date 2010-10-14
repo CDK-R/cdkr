@@ -1,3 +1,18 @@
+featvec.to.binaryfp <- function(fps, bit.length = 256) {
+  if (!all(unlist(lapply(fps, class)) == 'nfeatvec'))
+    stop("Must supply a list of feature vector fingerprints")
+  ## get all the features
+  features <- sort(unique(unlist(lapply(fps, as.numeric))))
+  nbit <- length(features)
+  if (nbit %% 2 == 1) nbit <- nbit + 1
+  ## based on the entire feature set, convert original fps to binary fps
+  fps <- lapply(fps, function(x) {
+    bitpos <- match(as.numeric(x), features)
+    new("fingerprint", nbit=nbit, folded=FALSE, provider=x@provider,name=x@name, bits=bitpos)
+  })
+  return(fps)
+}
+
 setGeneric("fold", function(fp) standardGeneric("fold"))
 setMethod("fold", "fingerprint",
           function(fp) {
