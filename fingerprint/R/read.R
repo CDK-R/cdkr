@@ -19,7 +19,14 @@ bci.lf <- function(line) {
   list(name, as.numeric(tokens))
 }
 
-fp.read <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE) {
+ecfp.lf <- function(line) {
+  tokens <- strsplit(line, '\\s')[[1]]
+  name <- tokens[1]
+  tokens <- tokens[-1]
+  list(name, as.numeric(tokens))
+}
+
+fp.read <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE, bitfp=TRUE) {
   provider <- parseCall(match.call())$lf
   
   fplist <- list()
@@ -31,23 +38,30 @@ fp.read <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE) {
     dat <- lf(line)
     if (is.na(dat[[1]])) name <- ""
     else name <- dat[[1]]
-    
-    fplist[[c]] <- new("fingerprint",
-                       nbit=size,
-                       bits=as.numeric(dat[[2]]),
-                       folded=FALSE,
-                       provider=provider,
-                       name=name)
+
+    if (bitfp) {
+      fplist[[c]] <- new("fingerprint",
+                         nbit=size,
+                         bits=as.numeric(dat[[2]]),
+                         folded=FALSE,
+                         provider=provider,
+                         name=name)
+    } else {
+      fplist[[c]] <- new("nfeatvec",
+                         features=dat[[2]],
+                         provider=provider,
+                         name=name)
+    }
     c <- c+1
   }
   close(fcon)
   fplist
 }
 
-# Need to supply the length of the bit string since fp.read does
-# not provide that information
+## Need to supply the length of the bit string since fp.read does
+## not provide that information
 fp.read.to.matrix <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE) {
-    fplist <- fp.read(f, size, lf, header)
-    fpmat <- fp.to.matrix(fplist)
-    fpmat
-  }
+  fplist <- fp.read(f, size, lf, header)
+  fpmat <- fp.to.matrix(fplist)
+  fpmat
+}

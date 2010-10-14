@@ -63,6 +63,7 @@ get.mol2formula <- function(molecule, charge=0) {
   formulaJ <- .jcast(formulaJ,"org/openscience/cdk/interfaces/IMolecularFormula")
   
   ## needs that all isotopes contain the properties
+
   string <- .cdkFormula.getString(formulaJ)
   objectF <- .cdkFormula.createFormulaObject()
   moleculaJT <- .jcall('org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator',

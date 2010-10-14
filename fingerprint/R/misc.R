@@ -37,6 +37,13 @@ setMethod("euc.vector", "fingerprint",
 
 
 setGeneric("distance", function(fp1,fp2,method) standardGeneric("distance"))
+setMethod("distance", c("nfeatvec", "nfeatvec", "missing"),
+          function(fp1, fp2) {
+            n1 <- length(fp1)
+            n2 <- length(fp2)
+            n12 <- length(intersect(fp1@features, fp2@features))
+            return(n12/(n1+n2-n12))
+          })
 setMethod("distance", c("fingerprint", "fingerprint", "missing"),
           function(fp1,fp2) {
             distance(fp1,fp2,"tanimoto")
