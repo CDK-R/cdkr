@@ -26,7 +26,7 @@ ecfp.lf <- function(line) {
   list(name, as.numeric(tokens))
 }
 
-fp.read <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE, bitfp=TRUE) {
+fp.read <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE, binary=TRUE) {
   provider <- parseCall(match.call())$lf
   
   fplist <- list()
@@ -39,7 +39,7 @@ fp.read <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE, bit
     if (is.na(dat[[1]])) name <- ""
     else name <- dat[[1]]
 
-    if (bitfp) {
+    if (binary) {
       fplist[[c]] <- new("fingerprint",
                          nbit=size,
                          bits=as.numeric(dat[[2]]),

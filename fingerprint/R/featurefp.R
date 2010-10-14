@@ -20,7 +20,6 @@ setMethod('show', 'nfeatvec',
 setMethod('as.numeric', 'nfeatvec', function(x) {
   return(x@features)
 })
-setMethod("length", "nfeatvec",
-          function(x) {
-            length(x@features)
-          })
+setMethod("length", "nfeatvec", function(x) {
+  length(x@features)
+})
