@@ -55,10 +55,10 @@ distance(fp1, fp2, method)
 }
 \arguments{
   \item{fp1}{
-    An object of class \code{fingerprint}
+    An object of class \code{fingerprint} or \code{featvec}
   }
   \item{fp2}{
-    An object of class \code{fingerprint}
+    An object of class \code{fingerprint} or \code{featvec}
   }
   \item{method}{
     The type of distance metric desired. Partial matching is
@@ -93,8 +93,9 @@ distance(fp1, fp2, method)
 
       \item \code{simpson}
       \item \code{petke}
-
     }
+    If the two fingerprints are of class \code{featvec} then the following methods 
+    may be specified: \code{tanimoto}, .
 
   }
 }
@@ -126,4 +127,4 @@ distance(fp1,fp3) # should be 0
 }
 
 \keyword{logic}
-\author{Rajarshi Guha \email{rguha@indiana.edu}}
+\author{Rajarshi Guha \email{rajarshi.guha@gmail.com}}

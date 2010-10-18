@@ -23,7 +23,7 @@ ecfp.lf <- function(line) {
   tokens <- strsplit(line, '\\s')[[1]]
   name <- tokens[1]
   tokens <- tokens[-1]
-  list(name, as.numeric(tokens))
+  list(name, tokens)
 }
 
 fp.read <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE, binary=TRUE) {

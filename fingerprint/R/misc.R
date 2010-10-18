@@ -1,17 +1,3 @@
-featvec.to.binaryfp <- function(fps, bit.length = 256) {
-  if (!all(unlist(lapply(fps, class)) == 'nfeatvec'))
-    stop("Must supply a list of feature vector fingerprints")
-  ## get all the features
-  features <- sort(unique(unlist(lapply(fps, as.numeric))))
-  nbit <- length(features)
-  if (nbit %% 2 == 1) nbit <- nbit + 1
-  ## based on the entire feature set, convert original fps to binary fps
-  fps <- lapply(fps, function(x) {
-    bitpos <- match(as.numeric(x), features)
-    new("fingerprint", nbit=nbit, folded=FALSE, provider=x@provider,name=x@name, bits=bitpos)
-  })
-  return(fps)
-}
 
 setGeneric("fold", function(fp) standardGeneric("fold"))
 setMethod("fold", "fingerprint",
@@ -52,13 +38,21 @@ setMethod("euc.vector", "fingerprint",
 
 
 setGeneric("distance", function(fp1,fp2,method) standardGeneric("distance"))
-setMethod("distance", c("nfeatvec", "nfeatvec", "missing"),
+setMethod("distance", c("featvec", "featvec", "missing"),
           function(fp1, fp2) {
-            n1 <- length(fp1)
-            n2 <- length(fp2)
-            n12 <- length(intersect(fp1@features, fp2@features))
-            return(n12/(n1+n2-n12))
+            distance(fp1, fp2, "tanimoto" )
           })
+setMethod("distance", c("featvec", "featvec", "character"),
+          function(fp1, fp2, method=c("tanimoto")) {
+            method <- match.arg(method)
+            if (method == 'tanimoto') {
+              n1 <- length(fp1)
+              n2 <- length(fp2)
+              n12 <- length(intersect(fp1@features, fp2@features))
+              return(n12/(n1+n2-n12))
+            }
+          })
+
 setMethod("distance", c("fingerprint", "fingerprint", "missing"),
           function(fp1,fp2) {
             distance(fp1,fp2,"tanimoto")

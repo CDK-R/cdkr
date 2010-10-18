@@ -32,8 +32,8 @@ integers, so string features are not handled
 \value{
 A list with two componenents - the name associated with the fingerprint (if available)
  and a vector of integers representing bits set to 1 (for the case of the first three 
-methods) or a vector of signed integers representing hashed features (characteristic of
- circular fingerprints).
+methods) or a vector of characters representing hashed features (characteristic of
+ circular fingerprints) or more generally, any string feature.
 }
 \author{Rajarshi Guha \email{rajarshi.guha@gmail.com}}
 \keyword{logic}
