@@ -43,7 +43,7 @@ setMethod("distance", c("featvec", "featvec", "missing"),
             distance(fp1, fp2, "tanimoto" )
           })
 setMethod("distance", c("featvec", "featvec", "character"),
-          function(fp1, fp2, method=c("tanimoto")) {
+          function(fp1, fp2, method=c("tanimoto", "dice", "robust")) {
             method <- match.arg(method)
             n1 <- length(fp1)
             n2 <- length(fp2)

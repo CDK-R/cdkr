@@ -1,8 +1,8 @@
 importFrom("methods")
 exportClasses("fingerprint")
-exportClasses("nfeatvec")
+exportClasses("featvec")
 exportMethods("fold", "euc.vector", "distance",
-              "random.fingerprint", "as.character", "as.numeric",
+              "random.fingerprint", "as.character",
               "length", "show")
 export("fp.sim.matrix", "fp.to.matrix", "fp.factor.matrix",
        "fp.read.to.matrix", "fp.read", "featvec.to.binaryfp",

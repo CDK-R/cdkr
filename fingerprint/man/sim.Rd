@@ -6,7 +6,8 @@
 \description{
 Given a set of fingerprints, a pairwise similarity can be calculated using the
 various distance metrics defined for binary strings. This function calculates
-the pairwise similarity matrix for a set of \code{fingerprint} objectssupplied in a \code{list} 
+the pairwise similarity matrix for a set of \code{fingerprint} or
+\code{featvec} objects supplied in a \code{list} 
 structure. Any of the distance metrics provided by \code{\link{distance}} can be used and the 
 default is the Tanimoto metric.
 
@@ -19,12 +20,11 @@ fp.sim.matrix(fplist, method='tanimoto')
 \arguments{
   \item{fplist}{
         A list structure with each element being an object of class
-	\code{fingerprint}. These will can be constructed by hand or
+	\code{fingerprint} or \code{featvec}. These can be constructed by hand or
 	read from disk via \code{\link{fp.read}}    
     }
     \item{method}{
-    The type of distance metric to use. Alternatives are \code{euclidean} and
-    \code{dice} and \code{mt}. The default is \code{tanimoto}. Partial
+    The type of distance metric to use. The default is \code{tanimoto}. Partial
     matching is supported.
     }
 }
@@ -43,4 +43,4 @@ fp3 <- new("fingerprint", nbit=6, bits=c(2,3,4,5,6))
 fp.sim.matrix( list(fp1,fp2,fp3) )
 }
 \keyword{logic}
-\author{Rajarshi Guha \email{rguha@indiana.edu}}
+\author{Rajarshi Guha \email{rajarshi.guha@gmail.com}}
