@@ -45,11 +45,15 @@ setMethod("distance", c("featvec", "featvec", "missing"),
 setMethod("distance", c("featvec", "featvec", "character"),
           function(fp1, fp2, method=c("tanimoto")) {
             method <- match.arg(method)
+            n1 <- length(fp1)
+            n2 <- length(fp2)
+            n12 <- length(intersect(fp1@features, fp2@features))
             if (method == 'tanimoto') {
-              n1 <- length(fp1)
-              n2 <- length(fp2)
-              n12 <- length(intersect(fp1@features, fp2@features))
               return(n12/(n1+n2-n12))
+            } else if (method == "robust") {
+              return(0.5 + 0.5 * n12 * n12 / (n1*n2))
+            } else if (method == "dice") {
+              return(2.0 * n12 / (n1+n2))
             }
           })
 
