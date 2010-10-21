@@ -1,3 +1,25 @@
+2010-10-20  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+
+	* R/read.R (fp.read): Updated to support reading of feature
+	fingerprints. The user must now indicate whether a binary or a
+	feature fingerprint is being read. Also added a new line parsing
+	function to process generic feature fingerprints.
+
+	* R/misc.R: Added similarity metrics for feature
+	fingerprints. Currently tanimoto, dice and robust metrics are
+	supported. 
+
+	* R/featurefp.R: Added a class to support fingerprints that are
+	represented as lists of numeric or string features such as
+	circular fingerprints. Also added a method to convert a collection
+	of feature fingerprints to a fixed-length binary string
+	representation. 
+
+	* man/featvec.Rd: Added man page for te featvec class, used to
+	represent fingerprints characterized as numeric or character
+	features
+	
+
 2010-06-02  Rajarshi  Guha  <rguha@Macintosh-5.local>
 
 	* R/balance.R (balance): Added a method to generate balanced fingerprints, which have 

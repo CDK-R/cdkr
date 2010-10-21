@@ -3,7 +3,6 @@
 \alias{featvec-class}
 \alias{distance,featvec,featvec,missing-method}
 \alias{distance,featvec,featvec,character-method}
-\alias{as.charater,featvec-method}
 \alias{length,featvec-method}
 
 \title{Class "featvec"}
