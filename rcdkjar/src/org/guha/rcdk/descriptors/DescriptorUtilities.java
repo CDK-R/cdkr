@@ -19,7 +19,7 @@ public class DescriptorUtilities {
         for (String className : classNames) {
             String[] dictClasses = engine.getDictionaryClass(className);
             if (dictClasses == null) {
-                if (className.indexOf("Mannhold") >= 0)
+                if (className.indexOf("AcidicGroupCountDescriptor") >= 0)
                     dictClasses = new String[]{"constitutionalDescriptor"};
             }
             for (String dictClass : dictClasses) {
