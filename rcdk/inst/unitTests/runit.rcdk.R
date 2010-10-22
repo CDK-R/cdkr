@@ -34,3 +34,16 @@ test.is.neutral <- function() {
   m <- parse.smiles('[O-]CC')[[1]]
   checkTrue(!is.neutral(m))
 }
+
+test.formula <- function() {
+##   m <- load.molecules('../../../data/formulatest.mol')
+##   f1 <- get.mol2formula(m[[1]]
+##   checkEquals(f1@string, "C35H64N3O21P3S")
+##   m <- parse.smiles("C1(C(C(C(C(C1OP(=O)(O)OCC(COC(=O)CCCCCCCNC(=O)CCCCC2SCC3C2NC(=O)N3)OC(=O)CCCCCCC)O)OP(=O)(O)O)OP(=O)(O)O)O)O")[[1]]
+##   do.aromaticity(m)
+##   do.typing(m)
+##   do.isotopes(m)
+## convert.implicit.to.explicit(m)
+##   f2 <- get.mol2formula(m)
+##   checkEquals(f2@string, "C35H64N3O21P3S")  
+}

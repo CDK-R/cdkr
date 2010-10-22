@@ -14,3 +14,11 @@ test.get.properties <- function() {
   checkEquals(props$foo,'bar')
   checkEquals(props$baz,1.23)  
 }
+
+## test.props.from.file <- function() {
+##   print(getwd())
+##   f <- load.molecules("../../../data/kegg.sdf")
+##   checkEquals(length(f), 10)
+##   proplens <- unlist(lapply(lapply(f, get.properties), length))
+##   checkEquals(proplens, c(5,5,5,5,5,5,5,3,5,5))
+## }

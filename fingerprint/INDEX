@@ -10,8 +10,10 @@ cdk.lf                  Functions to parse lines from fingerprint files
 distance                Calculates the Similarity or Dissimilarity
                         Between Two Fingerprints
 euc.vector              Euclidean Representation of Binary Fingerprints
+featvec-class           Class "featvec"
+featvec.to.binaryfp     Convert a Set of Feature Fingerprints to Binary
+                        Fingerprints
 fingerprint-class       Class "fingerpint"
-nfeatvec-class		Class "nfeatvec"
 fold                    Fold a fingerprint
 fp.factor.matrix        Converts a List of Fingerprints to a data.frame
                         of Factors

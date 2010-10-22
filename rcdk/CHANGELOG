@@ -1,3 +1,13 @@
+2010-10-21  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+
+	* Updated to latest CDK (1.4.x) which resolves bugs in formula
+	generation and reading SD tags consisting of single spaces. Also
+	updates to Murkco fragmentatin code which ensures that the proper
+	fragments are returned when requested as molecule objects. This
+	version also includes 3 new descriptors (FMF, acidic group and
+	basic group counts). 
+	
+
 2010-05-29  Rajarshi Guha  <guhar@OfficeMac.local>
 
 	* man/getfp.Rd: Updated docs for the newly included Pubchem fingerprint

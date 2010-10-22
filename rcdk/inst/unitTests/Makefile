@@ -12,4 +12,4 @@ inst: # Install package
 test: # Run unit tests
 	export RCMDCHECK=FALSE;\
 	cd ${TOP}/tests;\
-	${R} --vanilla --slave < ${SUITE}
+	${R} --slave < ${SUITE}
