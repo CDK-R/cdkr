@@ -91,6 +91,19 @@ result,they are pretty opaque to the user and are really meant to be
 processed using methods from the \Rpackage{rcdk} or \Rpackage{rJava}
 packages.
 
+However, since it loads all the molecules from the specified file into 
+a list, large files can lead to out of memory errors. In such a situtation
+it is preferable to iterate over the file, one structure at a time. Currently
+this behavior is supported for SDF and SMI files. An example of such a 
+usage for a large SD file would be:
+<<eval=FALSE>>=
+iter <- iload.molecules('verybig.sdf', type='sdf')
+while(hasNext(iter)) {
+ mol <- nextElem(iter)
+ print(get.property(mol, "cdk:Title"))
+}
+@ 
+
 Another common way to obtain molecule objects is by parsing SMILES
 strings. The simplest way to do this is
 <<>>=

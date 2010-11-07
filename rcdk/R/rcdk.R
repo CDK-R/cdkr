@@ -250,3 +250,11 @@ get.atom.count <- function(molecule) {
 
   .jcall(molecule, "I", "getAtomCount")
 }
+
+get.title <- function(molecule) {
+  if (is.null(attr(molecule, 'jclass')))
+    stop("molecule must be of class IAtomContainer or IMolecule")
+  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
+    stop("molecule must be of class IAtomContainer or IMolecule")
+  get.property(molecule, "cdk:Title")
+}

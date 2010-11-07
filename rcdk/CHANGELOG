@@ -1,5 +1,13 @@
 2010-11-07  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
+	* man/getproperty.Rd: Updated man page for get.title
+
+	* R/rcdk.R (get.title): Added a helper method to get the title
+	of a molecule.
+
+	* inst/doc/rcdk.Rnw (section{Input / Output}): Added a description
+	of how to use the iterating version of the molecule loader
+
 	* R/iterating.R (nextEl): Updated iterator so that we don't skip 
 	the first molecule. Also reorganized the code so that it makes
 	more sense
