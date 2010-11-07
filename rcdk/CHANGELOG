@@ -1,3 +1,9 @@
+2010-11-07  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+
+	* R/iterating.R (nextEl): Updated iterator so that we don't skip 
+	the first molecule. Also reorganized the code so that it makes
+	more sense
+
 2010-10-21  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
 	* Updated to latest CDK (1.4.x) which resolves bugs in formula
