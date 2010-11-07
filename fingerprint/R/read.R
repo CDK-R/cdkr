@@ -2,7 +2,8 @@ cdk.lf <- function(line) {
   p <- regexpr("{([0-9,\\s]*)}",line,perl=T)
   s <- gsub(',','',substr(line, p+1, p+attr(p,"match.length")-2))
   s <- lapply( strsplit(s,' '), as.numeric )
-  list(NA, s[[1]])
+  molid <- gsub("\\s+","", strsplit(line, "\\{")[[1]][1])
+  list(molid, s[[1]])
 }
 
 moe.lf <- function(line) {

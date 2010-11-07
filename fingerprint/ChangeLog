@@ -1,3 +1,9 @@
+2010-11-07  Rajarshi Guha  <guhar@hmmercadowiwxp.od.nih.gov>
+
+	* R/read.R: Updaetd the CDK line parser to extract the 
+	molecule id and return it so that the fingerpint object
+	contains the molecule id
+
 2010-10-20  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
 	* R/read.R (fp.read): Updated to support reading of feature
