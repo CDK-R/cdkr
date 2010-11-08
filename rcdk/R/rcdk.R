@@ -57,10 +57,17 @@ get.exact.mass <- function(molecule) {
       attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object")
   }
-  .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
-         'D',
-         'getTotalExactMass',
-         molecule);
+  ret <- .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
+                'D',
+                'getTotalExactMass',
+                molecule,
+                check=FALSE)
+  ex <- .jgetEx(clear=TRUE)
+  if (is.null(ex)) return(ret)
+  else{
+    print(ex)
+    stop("Couldn't get exact mass. Maybe you have not performed aromaticity, atom type or isotope configuration?")
+  }
 }
 
 get.natural.mass <- function(molecule) {
@@ -68,10 +75,17 @@ get.natural.mass <- function(molecule) {
       attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object")
   }
-  .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
-         'D',
-         'getNaturalExactMass',
-         molecule);
+  ret <- .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
+                'D',
+                'getNaturalExactMass',
+                molecule,
+                check=FALSE)
+  ex <- .jgetEx(clear=TRUE)
+  if (is.null(ex)) return(ret)
+  else{
+    print(ex)
+    stop("Couldn't get natural mass. Maybe you have not performed aromaticity, atom type or isotope configuration?")
+  }  
 }
 
 
