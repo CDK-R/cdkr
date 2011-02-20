@@ -5,6 +5,12 @@
 
 	* NAMESPACE: Added a specific export for hasNext
 
+2010-11-08  Rajarshi Guha  <guhar@office>
+
+	* R/rcdk.R (get.exact.mass): Updated to check for exception when
+	getting exact mass and print a more useful message.
+	(get.natural.mass): Same as above
+
 2010-11-07  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
 	* man/getproperty.Rd: Updated man page for get.title
