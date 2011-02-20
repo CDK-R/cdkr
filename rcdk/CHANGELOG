@@ -1,3 +1,10 @@
+2011-02-20  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+
+	* CHANGELOG: Updated CDK jar file to latest master plus some
+	cherry picks from 1.4
+
+	* NAMESPACE: Added a specific export for hasNext
+
 2010-11-07  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
 	* man/getproperty.Rd: Updated man page for get.title
