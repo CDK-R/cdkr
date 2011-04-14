@@ -10,3 +10,13 @@ bit.spectrum <- function(fplist) {
   }
   spec / length(fplist)
 }
+
+shannon <- function(fplist) {
+  if (class(fplist) != 'list') stop("Must provide a list of fingerprint objects")
+  if (any(unlist(lapply(fplist, class)) != 'fingerprint'))
+    stop("Must provide a list of fingerprint objects");
+
+  bs <- bit.spectrum(fplist)
+  bs <- bs[ bs != 0 ]
+  -1 * sum( bs * log2(bs) )
+}

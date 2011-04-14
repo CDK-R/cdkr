@@ -1,3 +1,8 @@
+2011-04-14  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+
+	* R/bitspec.R (shannon): Added a method to evaluate the Shannon
+	entropy for a list of fingerprints. Also added a man page
+
 2010-11-07  Rajarshi Guha  <guhar@hmmercadowiwxp.od.nih.gov>
 
 	* R/read.R: Updaetd the CDK line parser to extract the 

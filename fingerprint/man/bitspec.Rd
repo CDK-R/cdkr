@@ -43,4 +43,4 @@ Guha, R.; Schurer, S.; \emph{J. Comp. Aid. Molec. Des.}, \bold{2008},
     \emph{22}, 367-384.
 }
 \keyword{programming}
-\author{Rajarshi Guha \email{rguha@indiana.edu}}
+\author{Rajarshi Guha \email{rajarshi.guha@gmail.com}}
