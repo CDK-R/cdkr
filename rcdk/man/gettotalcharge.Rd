@@ -8,9 +8,13 @@
 \description{
 \code{get.total.charge} returns the summed partial charges for a molecule
 and \code{get.total.formal.charge} returns the summed formal charges. Currently,
-even if partial charges have not been assigned, the return value of \code{
-get.total.charges} will be 0 and as a result may not match the total formal
-charge on the molecules. This is a known issue in the CDK library
+if one or more partial charges are unset, the function simply returns
+the sum of formal charges (via \code{get.total.formal.charge}). This is slightly
+different from how the CDK evaluates the total charge of a molecule (via
+AtomContainerManipulator.getTotalCharge()), but is in line with how OEChem
+determines net charge on a molecule.
+
+In general, you will want to use the \code{get.total.charge} function.
 }
 \usage{
 get.total.charge(molecule)

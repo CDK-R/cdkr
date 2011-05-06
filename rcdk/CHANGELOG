@@ -1,10 +1,12 @@
 2011-05-06  Rajarshi Guha  <guhar@guest-193-062-206-199.wtgc.org>
 
 	* man/gettotalcharge.Rd: Added man page entry for the total
-	formal charge function
+	formal charge function.
 
 	* R/rcdk.R (get.total.formal.charge): Added new function to 
-	return the total formal charge
+	return the total formal charge. Also updated get.total.charge
+	to recognize when partial charges are unset and in such a case
+	return the sum of formal charges
 
 2011-02-20  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
