@@ -10,7 +10,7 @@
 
 \documentclass[letterpaper, 11pt]{article}
 
-\usepackage{fullpage, times}
+\usepackage{times}
 \usepackage{url}
 \usepackage[pdftex,bookmarks=true]{hyperref}
 

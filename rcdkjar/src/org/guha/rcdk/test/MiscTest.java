@@ -47,6 +47,14 @@ public class MiscTest extends TestCase {
 
     }
 
+    public void testTotalCharge() throws InvalidSmilesException {
+        String smi = "[H]C(COC(=O)CCCCCCCCCCC)(COP(O)(=O)OCC[N+](C)(C)C)OC(=O)CCCCCCCCCCCC";
+        SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
+        IAtomContainer mol = sp.parseSmiles(smi);
+        double tc = AtomContainerManipulator.getTotalCharge(mol);
+        System.out.println("tc = " + tc);
+    }
+
     public void testLoadMolsFromSmi() {
         IAtomContainer[] acs = null;
         try {

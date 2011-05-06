@@ -100,6 +100,18 @@ get.total.charge <- function(molecule) {
          molecule);
 }
 
+get.total.formal.charge <- function(molecule) {
+  if (is.null(attr(molecule, 'jclass')) ||
+      attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
+    stop("Must supply an IAtomContainer object")
+  }
+  .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
+         'D',
+         'getTotalFormalCharge',
+         molecule);
+}
+
+
 convert.implicit.to.explicit <- function(molecule) {
   if (is.null(attr(molecule, 'jclass')) ||
       attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
