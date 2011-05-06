@@ -101,7 +101,7 @@ get.total.charge <- function(molecule) {
 
   ## If any are null, partial charges were not set, so
   ## just return the total formal charge
-  if (any(is.null(pcharges))) return(get.total.formal.charge(mol))
+  if (any(is.null(pcharges))) return(get.total.formal.charge(molecule))
   else {
     .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
            'D',
@@ -116,7 +116,7 @@ get.total.formal.charge <- function(molecule) {
     stop("Must supply an IAtomContainer object")
   }
   .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
-         'D',
+         'I',
          'getTotalFormalCharge',
          molecule);
 }
