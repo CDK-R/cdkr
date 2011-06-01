@@ -32,9 +32,10 @@ fp.read.to.matrix(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE)
   }
   \item{lf}{
     A line reading function that parses a single line from
-    a fingerprint file. Currently, three such functions are provided
+    a fingerprint file. A number of functions are provided
     that parse the fingerprints from the output of the CDK, MOE and the
-    BCI toolkit,  respectively.
+    BCI toolkit. In addition, support is now available for the FPS format
+    from the chemfp project (\url{http://code.google.com/p/chem-fingerprints}).
   }
   \item{header}{
     Indicates whether the first line of the fingerprint file is
@@ -50,7 +51,8 @@ fp.read.to.matrix(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE)
   \code{\link{cdk.lf}},
   \code{\link{moe.lf}},
   \code{\link{bci.lf}},
-  \code{\link{ecfp.lf}}
+  \code{\link{ecfp.lf}},
+  \code{\link{fps.lf}}
 }
 \value{
   A \code{list} or \code{matrix} of fingerprints

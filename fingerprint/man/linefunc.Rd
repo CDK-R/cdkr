@@ -3,6 +3,7 @@
 \alias{moe.lf}
 \alias{bci.lf}
 \alias{ecfp.lf}
+\alias{fps.lf}
 \title{
     Functions to parse lines from fingerprint files
 }
@@ -12,8 +13,9 @@ a vector of integers which represents the position of the 'on' bits in
 a fingerprint. This allows the user to use \code{read.fp} with arbitrary fingerprint
 files. A new file format can be handled by defining a new line parser function.
 Currently the first three functions process fingerprint files obtained from the 
-CDK (\url{http://cdk.sourceforge.net}), MOE (\url{http://chemcomp.com})
-and BCI (\url{http://www.digitalchemistry.co.uk/}). The last function can be used
+CDK (\url{http://cdk.sourceforge.net}), MOE (\url{http://chemcomp.com}), BCI 
+(\url{http://www.digitalchemistry.co.uk/}) and the FPS format 
+(\url{http://code.google.com/p/chem-fingerprints/wiki/FPS}). The last function can be used
 for any fingerprint that generates hashed features (such as ECFPs or other 
 circular fingerprints). For these cases, it is assumed that features are unsigned 
 integers, so string features are not handled
@@ -23,6 +25,7 @@ integers, so string features are not handled
     moe.lf(line)
     bci.lf(line)
     ecfp.lf(line)
+    fps.lf(line)
 }
 \arguments{
     \item{line}{

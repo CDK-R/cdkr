@@ -6,6 +6,6 @@ exportMethods("fold", "euc.vector", "distance",
               "length", "show")
 export("fp.sim.matrix", "fp.to.matrix", "fp.factor.matrix",
        "fp.read.to.matrix", "fp.read", "featvec.to.binaryfp",
-       "moe.lf", "bci.lf", "cdk.lf", "ecfp.lf",
+       "moe.lf", "bci.lf", "cdk.lf", "ecfp.lf", "fps.lf",
        "bit.spectrum", "balance", "bit.importance")
 useDynLib(fingerprint)
