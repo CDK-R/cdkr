@@ -131,3 +131,22 @@ test.fp.balance <- function() {
   checkTrue(12 == length(fp2))
   checkEquals(c(1,2,3,10,11,12), fp2@bits)
 }
+
+test.fps.reader <- function() {
+  data.file <- file.path(.path.package(package="fingerprint"), "data", "bits.fps")
+  fps <- fp.read(data.file, lf=fps.lf)
+  checkEquals(323, length(fps))
+
+  ## OK, we need to pull in the bit positions Andrew specified
+  con <- file(description=data.file, open='r')
+  lines <- readLines(con, n=-1)
+  close(con)
+  headers <- grep('^#', lines)
+  lines <- lines[-headers]
+  pos <- lapply(strsplit(lines, "\\s"), function(x) as.numeric(strsplit(x[3], ",")[[1]])+1)
+  for (i in seq_along(fps)) {
+    expected <- sort(pos[[i]])
+    observed <- sort(fps[[i]]@bits)
+    checkEquals(expected, observed, msg = sprintf("%s had a mismatch in bit positions", fps[[i]]@name))
+  }
+}

@@ -1,6 +1,5 @@
 fps.lf <- function(line) {
   toks <- strsplit(line, "\\s")[[1]];
-  if (length(toks) != 2) return(NULL)
   bitpos <- .Call("parse_hex", as.character(toks[1]), as.integer(nchar(toks[1])))
   if (is.null(bitpos)) return(NULL)
   list(toks[2], bitpos+1) ## we add 1, since C does bit positions from 0
@@ -56,7 +55,7 @@ fp.read <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE, bin
       nheaderline <- nheaderline + 1
       if (nheaderline == 1 && length(grep("#FPS1", line)) != 1) stop("Invalid FPS format")
       if (length(grep("#num_bits", line)) == 1) size <- as.numeric(strsplit(line, '=')[[1]][2])
-      if (length(grep("#software", line)) == 1) provider <- as.numeric(strsplit(line, '=')[[1]][2])      
+      if (length(grep("#software", line)) == 1) provider <- as.character(strsplit(line, '=')[[1]][2])      
     }
     lines <- lines[ (nheaderline+1):length(lines) ]
     if (is.null(size)) { # num_bit
