@@ -3,6 +3,9 @@
 	* R/read.R (fp.read): Updated line functions to return a third
 	component that can be used to return the remainder of a line if a
 	format allows other items than just a title and fingerprint.
+	(fps.lf): Updated FPS line function to actually return remaining
+	components of a fingerprint line. Updated main reader to set the
+	misc field of a fingerprint object to hold this list
 
 2011-06-01  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 

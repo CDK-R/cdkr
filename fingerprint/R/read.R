@@ -2,7 +2,10 @@ fps.lf <- function(line) {
   toks <- strsplit(line, "\\s")[[1]];
   bitpos <- .Call("parse_hex", as.character(toks[1]), as.integer(nchar(toks[1])))
   if (is.null(bitpos)) return(NULL)
-  list(toks[2], bitpos+1, list()) ## we add 1, since C does bit positions from 0
+  if (length(toks) > 2) {
+    misc <- list(toks[-c(1,2)])
+  } else { misc <- list() }
+  list(toks[2], bitpos+1, misc) ## we add 1, since C does bit positions from 0
 }
 
 cdk.lf <- function(line) {
@@ -72,18 +75,22 @@ fp.read <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE, bin
     if (is.na(dat[[1]])) name <- ""
     else name <- dat[[1]]
 
+    misc <- dat[[3]] ## usually empty
+    
     if (binary) {
       fplist[[c]] <- new("fingerprint",
                          nbit=size,
                          bits=as.numeric(dat[[2]]),
                          folded=FALSE,
                          provider=provider,
-                         name=name)
+                         name=name,
+                         misc=misc)
     } else {
       fplist[[c]] <- new("featvec",
                          features=sort(dat[[2]]),
                          provider=provider,
-                         name=name)
+                         name=name,
+                         misc=misc)
     }
     c <- c+1
   }
