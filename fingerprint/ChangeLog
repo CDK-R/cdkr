@@ -1,3 +1,9 @@
+2011-06-02  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+
+	* R/read.R (fp.read): Updated line functions to return a third
+	component that can be used to return the remainder of a line if a
+	format allows other items than just a title and fingerprint.
+
 2011-06-01  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
 	* src/readfps.c (parse_hex): Added a C function to parse

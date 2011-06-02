@@ -18,7 +18,11 @@ CDK (\url{http://cdk.sourceforge.net}), MOE (\url{http://chemcomp.com}), BCI
 (\url{http://code.google.com/p/chem-fingerprints/wiki/FPS}). The last function can be used
 for any fingerprint that generates hashed features (such as ECFPs or other 
 circular fingerprints). For these cases, it is assumed that features are unsigned 
-integers, so string features are not handled
+integers, so string features are not handled.
+
+Note that when the \code{fps.lf} function is specified, items such as the number of bits
+or the header flag do not need to be specified, as the format requires a header block 
+containing some of these items.
 }
 \usage{
     cdk.lf(line)
@@ -33,10 +37,13 @@ integers, so string features are not handled
     }
 }
 \value{
-A list with two componenents - the name associated with the fingerprint (if available)
+A list with three componenents - the name associated with the fingerprint (if available)
  and a vector of integers representing bits set to 1 (for the case of the first three 
 methods) or a vector of characters representing hashed features (characteristic of
- circular fingerprints) or more generally, any string feature.
+ circular fingerprints) or more generally, any string feature. The third component is a
+(possibly empty) list, which contains the remaining components of a line, when the format
+allows items other than an a title and the fingerprint (such as the FPS format). The content
+of the third component is dependent on the line function that is being used.
 }
 \author{Rajarshi Guha \email{rajarshi.guha@gmail.com}}
 \keyword{logic}

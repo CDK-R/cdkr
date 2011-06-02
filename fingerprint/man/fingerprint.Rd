@@ -37,6 +37,11 @@ Objects can be created by calls of the form \code{new("fingerprint", ...)}.
     \item{\code{name}:}{Object of class \code{"character"} ~~
       The name associated with the fingerprint. If not name is available
     this gets set to an empty string}
+    \item{\code{misc}:}{Object of class \code{"list"} ~~
+    A holder for arbitrary items that may have been stored along with the fingerprint. Only
+    certain formats allow extra items to be stored with the fingerprint, so in many cases
+    this field is just an empty list}
+
   }
 }
 \section{Methods}{

@@ -133,7 +133,7 @@ test.fp.balance <- function() {
 }
 
 test.fps.reader <- function() {
-  data.file <- file.path(.path.package(package="fingerprint"), "data", "bits.fps")
+  data.file <- file.path(.path.package(package="fingerprint"), "unitTests", "bits.fps")
   fps <- fp.read(data.file, lf=fps.lf)
   checkEquals(323, length(fps))
 

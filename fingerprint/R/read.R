@@ -2,7 +2,7 @@ fps.lf <- function(line) {
   toks <- strsplit(line, "\\s")[[1]];
   bitpos <- .Call("parse_hex", as.character(toks[1]), as.integer(nchar(toks[1])))
   if (is.null(bitpos)) return(NULL)
-  list(toks[2], bitpos+1) ## we add 1, since C does bit positions from 0
+  list(toks[2], bitpos+1, list()) ## we add 1, since C does bit positions from 0
 }
 
 cdk.lf <- function(line) {
@@ -10,28 +10,28 @@ cdk.lf <- function(line) {
   s <- gsub(',','',substr(line, p+1, p+attr(p,"match.length")-2))
   s <- lapply( strsplit(s,' '), as.numeric )
   molid <- gsub("\\s+","", strsplit(line, "\\{")[[1]][1])
-  list(molid, s[[1]])
+  list(molid, s[[1]], list())
 }
 
 moe.lf <- function(line) {
   p <- regexpr("\"([0-9\\s]*)\"",line, perl=T)
   s <- substr(line, p+1, p+attr(p,"match.length")-2)
   s <- lapply( strsplit(s,' '), as.numeric )
-  list(NA, s[[1]])
+  list(NA, s[[1]], list())
 }
 
 bci.lf <- function(line) {
   tokens <- strsplit(line, '\\s')[[1]]
   name <- tokens[1]
   tokens <- tokens[-c(1, length(tokens), length(tokens)-1)]
-  list(name, as.numeric(tokens))
+  list(name, as.numeric(tokens), list())
 }
 
 ecfp.lf <- function(line) {
   tokens <- strsplit(line, '\\s')[[1]]
   name <- tokens[1]
   tokens <- tokens[-1]
-  list(name, tokens)
+  list(name, tokens, list())
 }
 
 ## TODO we should be iterating over lines and not reading

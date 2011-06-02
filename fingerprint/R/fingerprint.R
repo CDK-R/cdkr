@@ -3,7 +3,8 @@ setClass("fingerprint",
                         nbit="numeric",
                         folded="logical",
                         provider="character",
-                        name="character"),
+                        name="character",
+                        misc="list"),
          validity=function(object) {
            if (any(object@bits > object@nbit))
              return("Bit positions were greater than the specified bit length")
@@ -13,7 +14,8 @@ setClass("fingerprint",
                    nbit=0,
                    folded=FALSE,
                    provider="",
-                   name=""))
+                   name="",
+                   misc=list()))
 
 #setGeneric("show", function(object) standardGeneric("show"))
 setMethod("show", "fingerprint",
