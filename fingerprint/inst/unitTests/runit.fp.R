@@ -138,14 +138,8 @@ test.fps.reader <- function() {
   checkEquals(323, length(fps))
 
   ## OK, we need to pull in the bit positions Andrew specified
-  con <- file(description=data.file, open='r')
-  lines <- readLines(con, n=-1)
-  close(con)
-  headers <- grep('^#', lines)
-  lines <- lines[-headers]
-  pos <- lapply(strsplit(lines, "\\s"), function(x) as.numeric(strsplit(x[3], ",")[[1]])+1)
   for (i in seq_along(fps)) {
-    expected <- sort(pos[[i]])
+    expected <- sort(as.numeric(strsplit(fps[[i]]@misc[[1]],",")[[1]])+1)
     observed <- sort(fps[[i]]@bits)
     checkEquals(expected, observed, msg = sprintf("%s had a mismatch in bit positions", fps[[i]]@name))
   }
