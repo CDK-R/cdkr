@@ -1,3 +1,9 @@
+2011-06-03  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+
+	* src/fpdistance.c: Cleaned up uncessary headers and unused variables
+
+	* src/readfps.c: Cleaned up unecessary headers
+
 2011-06-02  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
 	* R/read.R (fp.read): Updated line functions to return a third

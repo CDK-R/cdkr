@@ -1,5 +1,4 @@
-#include <R.h>
-#include <R_ext/Utils.h>
+#include <math.h>
 
 #define X(_m,_i,_j,_nrow) _m[ _i + _nrow * _j ]
 
@@ -30,7 +29,7 @@ void fpdistance(double *fp1, double *fp2, int *nbit, int *metric, double *ret) {
 http://www.daylight.com/dayhtml/doc/theory/theory.finger.html
 **/
 double d_tanimoto(double *fp1, double *fp2, int nbit) {
-  int i,j;
+  int i;
   int nc = 0;
   int na = 0;
   int nb = 0;
@@ -47,7 +46,7 @@ double d_tanimoto(double *fp1, double *fp2, int nbit) {
 http://www.daylight.com/dayhtml/doc/theory/theory.finger.html
 **/
 double d_euclidean(double *fp1, double *fp2, int nbit) {
-  int i,j;
+  int i;
   int nc = 0;
   int nd = 0;
   if (nbit <= 0) return(-1.0);
