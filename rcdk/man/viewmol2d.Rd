@@ -1,6 +1,7 @@
 \name{view.molecule.2d}
 \alias{view.molecule.2d}
 \alias{view.image.2d}
+\alias{copy.image.to.clipboard}
 \alias{depict}
 \title{
   View 2D Structure Diagrams
@@ -10,11 +11,14 @@ The CDK is capable of generating 2D structure diagrams. These methods
 allow one to view 2D structure diagrams. Depending on the method called
 a Swing JFrame is displayed which allows resizing of the image or a
 raster image (derived from a PNG bytestream) is is returned, which can 
-be viewed using \code{\link{rasterImage}}
+be viewed using \code{\link{rasterImage}}. It is also possible to copy
+a 2D depiction to the system clipboard, which can then be pasted into 
+various external applications.
 }
 \usage{
 view.molecule.2d(molecule, ncol = 4, cellx = 200, celly = 200)
 view.image.2d(molecule, width = 200, height = 200)
+copy.image.to.clipboard(molecule, width = 200, height = 200)
 }
 \arguments{
   \item{molecule}{If a single molecule is to be viewed this should be a
@@ -29,7 +33,8 @@ view.image.2d(molecule, width = 200, height = 200)
   \item{height}{The height of the image}
 }
 \value{
-\code{view.molecule.2d} does not return anything. \code{view.image.2d} returns 
+\code{view.molecule.2d} and \code{copy.image.to.ckipboard} do not return anything. 
+\code{view.image.2d} returns 
 an array of the dimensions height x width x channels, from the original
 PNG version of the 2D depiction. 	
 }

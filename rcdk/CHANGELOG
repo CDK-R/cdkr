@@ -1,3 +1,16 @@
+2011-06-11  Rajarshi Guha  <guhar@nida01768669-lt.nida.nih.gov>
+
+	* R/rcdk.R (get.total.formal.charge): Fixed typo in variable name
+	(get.fingerprint): Added support for the new Hybridization fingerprinter
+
+	* man/viewmol2d.Rd: Updated man page for the new clipboard
+	copy method
+
+	* R/visual.R (copy.image.to.clipboard): Added function
+	to copy 2D depiction to system clipboard
+
+	* Updated to latest stable CDK release
+
 2011-05-06  Rajarshi Guha  <guhar@guest-193-062-206-199.wtgc.org>
 
 	* man/gettotalcharge.Rd: Added man page entry for the total

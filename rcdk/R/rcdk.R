@@ -96,7 +96,7 @@ get.total.charge <- function(molecule) {
   }
 
   ## check to see if we have partial charges
-  atoms <- get.atoms(mol)
+  atoms <- get.atoms(molecule)
   pcharges <- unlist(lapply(atoms, get.charge))
 
   ## If any are null, partial charges were not set, so
@@ -157,7 +157,9 @@ get.fingerprint <- function(molecule, type = 'standard', depth=6, size=1024) {
            graph = .jnew('org/openscience/cdk/fingerprint/GraphOnlyFingerprinter', size, depth),
            maccs = .jnew('org/openscience/cdk/fingerprint/MACCSFingerprinter'),
            pubchem = .jnew('org/openscience/cdk/fingerprint/PubchemFingerprinter'),
-           estate = .jnew('org/openscience/cdk/fingerprint/EStateFingerprinter'))
+           estate = .jnew('org/openscience/cdk/fingerprint/EStateFingerprinter'),
+           hybridization = .jnew('org/openscience/cdk/fingerprint/HybridizationFingerprinter', size, depth),
+           )
   if (is.null(fingerprinter)) stop("Invalid fingerprint type specified")
   
   bitset <- .jcall(fingerprinter, "Ljava/util/BitSet;", "getFingerprint", molecule)

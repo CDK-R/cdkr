@@ -134,3 +134,12 @@ view.image.2d <- function(molecule, width=200, height=200) {
   bytes <- .jcall(mi, "[B", "getBytes", as.integer(width), as.integer(height))
   return(readPNG(bytes))
 }
+
+copy.image.to.clipboard <-  function(molecule, width=200, height=200) {
+  if (attr(molecule,"jclass") != "org/openscience/cdk/interfaces/IAtomContainer")
+    stop("Must supply an IAtomContainer object")
+  .jcall('org/guha/rcdk/view/MoleculeImageToClipboard',
+         'V',
+         'copyImageToClipboard',
+         molecule, as.integer(width), as.integer(height));
+}
