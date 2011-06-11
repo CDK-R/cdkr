@@ -15,6 +15,7 @@
   \item extended - Similar to the standard type, but takes rings and
    atomic properties into account into account
   \item graph - Similar to the standard type by simply considers connectivity
+\item hybridization - Similar to the standard type, but only consider hybridization state
   \item maccs - The popular 166 bit MACCS keys described by MDL
   \item estate - 79 bit fingerprints corresponding to the E-State atom
   types described by Hall and Kier
@@ -34,11 +35,11 @@
     by loading them from disk or drawing them in the editor.
   }
   \item{type}{The type of fingerprint. Alternatives include
-  'extended',  'graph', 'maccs', 'estate'} 
+  'extended',  'graph', 'maccs', 'estate', 'hybridization'} 
   \item{depth}{The search depth. This argument is ignored for the
-  'maccs' and 'estate' fingerprints}
+  'pubchem', 'maccs' and 'estate' fingerprints}
   \item{size}{The length of the fingerprint bit string. This argument is ignored for the
-  'maccs' and 'estate' fingerprints}
+  'pubchem', 'maccs' and 'estate' fingerprints}
 }
 \value{
   Objects of class fingerprint, from the \code{fingerprint} package
