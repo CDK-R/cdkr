@@ -2,6 +2,7 @@ package org.guha.rcdk.view.panels;
 
 import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.exception.InvalidSmilesException;
+import org.openscience.cdk.interfaces.IAtom;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.interfaces.IMolecule;
 import org.openscience.cdk.layout.StructureDiagramGenerator;
@@ -43,6 +44,12 @@ public class MoleculeCell extends JPanel {
     private boolean isNew;
 
     public MoleculeCell(IAtomContainer atomContainer, int w, int h) {
+
+        for (IAtom atom : atomContainer.atoms()) {
+            if (atom.getPoint2d() == null)
+                throw new IllegalArgumentException("Molecule must have 2D coordinates");
+        }
+
         this.atomContainer = atomContainer;
         this.preferredWidth = w;
         this.preferredHeight = h;
