@@ -52,19 +52,36 @@ view.molecule.2d <- function(molecule, ncol = 4, cellx = 200, celly = 200) {
       class(molecule) != 'jobjRef') {
     stop("Must supply a filename, single molecule object or list of molecule objects")
   }
-  
-  
+
+  ## in case we're on OS X we need to prep some stuff
+  ## so we can shell out 
+  is.osx <- Sys.info()[1] == 'Darwin'
+  jarfile <- NULL
+  rcdklibs <- NULL
+  if (is.osx) { 
+    jarfile <- system.file(package='rcdk')
+    rcdklibs <- system.file(package='rcdklibs')
+  }
+
+  ## if we got a file name, lets load all the molecules
   if (class(molecule) == 'character') {
     molecule <- load.molecules(molecule)
     if (length(molecule) == 1) molecule <- molecule[[1]]
   }
-  
+
   if (class(molecule) != 'list') { ## single molecule
     if (attr(molecule, "jclass") != 'org/openscience/cdk/interfaces/IAtomContainer') {
       stop("Supplied object should be a Java reference to an IAtomContainer")
-    }    
-    v2d <- .jnew("org/guha/rcdk/view/ViewMolecule2D", molecule, as.integer(cellx), as.integer(celly))
-    ret <- .jcall(v2d, "V", "draw")
+    }
+
+    if (is.osx) {
+      smi <- get.smiles(molecule)
+      cmd <- sprintf('java -cp %s/cont/cdk.jar:%s/cont/rcdk.jar org.guha.rcdk.app.OSXHelper viewMolecule2D "%s" %d %d &', rcdklibs, jarfile, smi, cellx, celly)
+      return(system(cmd))
+    } else {
+      v2d <- .jnew("org/guha/rcdk/view/ViewMolecule2D", molecule, as.integer(cellx), as.integer(celly))
+      ret <- .jcall(v2d, "V", "draw")
+    }
   } else { ## multiple molecules
     array <- .jarray(molecule, contents.class="org/openscience/cdk/interfaces/IAtomContainer")
     v2d <- .jnew("org/guha/rcdk/view/ViewMolecule2DTable", array,
@@ -74,7 +91,7 @@ view.molecule.2d <- function(molecule, ncol = 4, cellx = 200, celly = 200) {
 
 view.table <- function(molecules, dat, cellx = 200, celly = 200) {
   stop("Currently disabled")
-  
+
   if (cellx <= 0 || celly <= 0) {
     stop("Invalid cell width or height specified")
   }
@@ -82,7 +99,7 @@ view.table <- function(molecules, dat, cellx = 200, celly = 200) {
   if (!is.list(molecules)) {
     stop("Must provide a list of molecule objects")
   }
-  
+
   if (!is.matrix(dat) && !is.data.frame(dat)) {
     stop("datatable must be a matrix or data.frame")
   }
@@ -93,7 +110,7 @@ view.table <- function(molecules, dat, cellx = 200, celly = 200) {
 
   if (is.null(names(dat))) cnames <- c('Molecule', paste('V',1:ncol(dat)), sep='')
   else cnames <- c('Molecule', names(dat))
-  
+
   ## we need to convert the R vectors to Java arrays
   ## and the datatable data.frame to an Object[][]
   molecules <- .jarray(molecules, "org/openscience/cdk/interfaces/IAtomContainer")
@@ -136,6 +153,13 @@ view.image.2d <- function(molecule, width=200, height=200) {
 }
 
 copy.image.to.clipboard <-  function(molecule, width=200, height=200) {
+  if (Sys.info()[1] == 'Darwin') { ## try the standalone helper
+    smi <- get.smiles(molecule)
+    jarfile <- system.file(package='rcdk')
+    rcdklibs <- system.file(package='rcdklibs')
+    cmd <- sprintf('java -cp %s/cont/cdk.jar:%s/cont/rcdk.jar org.guha.rcdk.app.OSXHelper copyToClipboard "%s" %d %d', rcdklibs, jarfile, smi, width, height)
+    return(system(cmd))
+  }
   if (attr(molecule,"jclass") != "org/openscience/cdk/interfaces/IAtomContainer")
     stop("Must supply an IAtomContainer object")
   .jcall('org/guha/rcdk/view/MoleculeImageToClipboard',

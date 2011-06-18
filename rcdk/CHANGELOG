@@ -1,5 +1,9 @@
 2011-06-18  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
+	* R/visual.R (view.molecule.2d): Updated some methods to make use
+	of the OS X helper. This allows users on OS X to view single
+	molecules in a Swing window and copy PNG depictions to the system clipboard
+
 	* man/props.Rd: Updated man page for the new volume method
 
 	* R/desc.R (get.volume): Added helper method to get molecular
