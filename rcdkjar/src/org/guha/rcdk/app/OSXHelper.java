@@ -27,14 +27,16 @@ public class OSXHelper {
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length != 4) return;
+        if (args.length != 4) {
+            System.out.println("Not enough argument");
+        }
 
         String method = args[0];
         String smiles = args[1];
         int width = Integer.parseInt(args[2]);
         int height = Integer.parseInt(args[3]);
 
-        if (smiles != null && smiles.equals("")) {
+        if (smiles != null && !smiles.equals("")) {
             OSXHelper helper = new OSXHelper();
             SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
             IAtomContainer mol = sp.parseSmiles(smiles);
@@ -42,7 +44,11 @@ public class OSXHelper {
                 helper.copyToClipboard(mol, width, height);
             } else if (method.equals("viewMolecule2D")) {
                 helper.viewMolecule2D(mol, width, height);
+            } else {
+                System.out.println("Didn't recognize method to run");
             }
+        } else {
+            System.out.println("Didn't get a SMILES to process");
         }
     }
 }
