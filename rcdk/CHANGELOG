@@ -1,3 +1,10 @@
+2011-06-18  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+
+	* man/props.Rd: Updated man page for the new volume method
+
+	* R/desc.R (get.volume): Added helper method to get molecular
+	volume based on the VABC method.
+
 2011-06-11  Rajarshi Guha  <guhar@nida01768669-lt.nida.nih.gov>
 
 	* man/getfp.Rd: Updated fingerprint man page for the new one
@@ -25,7 +32,7 @@
 
 2011-02-20  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
-	* CHANGELOG: Updated CDK jar file to latest master plus some
+	* Updated CDK jar file to latest master plus some
 	cherry picks from 1.4
 
 	* NAMESPACE: Added a specific export for hasNext

@@ -196,17 +196,6 @@ get.tpsa <- function(molecule) {
   return(value)
 }
 
-get.tpsa <- function(molecule) {
-  if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
-    stop("Must supply an IAtomContainer object")
-  }
-
-  desc <- .jnew("org.openscience.cdk.qsar.descriptors.molecular.TPSADescriptor")
-  descval <- .jcall(desc, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", molecule)
-  value <- .get.desc.values(descval, 1)
-  return(value)
-}
-
 get.alogp <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object")
@@ -227,4 +216,11 @@ get.xlogp <- function(molecule) {
   descval <- .jcall(desc, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", molecule)
   value <- .get.desc.values(descval, 3)
   return(value)
+}
+
+get.volume <- function(molecule) {
+  if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
+    stop("Must supply an IAtomContainer object")
+  }
+  return(J("org.openscience.cdk.geometry.volume.VABCVolume", "calculate", molecule))
 }

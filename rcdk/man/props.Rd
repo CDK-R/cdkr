@@ -2,6 +2,7 @@
 \alias{get.tpsa}
 \alias{get.alogp}
 \alias{get.xlogp}
+\alias{get.volume}
 \title{
 	Commonly Used Molecular Descriptors
 }
@@ -15,6 +16,7 @@
 get.tpsa(molecule)
 get.alogp(molecule)
 get.xlogp(molecule)
+get.volume(molecule)
 }
 \arguments{
   \item{molecule}{A \code{jObjRef} representing an IAtomContainer object}
@@ -24,9 +26,13 @@ It's important to note that ALogP and XLogP assumes that the molecule
 has explicit hydrogens. If the molecule is read from an SD file,
 explicit H's are usually present. On the other hand, if the molecule
 is obtained from a SMILES, explicit hydrogens must be added.
+
+The molecular volume is calculated using a group contribution method
+rather than the an analytical method. This allows to avoid the use of 
+3D structures.
 }
 \value{
-	Single numeric value representing TPSA, ALogP or XLogP
+	Single numeric value representing TPSA, ALogP, XLogP or molecular volume.
 }
 \keyword{programming}
 \seealso{
