@@ -1,3 +1,12 @@
+2011-06-19  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+
+	* R/formula.R (set.charge.formula): Updated default argument to
+	match docs
+
+	* man/viewmol2d.Rd: Fixed documentation typo
+
+	* man/setchargeformula.Rd: Fixed documentation error
+
 2011-06-18  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
 	* R/visual.R (view.molecule.2d): Updated some methods to make use

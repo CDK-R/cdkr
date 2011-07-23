@@ -58,8 +58,8 @@ PNG version of the 2D depiction.
   the window will be unresponsive. Also copying images to the clipboard will not work.
   As a result, on OS X we make use of a standalone
   helper that is run via the \code{system} command. Currently, this is supported
-  for the \code{\link{view.molecule.2d}} method (for a single molecule) and the 
-\code{\link{copyy.image.to.clipboard}} method. In the future, other view methods will also 
+  for the \code{view.molecule.2d} method (for a single molecule) and the 
+\code{copy.image.to.clipboard} method. In the future, other view methods will also 
 be accessible via this mechanism. While this allows OS X users to view molecules, it is
 slow due to invoking a new process.
 

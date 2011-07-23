@@ -9,14 +9,14 @@
 	its mass.
 }
 \usage{
-formula <- set.charge.formula(formula, charge=-1)
+set.charge.formula(formula, charge=-1)
 }
 \arguments{
   \item{formula}{A \code{cdkFormula} object.}
   \item{charge}{The value of the charge to set.}
  }
 \value{
-  None
+Returns the formula object with the specified charge
 }
 \keyword{programming}
 \seealso{

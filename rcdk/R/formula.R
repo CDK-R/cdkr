@@ -80,7 +80,7 @@ get.mol2formula <- function(molecule, charge=0) {
 ########################################################
 ##  Set the charge to a cdkFormula function.
 ########################################################
-set.charge.formula <- function(formula,charge) {
+set.charge.formula <- function(formula,charge = -1) {
   if (class(formula) != "cdkFormula")
     stop("Supplied object should be a cdkFormula Class")
   
