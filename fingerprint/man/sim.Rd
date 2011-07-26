@@ -15,7 +15,7 @@ Note that if the the Euclidean distance is specified then the resultant matrix i
 distance matrix and not a similarity matrix
 }
 \usage{
-fp.sim.matrix(fplist, method='tanimoto')
+fp.sim.matrix(fplist, fplist2=NULL, method='tanimoto')
 }
 \arguments{
   \item{fplist}{
@@ -23,13 +23,19 @@ fp.sim.matrix(fplist, method='tanimoto')
 	\code{fingerprint} or \code{featvec}. These can be constructed by hand or
 	read from disk via \code{\link{fp.read}}    
     }
+\item{fplist2}{A list structure with each element being an object of class
+\code{fingerprint} or \code{featvec}. if \code{NULL} then traditional pairwise 
+similarity is calculated with each member in \code{fplist}, otherwise the 
+resultant N x M matrix is derived from the similarity between each member of 
+\code{fplist} and \code{fplist2}}
     \item{method}{
     The type of distance metric to use. The default is \code{tanimoto}. Partial
     matching is supported.
     }
 }
 \value{
-A matrix with dimensions equal to \code{(length(fplist), length(fplist))}
+A matrix with dimensions equal to \code{(length(fplist), length(fplist))} if 
+\code{fplist2} is NULL, otherwise \code{(length(fplist), length(fplist2))}
 }
 \seealso{
     \code{\link{distance}}, \code{\link{fp.read}}
