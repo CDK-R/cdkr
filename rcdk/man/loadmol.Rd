@@ -49,6 +49,14 @@ such as SMILES, implicit or explicit hydrogens will be present.
 }
 \examples{
 \dontrun{
+
+## load a single file
+amol <- load.molecules('foo.sdf')
+
+## load multiple files
+mols <- load.molecules(c('mol1.sdf', 'mol2.smi', 'https://github.com/rajarshi/cdkr/blob/master/data/set2/dhfr00008.sdf?raw=true'))
+
+## iterate over a large file
 moliter <- iload.molecules("big.sdf", type="sdf")
 while(hasNext(moliter)) {
   mol <- nextElem(moliter)

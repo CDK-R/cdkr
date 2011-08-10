@@ -1,5 +1,7 @@
 2011-08-10  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
+	* man/loadmol.Rd: Added examples for using load.molecules
+
 	* R/iterating.R (hasNext.iload.molecules): Made more robust by
 	checking that the file exists before trying to load it
 
