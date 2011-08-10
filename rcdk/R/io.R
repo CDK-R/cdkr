@@ -56,6 +56,8 @@ load.molecules <- function(molfiles=NA, aromaticity = TRUE, typing = TRUE, isoto
 
   if (is.jnull(molecules)) {
     return(NA)
+  } if (length(molecules == 0)) {
+    return(molecules)
   } else {
     nulls <- which( unlist(lapply(molecules, is.jnull)) )
     if (length(nulls) > 0) molecules[nulls] <- NA
