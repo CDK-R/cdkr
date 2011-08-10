@@ -1,6 +1,10 @@
 hasNext <- function(obj, ...) { UseMethod("hasNext") } 
 hasNext.iload.molecules <- function(obj, ...) obj$hasNext()
 iload.molecules<- function(molfile, type = 'smi', aromaticity = TRUE, typing = TRUE, isotopes = TRUE) {
+
+  if (!file.exists(molfile) && length(grep('http://', molfile)) == 0)
+    stop(paste(molfile, ": Does not exist", sep=''))
+
   fr <- .jnew("java/io/FileReader", as.character(molfile))
   dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
                  "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",

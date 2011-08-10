@@ -1,5 +1,8 @@
 2011-08-10  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
+	* R/iterating.R (hasNext.iload.molecules): Made more robust by
+	checking that the file exists before trying to load it
+
 	* R/io.R (load.molecules): If non-existant file is specified we
 	now report the error properly
 
