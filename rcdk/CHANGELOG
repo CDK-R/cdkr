@@ -1,3 +1,8 @@
+2011-08-10  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+
+	* R/io.R (load.molecules): If non-existant file is specified we
+	now report the error properly
+
 2011-07-23  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 	
 	* Updated to latest CDK library

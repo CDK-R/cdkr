@@ -25,7 +25,7 @@ load.molecules <- function(molfiles=NA, aromaticity = TRUE, typing = TRUE, isoto
   }
 
   for (f in molfiles) {
-    if (!file.exists(f) && !grep('http://', f))
+    if (!file.exists(f) && length(grep('http://', f)) == 0)
       stop(paste(f, ": Does not exist", sep=''))
   }
 
