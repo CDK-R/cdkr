@@ -6,6 +6,7 @@ import org.guha.rcdk.util.Misc;
 import org.openscience.cdk.CDKConstants;
 import org.openscience.cdk.ChemFile;
 import org.openscience.cdk.DefaultChemObjectBuilder;
+import org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector;
 import org.openscience.cdk.exception.CDKException;
 import org.openscience.cdk.exception.InvalidSmilesException;
 import org.openscience.cdk.interfaces.IAtomContainer;
@@ -94,6 +95,16 @@ public class MiscTest extends TestCase {
         mol.setProperty("foo", "bar");
 
         Misc.writeMoleculesInOneFile(new IAtomContainer[]{mol}, "/Users/rguha/foo.sdf", 0);
+    }
+
+    public void testWriteMoleculesWithAromaticity() throws Exception {
+        SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
+        IAtomContainer mol = sp.parseSmiles("c1ccccc1CC");
+        CDKHueckelAromaticityDetector.detectAromaticity(mol);
+        mol.setProperty(CDKConstants.TITLE, "FooMolecule");
+        mol.setProperty("foo", "bar");
+
+        Misc.writeMoleculesInOneFile(new IAtomContainer[]{mol}, "/Users/guhar/foo.sdf", 0);
     }
 
 //    public void testjunk() throws FileNotFoundException, CDKException, CloneNotSupportedException {
