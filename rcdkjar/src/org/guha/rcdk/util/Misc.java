@@ -46,12 +46,15 @@ public class Misc {
                                                String filename,
                                                int writeProps) throws Exception {
         SDFWriter writer = new SDFWriter(new FileWriter(new File(filename)));
+
+        Properties props = new Properties();
+        props.put("WriteAromaticBondTypes", "true");
         if (writeProps == 0) {
-            Properties sdfWriterProps = new Properties();
-            sdfWriterProps.put("writeProperties", "false");
-            writer.addChemObjectIOListener(new PropertiesListener(sdfWriterProps));
-            writer.customizeJob();
+            props.put("writeProperties", "false");
         }
+        PropertiesListener listener = new PropertiesListener(props);
+        writer.addChemObjectIOListener(listener);
+        writer.customizeJob();
         for (IAtomContainer molecule : molecules) {
             writer.write(molecule);
         }
@@ -63,19 +66,22 @@ public class Misc {
         for (IAtomContainer molecule : molecules) {
             String filename = prefix + counter + ".sdf";
             SDFWriter writer = new SDFWriter(new FileWriter(new File(filename)));
+
+            Properties props = new Properties();
+            props.put("WriteAromaticBondTypes", "true");
             if (writeProps == 0) {
-                Properties sdfWriterProps = new Properties();
-                sdfWriterProps.put("writeProperties", "false");
-                writer.addChemObjectIOListener(
-                        new PropertiesListener(sdfWriterProps)
-                );
-                writer.customizeJob();
+                props.put("writeProperties", "false");
             }
+            PropertiesListener listener = new PropertiesListener(props);
+            writer.addChemObjectIOListener(listener);
+            writer.customizeJob();
+
             writer.write(molecule);
             writer.close();
             counter += 1;
         }
     }
+
 
     public static void setProperty(IAtomContainer molecule, String key, Object value) {
         molecule.setProperty(key, value);
