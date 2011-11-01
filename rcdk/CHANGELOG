@@ -1,3 +1,9 @@
+2011-11-01  Rajarshi Guha  <guhar@OfficeMac.local>
+	
+	* Convert package to use a namespace
+	
+	* Updated to use CDK 1.4.5
+
 2011-10-04  Rajarshi Guha  <guhar@OfficeMac.local>
 
 	* Updated to latest CDK 1.4.x branch, so that SDF writing now
