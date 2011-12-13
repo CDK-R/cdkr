@@ -1,3 +1,7 @@
+2011-12-13  Rajarshi Guha  <guhar@citdcssgoldi7lt.cit.nih.gov>
+
+	* Updated NAMESPACE to export the .get.desc.value method
+
 2011-11-01  Rajarshi Guha  <guhar@OfficeMac.local>
 	
 	* Convert package to use a namespace
