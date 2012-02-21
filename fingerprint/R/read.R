@@ -1,3 +1,10 @@
+jchem.binary.lf <- function(line) {
+  molid <- strsplit(line, "\t")[[1]][1]
+  bitpos <- .Call("parse_jchem_binary", as.character(line), as.integer(nchar(line)) )
+  if (is.null(bitpos)) return(NULL)
+  list(molid, bitpos+1, list()) ## we add 1, since C does bit positions from 0  
+}
+
 fps.lf <- function(line) {
   toks <- strsplit(line, "\\s")[[1]];
   bitpos <- .Call("parse_hex", as.character(toks[1]), as.integer(nchar(toks[1])))
@@ -76,7 +83,6 @@ fp.read <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE, bin
     else name <- dat[[1]]
 
     misc <- dat[[3]] ## usually empty
-    
     if (binary) {
       fplist[[c]] <- new("fingerprint",
                          nbit=size,

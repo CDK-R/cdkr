@@ -4,6 +4,7 @@
 \alias{bci.lf}
 \alias{ecfp.lf}
 \alias{fps.lf}
+\alias{jchem.binary.lf}
 \title{
     Functions to parse lines from fingerprint files
 }
@@ -30,6 +31,7 @@ containing some of these items.
     bci.lf(line)
     ecfp.lf(line)
     fps.lf(line)
+    jchem.binary.lf(line)
 }
 \arguments{
     \item{line}{

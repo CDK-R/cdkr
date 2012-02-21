@@ -23,7 +23,7 @@ static int to_int(int c) {
 
 
 SEXP parse_hex(SEXP hexstr, SEXP hexlen) {
-  int i,j;
+   int i,j;
   const char *argbuf;
   int arglen; 
 
@@ -61,4 +61,42 @@ SEXP parse_hex(SEXP hexstr, SEXP hexlen) {
 
 int bit_is_on(char *fp, int B) {
   return fp[B / 8] >> (B%8) & 0x01;
+}
+
+SEXP parse_jchem_binary(SEXP bstr, SEXP len) {
+  int i,j;
+  const char *argbuf;
+  int arglen; 
+  
+  argbuf = (const char*) CHAR(STRING_ELT(bstr,0));
+  arglen = INTEGER(len)[0];
+
+  // determine number of 1's
+  int n_on = 0;
+  i = 0;
+  while (i < arglen) {
+    if (argbuf[i++] == 9) break;
+  }
+  int startPos = i;
+  while (i < arglen) {
+    if (argbuf[i++] == 49) n_on++;
+  }
+  
+  // no get the actual bit positions
+  int *bitpos = (int*) R_alloc(n_on, sizeof(int));
+  int bitIdx = 0;
+  j = 0;
+  for (i = startPos; i < arglen; i++) {
+    int c = argbuf[i];
+    if (c != 49 && c != 48) continue;
+    if (c == 49) bitpos[j++] = bitIdx;
+    bitIdx++;
+  }
+
+  SEXP retsexp;
+  PROTECT(retsexp = allocVector(INTSXP, n_on));
+  for (i = 0; i < n_on; i++) INTEGER(retsexp)[i] = bitpos[i];
+  UNPROTECT(1);
+  return(retsexp);
+  
 }

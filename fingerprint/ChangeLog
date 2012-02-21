@@ -1,3 +1,9 @@
+2012-02-21  Rajarshi Guha  <guhar@dk31r9a06lp5a.niddk.nih.gov>
+
+	* R/read.R (jchem.binary.lf): Added a line parser for JChem binary
+	string formatted fingerprints. This is based on a C function to
+	parse the fingerprint portion of a line
+
 2011-07-26  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
 	* man/sim.Rd: Updated man page for fp.sim.matrix to indicate the
