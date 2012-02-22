@@ -1,6 +1,6 @@
 hasNext <- function(obj, ...) { UseMethod("hasNext") } 
 hasNext.iload.molecules <- function(obj, ...) obj$hasNext()
-iload.molecules<- function(molfile, type = 'smi', aromaticity = TRUE, typing = TRUE, isotopes = TRUE) {
+iload.molecules<- function(molfile, type = 'smi', aromaticity = TRUE, typing = TRUE, isotopes = TRUE, skip=TRUE) {
 
   if (!file.exists(molfile) && length(grep('http://', molfile)) == 0)
     stop(paste(molfile, ": Does not exist", sep=''))
@@ -12,7 +12,8 @@ iload.molecules<- function(molfile, type = 'smi', aromaticity = TRUE, typing = T
   if (type == 'smi') {
     sreader <- .jnew("org/openscience/cdk/io/iterator/IteratingSMILESReader",.jcast(fr, "java/io/Reader"), dcob)
   } else if (type == 'sdf') {
-    sreader <- .jnew("org/openscience/cdk/io/iterator/IteratingMDLReader",.jcast(fr, "java/io/Reader"), dcob)    
+    sreader <- .jnew("org/openscience/cdk/io/iterator/IteratingMDLReader",.jcast(fr, "java/io/Reader"), dcob)
+    .jcall(sreader, "V", "setSkip", skip)
   }
   hasNext <- NA
   mol <- NA

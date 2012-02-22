@@ -1,6 +1,6 @@
 Package: rcdk
-Version: 3.1.5
-Date: 2011-12-13
+Version: 3.1.6
+Date: 2012-02-22
 Title: rcdk - Interface to the CDK Libraries
 Author: Rajarshi Guha <rajarshi.guha@gmail.com>
 Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
