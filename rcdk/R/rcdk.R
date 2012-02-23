@@ -140,7 +140,7 @@ convert.implicit.to.explicit <- function(molecule) {
 }
 
 
-get.fingerprint <- function(molecule, type = 'standard', depth=6, size=1024) {
+get.fingerprint <- function(molecule, type = 'standard', depth=6, size=1024, verbose=FALSE) {
   if (is.null(attr(molecule, 'jclass'))) stop("Must supply an IAtomContainer or something coercable to it")
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     ## try casting it
@@ -162,7 +162,13 @@ get.fingerprint <- function(molecule, type = 'standard', depth=6, size=1024) {
            )
   if (is.null(fingerprinter)) stop("Invalid fingerprint type specified")
   
-  bitset <- .jcall(fingerprinter, "Ljava/util/BitSet;", "getFingerprint", molecule)
+  bitset <- .jcall(fingerprinter, "Ljava/util/BitSet;", "getFingerprint", molecule, check=FALSE)
+  e <- .jgetEx()
+  if (.jcheck(silent=TRUE)) {
+    if (verbose) print(e)
+    return(NULL)
+  }
+  
   if (type == 'maccs') nbit <- 166
   else if (type == 'estate') nbit <- 79
   else if (type == 'pubchem') nbit <- 881
