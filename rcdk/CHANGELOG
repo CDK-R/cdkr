@@ -1,3 +1,8 @@
+2012-02-23  Rajarshi Guha  <guhar@dk31r9a06lp5a.niddk.nih.gov>
+
+	* man/getfp.Rd: Updated documentation for the new parameters in
+	get.fingerprint and iload.molecules
+
 2012-02-22  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
 	* R/rcdk.R (get.fingerprint): Updated to manually check for

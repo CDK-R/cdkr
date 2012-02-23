@@ -10,7 +10,7 @@ encapsulates the calls to the CDK API to load a structure given its filename
 }
 \usage{
 load.molecules(molfiles=NA, aromaticity = TRUE, typing = TRUE, isotopes = TRUE, verbose=FALSE)
-iload.molecules(molfile, type="smi", aromaticity = TRUE, typing = TRUE, isotopes = TRUE)
+iload.molecules(molfile, type="smi", aromaticity = TRUE, typing = TRUE, isotopes = TRUE, skip=TRUE)
 }
 \arguments{
   \item{molfiles}{A \code{character} vector of filenames. Note that the full
@@ -29,6 +29,8 @@ iload.molecules(molfile, type="smi", aromaticity = TRUE, typing = TRUE, isotopes
   \item{isotopes}{If \code{TRUE} then atoms are configured with isotopic masses}
   \item{verbose}{If TRUE, output (such as file download progress) will
   be bountiful}
+  \item{skip}{If \code{TRUE}, then the reader will continue reading even when faced with an 
+  invalid molecule. If \code{FALSE}, the reader will stop at the fist invalid molecule}
 }
 \value{
   \code{load.molecules} returns a list of CDK \code{Molecule} objects, which can be 

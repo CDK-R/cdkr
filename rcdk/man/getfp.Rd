@@ -28,7 +28,7 @@
   manipulated with the fingerprint package.
 }
 \usage{
-    get.fingerprint(molecule, type = 'standard', depth=6, size=1024)
+    get.fingerprint(molecule, type = 'standard', depth=6, size=1024, verbose=FALSE)
 }
 \arguments{
   \item{molecule}{An \code{IAtomContainer} object that can be obtained
@@ -40,9 +40,11 @@
   'pubchem', 'maccs' and 'estate' fingerprints}
   \item{size}{The length of the fingerprint bit string. This argument is ignored for the
   'pubchem', 'maccs' and 'estate' fingerprints}
+  \item{verbose}{If \code{TRUE}, exceptions, if they occur, will be printed}
 }
 \value{
-  Objects of class fingerprint, from the \code{fingerprint} package
+  Objects of class fingerprint, from the \code{fingerprint} package. If there is a problem
+  during fingerprint calculation, \code{NULL} is returned.
 }
 \examples{
 ## get some molecules
