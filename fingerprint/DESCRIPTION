@@ -17,3 +17,4 @@ Description: This package contains functions to manipulate binary fingerprints
 License: GPL
 Depends: methods
 LazyLoad: yes
+Suggests: RUnit
