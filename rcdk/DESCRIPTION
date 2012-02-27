@@ -5,7 +5,7 @@ Title: rcdk - Interface to the CDK Libraries
 Author: Rajarshi Guha <rajarshi.guha@gmail.com>
 Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
 Depends: R (>= 2.11.0), rJava, rcdklibs, fingerprint, methods, png, iterators
-Suggests: xtable
+Suggests: xtable, RUnit
 License: LGPL 
 LazyLoad: yes
 Description: This package allows the user to access functionality in the

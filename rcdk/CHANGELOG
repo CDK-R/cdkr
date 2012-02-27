@@ -1,3 +1,8 @@
+2012-02-26  Rajarshi Guha  <guhar@niaaa-lptroach.niaaa.nih.gov>
+
+	* inst/doc/rcdk.Rnw: Updated vignette to not evaluate all descriptors for all molecules. 
+	Instead we now hand pick a few descriptors for the example on predictive models
+
 2012-02-23  Rajarshi Guha  <guhar@dk31r9a06lp5a.niddk.nih.gov>
 
 	* man/getfp.Rd: Updated documentation for the new parameters in

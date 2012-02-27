@@ -358,10 +358,18 @@ regression model to predict boiling points for the BP dataset. First
 we need a set of descriptors and so we evaluate all available descriptors.
 Also note that since a descriptor might belong to more than one
 category, we should obtain a unique set of descriptor names
+<<eval=FALSE>>=
+descNames <- unique(unlist(sapply(get.desc.categories(), get.desc.names)))           
+@ 
+For the current discussion we focus on a few, manually selected descriptors that we
+know will be related to boiling point.
 <<>>=
 data(bpdata)
 mols <- parse.smiles(bpdata[,1])
-descNames <- unique(unlist(sapply(get.desc.categories(), get.desc.names)))
+descNames <- c(
+     'org.openscience.cdk.qsar.descriptors.molecular.KierHallSmartsDescriptor',
+     'org.openscience.cdk.qsar.descriptors.molecular.APolDescriptor',
+     'org.openscience.cdk.qsar.descriptors.molecular.HBondDonorCountDescriptor')          
 descs <- eval.desc(mols, descNames) 
 class(descs)
 dim(descs)

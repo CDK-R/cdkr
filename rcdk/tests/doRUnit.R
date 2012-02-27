@@ -1,4 +1,4 @@
-if(require("RUnit", quietly=TRUE)) {
+ if(require("RUnit", quietly=TRUE)) {
  
   ## --- Setup ---
  
