@@ -27,6 +27,10 @@ set.property <- function(molecule, key, value) {
 }
 
 get.property <- function(molecule, key) {
+  if (is.jnull(molecule)) {
+    warn("Molecule object was null")
+    return(NA)
+  }
   if (!is.character(key)) {
     stop("The property key must be a character")
   }
@@ -37,7 +41,12 @@ get.property <- function(molecule, key) {
     atom <- .jcast(molecule, "org/openscience/cdk/interfaces/IAtomContainer")
 
   value <- .jcall('org/guha/rcdk/util/Misc', 'Ljava/lang/Object;', 'getProperty',
-                  molecule, as.character(key))
+                  molecule, as.character(key), check=FALSE)
+  e <- .jgetEx()
+  if (.jcheck(silent=TRUE)) {
+    return(NA)
+  }
+
   if (is.jnull(value)) return(NA)
   else return(.jsimplify(value))
 }
