@@ -1,3 +1,10 @@
+2012-03-09  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+
+	* R/atoms.R (get.connected.atoms): Added method to retrieve atoms
+	connected to the specified atom.
+	(get.atom.index): Added method to retrieve index of the atom in a
+	molecule, starting from 0
+
 2012-02-26  Rajarshi Guha  <guhar@niaaa-lptroach.niaaa.nih.gov>
 
 	* inst/doc/rcdk.Rnw: Updated vignette to not evaluate all descriptors for all molecules. 

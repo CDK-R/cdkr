@@ -34,7 +34,7 @@ get.point2d <- function(atom) {
 }
 
 get.symbol <- function(atom) {
-  atom <- .valid.atom(atom)  
+ r atom <- .valid.atom(atom)  
   .jcall(atom, "S", "getSymbol")
 }
 
@@ -74,4 +74,30 @@ is.in.ring <- function(atom) {
   atom <- .valid.atom(atom)
   flag.idx <- .jfield("org/openscience/cdk/CDKConstants", "I", "ISINRING")
   .jcall(atom, "Z", "getFlag", as.integer(flag.idx))
+}
+
+get.connected.atoms <- function(atom, mol) {
+  if (is.null(attr(mol, 'jclass')))
+    stop("object must be of class IMolecule or IAtomContainer")
+  
+  if (attr(mol, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer" &&
+      attr(mol, 'jclass') != "org/openscience/cdk/interfaces/IMolecule")
+    stop("object must be of class IMolecule or IAtomContainer")
+  
+  atom <- .valid.atom(atom)
+  ret <- .jcall(mol, "Ljava/util/List;", "getConnectedAtomsList", atom)
+  ret <- lapply(.javalist.to.rlist(ret), .jcast, new.class='org/openscience/cdk/interfaces/IAtom')
+  return(ret)
+}
+
+get.atom.index <- function(atom, mol) {
+  if (is.null(attr(mol, 'jclass')))
+    stop("object must be of class IMolecule or IAtomContainer")
+  
+  if (attr(mol, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer" &&
+      attr(mol, 'jclass') != "org/openscience/cdk/interfaces/IMolecule")
+    stop("object must be of class IMolecule or IAtomContainer")
+  
+  atom <- .valid.atom(atom)
+  .jcall(mol, "I", "getAtomNumber", atom)
 }
