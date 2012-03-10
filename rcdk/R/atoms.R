@@ -34,7 +34,7 @@ get.point2d <- function(atom) {
 }
 
 get.symbol <- function(atom) {
- r atom <- .valid.atom(atom)  
+  atom <- .valid.atom(atom)  
   .jcall(atom, "S", "getSymbol")
 }
 
