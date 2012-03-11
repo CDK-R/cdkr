@@ -28,7 +28,7 @@ set.property <- function(molecule, key, value) {
 
 get.property <- function(molecule, key) {
   if (is.jnull(molecule)) {
-    warn("Molecule object was null")
+    warning("Molecule object was null")
     return(NA)
   }
   if (!is.character(key)) {
