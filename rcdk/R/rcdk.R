@@ -13,6 +13,15 @@ require(rJava, quietly=TRUE)
   gsub('[[:space:]]+$', '',x)
 }
 
+.javalist.to.rlist <- function(l) {
+  size <- .jcall(l, "I", "size")
+  if (size == 0) return(list())
+  rl <- list()
+  for (i in 1:size)
+    rl[[i]] <- .jcall(l, "Ljava/lang/Object;", "get", as.integer(i-1))
+  return(rl)
+}
+
 .onLoad <- function(lib, pkg) {
   dlp<-Sys.getenv("DYLD_LIBRARY_PATH")
   if (dlp!="") { # for Mac OS X we need to remove X11 from lib-path

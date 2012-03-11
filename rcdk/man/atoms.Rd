@@ -6,6 +6,8 @@
 \alias{get.hydrogen.count}
 \alias{get.charge}
 \alias{get.formal.charge}
+\alias{get.connected.atoms}
+\alias{get.atom.index}
 \alias{is.aromatic}
 \alias{is.aliphatic}
 \alias{is.in.ring}
@@ -39,6 +41,10 @@ otherwise
 
 \code{is.in.ring} returns \code{TRUE} if the atom is in a ring, \code{FALSE} 
 otherwise
+
+\code{get.atom.index} returns the index of the atom in the molecule (starting from 0)
+
+\code{get.connected.atoms} returns a list of atoms that are connected to the specified atom
 }
 \usage{
 get.symbol(atom)
@@ -48,12 +54,15 @@ get.atomic.number(atom)
 get.hydrogen.count(atom)
 get.charge(atom)
 get.formal.charge(atom)
+get.connected.atoms(atom, mol)
+get.atom.index(atom, mol)
 is.aromatic(atom)
 is.aliphatic(atom)
 is.in.ring(atom)
 }
 \arguments{
   \item{atom}{A \code{jobjRef} representing an IAtom object}
+  \item{mol}{A \code{jobjRef} representing an IAtomContainer object}
 }
 \value{
 	In the case of \code{get.point3d} the return value is a
