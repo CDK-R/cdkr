@@ -193,13 +193,12 @@ get.fingerprint <- function(molecule, type = 'standard', depth=6, size=1024, ver
 
 get.atoms <- function(object) {
   if (is.null(attr(object, 'jclass')))
-    stop("object must be of class IMolecule or IAtomContainer or IObject or IBond")
+    stop("object must be of class IAtomContainer or IObject or IBond")
   
   if (attr(object, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer" &&
-      attr(object, 'jclass') != "org/openscience/cdk/interfaces/IMolecule" &&      
       attr(object, 'jclass') != "org/openscience/cdk/interfaces/IObject" &&
       attr(object, 'jclass') != "org/openscience/cdk/interfaces/IBond")
-    stop("object must be of class IMolecule or IAtomContainer or IObject or IBond")
+    stop("object must be of class IAtomContainer or IObject or IBond")
 
   natom <- .jcall(object, "I", "getAtomCount")
   atoms <- list()
@@ -210,10 +209,9 @@ get.atoms <- function(object) {
 
 get.bonds <- function(molecule) {
   if (is.null(attr(molecule, 'jclass')))
-    stop("molecule must be of class IAtomContainer or IMolecule")
-  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer" &&
-      attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IMolecule")
-    stop("molecule must be of class IAtomContainer or IMolecule")
+    stop("molecule must be of class IAtomContainer")
+  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
+    stop("molecule must be of class IAtomContainer")
 
   nbond <- .jcall(molecule, "I", "getBondCount")
   bonds <- list()
@@ -224,9 +222,9 @@ get.bonds <- function(molecule) {
 
 do.aromaticity <- function(molecule) {
   if (is.null(attr(molecule, 'jclass')))
-    stop("molecule must be of class IAtomContainer or IMolecule")
+    stop("molecule must be of class IAtomContainer")
   if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
-    stop("molecule must be of class IAtomContainer or IMolecule")
+    stop("molecule must be of class IAtomContainer")
 
   .jcall("org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector",
          "Z", "detectAromaticity", molecule)
@@ -234,9 +232,9 @@ do.aromaticity <- function(molecule) {
 
 do.typing <- function(molecule) {
   if (is.null(attr(molecule, 'jclass')))
-    stop("molecule must be of class IAtomContainer or IMolecule")
+    stop("molecule must be of class IAtomContainer")
   if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
-    stop("molecule must be of class IAtomContainer or IMolecule")
+    stop("molecule must be of class IAtomContainer")
 
   .jcall("org.openscience.cdk.tools.manipulator.AtomContainerManipulator",
          "V", "percieveAtomTypesAndConfigureAtoms", molecule)
@@ -244,9 +242,9 @@ do.typing <- function(molecule) {
 
 do.isotopes <- function(molecule) {
   if (is.null(attr(molecule, 'jclass')))
-    stop("molecule must be of class IAtomContainer or IMolecule")
+    stop("molecule must be of class IAtomContainer")
   if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
-    stop("molecule must be of class IAtomContainer or IMolecule")
+    stop("molecule must be of class IAtomContainer")
 
   builder <- .jcall(.jnew('org/openscience/cdk/ChemObject'),
                     'Lorg/openscience/cdk/interfaces/IChemObjectBuilder;', 'getBuilder')
@@ -258,9 +256,9 @@ do.isotopes <- function(molecule) {
 
 is.neutral <- function(molecule) {
   if (is.null(attr(molecule, 'jclass')))
-    stop("molecule must be of class IAtomContainer or IMolecule")
+    stop("molecule must be of class IAtomContainer")
   if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
-    stop("molecule must be of class IAtomContainer or IMolecule")
+    stop("molecule must be of class IAtomContainer")
   atoms <- get.atoms(molecule)
   fc <- unlist(lapply(atoms, get.formal.charge))
   return(all(fc == 0))
@@ -276,38 +274,38 @@ get.largest.component <- function(mol) {
                         "Z", "isConnected", mol)
   if (isConnected) return(mol)
   molSet <- .jcall("org.openscience.cdk.graph.ConnectivityChecker",
-                   "Lorg/openscience/cdk/interfaces/IMoleculeSet;",
+                   "Lorg/openscience/cdk/interfaces/IAtomContainerSet;",
                    "partitionIntoMolecules", mol)
-  ncomp <- .jcall(molSet, "I", "getMoleculeCount")
+  ncomp <- .jcall(molSet, "I", "getAtomContainerCount")
   max.idx <- -1
   max.atom.count <- -1
   for (i in seq_len(ncomp)) {
-    m <- .jcall(molSet, "Lorg/openscience/cdk/interfaces/IMolecule;",
-                "getMolecule", as.integer(i-1))
+    m <- .jcall(molSet, "Lorg/openscience/cdk/interfaces/IAtomContainer;",
+                "getAtomContainer", as.integer(i-1))
     natom <- .jcall(m, "I", "getAtomCount")
     if (natom > max.atom.count) {
       max.idx <- i
       max.atom.count <- natom
     }
   }
-  m <- .jcall(molSet, "Lorg/openscience/cdk/interfaces/IMolecule;",
-              "getMolecule", as.integer(max.idx-1))
+  m <- .jcall(molSet, "Lorg/openscience/cdk/interfaces/IAtomContainer;",
+              "getAtomContainer", as.integer(max.idx-1))
   .jcast(m, "org/openscience/cdk/interfaces/IAtomContainer")
 }
 
 get.atom.count <- function(molecule) {
   if (is.null(attr(molecule, 'jclass')))
-    stop("molecule must be of class IAtomContainer or IMolecule")
+    stop("molecule must be of class IAtomContainer")
   if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
-    stop("molecule must be of class IAtomContainer or IMolecule")
+    stop("molecule must be of class IAtomContainer")
 
   .jcall(molecule, "I", "getAtomCount")
 }
 
 get.title <- function(molecule) {
   if (is.null(attr(molecule, 'jclass')))
-    stop("molecule must be of class IAtomContainer or IMolecule")
+    stop("molecule must be of class IAtomContainer")
   if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
-    stop("molecule must be of class IAtomContainer or IMolecule")
+    stop("molecule must be of class IAtomContainer")
   get.property(molecule, "cdk:Title")
 }

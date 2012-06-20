@@ -85,15 +85,13 @@ get.desc.categories <- function() {
 eval.desc <- function(molecules, which.desc, verbose = FALSE) {
   if (class(molecules) != 'list') {
     jclassAttr <- attr(molecules, "jclass")
-    if (jclassAttr != "org/openscience/cdk/interfaces/IAtomContainer" &&
-        jclassAttr != "org/openscience/cdk/interfaces/IMolecule") {
+    if (jclassAttr != "org/openscience/cdk/interfaces/IAtomContainer") {
       stop("Must provide a list of molecule objects or a single molecule object")
     }
     molecules <- list(molecules)
   } else {
     jclassAttr <- lapply(molecules, attr, "jclass")
-    if (any(jclassAttr != "org/openscience/cdk/interfaces/IAtomContainer" &&
-            jclassAttr != "org/openscience/cdk/interfaces/IMolecule")) {
+    if (any(jclassAttr != "org/openscience/cdk/interfaces/IAtomContainer")) {
       stop("molecule must be an IAtomContainer")
     }
   }

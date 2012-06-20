@@ -1,3 +1,26 @@
+2012-06-20  Rajarshi Guha  <guhar@hg-01716957-lwx.nhgri.nih.gov>
+
+	* R/smiles.R (parse.smiles): Updated code to recognize there
+	is no longer a IMolecule class
+
+	* R/atoms.R (get.charge): Updated code to recognize there
+	is no longer a IMolecule class
+
+	* R/desc.R (get.desc.names): Updated code to recognize there
+	is no longer a IMolecule class
+
+	* R/rcdk.R (get.title): Updated code to recognize there
+	is no longer a IMolecule class
+
+	* R/props.R (get.properties): Updated code to recognize there
+	is no longer a IMolecule class
+
+	* R/formula.R (get.mol2formula): Updated code to recognize there
+	is no longer a IMolecule class
+
+	* inst/unitTests/runit.frags.R (test.frag3): Updated to remove
+	references to IMolecule and Molecule
+
 2012-03-09  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
 	* R/atoms.R (get.connected.atoms): Added method to retrieve atoms

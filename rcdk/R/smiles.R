@@ -19,7 +19,7 @@ parse.smiles <- function(smiles) {
   parser <- get.smiles.parser()
   returnValue <- sapply(smiles, 
       function(x) {
-        mol <- .jcall(parser, "Lorg/openscience/cdk/interfaces/IMolecule;", "parseSmiles", x)    
+        mol <- .jcall(parser, "Lorg/openscience/cdk/interfaces/IAtomContainer;", "parseSmiles", x)    
         if (is.null(mol)){
           return(NA)
         } else {

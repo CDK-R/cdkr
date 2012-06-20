@@ -49,12 +49,10 @@ setMethod("show", "cdkFormula",
 ##  Set the charge to a cdkFormula function.
 ########################################################
 get.mol2formula <- function(molecule, charge=0) {
-  if(((attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IMolecule") ||
-      (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") )== FALSE) {
-    stop("Must supply an IAtomContainer or IMolecule object")
+  print(attr(molecule, "jclass"))
+  if(attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
+    stop("Must supply an IAtomContainerobject")
   }
-  if(attr(molecule, "jclass") == "org/openscience/cdk/interfaces/IMolecule")
-    molecule <-.jcast(molecule, "org/openscience/cdk/interfaces/IAtomContainer")
   
   formulaJ <- .jcall('org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator',
                      "Lorg/openscience/cdk/interfaces/IMolecularFormula;",

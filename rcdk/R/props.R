@@ -53,9 +53,7 @@ get.property <- function(molecule, key) {
 
 get.properties <- function(molecule) {
   if (!.check.class(molecule, "org/openscience/cdk/interfaces/IAtomContainer") &&
-      !.check.class(molecule, "org/openscience/cdk/AtomContainer") &&
-      !.check.class(molecule, "org/openscience/cdk/Molecule") &&
-      !.check.class(molecule, "org/openscience/cdk/interfaces/IMolecule"))
+      !.check.class(molecule, "org/openscience/cdk/AtomContainer"))
     stop("Must supply an AtomContainer or IAtomContainer object")
   if (.check.class(molecule, "org/openscience/cdk/AtomContainer"))
     atom <- .jcast(molecule, "org/openscience/cdk/interfaces/IAtomContainer")
