@@ -2,13 +2,11 @@ package org.guha.rcdk.draw;
 
 import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.interfaces.IAtomContainer;
+import org.openscience.cdk.interfaces.IAtomContainerSet;
 import org.openscience.cdk.interfaces.IChemModel;
-import org.openscience.cdk.interfaces.IMolecule;
-import org.openscience.cdk.interfaces.IMoleculeSet;
 import org.openscience.cdk.layout.StructureDiagramGenerator;
 
-import javax.swing.JDialog;
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -19,20 +17,19 @@ public class Get2DStructureFromJCP {
     }
 
     public Get2DStructureFromJCP(IAtomContainer molecule) {
-        IMolecule localMolecule = null;
+        IAtomContainer localMolecule = null;
         // we should make 2D coords
         try {
             StructureDiagramGenerator sdg = new StructureDiagramGenerator();
-            sdg.setMolecule((IMolecule) molecule);
+            sdg.setMolecule(molecule);
             sdg.generateCoordinates();
             localMolecule = sdg.getMolecule();
-        }
-        catch (Exception exc) {
+        } catch (Exception exc) {
             exc.printStackTrace();
         }
 
-        IMoleculeSet som = DefaultChemObjectBuilder.getInstance().newInstance(IMoleculeSet.class);
-        som.addMolecule(localMolecule);
+        IAtomContainerSet som = DefaultChemObjectBuilder.getInstance().newInstance(IAtomContainerSet.class);
+        som.addAtomContainer(localMolecule);
         chemModel = DefaultChemObjectBuilder.getInstance().newInstance(IChemModel.class);
         chemModel.setMoleculeSet(som);
     }
@@ -80,12 +77,12 @@ public class Get2DStructureFromJCP {
     }
 
     public IAtomContainer[] getMolecules() {
-        IMoleculeSet som = chemModel.getMoleculeSet();
+        IAtomContainerSet som = chemModel.getMoleculeSet();
         if (som == null) return null;
         else {
-            IAtomContainer[] ret = new IAtomContainer[som.getMoleculeCount()];
+            IAtomContainer[] ret = new IAtomContainer[som.getAtomContainerCount()];
             int c = 0;
-            for (IAtomContainer molecule : som.molecules()) {
+            for (IAtomContainer molecule : som.atomContainers()) {
                 ret[c++] = molecule;
             }
 

@@ -1,20 +1,16 @@
 package org.guha.rcdk.view;
 
-import org.openscience.cdk.interfaces.IAtomContainer;
-import org.openscience.cdk.interfaces.IMolecule;
-import org.openscience.cdk.exception.CDKException;
-import org.openscience.cdk.exception.InvalidSmilesException;
-import org.openscience.cdk.smiles.SmilesParser;
-import org.openscience.cdk.DefaultChemObjectBuilder;
-import org.openscience.cdk.layout.StructureDiagramGenerator;
 import org.guha.rcdk.view.panels.MoleculeCell;
+import org.openscience.cdk.DefaultChemObjectBuilder;
+import org.openscience.cdk.exception.CDKException;
+import org.openscience.cdk.interfaces.IAtomContainer;
+import org.openscience.cdk.layout.StructureDiagramGenerator;
+import org.openscience.cdk.smiles.SmilesParser;
 
-import javax.swing.JPanel;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.GridLayout;
-import java.util.List;
+import javax.swing.*;
+import java.awt.*;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * A one line summary.
@@ -74,14 +70,14 @@ public class MoleculeDisplay extends JPanel {
         MoleculeDisplay md = new MoleculeDisplay();
 
         SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
-        String[] smiles = {"CCC", "c1ccccc1COC", "C12CN(CN(CCN(C1)Cc1ccccn1)CC2)C"};
+        String[] smiles = {"CC(C)N(C(=O)CCl)c1ccccc1", "CC(C)N(C(=O)CCl)C1=CC=CC=C1", "CC(C)N(C(=O)CCl)C1CC=CCC1"};
         List<IAtomContainer> mols = new ArrayList<IAtomContainer>();
 
         IAtomContainer mol;
         for (String s : smiles) {
             mol = sp.parseSmiles(s);
             StructureDiagramGenerator sdg = new StructureDiagramGenerator();
-            sdg.setMolecule((IMolecule) mol);
+            sdg.setMolecule(mol);
             try {
                 sdg.generateCoordinates();
             } catch (Exception e) {
@@ -94,8 +90,10 @@ public class MoleculeDisplay extends JPanel {
         //       md.setParams("ncol=2\nnrow=2");
         md.addMolecule(mols.get(0));
         md.addMolecule(mols.get(1));
+        md.addMolecule(mols.get(2));
         md.addLabel("Foo");
         md.addLabel("Bar");
+        md.addLabel("Baz");
 
         JFrame f = new JFrame("Molecule Display");
         f.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

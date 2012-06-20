@@ -3,9 +3,8 @@ package org.guha.rcdk.test;
 import junit.framework.Assert;
 import junit.framework.TestCase;
 import org.guha.rcdk.draw.Get2DStructureFromJCP;
-import org.openscience.cdk.interfaces.IChemModel;
-import org.openscience.cdk.interfaces.IMolecule;
 import org.openscience.cdk.interfaces.IAtomContainer;
+import org.openscience.cdk.interfaces.IChemModel;
 
 public class TestGet2DStructureFromJCP extends TestCase {
 

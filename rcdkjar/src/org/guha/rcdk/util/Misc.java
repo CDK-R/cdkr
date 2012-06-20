@@ -12,7 +12,6 @@ import org.openscience.cdk.interfaces.IAtom;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.interfaces.IChemFile;
 import org.openscience.cdk.interfaces.IChemObjectBuilder;
-import org.openscience.cdk.interfaces.IMolecule;
 import org.openscience.cdk.io.ISimpleChemObjectReader;
 import org.openscience.cdk.io.ReaderFactory;
 import org.openscience.cdk.io.SDFWriter;
@@ -25,16 +24,8 @@ import org.openscience.cdk.smsd.Isomorphism;
 import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 import org.openscience.cdk.tools.manipulator.ChemFileManipulator;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Vector;
+import java.io.*;
+import java.util.*;
 
 /**
  * @author Rajarshi Guha
@@ -205,7 +196,7 @@ public class Misc {
 
     public static IAtomContainer getMoleculeWithCoordinates(IAtomContainer molecule) throws Exception {
         StructureDiagramGenerator sdg = new StructureDiagramGenerator();
-        sdg.setMolecule((IMolecule) molecule);
+        sdg.setMolecule(molecule);
         sdg.generateCoordinates();
         return sdg.getMolecule();
     }
