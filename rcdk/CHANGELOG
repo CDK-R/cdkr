@@ -1,3 +1,11 @@
+2012-07-05  Rajarshi Guha  <guhar@OfficeMac.local>
+
+	* man/match.Rd: Updated man page for the matches method
+	to describe the new argument and return values
+
+	* R/matching.R (matches): Updated SMARTS matching method to return
+	the list of atom indices that correspond to the matching substructure
+
 2012-06-20  Rajarshi Guha  <guhar@hg-01716957-lwx.nhgri.nih.gov>
 
 	* R/smiles.R (parse.smiles): Updated code to recognize there
