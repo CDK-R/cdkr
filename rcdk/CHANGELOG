@@ -1,5 +1,8 @@
 2012-07-05  Rajarshi Guha  <guhar@OfficeMac.local>
 
+	* inst/unitTests/runit.match.R (test.match4): Added a unit test
+	for the new matches update
+
 	* man/match.Rd: Updated man page for the matches method
 	to describe the new argument and return values
 
