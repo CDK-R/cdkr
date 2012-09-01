@@ -1,8 +1,7 @@
 \name{fingerprint-class}
 \docType{class}
 \alias{fingerprint-class}
-\alias{distance,fingerprint,fingerprint,missing-method}
-\alias{distance,fingerprint,fingerprint,character-method}
+
 \alias{euc.vector,fingerprint-method}
 \alias{fold,fingerprint-method}
 \alias{random.fingerprint,numeric,numeric-method}
@@ -46,8 +45,8 @@ Objects can be created by calls of the form \code{new("fingerprint", ...)}.
 }
 \section{Methods}{
   \describe{
-    \item{distance}{\code{signature(fp1 = "fingerprint", fp2 = "fingerprint", method = "missing")}: ... }
-    \item{distance}{\code{signature(fp1 = "fingerprint", fp2 = "fingerprint", method = "character")}: ... }
+    \item{distance}{\code{signature(fp1 = "fingerprint", fp2 = "fingerprint", method = "missing", a = "missing", b = "missing")}: ... }
+    \item{distance}{\code{signature(fp1 = "fingerprint", fp2 = "fingerprint", method = "character", a = "missing", b = "missing")}: ... }
     \item{euc.vector}{\code{signature(fp = "fingerprint")}: ... }
     \item{fold}{\code{signature(fp = "fingerprint")}: ... }
     \item{random.fingerprint}{\code{signature(nbit = "numeric", on = "numeric")}: ... }    

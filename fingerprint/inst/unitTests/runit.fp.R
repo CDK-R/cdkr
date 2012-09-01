@@ -113,6 +113,33 @@ test.fp.to.matrix <- function() {
     checkTrue(all(m1 == m2))
 }
 
+test.tversky.1 <- function() {
+  fp1 <- new("fingerprint", bits=c(1,2,3,4), nbit=8)
+  fp2 <- new("fingerprint", bits=c(1,2,3,4), nbit=8)
+  s <- distance(fp1, fp2, "tversky", a=1,b=1)
+  checkEquals(1.0, s)
+}
+test.tversky.2 <- function() {
+  fp1 <- new("fingerprint", bits=c(5,6,7,8), nbit=8)
+  fp2 <- new("fingerprint", bits=c(1,2,3,4), nbit=8)
+  s <- distance(fp1, fp2, "tversky", a=1,b=1)
+  checkEquals(0.0, s)
+}
+test.tversky.3 <- function() {
+  fp1 <- new("fingerprint", bits=c(4,6,7,8), nbit=8)
+  fp2 <- new("fingerprint", bits=c(1,2,3,4), nbit=8)
+  stv <- distance(fp1, fp2, "tversky", a=1,b=1)
+  sta <- distance(fp1, fp2)  
+  checkEquals(stv, sta)
+}
+test.tversky.4 <- function() {
+  fp1 <- new("fingerprint", bits=c(4,6,7,8), nbit=8)
+  fp2 <- new("fingerprint", bits=c(1,2,3,4), nbit=8)
+  stv <- distance(fp1, fp2, "tversky", a=0.5,b=0.5)
+  std <- distance(fp1, fp2, "dice")  
+  checkEquals(stv, std)
+}
+
 test.fp.sim.matrix <- function() {
     fp1 <- new("fingerprint", bits=c(1,2,3,4), nbit=8)
     fp2 <- new("fingerprint", bits=c(5,6,7,8), nbit=8)

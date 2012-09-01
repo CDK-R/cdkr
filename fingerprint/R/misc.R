@@ -37,12 +37,12 @@ setMethod("euc.vector", "fingerprint",
           })
 
 
-setGeneric("distance", function(fp1,fp2,method) standardGeneric("distance"))
-setMethod("distance", c("featvec", "featvec", "missing"),
+setGeneric("distance", function(fp1,fp2,method,a,b) standardGeneric("distance"))
+setMethod("distance", c("featvec", "featvec", "missing", "missing", "missing"),
           function(fp1, fp2) {
             distance(fp1, fp2, "tanimoto" )
           })
-setMethod("distance", c("featvec", "featvec", "character"),
+setMethod("distance", c("featvec", "featvec", "character", "missing", "missing"),
           function(fp1, fp2, method=c("tanimoto", "dice", "robust")) {
             method <- match.arg(method)
             n1 <- length(fp1)
@@ -57,11 +57,29 @@ setMethod("distance", c("featvec", "featvec", "character"),
             }
           })
 
-setMethod("distance", c("fingerprint", "fingerprint", "missing"),
+setMethod("distance", c("fingerprint", "fingerprint", "missing", "missing", "missing"),
           function(fp1,fp2) {
             distance(fp1,fp2,"tanimoto")
           })
-setMethod("distance", c("fingerprint", "fingerprint", "character"),
+
+setMethod("distance", c("fingerprint", "fingerprint", "character", "numeric", "numeric"),
+          function(fp1, fp2, method="tversky", a, b) {
+            if (!is.null(method) && !is.na(method) && method != "tversky") distance(fp1, fp2, method)
+            if ( length(fp1) != length(fp2))
+              stop("Fingerprints must of the same bit length")
+            if (a < 0 || b < 0) stop("a and b must be positive")
+
+            tmp <- fp1 & fp2
+            xiy <- length(tmp@bits)
+
+            tmp <- fp1 | fp2
+            xuy <- length(tmp@bits)
+
+            x <- length(fp1@bits)
+            y <- length(fp2@bits)
+            return( xiy / (a*x + b*y + (1-a-b)*xiy ) )
+          })
+setMethod("distance", c("fingerprint", "fingerprint", "character", "missing", "missing"),
           function(fp1,fp2, method=c('tanimoto', 'euclidean', 'mt',
                               'simple', 'jaccard', 'dice',
                               'russelrao', 'rodgerstanimoto','cosine',
@@ -77,6 +95,9 @@ setMethod("distance", c("fingerprint", "fingerprint", "character"),
                               'simpson', 'petke',
                               'stanimoto', 'seuclidean'
                               )) {
+
+            if (method == 'tversky')
+              stop("If Tversky metric is desired, must specify a and b")
             
             if ( length(fp1) != length(fp2))
               stop("Fingerprints must of the same bit length")
