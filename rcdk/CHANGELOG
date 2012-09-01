@@ -1,3 +1,7 @@
+2012-09-01  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+
+	* R/formula.R (get.mol2formula): Removed a debug statement
+
 2012-07-05  Rajarshi Guha  <guhar@OfficeMac.local>
 
 	* inst/unitTests/runit.match.R (test.match4): Added a unit test

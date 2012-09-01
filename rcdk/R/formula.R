@@ -49,7 +49,6 @@ setMethod("show", "cdkFormula",
 ##  Set the charge to a cdkFormula function.
 ########################################################
 get.mol2formula <- function(molecule, charge=0) {
-  print(attr(molecule, "jclass"))
   if(attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainerobject")
   }
