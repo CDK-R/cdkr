@@ -12,7 +12,7 @@ iload.molecules<- function(molfile, type = 'smi', aromaticity = TRUE, typing = T
   if (type == 'smi') {
     sreader <- .jnew("org/openscience/cdk/io/iterator/IteratingSMILESReader",.jcast(fr, "java/io/Reader"), dcob)
   } else if (type == 'sdf') {
-    sreader <- .jnew("org/openscience/cdk/io/iterator/IteratingMDLReader",.jcast(fr, "java/io/Reader"), dcob)
+    sreader <- .jnew("org/openscience/cdk/io/iterator/IteratingSDFReader",.jcast(fr, "java/io/Reader"), dcob)
     .jcall(sreader, "V", "setSkip", skip)
   }
   hasNext <- NA

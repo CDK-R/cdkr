@@ -1,3 +1,8 @@
+2012-11-17 Rajarshi Guha
+	
+	* R/iterating.R: Updated to use the proper class for iterating
+	over SD files. Thanks to Xavier Arroyo for reporting this
+
 2012-09-01  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
 
 	* R/formula.R (get.mol2formula): Removed a debug statement
