@@ -47,3 +47,13 @@ test.formula <- function() {
 ##   f2 <- get.mol2formula(m)
 ##   checkEquals(f2@string, "C35H64N3O21P3S")  
 }
+
+test.fp <- function() {
+  mol <- parse.smiles("CCCCC")[[1]]
+  fp <- get.fingerprint(mol, type='maccs')
+  checkTrue(length(fp@bits) > 0)
+  fp <- get.fingerprint(mol, type='kr')
+  checkTrue(length(fp@bits) > 0)
+  fp <- get.fingerprint(mol, type='shortestpath')
+  checkTrue(length(fp@bits) > 0)
+}

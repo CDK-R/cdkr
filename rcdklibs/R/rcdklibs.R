@@ -9,7 +9,7 @@ require(rJava, quietly=TRUE)
     }
 
     jar.cdk <- paste(lib,pkg,"cont","cdk.jar",sep=.Platform$file.sep)
-    jar.jcp <- paste(lib,pkg,"cont","jcp16.jar",sep=.Platform$file.sep)
+    jar.jcp <- paste(lib,pkg,"cont","commons-math3-3.0.jar",sep=.Platform$file.sep)
     .jinit(classpath=c(jar.cdk,jar.jcp))
 }
     

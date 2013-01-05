@@ -1,5 +1,18 @@
+2013-01-05  Guha  <guhar@citdnstjonesr.cit.nih.gov>
+
+	* man/getfp.Rd: Updated man page for new fingerprints
+
+	* inst/unitTests/runit.rcdk.R (test.fp): Added some simple
+	fingerprint test cases
+
+	* R/rcdk.R (get.fingerprint): Updated to use the new
+	IBitFingerprint interface. Added support for the Kelkota Roth and shortest
+	path fingerprinters
+
+	* Updated to latest CDK master, supporting new atom types
+
 2012-11-17 Rajarshi Guha
-	
+
 	* R/iterating.R: Updated to use the proper class for iterating
 	over SD files. Thanks to Xavier Arroyo for reporting this
 

@@ -168,19 +168,28 @@ get.fingerprint <- function(molecule, type = 'standard', depth=6, size=1024, ver
            pubchem = .jnew('org/openscience/cdk/fingerprint/PubchemFingerprinter'),
            estate = .jnew('org/openscience/cdk/fingerprint/EStateFingerprinter'),
            hybridization = .jnew('org/openscience/cdk/fingerprint/HybridizationFingerprinter', size, depth),
+           ##lingo = .jnew('org/openscience/cdk/fingerprint/LingoFingerprinter', depth),
+           kr = .jnew('org/openscience/cdk/fingerprint/KlekotaRothFingerprinter'),
+           shortestpath = .jnew('org/openscience/cdk/fingerprint/ShortestPathFingerprinter', size)
            )
   if (is.null(fingerprinter)) stop("Invalid fingerprint type specified")
   
-  bitset <- .jcall(fingerprinter, "Ljava/util/BitSet;", "getFingerprint", molecule, check=FALSE)
+  ibitfp <- .jcall(fingerprinter,
+                   "Lorg/openscience/cdk/fingerprint/IBitFingerprint;",
+                   "getBitFingerprint", molecule, check=FALSE)
+  
   e <- .jgetEx()
   if (.jcheck(silent=TRUE)) {
     if (verbose) print(e)
     return(NULL)
   }
+
+  bitset <- .jcall(ibitfp, "Ljava/util/BitSet;", "asBitSet")
   
   if (type == 'maccs') nbit <- 166
   else if (type == 'estate') nbit <- 79
   else if (type == 'pubchem') nbit <- 881
+  else if (type == 'kr') nbit <- 4860
   else nbit <- size
   
   bitset <- .jcall(bitset, "S", "toString")

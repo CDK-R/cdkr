@@ -20,6 +20,8 @@
   \item estate - 79 bit fingerprints corresponding to the E-State atom
   types described by Hall and Kier
   \item pubchem - 881 bit fingerprints defined by PubChem
+  \item kr - 4860 bit fingerprint defined by Klekota and Roth
+  \item shortestpath - A fingerprint based on the shortest paths between pairs of atoms and takes into account ring systems, charges etc.
   }
 
   Depending on whether the input is a single \code{IAtomContainer}
