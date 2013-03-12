@@ -9,8 +9,9 @@ require(rJava, quietly=TRUE)
     }
 
     jar.cdk <- paste(lib,pkg,"cont","cdk.jar",sep=.Platform$file.sep)
-    jar.jcp <- paste(lib,pkg,"cont","commons-math3-3.0.jar",sep=.Platform$file.sep)
-    .jinit(classpath=c(jar.cdk,jar.jcp))
+    jar.jcp <- paste(lib,pkg,"cont","cdk-jchempaint-26.jar",sep=.Platform$file.sep)
+    jar.math <- paste(lib,pkg,"cont","commons-math3-3.0.jar",sep=.Platform$file.sep)
+    .jinit(classpath=c(jar.cdk,jar.math,jar.jcp))
 }
     
 

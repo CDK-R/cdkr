@@ -7,7 +7,7 @@ import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.layout.StructureDiagramGenerator;
 import org.openscience.cdk.renderer.AtomContainerRenderer;
 import org.openscience.cdk.renderer.font.AWTFontManager;
-import org.openscience.cdk.renderer.generators.BasicAtomGenerator;
+import org.openscience.cdk.renderer.generators.ExtendedAtomGenerator;
 import org.openscience.cdk.renderer.generators.BasicSceneGenerator;
 import org.openscience.cdk.renderer.generators.IGenerator;
 import org.openscience.cdk.renderer.generators.RingGenerator;
@@ -53,7 +53,7 @@ public class MoleculeCell extends JPanel {
         java.util.List<IGenerator<IAtomContainer>> generators = new ArrayList<IGenerator<IAtomContainer>>();
         generators.add(new BasicSceneGenerator());
         generators.add(new RingGenerator());
-        generators.add(new BasicAtomGenerator());
+        generators.add(new ExtendedAtomGenerator());
 
         this.renderer = new AtomContainerRenderer(generators, new AWTFontManager());
         isNew = true;
