@@ -8,9 +8,13 @@ import org.openscience.cdk.exception.CDKException;
 import org.openscience.cdk.graph.ConnectivityChecker;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.renderer.AtomContainerRenderer;
+import org.openscience.cdk.renderer.RendererModel;
 import org.openscience.cdk.renderer.font.AWTFontManager;
 import org.openscience.cdk.renderer.generators.ExtendedAtomGenerator;
 import org.openscience.cdk.renderer.generators.BasicSceneGenerator;
+import org.openscience.cdk.renderer.generators.BasicBondGenerator;
+import org.openscience.cdk.renderer.generators.AtomNumberGenerator;
+import org.openscience.cdk.renderer.generators.AtomNumberGenerator.WillDrawAtomNumbers;
 import org.openscience.cdk.renderer.generators.IGenerator;
 import org.openscience.cdk.renderer.generators.RingGenerator;
 import org.openscience.cdk.renderer.visitor.AWTDrawVisitor;
@@ -51,7 +55,9 @@ public class MoleculeImage {
 
         List<IGenerator<IAtomContainer>> generators = new ArrayList<IGenerator<IAtomContainer>>();
         generators.add(new BasicSceneGenerator());
-        generators.add(new RingGenerator());
+	generators.add(new RingGenerator());
+	generators.add(new BasicBondGenerator()); 
+	generators.add(new AtomNumberGenerator());
         generators.add(new ExtendedAtomGenerator());
 
         // the renderer needs to have a toolkit-specific font manager
@@ -64,6 +70,10 @@ public class MoleculeImage {
         Graphics2D g2 = (Graphics2D) image.getGraphics();
         g2.setColor(Color.WHITE);
         g2.fillRect(0, 0, width, height);
+
+	// disable atom number rendering	
+	RendererModel model = renderer.getRenderer2DModel();
+	model.set(WillDrawAtomNumbers.class, Boolean.FALSE);
 
         // the paint method also needs a toolkit-specific renderer
         renderer.paint(molecule, new AWTDrawVisitor(g2), drawArea, true);
