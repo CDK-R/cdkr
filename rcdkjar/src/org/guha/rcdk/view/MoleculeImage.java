@@ -10,7 +10,7 @@ import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.renderer.AtomContainerRenderer;
 import org.openscience.cdk.renderer.RendererModel;
 import org.openscience.cdk.renderer.font.AWTFontManager;
-import org.openscience.cdk.renderer.generators.BasicAtomGenerator;
+import org.openscience.cdk.renderer.generators.ExtendedAtomGenerator;
 import org.openscience.cdk.renderer.generators.BasicSceneGenerator;
 import org.openscience.cdk.renderer.generators.BasicBondGenerator;
 import org.openscience.cdk.renderer.generators.AtomNumberGenerator;
