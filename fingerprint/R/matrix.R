@@ -3,6 +3,10 @@ fp.sim.matrix <- function(fplist, fplist2=NULL, method='tanimoto') {
   if (!is.null(fplist2)) {
     return(do.call('rbind', lapply(fplist, function(fp) unlist(lapply(fplist2, function(x) distance(x,fp))))))
   }
+
+  if (method == 'dice') {
+    return(.dice.sim.mat(fplist))
+  }
   
   sim <- matrix(0,nrow=length(fplist), ncol=length(fplist))
   for (i in 1:(length(fplist)-1)) {
@@ -32,4 +36,21 @@ fp.factor.matrix <- function( fplist ) {
   m <- data.frame(fp.to.matrix(fplist))
   m[] <- lapply(m, factor, levels=0:1)
   m
+}
+
+.dice.sim.mat <- function(fplist) {
+  m <- fp.to.matrix(fplist)
+  mat<-m%*%t(m)
+  len<-length(m[,1])
+  s<-mat.or.vec(len,len)
+  rs<-rowSums(m) #since its is binary just add the row values.
+
+  for (i in 1:(len-1)) {
+    for (j in (i+1):len) {
+      s[i,j]=(2*(mat[i,j])/(rs[i]+rs[j]))
+      s[j,i]=s[i,j]
+    }
+  }
+  diag(s) <- 1.0  
+  return(s)
 }

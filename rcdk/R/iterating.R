@@ -30,6 +30,8 @@ iload.molecules<- function(molfile, type = 'smi', aromaticity = TRUE, typing = T
   
   nextEl <- function() {
     mol <<- .jcall(sreader, "Ljava/lang/Object;", "next")
+    print(class(mol))
+    print("----")
     mol <<- .jcast(mol, "org/openscience/cdk/interfaces/IAtomContainer")
     if (aromaticity) do.aromaticity(mol)
     if (typing) do.typing(mol)
