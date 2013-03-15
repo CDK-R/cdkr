@@ -1,10 +1,10 @@
 Package: rcdk
-Version: 3.2.0
-Date: 2013-01-03
+Version: 3.2.0.2
+Date: 2013-03-13
 Title: rcdk - Interface to the CDK Libraries
 Author: Rajarshi Guha <rajarshi.guha@gmail.com>
 Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
-Depends: R (>= 2.11.0), rJava, rcdklibs (>= 1.5.0), fingerprint, methods, png, iterators
+Depends: R (>= 2.11.0), rJava, rcdklibs (>= 1.5.0.3), fingerprint, methods, png, iterators
 Suggests: xtable, RUnit
 License: LGPL 
 LazyLoad: yes

@@ -6,9 +6,13 @@ import org.openscience.cdk.interfaces.IAtom;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.layout.StructureDiagramGenerator;
 import org.openscience.cdk.renderer.AtomContainerRenderer;
+import org.openscience.cdk.renderer.RendererModel;
 import org.openscience.cdk.renderer.font.AWTFontManager;
-import org.openscience.cdk.renderer.generators.BasicAtomGenerator;
+import org.openscience.cdk.renderer.generators.ExtendedAtomGenerator;
 import org.openscience.cdk.renderer.generators.BasicSceneGenerator;
+import org.openscience.cdk.renderer.generators.BasicBondGenerator;
+import org.openscience.cdk.renderer.generators.AtomNumberGenerator;
+import org.openscience.cdk.renderer.generators.AtomNumberGenerator.WillDrawAtomNumbers;
 import org.openscience.cdk.renderer.generators.IGenerator;
 import org.openscience.cdk.renderer.generators.RingGenerator;
 import org.openscience.cdk.renderer.visitor.AWTDrawVisitor;
@@ -52,11 +56,18 @@ public class MoleculeCell extends JPanel {
 
         java.util.List<IGenerator<IAtomContainer>> generators = new ArrayList<IGenerator<IAtomContainer>>();
         generators.add(new BasicSceneGenerator());
-        generators.add(new RingGenerator());
-        generators.add(new BasicAtomGenerator());
+	generators.add(new RingGenerator());
+	generators.add(new BasicBondGenerator()); 
+	generators.add(new AtomNumberGenerator());
+        generators.add(new ExtendedAtomGenerator());
 
         this.renderer = new AtomContainerRenderer(generators, new AWTFontManager());
-        isNew = true;
+
+	// disable atom number rendering	
+	RendererModel model = renderer.getRenderer2DModel();
+	model.set(WillDrawAtomNumbers.class, Boolean.FALSE);
+
+	isNew = true;
     }
 
     public void paint(Graphics g) {
