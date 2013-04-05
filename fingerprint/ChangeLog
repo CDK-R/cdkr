@@ -1,3 +1,7 @@
+2013-04-05  Rajarshi Guha  <guhar@mh01887564lt.nih.gov>
+
+	* Updated package to remove use of deprecated methods
+
 2012-10-30  Rajarshi Guha  <guhar@OfficeMac.local>
 
 	* R/matrix.R (fp.sim.matrix): Added code provided by Abhik Seal 
