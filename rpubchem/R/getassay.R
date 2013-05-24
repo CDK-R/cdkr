@@ -40,8 +40,9 @@ require(RJSONIO)
 }
 
 get.assay.summary <- function(aid) {
-  url <- sprintf('http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/summary', as.numeric(aid))
-  j <- fromJSON(content=.join(readLines(url('http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/1000/summary/JSON')), '\n'))
+  urlcon <- url('http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/1000/summary/JSON')
+  j <- fromJSON(content=.join(readLines(urlcon), '\n'))
+  close(urlcon)
   j <- j[[1]][[1]][[1]]
   j$Comment <- .join(j$Comment, '\n')
   j$Protocol <- .join(j$Protocol, '\n')
@@ -158,26 +159,22 @@ find.assay.id <- function(query, quiet=TRUE) {
   ids
 }
 get.assay <- function(aid, quiet=TRUE) {
-  
-  baseURL <- 'ftp://ftp.ncbi.nlm.nih.gov/pubchem/Bioassay/CSV/Data/'
-  url <- paste(baseURL,aid,'.csv.gz', sep='', collapse='')
-
-  tmpdest <- tempfile(pattern = 'pcassay')
-  tmpdest <- paste(tmpdest, '.gz', sep='', collapse='')
-  status <- try(download.file(url, destfile=tmpdest, method='internal', mode='wb', quiet=quiet),
-                silent=TRUE)
-
-  if (class(status) == 'try-error') {
-    stop("Error in the download")
+  ## Lets see how many SID's we're going to pull down
+  as <- get.assay.summary(aid)
+  nsid <- as$SIDCountAll
+  if (nsid > 8000) {
+    .getAssayChunked(aid, quiet)
+  } else {
+    .getAssay(aid, quiet)
   }
-  if (!quiet) cat("Got data file\n")
+}
 
-  csvfile <- strsplit(tmpdest, '\\.')[[1]][1]
-  .gunzip(tmpdest, csvfile)
+.getAssay <- function(aid, quiet=TRUE) {
+  qurl <- sprintf("http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/CSV", as.numeric(aid))
+  urlcon <- url(qurl)
+  dat <- read.csv(urlcon, header=TRUE, as.is=TRUE)
 
-  if (!quiet) cat('Loading data\n')  
-  dat <- read.csv(csvfile, header=TRUE)
-  dat <- dat[,-c(2,6,8)]
+  if (!quiet) cat('Loaded data\n')  
 
   ## get rid of underscores in the names
   n <- names(dat)
@@ -201,10 +198,8 @@ get.assay <- function(aid, quiet=TRUE) {
   }
   attr(dat, 'types') <- types
   
-  names(dat)[6:ncol(dat)] <- desc$types[,1]
+  names(dat)[7:ncol(dat)] <- desc$types[,1]
 
-
-  unlink(csvfile)
   dat
 }
 
@@ -219,9 +214,9 @@ get.assay <- function(aid, quiet=TRUE) {
 
 
 #################################
-                                        #
-                                        # Get compound data
-                                        #
+##
+## Get compound data
+##
 #################################
 
 
@@ -401,9 +396,9 @@ get.sid.list <- function(cid, quiet=TRUE, from.file=FALSE) {
 }
 
 #################################
-                                        #
-                                        # Get substance data
-                                        #
+##
+## Get substance data
+##
 #################################
 get.sid <- function(sid, quiet=TRUE, from.file=FALSE) {
 
@@ -426,9 +421,9 @@ get.sid <- function(sid, quiet=TRUE, from.file=FALSE) {
 }
 
 #####################################
-                                        #
-                                        # Contributed code
-                                        #
+##
+## Contributed code
+##
 #####################################
 
 .find.compound.count <- function (compounds, quiet = TRUE) {
