@@ -1,0 +1,11 @@
+38f11d22bc14093f8e5387b458da307f *DESCRIPTION
+01aacd88d7eb4deaec2b3c0986e45e63 *NAMESPACE
+9935f8b2b33338171099138b1957fb64 *R/bioassayQueries.R
+f1badcf259108347578c58f9aafe93ac *R/getassay.R
+f8e1dd6c8a3934c21086b3efdd815dc0 *man/findaid.Rd
+5a1d5b261492991aa359fa093ec3b480 *man/getadesc.Rd
+530dd10e862a44dd603e8b410fece971 *man/getaidcid.Rd
+fbe569202e1a5cc8fa9df33cf81f69a7 *man/getassay.Rd
+628dcc06830115481ff10f80e5fcf213 *man/getcid.Rd
+b28b95e8678445221a3ee19b420dfdf5 *man/getcsid.Rd
+8c6fca94ad1d27b6fba362f9c3359539 *man/getsid.Rd

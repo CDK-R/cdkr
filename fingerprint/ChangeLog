@@ -1,3 +1,13 @@
+2013-04-05  Rajarshi Guha  <guhar@mh01887564lt.nih.gov>
+
+	* Updated package to remove use of deprecated methods
+
+2012-10-30  Rajarshi Guha  <guhar@OfficeMac.local>
+
+	* R/matrix.R (fp.sim.matrix): Added code provided by Abhik Seal 
+	to speed up pairwise similarity matrix calculation when the Dice
+	metric is specified.
+
 2012-02-21  Rajarshi Guha  <guhar@dk31r9a06lp5a.niddk.nih.gov>
 
 	* R/read.R (jchem.binary.lf): Added a line parser for JChem binary
