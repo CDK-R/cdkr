@@ -109,6 +109,9 @@
     <option name="OPEN_IN_BROWSER" value="false" />
     <option name="OUTPUT_DIRECTORY" />
   </component>
+  <component name="GradleSettings">
+    <option name="gradleHome" value="$PROJECT_DIR$/../../gradle-1.2" />
+  </component>
   <component name="IdProvider" IDEtalkID="FA3E28E1F23E022DE51CD8DDBF6B68BC" />
   <component name="InspectionProjectProfileManager">
     <profiles>
@@ -270,9 +273,6 @@
         <XML>
           <option name="XML_LEGACY_SETTINGS_IMPORTED" value="true" />
         </XML>
-        <ADDITIONAL_INDENT_OPTIONS fileType="sql">
-          <option name="INDENT_SIZE" value="2" />
-        </ADDITIONAL_INDENT_OPTIONS>
       </value>
     </option>
     <option name="USE_PER_PROJECT_SETTINGS" value="true" />

@@ -1,6 +1,7 @@
 package org.guha.rcdk.descriptors;
 
 import org.openscience.cdk.qsar.DescriptorEngine;
+import org.openscience.cdk.silent.SilentChemObjectBuilder;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,7 +15,7 @@ public class DescriptorUtilities {
     public static String[] getDescriptorNamesByCategory(String category) {
         category += "Descriptor";
         List<String> ret = new ArrayList<String>();
-        DescriptorEngine engine = new DescriptorEngine(DescriptorEngine.MOLECULAR);
+        DescriptorEngine engine = new DescriptorEngine(DescriptorEngine.MOLECULAR, SilentChemObjectBuilder.getInstance());
         List<String> classNames = engine.getDescriptorClassNames();
         for (String className : classNames) {
             String[] dictClasses = engine.getDictionaryClass(className);
@@ -36,7 +37,7 @@ public class DescriptorUtilities {
     }
 
     public static String[] getDescriptorCategories() {
-        DescriptorEngine engine = new DescriptorEngine(DescriptorEngine.MOLECULAR);
+        DescriptorEngine engine = new DescriptorEngine(DescriptorEngine.MOLECULAR, SilentChemObjectBuilder.getInstance());
         return engine.getAvailableDictionaryClasses();
     }
 
