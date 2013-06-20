@@ -2,12 +2,11 @@ Build Instructions
 ------------------
 
 	R CMD BUILD rcdklibs
+	R CMD INSTALL rcdklibs_*gz
 	cd rcdkjar
 	ant clean jar
 	cd ../
 	R CMD BUILD rcdk
-	
-	R CMD INSTALL rcdklibs_*gz
 	R CMD INSTALL rcdk_*gz
 
 Before performing the install, you should have the following dependencies installed:
