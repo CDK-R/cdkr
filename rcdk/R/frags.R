@@ -9,7 +9,6 @@ get.murcko.fragments <- function(mols, min.frag.size = 6, as.smiles = TRUE, sing
                       single.framework, as.integer(min.frag.size))
   
   ret <- lapply(mols, function(x) {
-    .jcall(fragmenter, "V", "reset")
     .jcall(fragmenter, "V", "generateFragments", x)
     if (as.smiles) {
       rings <- .jcall(fragmenter, "[S", "getRingSystems")
