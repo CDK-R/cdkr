@@ -57,3 +57,24 @@ test.fp <- function() {
   fp <- get.fingerprint(mol, type='shortestpath')
   checkTrue(length(fp@bits) > 0)
 }
+
+test.desc.cats <- function() {
+  cats <- get.desc.categories()
+  print(cats)
+  checkEquals(5, length(cats))
+}
+
+test.desc.names <- function() {
+  cats <- get.desc.categories()
+  for (acat in cats) {
+    dnames <- get.desc.names(acat)
+    checkTrue(length(dnames) > 0)
+  }
+}
+
+test.desc.calc <- function() {
+  dnames <- get.desc.names("topological")
+  mols <- parse.smiles("ccccccCCC")
+  dvals <- eval.desc(mols, dnames[1])
+  checkTrue(dvals[1,1] == 30)
+}

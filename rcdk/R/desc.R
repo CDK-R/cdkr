@@ -36,7 +36,19 @@
     stop('type must bond, molecular or atomic')
   }
   type <- match(type, c('atomic', 'bond', 'molecular'))
-  dengine <- .jnew('org/openscience/cdk/qsar/DescriptorEngine', as.integer(type))
+  if (type == 'molecular') {
+    interface <- J("org.openscience.cdk.qsar.IMolecularDescriptor")
+  } else if (type == 'atomic') {
+    interface <- J("org.openscience.cdk.qsar.IAtomicDescriptor")    
+  } else if (type == 'bond') {
+    interface <- J("org.openscience.cdk.qsar.IBondDescriptor")        
+  }
+  dklass <- interface@jobj
+  dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
+                 "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
+                 "getInstance")
+
+  dengine <- .jnew('org/openscience/cdk/qsar/DescriptorEngine', dklass, dcob)
   attr(dengine, 'descType') <- type
   pkg <- c('org.openscience.cdk.qsar.descriptors.atomic',
            'org.openscience.cdk.qsar.descriptors.bond',
