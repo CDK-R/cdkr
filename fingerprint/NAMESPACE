@@ -1,6 +1,7 @@
 importFrom("methods")
 exportClasses("fingerprint")
 exportClasses("featvec")
+exportClasses("feature")
 exportMethods("fold", "euc.vector", "distance",
               "random.fingerprint", "as.character",
               "length", "show")
