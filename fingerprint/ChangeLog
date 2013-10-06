@@ -1,3 +1,9 @@
+2013-10-06  Guha  <guhar@HG-01881061-LM8.local>
+
+	* R/zzz.R (.onLoad): Removed unecessary usage of require
+
+	* R/misc.R: Removed debug code
+
 2013-10-05  Rajarshi Guha <rajarshi.guha@gmail.com>
 
 	* Added the 'feature' class to represent alphanumeric features
