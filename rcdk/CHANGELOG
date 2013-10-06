@@ -1,3 +1,13 @@
+2013-10-06  Guha  <guhar@HG-01881061-LM8.local>
+
+	* man/getfp.Rd: Updated man page to describe feature,count
+	fingeprints. Added reference for signature fingerprint
+
+	* R/fingerprint.R (get.fingerprint): Added support for the
+	signature fingerprint. We also support the raw and count mode
+	fingerprint types in general. If these modes are requested, the
+	fingerprint is a featvec object
+
 2013-01-05  Guha  <guhar@citdnstjonesr.cit.nih.gov>
 
 	* man/getfp.Rd: Updated man page for new fingerprints

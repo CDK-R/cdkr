@@ -77,7 +77,7 @@ fps <- lapply(mols, get.fingerprint, type='signature', fp.mode='raw')
 }
 
 \references{
-Faulon et al, \href{http://pubs3.acs.org/acs/journals/doilookup?in_doi=10.1021/ci020345w}{The Signature Molecular Descriptor. 1. Using Extended Valence Sequences in QSAR and QSPR studies}, \emph{J. Chem. Inf. Comput. Sci.}, 2003, \emph{43}, 707-720. 	
+Faulon et al, \href{http://dx.doi.org/10.1021/ci020345w}{The Signature Molecular Descriptor. 1. Using Extended Valence Sequences in QSAR and QSPR studies}, \emph{J. Chem. Inf. Comput. Sci.}, 2003, \emph{43}, 707-720. 	
 }
 
 \keyword{programming}
