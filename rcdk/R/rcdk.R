@@ -149,56 +149,6 @@ convert.implicit.to.explicit <- function(molecule) {
 }
 
 
-get.fingerprint <- function(molecule, type = 'standard', depth=6, size=1024, verbose=FALSE) {
-  if (is.null(attr(molecule, 'jclass'))) stop("Must supply an IAtomContainer or something coercable to it")
-  if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
-    ## try casting it
-    molecule <- .jcast(molecule, "org/openscience/cdk/interfaces/IAtomContainer")
-  }
-
-  mode(size) <- 'integer'
-  mode(depth) <- 'integer'
-  
-  fingerprinter <-
-    switch(type,
-           standard = .jnew('org/openscience/cdk/fingerprint/Fingerprinter', size, depth),
-           extended = .jnew('org/openscience/cdk/fingerprint/ExtendedFingerprinter', size, depth),
-           graph = .jnew('org/openscience/cdk/fingerprint/GraphOnlyFingerprinter', size, depth),
-           maccs = .jnew('org/openscience/cdk/fingerprint/MACCSFingerprinter'),
-           pubchem = .jnew('org/openscience/cdk/fingerprint/PubchemFingerprinter'),
-           estate = .jnew('org/openscience/cdk/fingerprint/EStateFingerprinter'),
-           hybridization = .jnew('org/openscience/cdk/fingerprint/HybridizationFingerprinter', size, depth),
-           ##lingo = .jnew('org/openscience/cdk/fingerprint/LingoFingerprinter', depth),
-           kr = .jnew('org/openscience/cdk/fingerprint/KlekotaRothFingerprinter'),
-           shortestpath = .jnew('org/openscience/cdk/fingerprint/ShortestPathFingerprinter', size)
-           )
-  if (is.null(fingerprinter)) stop("Invalid fingerprint type specified")
-  
-  ibitfp <- .jcall(fingerprinter,
-                   "Lorg/openscience/cdk/fingerprint/IBitFingerprint;",
-                   "getBitFingerprint", molecule, check=FALSE)
-  
-  e <- .jgetEx()
-  if (.jcheck(silent=TRUE)) {
-    if (verbose) print(e)
-    return(NULL)
-  }
-
-  bitset <- .jcall(ibitfp, "Ljava/util/BitSet;", "asBitSet")
-  
-  if (type == 'maccs') nbit <- 166
-  else if (type == 'estate') nbit <- 79
-  else if (type == 'pubchem') nbit <- 881
-  else if (type == 'kr') nbit <- 4860
-  else nbit <- size
-  
-  bitset <- .jcall(bitset, "S", "toString")
-  s <- gsub('[{}]','', bitset)
-  s <- strsplit(s, split=',')[[1]]
-  moltitle <- get.property(molecule, 'Title')
-  if (is.na(moltitle)) moltitle <- ''
-  return(new("fingerprint", nbit=nbit, bits=as.numeric(s)+1, provider="CDK", name=moltitle))
-}
 
 get.atoms <- function(object) {
   if (is.null(attr(object, 'jclass')))

@@ -15,37 +15,43 @@
   \item extended - Similar to the standard type, but takes rings and
    atomic properties into account into account
   \item graph - Similar to the standard type by simply considers connectivity
-\item hybridization - Similar to the standard type, but only consider hybridization state
+  \item hybridization - Similar to the standard type, but only consider hybridization state
   \item maccs - The popular 166 bit MACCS keys described by MDL
-  \item estate - 79 bit fingerprints corresponding to the E-State atom
-  types described by Hall and Kier
+  \item estate - 79 bit fingerprints corresponding to the E-State atom types described by Hall and Kier
   \item pubchem - 881 bit fingerprints defined by PubChem
   \item kr - 4860 bit fingerprint defined by Klekota and Roth
   \item shortestpath - A fingerprint based on the shortest paths between pairs of atoms and takes into account ring systems, charges etc.
+  \item signature - A feature,count type of fingerprint, similar in nature to circular fingerprints, but based on the signature 
+    descriptor
   }
 
   Depending on whether the input is a single \code{IAtomContainer}
   object, a list or single vector is returned. Each element of the list 
-  is an S4 object of class \code{fingerprint}, which can be
-  manipulated with the fingerprint package.
+  is an S4 object of class \code{\link{fingerprint-class}} or \code{\link{featvec-class}}, 
+  which can be manipulated with the fingerprint package.
 }
 \usage{
-    get.fingerprint(molecule, type = 'standard', depth=6, size=1024, verbose=FALSE)
+    get.fingerprint(molecule, type = 'standard', fp.mode = 'bit', depth=6, size=1024, verbose=FALSE)
 }
 \arguments{
   \item{molecule}{An \code{IAtomContainer} object that can be obtained
     by loading them from disk or drawing them in the editor.
   }
-  \item{type}{The type of fingerprint. Alternatives include
-  'extended',  'graph', 'maccs', 'estate', 'hybridization'} 
+  \item{type}{The type of fingerprint. See description for possible values. The default is the standard
+  binary fingerprint.}
+  \item{fp.mode}{The type of fingerprint to return. Possible values are 'bit', 'raw', and 'count'. The 'raw' mode will  
+  return a \code{featvec-class} type of fingerprint, representing fragments and their count of occurence in the molecule.
+  The 'count' mode is similar, except that it returns hash values of fragments and their count of occurence.
+  While any of these values can be specified, a given fingerprint implementation may not implement all of them, and in 
+  those cases the return value is NULL.}
   \item{depth}{The search depth. This argument is ignored for the
-  'pubchem', 'maccs' and 'estate' fingerprints}
+  'pubchem', 'maccs', 'kr' and 'estate' fingerprints}
   \item{size}{The length of the fingerprint bit string. This argument is ignored for the
-  'pubchem', 'maccs' and 'estate' fingerprints}
+  'pubchem', 'maccs', 'kr', 'signature' and 'estate' fingerprints}
   \item{verbose}{If \code{TRUE}, exceptions, if they occur, will be printed}
 }
 \value{
-  Objects of class fingerprint, from the \code{fingerprint} package. If there is a problem
+  Objects of class \code{\link{fingerprint-class}} or \code{\link{featvec-class}}, from the \code{fingerprint} package. If there is a problem
   during fingerprint calculation, \code{NULL} is returned.
 }
 \examples{
@@ -60,10 +66,20 @@ fp <- get.fingerprint(mols[[1]])
 
 ## get MACCS keys for all the molecules
 fps <- lapply(mols, get.fingerprint, type='maccs')
+
+## get Signature fingerprint
+## feature, count fingerprinter
+fps <- lapply(mols, get.fingerprint, type='signature', fp.mode='raw')
 }      
+
 \seealso{
   \code{\link{load.molecules}}
 }
+
+\references{
+Faulon et al, \href{http://pubs3.acs.org/acs/journals/doilookup?in_doi=10.1021/ci020345w}{The Signature Molecular Descriptor. 1. Using Extended Valence Sequences in QSAR and QSPR studies}, \emph{J. Chem. Inf. Comput. Sci.}, 2003, \emph{43}, 707-720. 	
+}
+
 \keyword{programming}
 
 \author{Rajarshi Guha (\email{rajarshi.guha@gmail.com})}
