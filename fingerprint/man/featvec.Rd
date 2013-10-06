@@ -28,6 +28,8 @@ the logical and (&) would correspond to the union of the two feature vectors.
     \item{\code{name}:}{Object of class \code{"character"} ~~
       The name associated with the fingerprint. If not name is available
     this gets set to an empty string}
+    \item{\code{misc}:}{A list to hold arbitrary items associated with a fingerprint (such as 
+     extra fields from a fingerprint file)}
   }
 }
 \section{Methods}{

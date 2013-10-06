@@ -219,14 +219,11 @@ test.feature.dist2 <- function() {
 }
 
 test.featvec.read <- function() {
-  data.file <- file.path(system.file("unitTests", "bits.fps", package="fingerprint"))
-  fps <- fp.read(data.file, lf=fps.lf)
-  checkEquals(323, length(fps))
+  data.file <- file.path(system.file("unitTests", "test.ecfp", package="fingerprint"))
+  fps <- fp.read(data.file, lf=ecfp.lf, binary=FALSE)
+  checkEquals(10, length(fps))
 
-  ## OK, we need to pull in the bit positions Andrew specified
-  for (i in seq_along(fps)) {
-    expected <- sort(as.numeric(strsplit(fps[[i]]@misc[[1]],",")[[1]])+1)
-    observed <- sort(fps[[i]]@bits)
-    checkEquals(expected, observed, msg = sprintf("%s had a mismatch in bit positions", fps[[i]]@name))
-  }
+  lengths <- c(58L, 38L, 43L, 66L, 62L, 66L, 65L, 44L, 66L, 61L)
+  ol <- sapply(fps, length)
+  checkTrue(identical(lengths, ol))
 }
