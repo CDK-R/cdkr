@@ -227,3 +227,14 @@ test.featvec.read <- function() {
   ol <- sapply(fps, length)
   checkTrue(identical(lengths, ol))
 }
+
+tester.getters.setters <- function() {
+  f <- new("feature", feature='ABCD', count=as.integer(1))
+  checkEquals("ABCD", feature(f))
+  checkEquals(1, count(f))
+
+  feature(f) <- 'UXYZ'
+  count(f) <- 10
+  checkEquals("UXYZ", feature(f))
+  checkEquals(10, count(f))
+}

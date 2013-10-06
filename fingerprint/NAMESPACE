@@ -4,7 +4,8 @@ exportClasses("featvec")
 exportClasses("feature")
 exportMethods("fold", "euc.vector", "distance",
               "random.fingerprint", "as.character",
-              "length", "show")
+              "length", "show",
+              "feature", "count", 'feature<-', 'count<-')
 export("fp.sim.matrix", "fp.to.matrix", "fp.factor.matrix",
        "fp.read.to.matrix", "fp.read",
        ##"featvec.to.binaryfp",

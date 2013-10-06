@@ -24,3 +24,22 @@ setMethod('c', signature(x='feature'), function(x, ...) {
   return(ret)
 })
 
+## getters/setters
+setGeneric("feature", function(object) standardGeneric("feature"))
+setMethod("feature", "feature", function(object) object@feature)
+setGeneric("feature<-", function(this, value) standardGeneric("feature<-"))
+setReplaceMethod("feature", signature=signature("feature", "character"),
+                 function(this, value) {
+                   this@feature <- value
+                   this
+                 })
+
+setGeneric("count", function(object) standardGeneric("count"))
+setMethod("count", "feature", function(object) object@count)
+setGeneric("count<-", function(this, value) standardGeneric("count<-"))
+setReplaceMethod("count", signature=signature("feature", "numeric"),
+                 function(this, value) {
+                   this@count <- as.integer(value)
+                   this
+})
+
