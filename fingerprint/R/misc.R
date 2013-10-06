@@ -47,8 +47,6 @@ setMethod("distance", c("featvec", "featvec", "character", "missing", "missing")
             method <- match.arg(method)
             n1 <- length(fp1)
             n2 <- length(fp2)
-            print('method')
-
             ## extract the feature strings, ignoring counts for now
             f1 <- sapply(fp1@features, function(x) x@feature)
             f2 <- sapply(fp2@features, function(x) x@feature)
