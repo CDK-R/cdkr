@@ -1,3 +1,15 @@
+2013-10-05  Rajarshi Guha <rajarshi.guha@gmail.com>
+
+	* Added the 'feature' class to represent alphanumeric features
+          (usually substructures but could be arbitrary hashes) and
+          their counts
+
+        * Updated the 'featvec' fingerprint class to use 'feature'
+          objects
+
+        * Removed featvec.to.binary since the featvec fingerprint
+          type can also include non numeric features
+
 2013-04-05  Rajarshi Guha  <guhar@mh01887564lt.nih.gov>
 
 	* Updated package to remove use of deprecated methods
