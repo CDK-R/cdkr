@@ -2,6 +2,7 @@
 \alias{as.character}
 \alias{as.character,fingerprint-method}
 \alias{as.character,featvec-method}
+\alias{as.character,feature-method}
 \title{
   Generates a String Representation of a Fingerprint
 }
@@ -12,14 +13,15 @@
 \usage{
 \S4method{as.character}{fingerprint}(x)
 \S4method{as.character}{featvec}(x)
+\S4method{as.character}{feature}(x)
 }
 \arguments{
     \item{x}{
-      An object of class \code{fingerprint} or \code{featvec}
+      An object of class \code{fingerprint}, \code{featvec} or \code{feature}
     }
 }
 \value{
-A string of 1's and 0's or else a character vector of features
+A string of 1's and 0's or else a character vector of features (with their counts)
 }
 
 \examples{

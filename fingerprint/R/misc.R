@@ -47,7 +47,13 @@ setMethod("distance", c("featvec", "featvec", "character", "missing", "missing")
             method <- match.arg(method)
             n1 <- length(fp1)
             n2 <- length(fp2)
-            n12 <- length(intersect(fp1@features, fp2@features))
+            print('method')
+
+            ## extract the feature strings, ignoring counts for now
+            f1 <- sapply(fp1@features, function(x) x@feature)
+            f2 <- sapply(fp2@features, function(x) x@feature)
+            
+            n12 <- length(intersect(f1,f2))
             if (method == 'tanimoto') {
               return(n12/(n1+n2-n12))
             } else if (method == "robust") {

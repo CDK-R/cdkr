@@ -44,8 +44,9 @@ the logical and (&) would correspond to the union of the two feature vectors.
   \code{\link{fp.read}}, \code{\link{fp.read.to.matrix}}
   \code{\link{fp.sim.matrix}}, \code{\link{fp.to.matrix}},
   \code{\link{fp.factor.matrix}}
-  \code{\link{random.fingerprint}}, \code{\link{featvec.to.binaryfp}}
+  \code{\link{random.fingerprint}}
 }
+
  
 \keyword{classes}
 \keyword{logic}

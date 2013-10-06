@@ -171,3 +171,62 @@ test.fps.reader <- function() {
     checkEquals(expected, observed, msg = sprintf("%s had a mismatch in bit positions", fps[[i]]@name))
   }
 }
+
+#######################################
+##
+## Feature vector tests
+##
+#######################################
+test.feature <- function() {
+  f1 <- new('feature', feature='F1')
+  checkEquals(1, f1@count)
+
+  f2 <- new('feature', feature='F2', count=as.integer(12))
+  checkEquals(12, f2@count)
+}
+
+test.feature.c <- function() {
+  f1 <- new('feature', feature='F1', count=as.integer(2))
+  f2 <- new('feature', feature='F2', count=as.integer(3))
+  fl <- c(f1, f2)
+  checkEquals(2, length(fl))
+  checkEquals("list", class(fl))
+  checkTrue(identical(f1, fl[[1]]))
+  checkTrue(identical(f2, fl[[2]]))  
+}
+
+test.feature.fp <- function() {
+  feats <- sapply(letters[1:10], function(x) new('feature', feature=x, count=as.integer(1)))
+  fv <- new('featvec', features=feats)
+  checkEquals(10, length(fv))
+}
+
+test.feature.dist1 <- function() {
+  f1 <- sapply(letters[1:10], function(x) new('feature', feature=x, count=as.integer(1)))
+  f2 <- sapply(letters[1:10], function(x) new('feature', feature=x, count=as.integer(1)))
+  fv1 <- new('featvec', features=f1)
+  fv2 <- new('featvec', features=f2)
+  d <- distance(fv1, fv2, method='tanimoto')
+  checkEquals(1, d)
+}
+test.feature.dist2 <- function() {
+  f1 <- sapply(letters[1:10], function(x) new('feature', feature=x, count=as.integer(1)))
+  f2 <- sapply(letters[11:20], function(x) new('feature', feature=x, count=as.integer(1)))
+  fv1 <- new('featvec', features=f1)
+  fv2 <- new('featvec', features=f2)
+  d <- distance(fv1, fv2, method='tanimoto')
+  checkEquals(0, d)
+}
+
+test.featvec.read <- function() {
+  data.file <- file.path(system.file("unitTests", "bits.fps", package="fingerprint"))
+  fps <- fp.read(data.file, lf=fps.lf)
+  checkEquals(323, length(fps))
+
+  ## OK, we need to pull in the bit positions Andrew specified
+  for (i in seq_along(fps)) {
+    expected <- sort(as.numeric(strsplit(fps[[i]]@misc[[1]],",")[[1]])+1)
+    observed <- sort(fps[[i]]@bits)
+    checkEquals(expected, observed, msg = sprintf("%s had a mismatch in bit positions", fps[[i]]@name))
+  }
+}

@@ -92,8 +92,10 @@ fp.read <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE, bin
                          name=name,
                          misc=misc)
     } else {
+      ## convert the features to 'feature' objects
+      feats <- lapply(dat[[2]], function(x) new("feature", feature=x))
       fplist[[c]] <- new("featvec",
-                         features=sort(dat[[2]]),
+                         features=feats,
                          provider=provider,
                          name=name,
                          misc=misc)
