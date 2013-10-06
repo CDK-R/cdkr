@@ -68,3 +68,11 @@ test.mcs2 <- function() {
   checkEquals(9, nrow(mcs))
   checkEquals(2, ncol(mcs))
 }
+
+test.aromaticity.match <- function() {
+  smiles <- c("CCC", "c1ccccc1", "C(C)(C=O)C(CCNC)C1CC1C(=O)")
+  mols <- parse.smiles(smiles)
+  query <- "[#6]=O"
+doesMatch <- matches(query, mols)
+  checkTrue(all(doesMatch == c(FALSE,FALSE,TRUE)))
+}

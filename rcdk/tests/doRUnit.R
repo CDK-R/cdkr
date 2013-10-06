@@ -1,5 +1,9 @@
  if(require("RUnit", quietly=TRUE)) {
- 
+
+   library(rJava)
+   library(fingerprint)
+
+   print(ls())
   ## --- Setup ---
  
   pkg <- "rcdk" # <-- Change to package name!

@@ -1,9 +1,5 @@
 .packageName <- "rcdk"
 
-## .First.lib code taken from iPlots
-
-require(rJava, quietly=TRUE)
-
 .check.class <- function(obj, klass) {
   attr(obj, "jclass") == klass
 }

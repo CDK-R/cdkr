@@ -1,3 +1,3 @@
 exportPattern("^[[:alpha:]]+")
 exportPattern(".get.desc.values")
-importFrom('rJava', '.jinit')
+import('fingerprint', 'methods', 'rJava', 'png', 'iterators', 'rcdklibs')
