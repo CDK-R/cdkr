@@ -17,7 +17,7 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
            pubchem = .jnew('org/openscience/cdk/fingerprint/PubchemFingerprinter'),
            estate = .jnew('org/openscience/cdk/fingerprint/EStateFingerprinter'),
            hybridization = .jnew('org/openscience/cdk/fingerprint/HybridizationFingerprinter', size, depth),
-           ##lingo = .jnew('org/openscience/cdk/fingerprint/LingoFingerprinter', depth),
+           lingo = .jnew('org/openscience/cdk/fingerprint/LingoFingerprinter', depth),
            kr = .jnew('org/openscience/cdk/fingerprint/KlekotaRothFingerprinter'),
            shortestpath = .jnew('org/openscience/cdk/fingerprint/ShortestPathFingerprinter', size),
            signature = .jnew('org/openscience/cdk/fingerprint/SignatureFingerprinter', size)           

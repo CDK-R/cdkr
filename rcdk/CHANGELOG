@@ -1,5 +1,8 @@
 2013-10-06  Guha  <guhar@HG-01881061-LM8.local>
 
+	* R/fingerprint.R (get.fingerprint): Included LINGO fingerprinter
+	as an available fingerprint type
+
 	* man/getfp.Rd: Updated man page to describe feature,count
 	fingeprints. Added reference for signature fingerprint
 
