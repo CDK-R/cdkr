@@ -31,7 +31,8 @@
   which can be manipulated with the fingerprint package.
 }
 \usage{
-    get.fingerprint(molecule, type = 'standard', fp.mode = 'bit', depth=6, size=1024, verbose=FALSE)
+    get.fingerprint(molecule, type = 'standard', 
+                    fp.mode = 'bit', depth=6, size=1024, verbose=FALSE)
 }
 \arguments{
   \item{molecule}{An \code{IAtomContainer} object that can be obtained

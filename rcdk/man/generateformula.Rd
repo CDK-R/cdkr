@@ -7,7 +7,10 @@
 	This function generate a list of \code{cdkFormula} objects given a mass.
 }
 \usage{
-generate.formula(mass, window=0.01, elements=list(c("C",0,50),c("H",0,50),c("N",0,50),c("O",0,50),c("S",0,50)), validation=FALSE, charge=0.0)
+generate.formula(mass, window=0.01, elements=list(c("C",0,50),c("H",0,50),
+                                                  c("N",0,50),c("O",0,50),
+                                                  c("S",0,50)),
+                 validation=FALSE, charge=0.0)
 }
 
 \arguments{
@@ -23,7 +26,8 @@ generate.formula(mass, window=0.01, elements=list(c("C",0,50),c("H",0,50),c("N",
 	Objects of class MassToFormulaTool, from the \code{IMolecularFormula} package
 }
 \examples{
-mfSet <- generate.formula(18.03383,charge=1,elements=list(c("C",0,50),c("H",0,50),c("N",0,50)))
+mfSet <- generate.formula(18.03383,charge=1,
+                          elements=list(c("C",0,50),c("H",0,50),c("N",0,50)))
 for (i in mfSet) {
   print(i)
 }

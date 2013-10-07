@@ -9,8 +9,10 @@ The CDK can read a variety of molecular structure formats. This function
 encapsulates the calls to the CDK API to load a structure given its filename
 }
 \usage{
-load.molecules(molfiles=NA, aromaticity = TRUE, typing = TRUE, isotopes = TRUE, verbose=FALSE)
-iload.molecules(molfile, type="smi", aromaticity = TRUE, typing = TRUE, isotopes = TRUE, skip=TRUE)
+load.molecules(molfiles=NA, aromaticity = TRUE, typing = TRUE, isotopes = TRUE,
+               verbose=FALSE)
+iload.molecules(molfile, type="smi", aromaticity = TRUE, typing = TRUE, isotopes = TRUE,
+                skip=TRUE)
 }
 \arguments{
   \item{molfiles}{A \code{character} vector of filenames. Note that the full
@@ -56,7 +58,8 @@ such as SMILES, implicit or explicit hydrogens will be present.
 amol <- load.molecules('foo.sdf')
 
 ## load multiple files
-mols <- load.molecules(c('mol1.sdf', 'mol2.smi', 'https://github.com/rajarshi/cdkr/blob/master/data/set2/dhfr00008.sdf?raw=true'))
+mols <- load.molecules(c('mol1.sdf', 'mol2.smi', 
+          'https://github.com/rajarshi/cdkr/blob/master/data/set2/dhfr00008.sdf?raw=true'))
 
 ## iterate over a large file
 moliter <- iload.molecules("big.sdf", type="sdf")
