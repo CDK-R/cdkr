@@ -54,3 +54,20 @@ fp.factor.matrix <- function( fplist ) {
   diag(s) <- 1.0  
   return(s)
 }
+
+.tanimoto.sim.mat <- function(fplist){
+m <- fp.to.matrix(fplist)
+#Calculate Inner products
+mat<-m%*%t(m)
+len<-length(m[,1])
+s<-mat.or.vec(len,len)
+
+for (i in 1:len){
+  for (j in 1:len){
+    s[i,j]<- mat[i,j]/(mat[i,i]+mat[j,j]-mat[i,j]) # Formula for Tanimoto Calculation
+  }
+}
+
+return(s)
+
+}
