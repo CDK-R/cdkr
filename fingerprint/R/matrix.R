@@ -6,6 +6,8 @@ fp.sim.matrix <- function(fplist, fplist2=NULL, method='tanimoto') {
 
   if (method == 'dice') {
     return(.dice.sim.mat(fplist))
+  } else if (method == 'tanimoto') {
+    return(.tanimoto.sim.mat(fplist))
   }
   
   sim <- matrix(0,nrow=length(fplist), ncol=length(fplist))
@@ -56,18 +58,14 @@ fp.factor.matrix <- function( fplist ) {
 }
 
 .tanimoto.sim.mat <- function(fplist){
-m <- fp.to.matrix(fplist)
-#Calculate Inner products
-mat<-m%*%t(m)
-len<-length(m[,1])
-s<-mat.or.vec(len,len)
-
-for (i in 1:len){
-  for (j in 1:len){
-    s[i,j]<- mat[i,j]/(mat[i,i]+mat[j,j]-mat[i,j]) # Formula for Tanimoto Calculation
+  m <- fp.to.matrix(fplist)
+  mat<-m%*%t(m)
+  len<-length(m[,1])
+  s<-mat.or.vec(len,len)
+  for (i in 1:len){
+    for (j in 1:len){
+      s[i,j]<- mat[i,j]/(mat[i,i]+mat[j,j]-mat[i,j]) # Formula for Tanimoto Calculation
+    }
   }
-}
-
-return(s)
-
+  return(s)
 }

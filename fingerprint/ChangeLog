@@ -1,4 +1,10 @@
-2013-10-06  Guha  <guhar@HG-01881061-LM8.local>
+2013-10-22  Rajarshi Guha <rajarshi.guha@gmail.com>
+
+	* R/matrix.R (fp.sim.matrix): Updated to use the new matrix
+	multiplication based Tanimoto calculation for similarity matrices
+	contributed by Abhik Seal
+
+2013-10-06  Rajarshi Guha <rajarshi.guha@gmail.com>
 
 	* R/zzz.R (.onLoad): Removed unecessary usage of require
 
@@ -16,23 +22,23 @@
         * Removed featvec.to.binary since the featvec fingerprint
           type can also include non numeric features
 
-2013-04-05  Rajarshi Guha  <guhar@mh01887564lt.nih.gov>
+2013-04-05  Rajarshi Guha <rajarshi.guha@gmail.com>
 
 	* Updated package to remove use of deprecated methods
 
-2012-10-30  Rajarshi Guha  <guhar@OfficeMac.local>
+2012-10-30  Rajarshi Guha <rajarshi.guha@gmail.com>
 
 	* R/matrix.R (fp.sim.matrix): Added code provided by Abhik Seal 
 	to speed up pairwise similarity matrix calculation when the Dice
 	metric is specified.
 
-2012-02-21  Rajarshi Guha  <guhar@dk31r9a06lp5a.niddk.nih.gov>
+2012-02-21  Rajarshi Guha <rajarshi.guha@gmail.com>
 
 	* R/read.R (jchem.binary.lf): Added a line parser for JChem binary
 	string formatted fingerprints. This is based on a C function to
 	parse the fingerprint portion of a line
 
-2011-07-26  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+2011-07-26  Rajarshi Guha <rajarshi.guha@gmail.com>
 
 	* man/sim.Rd: Updated man page for fp.sim.matrix to indicate the
 	use of two fingerprint lists
@@ -41,13 +47,13 @@
 	calculation to support cross-similarity (ie, similarity matrix
 	from two (possibly different lengths) lists of fingerprints
 
-2011-06-03  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+2011-06-03  Rajarshi Guha <rajarshi.guha@gmail.com>
 
 	* src/fpdistance.c: Cleaned up uncessary headers and unused variables
 
 	* src/readfps.c: Cleaned up unecessary headers
 
-2011-06-02  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+2011-06-02  Rajarshi Guha <rajarshi.guha@gmail.com>
 
 	* R/read.R (fp.read): Updated line functions to return a third
 	component that can be used to return the remainder of a line if a
@@ -56,7 +62,7 @@
 	components of a fingerprint line. Updated main reader to set the
 	misc field of a fingerprint object to hold this list
 
-2011-06-01  Rajarshi Guha  <guhar@Rajarshi-Guha-MacBook-Pro.local>
+2011-06-01  Rajarshi Guha <rajarshi.guha@gmail.com>
 
 	* src/readfps.c (parse_hex): Added a C function to parse
 	hex-encoded fingerprints from the FPS format and return the bit
