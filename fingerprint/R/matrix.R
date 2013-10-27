@@ -62,10 +62,16 @@ fp.factor.matrix <- function( fplist ) {
   mat<-m%*%t(m)
   len<-length(m[,1])
   s<-mat.or.vec(len,len)
-  for (i in 1:len){
-    for (j in 1:len){
-      s[i,j]<- mat[i,j]/(mat[i,i]+mat[j,j]-mat[i,j]) # Formula for Tanimoto Calculation
-    }
-  }
-  return(s)
+  
+  ret <-  .C("m_tanimoto", as.double(mat), as.integer(len), as.double(s),
+             PACKAGE="fingerprint")
+  ret <- matrix(ret[[3]], nrow=len, ncol=len, byrow=TRUE)
+  return(ret)
+  
+  ## for (i in 1:len){
+  ##   for (j in 1:len){
+  ##     s[i,j]<- mat[i,j]/(mat[i,i]+mat[j,j]-mat[i,j]) # Formula for Tanimoto Calculation
+  ##   }
+  ## }
+  ## return(s)
 }

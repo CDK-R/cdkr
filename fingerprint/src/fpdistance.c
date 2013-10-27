@@ -8,6 +8,19 @@
 double d_tanimoto(double*,double*,int);
 double d_euclidean(double*,double*,int);
 
+void m_tanimoto(double *m, int *nrow, double *ret) {
+  int i,j;
+  for (i = 0; i < *nrow; i++) {
+    for (j = 0; j < *nrow; j++) {
+      double mij = X(m, i,j, *nrow);
+      double mii = X(m, i,i, *nrow);
+      double mjj = X(m, j,j, *nrow);
+      X(ret, i, j, *nrow) = mij / (mii+mjj-mij);
+    }
+  }
+  return;
+}
+
 /**
 fp1 and fp2 should be an array of 1's and 0's, of
 length equal to the size of the fingerprint
