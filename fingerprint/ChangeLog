@@ -1,3 +1,8 @@
+2013-10-28  Guha  <guhar@HG-01881061-LM8.local>
+
+	* src/fpdistance.c (m_tanimoto): Reduced the number of iterations
+	based on comments from John May
+
 2013-10-27  Guha  <guhar@HG-01881061-LM8.local>
 
 	* R/matrix.R (.tanimoto.sim.mat): Updated Tanimoto matrix code

@@ -11,11 +11,11 @@ double d_euclidean(double*,double*,int);
 void m_tanimoto(double *m, int *nrow, double *ret) {
   int i,j;
   for (i = 0; i < *nrow; i++) {
-    for (j = 0; j < *nrow; j++) {
+    for (j = i+1; j < *nrow; j++) {
       double mij = X(m, i,j, *nrow);
       double mii = X(m, i,i, *nrow);
       double mjj = X(m, j,j, *nrow);
-      X(ret, i, j, *nrow) = mij / (mii+mjj-mij);
+      X(ret, i, j, *nrow) = X(ret, j, i, *nrow) = mij / (mii+mjj-mij);
     }
   }
   return;
