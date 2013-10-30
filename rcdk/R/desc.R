@@ -44,10 +44,7 @@
     interface <- J("org.openscience.cdk.qsar.IBondDescriptor")        
   }
   dklass <- interface@jobj
-  dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
-                 "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
-                 "getInstance")
-
+  dcob <- .get.chem.object.builder()
   dengine <- .jnew('org/openscience/cdk/qsar/DescriptorEngine', dklass, dcob)
   attr(dengine, 'descType') <- type
   pkg <- c('org.openscience.cdk.qsar.descriptors.atomic',

@@ -141,9 +141,7 @@ convert.implicit.to.explicit <- function(molecule) {
   }
   if (any(is.null(unlist(lapply(get.atoms(molecule), .jcall, returnSig = "Ljava/lang/Integer;", method="getImplicitHydrogenCount"))))) {
     ## add them in
-    dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
-                   "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
-                   "getInstance")
+    dcob <- .get.chem.object.builder()
     hadder <- .jcall("org/openscience/cdk/tools/CDKHydrogenAdder", "Lorg/openscience/cdk/tools/CDKHydrogenAdder;",
                      "getInstance", dcob)
     .jcall(hadder, "V", "addImplicitHydrogens", molecule)

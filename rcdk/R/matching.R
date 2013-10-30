@@ -3,9 +3,7 @@ matches <- function(query, target, return.matches=FALSE) {
   if (!all(unlist(lapply(target, class)) == 'jobjRef'))
     stop("targets must be a list of IAtomContainer objects or a single IAtomContainer object")
 
-  dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
-                 "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
-                 "getInstance")
+  dcob <- .get.chem.object.builder()
 
   ## make an SQT
   sqt <- new(J("org/openscience/cdk/smiles/smarts/SMARTSQueryTool"), query, dcob)
