@@ -1,3 +1,10 @@
+2013-10-30  Guha  <guhar@HG-01881061-LM8.local>
+
+	* R/fingerprint.R (get.fingerprint): Updated to ensure we call
+	Pubchem fingerprinter with appropriate constructor arguments
+
+	* R/rcdk.R: Added internal helper method to get a DefaultChemObjectBuilder
+
 2013-10-06  Guha  <guhar@HG-01881061-LM8.local>
 
 	* R/fingerprint.R (get.fingerprint): Included LINGO fingerprinter

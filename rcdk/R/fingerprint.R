@@ -14,13 +14,13 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
            extended = .jnew('org/openscience/cdk/fingerprint/ExtendedFingerprinter', size, depth),
            graph = .jnew('org/openscience/cdk/fingerprint/GraphOnlyFingerprinter', size, depth),
            maccs = .jnew('org/openscience/cdk/fingerprint/MACCSFingerprinter'),
-           pubchem = .jnew('org/openscience/cdk/fingerprint/PubchemFingerprinter'),
+           pubchem = .jnew('org/openscience/cdk/fingerprint/PubchemFingerprinter', .get.chem.object.builder()),
            estate = .jnew('org/openscience/cdk/fingerprint/EStateFingerprinter'),
            hybridization = .jnew('org/openscience/cdk/fingerprint/HybridizationFingerprinter', size, depth),
            lingo = .jnew('org/openscience/cdk/fingerprint/LingoFingerprinter', depth),
            kr = .jnew('org/openscience/cdk/fingerprint/KlekotaRothFingerprinter'),
            shortestpath = .jnew('org/openscience/cdk/fingerprint/ShortestPathFingerprinter', size),
-           signature = .jnew('org/openscience/cdk/fingerprint/SignatureFingerprinter', size)           
+           signature = .jnew('org/openscience/cdk/fingerprint/SignatureFingerprinter', depth)           
            )
   if (is.null(fingerprinter)) stop("Invalid fingerprint type specified")
 

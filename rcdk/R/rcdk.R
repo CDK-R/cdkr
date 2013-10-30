@@ -1,5 +1,12 @@
 .packageName <- "rcdk"
 
+.get.chem.object.builder <- function() {
+  dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
+                 "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
+                 "getInstance")
+  return(dcob)
+}
+
 .check.class <- function(obj, klass) {
   attr(obj, "jclass") == klass
 }
