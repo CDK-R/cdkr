@@ -243,6 +243,7 @@ public class Misc {
 
     public static void main(String[] args) throws Exception, CloneNotSupportedException, IOException {
         SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
+
         IAtomContainer mol1 = sp.parseSmiles("c1cccc(COC(=O)NC(CC(C)C)C(=O)NC(CCc2ccccc2)C(=O)COC)c1");
         IAtomContainer mol2 = sp.parseSmiles("c1cccc(COC(=O)NC(CC(C)C)C(=O)NCC#N)c1");
         CDKHueckelAromaticityDetector.detectAromaticity(mol1);
