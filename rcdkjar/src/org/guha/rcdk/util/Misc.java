@@ -162,22 +162,22 @@ public class Misc {
             retValues[i] = v.get(i);
         }
 
-        // before returning, lets make see if we
-        // need to perceive aromaticity and atom typing
-        if (doAromaticity) {
+        if (doTyping) {
             for (int i = 0; i < retValues.length; i++) {
                 try {
-                    CDKHueckelAromaticityDetector.detectAromaticity(retValues[i]);
+                    AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(retValues[i]);
                 } catch (CDKException e) {
                     retValues[i] = null;
                 }
             }
         }
 
-        if (doTyping) {
+        // before returning, lets make see if we
+        // need to perceive aromaticity and atom typing
+        if (doAromaticity) {
             for (int i = 0; i < retValues.length; i++) {
                 try {
-                    AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(retValues[i]);
+                    CDKHueckelAromaticityDetector.detectAromaticity(retValues[i]);
                 } catch (CDKException e) {
                     retValues[i] = null;
                 }
@@ -242,6 +242,8 @@ public class Misc {
     }
 
     public static void main(String[] args) throws Exception, CloneNotSupportedException, IOException {
+        IAtomContainer[] mols = Misc.loadMolecules(new String[]{"/Users/guhar/Downloads/Benzene.sdf"}, true, true, true);
+
         SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
 
         IAtomContainer mol1 = sp.parseSmiles("c1cccc(COC(=O)NC(CC(C)C)C(=O)NC(CCc2ccccc2)C(=O)COC)c1");
