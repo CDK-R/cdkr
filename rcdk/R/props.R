@@ -72,14 +72,17 @@ get.properties <- function(molecule) {
   
   values <- list()
   for (i in 1:length(keys)) {
-    values[[i]] <- .jcall(map, "Ljava/lang/Object;", "get", .jcast(new(J("java/lang/String"),keys[[i]]),"java/lang/Object") )
+    the.value <- .jcall(map, "Ljava/lang/Object;", "get", .jcast(new(J("java/lang/String"),keys[[i]]),"java/lang/Object") )
+    if (is.jnull(the.value)) values[[i]] <- NA
+    else values[[i]] <- the.value
   }
-
+  
   ret <- list()
   for (i in 1:length(keys)) {
     k <- keys[[i]]
-    if (is.jnull(values[[i]])) ret[[k]] <- NA
-    else ret[[k]] <- .jsimplify(values[[i]])
+    if ('jobjRef' %in% class(values[[i]])) ret[[k]] <- .jsimplify(values[[i]])
+    else if (is.na(values[[i]])) ret[[k]] <- NA
+    else ret[[k]] <- values[[i]]
   }
   ret
 }
