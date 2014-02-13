@@ -221,7 +221,7 @@ get.assay <- function(aid, quiet=TRUE) {
 
 
 .eh <- function() {
-  .itemNames <- c('IUPACName','CanonicalSmile','MolecularFormula','MolecularWeight', 'TotalFormalCharge',
+  .itemNames <- c('IUPACName','CanonicalSmiles','MolecularFormula','MolecularWeight', 'TotalFormalCharge',
                   'XLogP', 'HydrogenBondDonorCount', 'HydrogenBondAcceptorCount',
                   'HeavyAtomCount', 'TPSA')
   .types <- c('character','character','character', 'double', 'integer', 'double', 'integer', 'integer',
