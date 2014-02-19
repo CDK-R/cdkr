@@ -64,7 +64,8 @@ public class ViewMolecule2D extends JFrame {
 //            e.printStackTrace();
 //        }
         SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
-        IAtomContainer mol = sp.parseSmiles("[CH2+]");
+        sp.kekulise(false);
+        IAtomContainer mol = sp.parseSmiles("c1ccccc1");
 
         ViewMolecule2D v2d = new ViewMolecule2D(mol);
 

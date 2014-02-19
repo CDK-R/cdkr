@@ -51,7 +51,7 @@ public class MoleculeCell extends JPanel {
 
         java.util.List<IGenerator<IAtomContainer>> generators = new ArrayList<IGenerator<IAtomContainer>>();
         generators.add(new BasicSceneGenerator());
-        generators.add(new RingGenerator());
+//        generators.add(new RingGenerator());
         generators.add(new BasicBondGenerator());
         generators.add(new AtomNumberGenerator());
         generators.add(new ExtendedAtomGenerator());

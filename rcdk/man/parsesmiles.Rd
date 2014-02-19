@@ -15,15 +15,15 @@
   perform these steps manually on the molecules.
 }
 \usage{
-parse.smiles(smiles, preserve.aromaticity=FALSE)
+parse.smiles(smiles, kekulise=TRUE)
 }
 \arguments{
   \item{smiles}{A SMILES string}
-  \item{preserve.aromaticity}{If set to \code{TRUE} disables electron checking and 
+  \item{kekulize}{If set to \code{FALSE} disables electron checking and 
   allows for parsing of incorrect SMILES. If a SMILES does not parse by default, try
-  setting this to \code{TRUE} - though the resultant molecule may not have consistent
+  setting this to \code{FALSE} - though the resultant molecule may not have consistent
   bonding. As an example, c4ccc2c(cc1=Nc3ncccc3(Cn12))c4 will not be parsed by default
-  because it is missing a nitrogen. With this argument set to \code{TRUE} it will parse
+  because it is missing a nitrogen. With this argument set to \code{FALSE} it will parse
   succesfully, but this is a hack to handle an incorrect SMILES}
 }
 \examples{
