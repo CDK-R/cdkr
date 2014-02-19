@@ -187,9 +187,9 @@ generate.formula <- function(mass, window=0.01,
   
   chemObject <- .cdkFormula.createChemObject();
   range <- .jnew("org/openscience/cdk/formula/MolecularFormulaRange");
-  ifac <- .jcall("org/openscience/cdk/config/IsotopeFactory",
-                 "Lorg/openscience/cdk/config/IsotopeFactory;",
-                 "getInstance",chemObject);
+  ifac <- .jcall("org/openscience/cdk/config/Isotopes",
+                 "Lorg/openscience/cdk/config/Isotopes;",
+                 "getInstance");
   
   for (i in 1:length(elements)) {
     isotope <- .jcall(ifac,

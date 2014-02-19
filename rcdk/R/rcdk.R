@@ -205,12 +205,9 @@ do.isotopes <- function(molecule) {
     stop("molecule must be of class IAtomContainer")
   if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
     stop("molecule must be of class IAtomContainer")
-
-  builder <- .jcall(.jnew('org/openscience/cdk/ChemObject'),
-                    'Lorg/openscience/cdk/interfaces/IChemObjectBuilder;', 'getBuilder')
-  ifac <- .jcall('org.openscience.cdk.config.IsotopeFactory',
-                 'Lorg/openscience/cdk/config/IsotopeFactory;',
-                 'getInstance', builder)
+  ifac <- .jcall('org.openscience.cdk.config.Isotopes',
+                 'Lorg/openscience/cdk/config/Isotopes;',
+                 'getInstance')
   .jcall(ifac, 'V', 'configureAtoms', molecule)
 }
 
