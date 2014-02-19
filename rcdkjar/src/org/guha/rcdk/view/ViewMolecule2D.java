@@ -3,7 +3,6 @@ package org.guha.rcdk.view;
 import org.guha.rcdk.util.Misc;
 import org.guha.rcdk.view.panels.MoleculeCell;
 import org.openscience.cdk.DefaultChemObjectBuilder;
-import org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector;
 import org.openscience.cdk.exception.CDKException;
 import org.openscience.cdk.graph.ConnectivityChecker;
 import org.openscience.cdk.interfaces.IAtomContainer;
@@ -40,11 +39,6 @@ public class ViewMolecule2D extends JFrame {
 
         if (!ConnectivityChecker.isConnected(molecule)) throw new CDKException("Molecule must be connected");
         molecule = AtomContainerManipulator.removeHydrogens(molecule);
-        try {
-            CDKHueckelAromaticityDetector.detectAromaticity(molecule);
-        } catch (CDKException e) {
-            throw new Exception("Error in aromatcity detection");
-        }
         molecule = Misc.getMoleculeWithCoordinates(molecule);
         panel = new MoleculeCell(molecule, width, height);
         setTitle("2D Viewer");
