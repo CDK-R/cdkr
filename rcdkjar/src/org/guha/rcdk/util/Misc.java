@@ -102,10 +102,11 @@ public class Misc {
      * @param container The molecule to convert
      * @return A SMILES string
      */
-    public static String getSmiles(IAtomContainer container) {
-        SmilesGenerator sg = new SmilesGenerator();
-        sg.setUseAromaticityFlag(true);
-        return sg.createSMILES(container);
+    public static String getSmiles(IAtomContainer container) throws CDKException {
+        SmilesGenerator smigen = SmilesGenerator.unique()
+                .aromatic()
+                .withAtomClasses();
+        return smigen.create(container);
     }
 
     /**
