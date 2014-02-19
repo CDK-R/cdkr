@@ -84,7 +84,8 @@ public class MoleculeCell extends JPanel {
 
     public static void main(String[] args) throws InvalidSmilesException {
         SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
-        IAtomContainer container = sp.parseSmiles("C1CN2CCN(CCCN(CCN(C1)Cc1ccccn1)CC2)C");
+//        IAtomContainer container = sp.parseSmiles("C1CN2CCN(CCCN(CCN(C1)Cc1ccccn1)CC2)C");
+        IAtomContainer container = sp.parseSmiles("[CH2+]");
 
         StructureDiagramGenerator sdg = new StructureDiagramGenerator();
         sdg.setMolecule(container);

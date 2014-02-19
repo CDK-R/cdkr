@@ -17,6 +17,7 @@ import org.openscience.cdk.io.ReaderFactory;
 import org.openscience.cdk.io.SDFWriter;
 import org.openscience.cdk.io.SMILESReader;
 import org.openscience.cdk.io.listener.PropertiesListener;
+import org.openscience.cdk.isomorphism.UniversalIsomorphismTester;
 import org.openscience.cdk.layout.StructureDiagramGenerator;
 import org.openscience.cdk.smiles.SmilesGenerator;
 import org.openscience.cdk.smiles.SmilesParser;
@@ -200,6 +201,20 @@ public class Misc {
         sdg.setMolecule(molecule);
         sdg.generateCoordinates();
         return sdg.getMolecule();
+    }
+
+    public static IAtomContainer getMcsAsNewContainerUIT(IAtomContainer mol1, IAtomContainer mol2) throws CDKException, CloneNotSupportedException {
+        UniversalIsomorphismTester uit = new UniversalIsomorphismTester();
+        List<IAtomContainer> overlaps = uit.getOverlaps(mol1, mol2);
+        int maxmcss = -9999999;
+        IAtomContainer maxac = null;
+        for (IAtomContainer ac : overlaps){
+            if (ac.getAtomCount() > maxmcss) {
+                maxmcss = ac.getAtomCount();
+                maxac = ac;
+            }
+        }
+        return maxac;
     }
 
     public static IAtomContainer getMcsAsNewContainer(IAtomContainer mol1, IAtomContainer mol2) throws CDKException, CloneNotSupportedException {
