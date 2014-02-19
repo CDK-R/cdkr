@@ -6,7 +6,7 @@ package org.guha.rcdk.util;
 import org.guha.rcdk.view.MoleculeImage;
 import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector;
-import org.openscience.cdk.config.IsotopeFactory;
+import org.openscience.cdk.config.Isotopes;
 import org.openscience.cdk.exception.CDKException;
 import org.openscience.cdk.interfaces.IAtom;
 import org.openscience.cdk.interfaces.IAtomContainer;
@@ -185,7 +185,7 @@ public class Misc {
         }
 
         if (doIsotopes) {
-            IsotopeFactory ifac = IsotopeFactory.getInstance(DefaultChemObjectBuilder.getInstance());
+            Isotopes ifac = Isotopes.getInstance();
             for (IAtomContainer retValue : retValues) {
                 ifac.configureAtoms(retValue);
             }
