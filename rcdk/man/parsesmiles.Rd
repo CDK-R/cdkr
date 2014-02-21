@@ -19,7 +19,7 @@ parse.smiles(smiles, kekulise=TRUE)
 }
 \arguments{
   \item{smiles}{A SMILES string}
-  \item{kekulize}{If set to \code{FALSE} disables electron checking and 
+  \item{kekulise}{If set to \code{FALSE} disables electron checking and 
   allows for parsing of incorrect SMILES. If a SMILES does not parse by default, try
   setting this to \code{FALSE} - though the resultant molecule may not have consistent
   bonding. As an example, c4ccc2c(cc1=Nc3ncccc3(Cn12))c4 will not be parsed by default
