@@ -4,7 +4,8 @@ Date: 2013-05-23
 Title: rpubchem - Interface to the PubChem Collection
 Author: Rajarshi Guha <rajarshi.guha@gmail.com>
 Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
-Depends: R (>= 2.0.0), XML, car, RCurl, RJSONIO
+Depends: R (>= 2.0.0)
+Imports: XML, car, RCurl, RJSONIO
 License: GPL (>= 2)
 Description: Access PubChem data (compounds, substance, assays).
         Structural information is provided in the form of SMILES
