@@ -2,11 +2,12 @@
 # Remove the previous line if you edit this file
 
 # Export all names
-exportPattern(".")
+exportPattern("^[[:alpha:]]+")
 
 # Import all packages listed as Imports or Depends
 import(
   XML,
   car,
-  RCurl
+  RCurl,
+  RJSONIO     
 )

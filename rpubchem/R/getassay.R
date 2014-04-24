@@ -1,6 +1,6 @@
-require(XML)
-require(car)
-require(RJSONIO)
+#require(XML)
+#require(car)
+#require(RJSONIO)
 
 .join <- function (x, delim = ",") 
   paste(x, sep = "", collapse = delim)
@@ -40,7 +40,7 @@ require(RJSONIO)
 }
 
 get.assay.summary <- function(aid) {
-  urlcon <- url('http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/1000/summary/JSON')
+  urlcon <- url(sprintf('http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/summary/JSON', as.integer(aid)))
   j <- fromJSON(content=.join(readLines(urlcon), '\n'))
   close(urlcon)
   j <- j[[1]][[1]][[1]]
@@ -51,7 +51,7 @@ get.assay.summary <- function(aid) {
 }
 
 get.assay.desc <- function(aid) {
-  url <- sprintf('http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/description/XML', as.numeric(aid))
+  url <- sprintf('http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/description/XML', as.integer(aid))
   tmpdest <- tempfile(pattern = 'adesc')
 
   status <- try(download.file(url, destfile=tmpdest, method='internal', mode='wb', quiet=TRUE),
@@ -163,7 +163,7 @@ get.assay <- function(aid, quiet=TRUE) {
   as <- get.assay.summary(aid)
   nsid <- as$SIDCountAll
   if (nsid > 8000) {
-    .getAssayChunked(aid, quiet)
+    .getAssay(aid, quiet)
   } else {
     .getAssay(aid, quiet)
   }
@@ -208,6 +208,7 @@ get.assay <- function(aid, quiet=TRUE) {
                 silent=TRUE)
 
   if (class(status) == 'try-error') {
+    print(status)
     stop("Error in the download")
   }
 }
@@ -221,7 +222,7 @@ get.assay <- function(aid, quiet=TRUE) {
 
 
 .eh <- function() {
-  .itemNames <- c('IUPACName','CanonicalSmiles','MolecularFormula','MolecularWeight', 'TotalFormalCharge',
+  .itemNames <- c('IUPACName','CanonicalSmile','MolecularFormula','MolecularWeight', 'TotalFormalCharge',
                   'XLogP', 'HydrogenBondDonorCount', 'HydrogenBondAcceptorCount',
                   'HeavyAtomCount', 'TPSA')
   .types <- c('character','character','character', 'double', 'integer', 'double', 'integer', 'integer',
@@ -234,6 +235,7 @@ get.assay <- function(aid, quiet=TRUE) {
   aRow <- c()
   inDocSum <- FALSE
   inId <- FALSE
+  currItemName <- NA
 
   startElement <- function(name, attr) {
     if (name == 'DocSum') {
@@ -244,6 +246,7 @@ get.assay <- function(aid, quiet=TRUE) {
     if (name == 'Id') inId <<- TRUE
 
     if (name == 'Item' && attr[['Name']] %in% .itemNames) {
+      currItemName <<- attr[['Name']]
       validItem <<- TRUE
       textval <<- NA
     } else {
@@ -272,6 +275,8 @@ get.assay <- function(aid, quiet=TRUE) {
       textval <<- val
     }else if (inDocSum && validItem) {
       textval <<- val
+    } else {
+      textval <<- ''
     }
   }
 
