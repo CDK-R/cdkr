@@ -245,7 +245,12 @@ get.assay <- function(aid, quiet=TRUE) {
 
     if (name == 'Id') inId <<- TRUE
 
-    if (name == 'Item' && attr[['Name']] %in% .itemNames) {
+    .itemIsPresent <- function(q) {
+      any(sapply(.itemNames, function(x) length(grep(x,q)) > 0))
+    }
+    
+    if (name == 'Item' && .itemIsPresent(attr[['Name']]) ) {
+      print (attr[['Name']])
       currItemName <<- attr[['Name']]
       validItem <<- TRUE
       textval <<- NA
