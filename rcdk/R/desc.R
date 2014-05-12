@@ -1,6 +1,6 @@
 .get.desc.values <- function(dval, nexpected) {
   if (!inherits(dval, "jobjRef")) {
-    if (is.na(dval)) return(NA)
+    if (is.null(dval) || is.na(dval)) return(NA)
   }
 
   if (!is.null(.jcall(dval, "Ljava/lang/Exception;", "getException"))) {
