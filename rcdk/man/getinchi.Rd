@@ -1,4 +1,5 @@
 \name{get.inchi}
+\alias{get.inchi}
 \alias{get.inchi.key}
 \alias{inchi}
 \title{

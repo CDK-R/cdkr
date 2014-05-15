@@ -45,12 +45,16 @@ get.atomic.number <- function(atom) {
 
 get.charge <- function(atom) {
   atom <- .valid.atom(atom)
-  .jcall(.jcall(atom, "Ljava/lang/Double;", "getCharge"), "D", "doubleValue")
+  ch <- .jcall(atom, "Ljava/lang/Double;", "getCharge")
+  if (!is.null(ch)) return(.jcall(ch, "D", "doubleValue"))
+  else return(ch)
 }
 
 get.formal.charge <- function(atom) {
   atom <- .valid.atom(atom)
-  .jcall(.jcall(atom, "Ljava/lang/Integer;", "getFormalCharge"), "I", "intValue")
+  ch <- .jcall(atom, "Ljava/lang/Integer;", "getFormalCharge")
+  if (!is.null(ch)) return(.jcall(ch, "I", "intValue"))
+  else return(ch)  
 }
 
 get.hydrogen.count <- function(atom) {
