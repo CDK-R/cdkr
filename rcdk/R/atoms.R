@@ -40,12 +40,12 @@ get.symbol <- function(atom) {
 
 get.atomic.number <- function(atom) {
   atom <- .valid.atom(atom)
-  .jcall(atom, "I", "getAtomicNumber")
+  .jcall(.jcall(atom, "Ljava/lang/Integer;", "getAtomicNumber"), "I", "intValue")
 }
 
 get.charge <- function(atom) {
   atom <- .valid.atom(atom)
-  .jcall(atom, "Ljava/lang/Double;", "getCharge")
+  .jcall(.jcall(atom, "Ljava/lang/Double;", "getCharge"), "D", "doubleValue")
 }
 
 get.formal.charge <- function(atom) {
