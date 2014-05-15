@@ -1,0 +1,11 @@
+Package: spe
+Version: 1.1.2
+Date: 2009-02-24
+Title: Stochastic Proximity Embedding
+Author: Rajarshi Guha <rajarshi.guha@gmail.com>
+Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
+Description: Implements stochastic proximity embedding as described by
+ Agrafiotis et al. in PNAS, 2002, 99, pg 15869 and J. Comput. Chem., 2003,24, pg 1215
+License: GPL
+ZipData: no
+Packaged: Tue Feb 24 14:59:49 2009; rguha
