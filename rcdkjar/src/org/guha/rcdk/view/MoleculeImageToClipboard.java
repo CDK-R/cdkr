@@ -8,19 +8,12 @@ import org.openscience.cdk.graph.ConnectivityChecker;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.renderer.AtomContainerRenderer;
 import org.openscience.cdk.renderer.font.AWTFontManager;
-import org.openscience.cdk.renderer.generators.BasicAtomGenerator;
-import org.openscience.cdk.renderer.generators.BasicBondGenerator;
-import org.openscience.cdk.renderer.generators.BasicSceneGenerator;
-import org.openscience.cdk.renderer.generators.IGenerator;
+import org.openscience.cdk.renderer.generators.*;
 import org.openscience.cdk.renderer.visitor.AWTDrawVisitor;
 import org.openscience.cdk.smiles.SmilesParser;
 import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 
-import java.awt.Color;
-import java.awt.Graphics2D;
-import java.awt.Image;
-import java.awt.Rectangle;
-import java.awt.Toolkit;
+import java.awt.*;
 import java.awt.datatransfer.DataFlavor;
 import java.awt.datatransfer.Transferable;
 import java.awt.datatransfer.UnsupportedFlavorException;
@@ -60,6 +53,7 @@ public class MoleculeImageToClipboard {
         generators.add(new BasicSceneGenerator());
         generators.add(new BasicBondGenerator());
         generators.add(new BasicAtomGenerator());
+        generators.add(new AtomMassGenerator());
 
         // the renderer needs to have a toolkit-specific font manager
         AtomContainerRenderer renderer = new AtomContainerRenderer(generators, new AWTFontManager());
