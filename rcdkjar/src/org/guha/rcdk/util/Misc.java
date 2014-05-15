@@ -8,6 +8,8 @@ import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector;
 import org.openscience.cdk.config.Isotopes;
 import org.openscience.cdk.exception.CDKException;
+import org.openscience.cdk.inchi.InChIGenerator;
+import org.openscience.cdk.inchi.InChIGeneratorFactory;
 import org.openscience.cdk.interfaces.IAtom;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.interfaces.IChemFile;
@@ -208,7 +210,7 @@ public class Misc {
         List<IAtomContainer> overlaps = uit.getOverlaps(mol1, mol2);
         int maxmcss = -9999999;
         IAtomContainer maxac = null;
-        for (IAtomContainer ac : overlaps){
+        for (IAtomContainer ac : overlaps) {
             if (ac.getAtomCount() > maxmcss) {
                 maxmcss = ac.getAtomCount();
                 maxac = ac;
@@ -255,6 +257,18 @@ public class Misc {
             i++;
         }
         return mapping;
+    }
+
+    public static String getInChi(IAtomContainer mol) throws CDKException {
+        InChIGeneratorFactory factory = InChIGeneratorFactory.getInstance();
+        InChIGenerator gen = factory.getInChIGenerator(mol);
+        return gen.getInchi();
+    }
+
+    public static String getInChiKey(IAtomContainer mol) throws CDKException {
+        InChIGeneratorFactory factory = InChIGeneratorFactory.getInstance();
+        InChIGenerator gen = factory.getInChIGenerator(mol);
+        return gen.getInchiKey();
     }
 
     public static void main(String[] args) throws Exception, CloneNotSupportedException, IOException {
