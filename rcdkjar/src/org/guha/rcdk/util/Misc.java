@@ -261,12 +261,14 @@ public class Misc {
 
     public static String getInChi(IAtomContainer mol) throws CDKException {
         InChIGeneratorFactory factory = InChIGeneratorFactory.getInstance();
+        factory.setIgnoreAromaticBonds(true);
         InChIGenerator gen = factory.getInChIGenerator(mol);
         return gen.getInchi();
     }
 
     public static String getInChiKey(IAtomContainer mol) throws CDKException {
         InChIGeneratorFactory factory = InChIGeneratorFactory.getInstance();
+        factory.setIgnoreAromaticBonds(true);
         InChIGenerator gen = factory.getInChIGenerator(mol);
         return gen.getInchiKey();
     }
