@@ -23,3 +23,11 @@ test.inchi.4 <- function()
   checkEquals(i, "InChI=1S/C12H17NO/c1-4-13(5-2)12(14)11-8-6-7-10(3)9-11/h6-9H,4-5H2,1-3H3/i3D3,6D,7D,8D,9D")
 }
 
+test.inchi.5 <- function()
+{
+  m <- parse.smiles("c1ccccc1Cc1ccccc1")[[1]]
+  i <- get.inchi(m)
+  checkTrue(!is.null(i))
+  checkEquals(i, "InChI=1S/C13H12/c1-3-7-12(8-4-1)11-13-9-5-2-6-10-13/h1-10H,11H2")
+}
+
