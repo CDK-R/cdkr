@@ -105,10 +105,14 @@ public class Misc {
      * @param container The molecule to convert
      * @return A SMILES string
      */
-    public static String getSmiles(IAtomContainer container) throws CDKException {
-        SmilesGenerator smigen = SmilesGenerator.unique()
-                .aromatic()
-                .withAtomClasses();
+    public static String getSmiles(IAtomContainer container, String type, boolean aromatic, boolean atomClasses) throws CDKException {
+        SmilesGenerator smigen;
+        if (type.equals("generic")) smigen = SmilesGenerator.generic();
+        else if (type.equals("unique")) smigen = SmilesGenerator.unique();
+        else if (type.equals("isomeric")) smigen = SmilesGenerator.isomeric();
+        else smigen = SmilesGenerator.absolute();
+        if (aromatic) smigen = smigen.aromatic();
+        if (atomClasses) smigen = smigen.withAtomClasses();
         return smigen.create(container);
     }
 

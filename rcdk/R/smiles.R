@@ -1,8 +1,8 @@
-get.smiles <- function(molecule) {
+get.smiles <- function(molecule, type = 'generic', aromatic=FALSE, atomClasses=FALSE) {
   if (attr(molecule, "jclass") != 'org/openscience/cdk/interfaces/IAtomContainer') {
     stop("Supplied object should be a Java reference to an IAtomContainer")
   }
-  smiles <- .jcall('org/guha/rcdk/util/Misc', 'S', 'getSmiles', molecule)
+  smiles <- .jcall('org/guha/rcdk/util/Misc', 'S', 'getSmiles', molecule, as.character(type), as.logical(aromatic), as.logical(atomClasses))
   smiles
 }
 
