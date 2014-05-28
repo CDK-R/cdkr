@@ -35,7 +35,6 @@
   if (!(type %in% c('molecular', 'atomic', 'bond'))) {
     stop('type must bond, molecular or atomic')
   }
-  type <- match(type, c('atomic', 'bond', 'molecular'))
   if (type == 'molecular') {
     interface <- J("org.openscience.cdk.qsar.IMolecularDescriptor")
   } else if (type == 'atomic') {
