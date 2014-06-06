@@ -266,3 +266,12 @@ get.title <- function(molecule) {
     stop("molecule must be of class IAtomContainer")
   get.property(molecule, "cdk:Title")
 }
+
+generate.2d.coordinates <- function(molecule) {
+  if (is.null(attr(molecule, 'jclass')))
+    stop("molecule must be of class IAtomContainer")
+  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
+    stop("molecule must be of class IAtomContainer")
+  .jcall('org/guha/rcdk/util/Misc', 'Lorg/openscience/cdk/interfaces/IAtomContainer;',
+         'getMoleculeWithCoordinates', molecule)
+}
