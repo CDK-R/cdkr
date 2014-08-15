@@ -1,5 +1,5 @@
 Package: rcdklibs
-Version: 1.5.6
+Version: 1.5.8
 Date: 2014-08-15
 Title: rcdklib - CDK libraries packaged for R
 Authors@R: c(person('Rajarshi', 'Guha', role=c('aut','cre'), email='rajarshi.guha@gmail.com'),
