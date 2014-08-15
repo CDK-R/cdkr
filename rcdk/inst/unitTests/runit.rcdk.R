@@ -74,7 +74,7 @@ test.desc.names <- function() {
 
 test.desc.calc <- function() {
   dnames <- get.desc.names("topological")
-  mols <- parse.smiles("ccccccCCC")
+  mols <- parse.smiles("c1ccccc1CCC")
   dvals <- eval.desc(mols, dnames[1])
-  checkTrue(dvals[1,1] == 30)
+  checkTrue(dvals[1,1] == 1)
 }
