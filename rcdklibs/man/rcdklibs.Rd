@@ -8,5 +8,8 @@
 
   This package has no user accessible methods
 }
+\examples{
+library(rcdklibs)
+}
 \author{Rajarshi Guha (\email{rguha@indiana.edu})}
 \keyword{programming}
