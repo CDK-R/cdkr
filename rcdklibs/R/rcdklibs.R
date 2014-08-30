@@ -7,10 +7,9 @@ require(rJava, quietly=TRUE)
     if (dlp!="") { # for Mac OS X we need to remove X11 from lib-path
         Sys.setenv("DYLD_LIBRARY_PATH"=sub("/usr/X11R6/lib","",dlp))
     }
-
-    jar.cdk <- paste(lib,pkg,"cont","cdk.jar",sep=.Platform$file.sep)
-    jar.jcp <- paste(lib,pkg,"cont","commons-math3-3.0.jar",sep=.Platform$file.sep)
-    .jinit(classpath=c(jar.cdk,jar.jcp))
+    jars <- list.files(path=paste(lib,pkg,"cont", sep=.Platform$file.sep),
+                       pattern="jar$", full.names=TRUE)
+    .jinit(classpath=c(jars))
 }
     
 

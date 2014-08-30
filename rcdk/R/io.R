@@ -1,21 +1,5 @@
 .packageName <- "rcdk"
 
-get.inchi <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')) ||
-      attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
-    stop("Must supply an IAtomContainer object")
-  }
-  .jcall("org/guha/rcdk/util/Misc", "S", "getInChi", molecule, check=FALSE)
-}
-
-get.inchi.key <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')) ||
-      attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
-    stop("Must supply an IAtomContainer object")
-  }
-  .jcall("org/guha/rcdk/util/Misc", "S", "getInChiKey", molecule, check=FALSE)
-}
-
 write.molecules <- function(mols, filename, together=TRUE, write.props=FALSE) {
   if (together) {
     value <-.jcall('org/guha/rcdk/util/Misc', 'V', 'writeMoleculesInOneFile',
