@@ -11,23 +11,19 @@
                       pattern="jar$", full.names=TRUE)
 
   .jinit(classpath=c(jars))
+
+  assign("rinchi_globals", new.env(), envir=parent.env(environment()))
+  assign("parser", .jnew("org/openscience/cdk/smiles/SmilesParser", .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
+                                                                           "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
+                                                                           "getInstance")))
 }
 
-.get.chem.object.builder <- function() {
-  dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
-                 "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
-                 "getInstance")
-  return(dcob)
-}
-.get.smiles.parser <- function() {
-  dcob <- .get.chem.object.builder()
-  .jnew("org/openscience/cdk/smiles/SmilesParser", dcob)
-}
+
 .parse.smiles <- function(smiles, kekulise=TRUE) {
   if (!is.character(smiles)) {
     stop("Must supply a character vector of SMILES strings")
   }
-  parser <- .get.smiles.parser()
+  parser <- get("parser", rinchi_globals) 
   .jcall(parser, "V", "kekulise", kekulise)
   returnValue <- sapply(smiles, 
       function(x) {
