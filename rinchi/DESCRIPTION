@@ -1,5 +1,5 @@
 Package: rinchi
-Version: 0.1
+Version: 0.2
 Date: 2014-04-30
 Title: rinchi - Generate InChI and InChI keys from SMILES and other chemical file formats
 Author: Rajarshi Guha <rajarshi.guha@gmail.com>
