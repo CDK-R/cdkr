@@ -23,6 +23,5 @@ Before performing the install, you should have the following dependencies instal
 * rJava
 * fingerprint
 * png
-* methods
 
 For the png package, I have tested [png-0.1-4](http://www.rforge.net/png/files/)
