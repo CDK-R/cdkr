@@ -20,7 +20,8 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
            lingo = .jnew('org/openscience/cdk/fingerprint/LingoFingerprinter', depth),
            kr = .jnew('org/openscience/cdk/fingerprint/KlekotaRothFingerprinter'),
            shortestpath = .jnew('org/openscience/cdk/fingerprint/ShortestPathFingerprinter', size),
-           signature = .jnew('org/openscience/cdk/fingerprint/SignatureFingerprinter', depth)           
+           signature = .jnew('org/openscience/cdk/fingerprint/SignatureFingerprinter', depth),
+           circular = .jnew('org/openscience/cdk/fingerprint/CircularFingerprinter'),
            )
   if (is.null(fingerprinter)) stop("Invalid fingerprint type specified")
 

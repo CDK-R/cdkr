@@ -23,6 +23,7 @@
   \item shortestpath - A fingerprint based on the shortest paths between pairs of atoms and takes into account ring systems, charges etc.
   \item signature - A feature,count type of fingerprint, similar in nature to circular fingerprints, but based on the signature 
     descriptor
+  \item circular - An implementation of the ECFP6 fingerprint
   }
 
   Depending on whether the input is a single \code{IAtomContainer}
@@ -48,7 +49,7 @@
   \item{depth}{The search depth. This argument is ignored for the
   'pubchem', 'maccs', 'kr' and 'estate' fingerprints}
   \item{size}{The length of the fingerprint bit string. This argument is ignored for the
-  'pubchem', 'maccs', 'kr', 'signature' and 'estate' fingerprints}
+  'pubchem', 'maccs', 'kr', 'signature', 'circular' and 'estate' fingerprints}
   \item{verbose}{If \code{TRUE}, exceptions, if they occur, will be printed}
 }
 \value{
