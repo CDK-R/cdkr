@@ -104,8 +104,11 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
     }
   }
 
+  dcob <- .get.chem.object.builder()
+  
   if (length(which.desc) == 1) {
     desc <- .jnew(which.desc)
+    .jcall(desc, "V", "initialise", dcob)
     
     dnames <- .jcall(desc, "[Ljava/lang/String;", "getDescriptorNames")
     dnames <- gsub('-', '.', dnames)
@@ -126,7 +129,8 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
       if (verbose) { cat("Processing ", gsub('org.openscience.cdk.qsar.descriptors.molecular.', '', desc)
                          , "\n") }
       desc <- .jnew(desc)
-
+      .jcall(desc, "V", "initialise", dcob)
+      
       dnames <- .jcall(desc, "[Ljava/lang/String;", "getDescriptorNames")
       dnames <- gsub('-', '.', dnames)
       
