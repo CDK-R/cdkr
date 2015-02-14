@@ -7,13 +7,21 @@ import org.openscience.cdk.CDKConstants;
 import org.openscience.cdk.ChemFile;
 import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector;
+import org.openscience.cdk.config.IsotopeFactory;
+import org.openscience.cdk.config.Isotopes;
 import org.openscience.cdk.exception.CDKException;
 import org.openscience.cdk.exception.InvalidSmilesException;
+import org.openscience.cdk.formula.MassToFormulaTool;
+import org.openscience.cdk.formula.MolecularFormulaRange;
+import org.openscience.cdk.formula.rules.ElementRule;
+import org.openscience.cdk.formula.rules.IRule;
+import org.openscience.cdk.formula.rules.ToleranceRangeRule;
 import org.openscience.cdk.interfaces.IAtomContainer;
+import org.openscience.cdk.interfaces.IChemObjectBuilder;
+import org.openscience.cdk.interfaces.IMolecularFormulaSet;
 import org.openscience.cdk.io.MDLV2000Reader;
 import org.openscience.cdk.io.SDFWriter;
-import org.openscience.cdk.isomorphism.UniversalIsomorphismTester;
-import org.openscience.cdk.isomorphism.mcss.RMap;
+import org.openscience.cdk.silent.SilentChemObjectBuilder;
 import org.openscience.cdk.smiles.SmilesParser;
 import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 import org.openscience.cdk.tools.manipulator.ChemFileManipulator;
@@ -22,14 +30,43 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.StringWriter;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Vector;
 
 public class MiscTest extends TestCase {
     String home = "/Users/guhar/";
+
+    public void testRcdkBugReport() throws Exception {
+
+        IChemObjectBuilder builder = SilentChemObjectBuilder.getInstance();
+        IsotopeFactory ifac = Isotopes.getInstance();;
+
+        Double tolerance = 0.0005;
+        MassToFormulaTool mfTool = new MassToFormulaTool(builder);
+        List<IRule> rules = new ArrayList<IRule>();
+
+        ToleranceRangeRule trule = new ToleranceRangeRule();
+        trule.setParameters(new Object[]{tolerance, tolerance});
+        rules.add(trule);
+
+        ElementRule erule = new ElementRule();
+        Object[] params = new Object[1];
+        MolecularFormulaRange mfRange = new MolecularFormulaRange();
+        mfRange.addIsotope(ifac.getMajorIsotope("C"), 0, 20);
+        mfRange.addIsotope(ifac.getMajorIsotope("H"), 0, 24);
+        mfRange.addIsotope(ifac.getMajorIsotope("O"), 0, 4);
+        mfRange.addIsotope(ifac.getMajorIsotope("N"), 0, 1);
+        params[0] = mfRange;
+        erule.setParameters(params);
+        rules.add(erule);
+
+        mfTool.setRestrictions(rules);
+        IMolecularFormulaSet mfset = mfTool.generate(55.05423);
+        System.out.println("mfset.size() = " + mfset.size());
+
+
+    }
 
     public void testLoadMolecules() {
         String[] fname = {home + "src/cdkr/rcdk/data/dan001.hin",
@@ -132,24 +169,24 @@ public class MiscTest extends TestCase {
 ////        KabschAlignment ka = new KabschAlignment();
 //    }
 
-    public static IAtomContainer getneedle(IAtomContainer a, IAtomContainer q) throws CDKException {
+//    public IAtomContainer getneedle(IAtomContainer a, IAtomContainer q) throws CDKException {
+////        IAtomContainer needle = DefaultChemObjectBuilder.getInstance().newInstance(IAtomContainer.class);
 //        IAtomContainer needle = DefaultChemObjectBuilder.getInstance().newInstance(IAtomContainer.class);
-        IAtomContainer needle = DefaultChemObjectBuilder.getInstance().newInstance(IAtomContainer.class);
-        Vector idlist = new Vector();
-
-        List l = UniversalIsomorphismTester.getSubgraphMaps(a, q);
-        List maplist = (List) l.get(0);
-        for (Iterator i = maplist.iterator(); i.hasNext();) {
-            RMap rmap = (RMap) i.next();
-            idlist.add(new Integer(rmap.getId1()));
-        }
-
-        HashSet hs = new HashSet(idlist);
-        for (Iterator i = hs.iterator(); i.hasNext();) {
-            needle.addBond(a.getBond(((Integer) i.next()).intValue()));
-        }
-        return needle;
-    }
+//        Vector idlist = new Vector();
+//
+//        List l = UniversalIsomorphismTester.getSubgraphMaps(a, q);
+//        List maplist = (List) l.get(0);
+//        for (Iterator i = maplist.iterator(); i.hasNext(); ) {
+//            RMap rmap = (RMap) i.next();
+//            idlist.add(new Integer(rmap.getId1()));
+//        }
+//
+//        HashSet hs = new HashSet(idlist);
+//        for (Iterator i = hs.iterator(); i.hasNext(); ) {
+//            needle.addBond(a.getBond(((Integer) i.next()).intValue()));
+//        }
+//        return needle;
+//    }
 
     public void testExactMass() throws InvalidSmilesException {
         SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
