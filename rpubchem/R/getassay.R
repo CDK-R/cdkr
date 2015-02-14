@@ -1,6 +1,3 @@
-#require(XML)
-#require(car)
-#require(RJSONIO)
 
 .join <- function (x, delim = ",") 
   paste(x, sep = "", collapse = delim)
@@ -222,7 +219,7 @@ get.assay <- function(aid, quiet=TRUE) {
 
 
 .eh <- function() {
-  .itemNames <- c('IUPACName','CanonicalSmile','MolecularFormula','MolecularWeight', 'TotalFormalCharge',
+  .itemNames <- c('IUPACName','CanonicalSmiles','MolecularFormula','MolecularWeight', 'TotalFormalCharge',
                   'XLogP', 'HydrogenBondDonorCount', 'HydrogenBondAcceptorCount',
                   'HeavyAtomCount', 'TPSA')
   .types <- c('character','character','character', 'double', 'integer', 'double', 'integer', 'integer',
@@ -250,7 +247,6 @@ get.assay <- function(aid, quiet=TRUE) {
     }
     
     if (name == 'Item' && .itemIsPresent(attr[['Name']]) ) {
-      print (attr[['Name']])
       currItemName <<- attr[['Name']]
       validItem <<- TRUE
       textval <<- NA
