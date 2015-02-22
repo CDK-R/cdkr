@@ -1,17 +1,21 @@
 \name{get.sid.list}
 \alias{get.sid.list}
+\alias{get.cid.list}
 \title{
-  Get PubChem Substance ID's Associated With A Compound
+  Get PubChem Substance ID's Associated With A Compound and Vice Versa
 }
 \description{
   Each unique compound is associated with a number of substances. Given
-  a CID it is possible to determine the associated substance ID's.
+  a CID it is possible to determine the associated substance ID's. Conversely
+  given a SID it is useful to identify all CIDs that are associated with it
 }
 \usage{
 get.sid.list(cid, quiet=TRUE, from.file=FALSE)
+get.cid.list(sid, quiet=TRUE, from.file=FALSE)
 }
 \arguments{
   \item{cid}{A vector of one or more compound ID's}
+  \item{sid}{A vector of one or more substance ID's}
   \item{quiet}{If \code{FALSE}, output is verbose}
   \item{from.file}{If \code{TRUE} then the first argument is considered
     to be the name of a file containing the XML data. If \code{FALSE}
@@ -35,6 +39,7 @@ get.sid.list(cid, quiet=TRUE, from.file=FALSE)
 
 \seealso{
   \code{\link{get.cid}},
+  \code{\link{get.sid}},
   \code{\link{get.assay}}
 }
 \keyword{programming}
