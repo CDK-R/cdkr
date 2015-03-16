@@ -42,6 +42,16 @@ get.interactions <- function(geneList, species = 9606,
     if (verbose) cat("Found in cache\n", file=stderr())
     return(cached.doc)
   }
+
+  ## if it's not in the cache, first query for count of rows
+  url <- sprintf('http://webservice.thebiogrid.org/interactions/?accesskey=%s&%s&format=count', key, qs)
+  resp <- GET(url)
+  if (resp$status_code != 200) {
+    warning(paste("Can't get count for", url, '\n', sep='', collapse=' '))
+    return(NULL)
+  }
+  count <- as.integer(content(resp))
+  if (verbose) cat("Will retrieve", count, "interactions\n", file=stderr())
   
   resp <- GET(url)
   if (resp$status_code != 200) {
