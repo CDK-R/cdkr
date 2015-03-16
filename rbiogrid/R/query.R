@@ -52,7 +52,8 @@ get.interactions <- function(geneList, species = 9606,
   }
   count <- as.integer(content(resp))
   if (verbose) cat("Will retrieve", count, "interactions\n", file=stderr())
-  
+
+  url <- sprintf('http://webservice.thebiogrid.org/interactions/?accesskey=%s&%s&format=json', key, qs)
   resp <- GET(url)
   if (resp$status_code != 200) {
     warning(paste("Error retrieving interactions. HTTP Error", resp$status_code, collapse=' ', sep=''))
@@ -64,3 +65,4 @@ get.interactions <- function(geneList, species = 9606,
     return(page)
   }
 }
+
