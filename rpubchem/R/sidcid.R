@@ -115,7 +115,8 @@ get.sid.list <- function(cid, quiet=TRUE, from.file=FALSE) {
   } else {
     datafile <- cid
   }
-
+  
+  doc <- xmlParse(datafile)
   docsums <- getNodeSet(doc, '/eSummaryResult/DocSum')
   ret <- lapply(docsums, function(docsum) {
     nodes <- Filter(function(x) xmlGetAttr(x, 'Name') == 'SubstanceIDList', docsum['Item'])

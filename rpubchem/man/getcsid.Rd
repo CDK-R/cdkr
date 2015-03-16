@@ -20,11 +20,12 @@ get.cid.list(sid, quiet=TRUE, from.file=FALSE)
   \item{from.file}{If \code{TRUE} then the first argument is considered
     to be the name of a file containing the XML data. If \code{FALSE}
     the first argument must be a sequence of compound ID's and the data
-    will be downloaded from the PubChem FTP site}
+    will be downloaded from PubChem}
 }
 \value{
   A \code{list} object, the name of each element is the CID and the
-  value is the SID's that are associated with the compound in question.
+  value is the SID's that are associated with the compound in question (or
+  vice versa).
 }
 \details{Processing a large number of compound ID's can take a long
   time. For large numbers of CID's the resultant XML file can be many
