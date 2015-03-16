@@ -15,11 +15,12 @@ get.organisms <- function() {
 
 
 get.interactions <- function(geneList, species = 9606,
-                             searchNames = TRUE, searchSynonyms = TRUE, 
+                             searchNames = TRUE, searchSynonyms = TRUE, searchIds = FALSE, searchBiogridIds = FALSE,
+                             taxId = 'All',
                              selfInteractionsExcluded = TRUE,
                              includeInteractorInteractions = FALSE, 
                              includeEvidence = TRUE,
-                             verbose = TRUE) {
+                             verbose = FALSE) {
   key <- get.access.key()
   if (is.null(key)) stop("Must provide a non-NULL access key")
 
@@ -34,7 +35,7 @@ get.interactions <- function(geneList, species = 9606,
   qs <- paste(qs, collapse='&', sep='')
   url <- sprintf('http://webservice.thebiogrid.org/interactions/?accesskey=%s&%s&format=json', key, qs)
   if (verbose)
-    cat(url, file=stderr())
+    cat('URL:',url, '\n', file=stderr())
 
   cached.doc <- .get.cache(url)
   if (!is.null(cached.doc)) {
