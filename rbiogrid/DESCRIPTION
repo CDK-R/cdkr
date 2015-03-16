@@ -1,6 +1,6 @@
 Package: rbiogrid
 Type: Package
-Version: 0.1
+Version: 0.2
 Date: 2014-03-15
 Title: rbiogrid - A client for the BioGRID REST services
 Authors@R: c(person("Rajarshi", "Guha", role = c("aut", "cre"),
