@@ -6,6 +6,6 @@ Title: rbiogrid - A client for the BioGRID REST services
 Authors@R: c(person("Rajarshi", "Guha", role = c("aut", "cre"),
     email = "rajarshi.guha@gmail.com"))
 Depends: R (>= 2.0.0)
-Imports: httr, jsonlite
+Imports: httr
 License: GPL (>= 2)
 Description: An interface to the BioGRID database of protein protein interactions using their REST interface

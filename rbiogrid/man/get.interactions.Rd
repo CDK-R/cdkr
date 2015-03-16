@@ -27,8 +27,7 @@ should be \code{FALSE}}
 
 \item{selfInteractionsExcluded}{If \code{TRUE} ignore self interactions}
 
-\item{includeInteractorInteractions}{If \code{TRUE}, then interactions between the interactors of the
-query targets are included in the return value}
+\item{includeInteractorInteractions}{If \code{TRUE}, then interactions between the interactors of the query targets are included in the return value}
 
 \item{verbose}{If \code{TRUE} intermediate output is printed such as URLs and interaction counts}
 }
