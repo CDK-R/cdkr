@@ -44,7 +44,7 @@ get.organisms <- function() {
 #'                  should be \code{FALSE}
 #' @param selfInteractionsExcluded If \code{TRUE} ignore self interactions
 #' @param includeInteractorInteractions If \code{TRUE}, then interactions between the interactors of the query targets are included in the return value
-#" @param includeEvidence If \code{TRUE} then include reported evidence for the interaction
+#' @param includeEvidence If \code{TRUE} then include reported evidence for the interaction
 #' @param verbose If \code{TRUE} intermediate output is printed such as URLs and interaction counts
 #'
 #' @return A \code{data.frame} with interaction information

@@ -29,6 +29,8 @@ should be \code{FALSE}}
 
 \item{includeInteractorInteractions}{If \code{TRUE}, then interactions between the interactors of the query targets are included in the return value}
 
+\item{includeEvidence}{If \code{TRUE} then include reported evidence for the interaction}
+
 \item{verbose}{If \code{TRUE} intermediate output is printed such as URLs and interaction counts}
 }
 \value{
