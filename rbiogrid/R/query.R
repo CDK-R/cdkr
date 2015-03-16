@@ -7,7 +7,7 @@
 #'
 #' @return A \code{data.frame} with two columns called "taxid" and "organism"
 #' @keywords database
-#' @seealso \code{link{set.access.key}}
+#' @seealso \code{\link{set.access.key}}
 #' @export
 get.organisms <- function() {
   key <- get.access.key()
@@ -29,7 +29,9 @@ get.organisms <- function() {
 #' By default this function returns interactions for one or more gene
 #' symbols, separated by the pipe ('|') symbol and considers Homo Sapiens
 #' as the species. See \url{http://wiki.thebiogrid.org/doku.php/biogridrest#list_of_parameters}
-#' for more details.
+#' for more details. This method caches queries to the BioGRID REST API, so that queries
+#' for the same set of targets will be retrieved from cache. Note that cache is restricted
+#' to the current session only.
 #'
 #' @param geneList A character string with pipe delimited series of gene symbols
 #' @param taxId The species to consider. By default Homo Sapiens (9606)
@@ -46,7 +48,7 @@ get.organisms <- function() {
 #" @param includeEvidence If \code{TRUE} then include reported evidence for the interaction
 #' @param verbose If \code{TRUE} intermediate output is printed such as URLs and interaction counts
 #' @return A \code{data.frame} with interaction information
-#' @seealso \code{link{get.organisms}}, \code{link{set.access.key}}
+#' @seealso \code{\link{get.organisms}}, \code{\link{set.access.key}}
 #' @keywords database
 #' @export
 get.interactions <- function(geneList, 

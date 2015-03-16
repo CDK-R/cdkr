@@ -16,7 +16,7 @@ consider a specific species. This methods returns all species names
 and their corresponding taxonomy ID
 }
 \seealso{
-\code{link{set.access.key}}
+\code{\link{set.access.key}}
 }
 \keyword{database}
 

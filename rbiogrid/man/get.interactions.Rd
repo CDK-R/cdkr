@@ -39,10 +39,12 @@ A \code{data.frame} with interaction information
 By default this function returns interactions for one or more gene
 symbols, separated by the pipe ('|') symbol and considers Homo Sapiens
 as the species. See \url{http://wiki.thebiogrid.org/doku.php/biogridrest#list_of_parameters}
-for more details.
+for more details. This method caches queries to the BioGRID REST API, so that queries
+for the same set of targets will be retrieved from cache. Note that cache is restricted
+to the current session only.
 }
 \seealso{
-\code{link{get.organisms}}, \code{link{set.access.key}}
+\code{\link{get.organisms}}, \code{\link{set.access.key}}
 }
 \keyword{database}
 
