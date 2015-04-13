@@ -1,20 +1,22 @@
 fp.sim.matrix <- function(fplist, fplist2=NULL, method='tanimoto') {
 
+  sim <- NA
+  
   if (!is.null(fplist2)) {
-    return(do.call('rbind', lapply(fplist, function(fp) unlist(lapply(fplist2, function(x) distance(x,fp))))))
+    sim <- do.call('rbind', lapply(fplist, function(fp) unlist(lapply(fplist2, function(x) distance(x,fp)))))
   }
 
   if (method == 'dice') {
-    return(.dice.sim.mat(fplist))
+    sim <- .dice.sim.mat(fplist)
   } else if (method == 'tanimoto') {
-    return(.tanimoto.sim.mat(fplist))
-  }
-  
-  sim <- matrix(0,nrow=length(fplist), ncol=length(fplist))
-  for (i in 1:(length(fplist)-1)) {
-    v <- unlist(lapply( fplist[(i+1):length(fplist)], distance, fp2=fplist[[i]], method=method))
-    sim[i,(i+1):length(fplist)] <- v
-    sim[(i+1):length(fplist),i] <- v
+    sim <- .tanimoto.sim.mat(fplist)
+  } else {
+    sim <- matrix(0,nrow=length(fplist), ncol=length(fplist))
+    for (i in 1:(length(fplist)-1)) {
+      v <- unlist(lapply( fplist[(i+1):length(fplist)], distance, fp2=fplist[[i]], method=method))
+      sim[i,(i+1):length(fplist)] <- v
+      sim[(i+1):length(fplist),i] <- v
+    }
   }
   diag(sim) <- 1.0
   return(sim)
