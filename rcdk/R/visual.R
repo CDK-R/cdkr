@@ -76,7 +76,7 @@ view.molecule.2d <- function(molecule, ncol = 4, cellx = 200, celly = 200) {
 
     if (is.osx) {
       smi <- get.smiles(molecule)
-      cmd <- sprintf('java -cp %s/cont/cdk.jar:%s/cont/rcdk.jar org.guha.rcdk.app.OSXHelper viewMolecule2D "%s" %d %d &', rcdklibs, jarfile, smi, cellx, celly)
+      cmd <- sprintf('java -cp \"%s/cont/*:%s/cont/rcdk.jar\" org.guha.rcdk.app.OSXHelper viewMolecule2D "%s" %d %d &', rcdklibs, jarfile, smi, cellx, celly)
       return(system(cmd))
     } else {
       v2d <- .jnew("org/guha/rcdk/view/ViewMolecule2D", molecule, as.integer(cellx), as.integer(celly))
