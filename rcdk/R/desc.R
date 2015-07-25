@@ -139,6 +139,11 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
       })
       vals <- lapply(descvals, .get.desc.values, nexpected = length(dnames))
       vals <- data.frame(do.call('rbind', vals))
+
+      if (length(vals) == 1 && is.na(vals)) {
+        vals[,dnames] <- NA
+      }
+      
       names(vals) <- dnames
       
       dl[[counter]] <- vals
