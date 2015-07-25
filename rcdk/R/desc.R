@@ -141,10 +141,12 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
       vals <- data.frame(do.call('rbind', vals))
 
       if (length(vals) == 1 && is.na(vals)) {
-        vals[,dnames] <- NA
+        vals <- as.data.frame(matrix(NA, nrow=1, ncol=length(dnames)))
       }
       
       names(vals) <- dnames
+      ## idx <- which(is.na(names(vals)))
+      ## if (length(idx) > 0) vals <- vals[,-idx]
       
       dl[[counter]] <- vals
       counter <- counter + 1
