@@ -17,10 +17,12 @@ import org.openscience.cdk.formula.rules.ElementRule;
 import org.openscience.cdk.formula.rules.IRule;
 import org.openscience.cdk.formula.rules.ToleranceRangeRule;
 import org.openscience.cdk.interfaces.IAtomContainer;
+import org.openscience.cdk.interfaces.IAtomContainerSet;
 import org.openscience.cdk.interfaces.IChemObjectBuilder;
 import org.openscience.cdk.interfaces.IMolecularFormulaSet;
 import org.openscience.cdk.io.MDLV2000Reader;
 import org.openscience.cdk.io.SDFWriter;
+import org.openscience.cdk.io.SMILESReader;
 import org.openscience.cdk.silent.SilentChemObjectBuilder;
 import org.openscience.cdk.smiles.SmilesParser;
 import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
@@ -105,6 +107,21 @@ public class MiscTest extends TestCase {
 
         assert acs != null;
         Assert.assertEquals(277, acs.length);
+
+    }
+
+    public void testLoadMolsFromSmi2() {
+        IAtomContainer[] acs = null;
+        try {
+            acs = Misc.loadMolecules(new String[]{"/Users/guhar/Downloads/mcriobs.smi"}, true, true, true);
+        } catch (CDKException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+        }
+
+        assert acs != null;
+        Assert.assertEquals(2000, acs.length);
 
     }
 
@@ -215,6 +232,13 @@ public class MiscTest extends TestCase {
         for (Map.Entry entry : props.entrySet()) {
             System.out.println(entry.getKey() + " " + entry.getValue());
         }
+    }
+
+    public void testSmilesReader() throws FileNotFoundException, CDKException {
+        SMILESReader reader = new SMILESReader(new FileReader("/Users/guhar//src/cdkr/rcdkjar/foo.smi"));
+        IAtomContainerSet mols = reader.read(DefaultChemObjectBuilder.getInstance().newInstance(IAtomContainerSet.class));
+        Assert.assertNotNull(mols);
+        Assert.assertTrue(mols.getAtomContainerCount() == 1);
     }
 
 
