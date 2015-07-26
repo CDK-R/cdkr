@@ -235,7 +235,7 @@ public class MiscTest extends TestCase {
     }
 
     public void testSmilesReader() throws FileNotFoundException, CDKException {
-        SMILESReader reader = new SMILESReader(new FileReader("/Users/guhar//src/cdkr/rcdkjar/foo.smi"));
+        SMILESReader reader = new SMILESReader(new FileReader("/Users/guhar/src/cdkr/data/nonkekulizable.smi"));
         IAtomContainerSet mols = reader.read(DefaultChemObjectBuilder.getInstance().newInstance(IAtomContainerSet.class));
         Assert.assertNotNull(mols);
         Assert.assertTrue(mols.getAtomContainerCount() == 1);
