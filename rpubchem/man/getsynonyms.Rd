@@ -12,7 +12,7 @@
   obtained using the \code{\link{get.cid}} function.
 }
 \usage{
-get.cid(name, quiet=TRUE)
+get.synonyms(name, quiet=TRUE)
 }
 \arguments{
   \item{name}{A vector of one or more compound names}
