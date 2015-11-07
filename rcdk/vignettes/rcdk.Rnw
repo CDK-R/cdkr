@@ -28,6 +28,7 @@ library(xtable)
 \parskip 1em
 
 \begin{document}
+\SweaveOpts{concordance=TRUE}
 
 \title{rcdk: Integrating the CDK with R}
 \author{Rajarshi Guha \\ Miguel Rojas Cherto}

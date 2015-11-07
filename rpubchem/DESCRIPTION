@@ -1,13 +1,16 @@
 Package: rpubchem
-Version: 1.5.2
-Date: 2015-11-04
-Title: rpubchem - Interface to the PubChem Collection
-Author: Rajarshi Guha <rajarshi.guha@gmail.com>
+Version: 1.5.2.1
+Date: 2015-11-07
+Title: Interface to the PubChem Collection
+Authors@R: c(person("Rajarshi", "Guha", email="rajarshi.guha@gmail.com", role=c("aut","cre")),
+             person("John", "Buonagurio", email="jbuonagurio@exponent.com", role=c("ctb")))	
+Author: Rajarshi Guha [aut, cre],
+ John Buonagurio [ctb]
 Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
 Depends: R (>= 2.0.0)
 Imports: XML, car, RCurl, RJSONIO, data.table
 License: GPL (>= 2)
-Description: Access PubChem data (compounds, substance, assays).
+Description: Access PubChem data (compounds, substance, assays) using R.
         Structural information is provided in the form of SMILES
         strings. This package only provides access to a subset of the
         precalculated data stored by PubChem. Bio-assay data can be

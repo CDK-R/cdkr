@@ -3,8 +3,6 @@
 
     <!-- compile options -->
     <property name="build.sysclasspath" value="ignore"/>
-    <property name="build.compiler" value="javac1.6"/>
-    <property name="java.version" value="1.5"/>
     <property name="debug" value="on"/>
     <property name="deprecation" value="off"/>
     <property name="optimization" value="off"/>
@@ -25,7 +23,7 @@
         <mkdir dir="${build.dir}"/>
         <javac srcdir="${src.dir}" destdir="${build.dir}"
                debug="${debug}" deprecation="${deprecation}"
-               optimize="${optimization}" source="1.5" verbose="no">
+               optimize="${optimization}" source="1.7" verbose="no">
             <classpath refid="project.class.path"/>
             <exclude name="org/guha/rcdk/test/**"/>
             <exclude name="org/guha/rcdk/draw/**"/>

@@ -241,5 +241,11 @@ public class MiscTest extends TestCase {
         Assert.assertTrue(mols.getAtomContainerCount() == 1);
     }
 
+    public void testfoo() throws CDKException {
+        IChemObjectBuilder dcob = DefaultChemObjectBuilder.getInstance();
+        SmilesParser sp = new SmilesParser(dcob);
+        sp.parseSmiles("CCCC");
+    }
+
 
 }

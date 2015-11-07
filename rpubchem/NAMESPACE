@@ -2,6 +2,7 @@
 exportPattern("^[[:alpha:]]+")
 
 # Import all packages listed as Imports or Depends
+importFrom("utils", "URLencode", "download.file", "read.csv")
 import(
   XML,
   car,
