@@ -12,7 +12,7 @@ Imports: XML, car, RCurl, RJSONIO, data.table
 License: GPL (>= 2)
 Description: Access PubChem data (compounds, substance, assays) using R.
         Structural information is provided in the form of SMILES
-        strings. This package only provides access to a subset of the
+        strings. It currently only provides access to a subset of the
         precalculated data stored by PubChem. Bio-assay data can be
         accessed to obtain descriptions as well as the actual data. It
         is also possible to search for assay ID's by keyword. Currently
