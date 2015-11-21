@@ -155,6 +155,30 @@ find.assay.id <- function(query, quiet=TRUE) {
   
   ids
 }
+
+#' Retreive CID's for the given bioassay
+#'
+#' @param aid The bioassay ID
+#' @param quiet If \code{TRUE} verbose output is provided
+#' @return A vector of CIDs
+#' @seealso \code{\link{get.sids.by.aid}}, \code{\link{get.sid.list}}
+#' @examples
+#' get.cids.by.aid(2044)
+get.cids.by.aid <- function(aid, quiet=TRUE) {
+  .ids.for.aid(aid,'cid',quiet)
+}
+
+#' Retreive SID's for the given bioassay
+#'
+#' @param aid The bioassay ID
+#' @param quiet If \code{TRUE} verbose output is provided
+#' @return A vector of SIDs
+#' @seealso \code{\link{get.cids.by.aid}}
+#' @examples
+#' get.sids.by.aid(2044)
+get.sids.by.aid <- function(aid, quiet=TRUE) {
+  .ids.for.aid(aid,'sid', quiet)
+}
 get.assay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
   ## Lets see how many SID's we're going to pull down
   as <- get.assay.summary(aid)
@@ -167,7 +191,8 @@ get.assay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
   }
 }
 
-## only one of cid or sid should be non-null
+## only one of cid or sid should be non-null. If both are non-null, use cid
+## if both are null, retrieve entire assay in chunked mode by cid
 .getAssay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
   idtype <- NA
   if (!is.null(cid)) {
@@ -179,7 +204,7 @@ get.assay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
   } else {
     ## if no cid/sid was specified this means that the assay was too big to get
     ## in one go, so instead we'll be chunking all the cids
-    ids <- .cids.for.aid(aid)
+    ids <- .ids.for.aid(aid, 'cid', quiet)
     idtype <- 'cid'
   }
 
