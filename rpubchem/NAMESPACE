@@ -3,10 +3,13 @@ exportPattern("^[[:alpha:]]+")
 
 # Import all packages listed as Imports or Depends
 importFrom("utils", "URLencode", "download.file", "read.csv")
+importFrom("stringr", "str_detect")
 import(
   XML,
   car,
   RCurl,
   RJSONIO,
-  data.table
+  data.table,
+  iterators,
+  itertools
 )

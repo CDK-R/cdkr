@@ -167,97 +167,88 @@ get.assay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
   }
 }
 
-.getAssayDirect <- function(aid, quiet=TRUE) {
-  qurl <- sprintf("http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/CSV", as.numeric(aid))
-  urlcon <- url(qurl)
-  dat <- read.csv(urlcon, header=TRUE, as.is=TRUE)
+## only one of cid or sid should be non-null
+.getAssay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
+  idtype <- NA
+  if (!is.null(cid)) {
+    ids <- cid
+    idtype <- 'cid'
+  } else if (!is.null(sid)) {
+    ids <- sid
+    idtype <- 'sid'
+  } else {
+    ## if no cid/sid was specified this means that the assay was too big to get
+    ## in one go, so instead we'll be chunking all the cids
+    ids <- .cids.for.aid(aid)
+    idtype <- 'cid'
+  }
 
-  if (!quiet) cat('Loaded data\n')
+  chunk.size <- 1000
+  if (!quiet) cat("Will process AID", aid, "in", as.integer(length(ids)/chunk.size)+1, "chunks\n")
+  it <- ihasNext(ichunk(ids, chunk.size))
+  nchunk <- 1
+  chunks <- list()
+  while (itertools::hasNext(it)) {
+    achunk <- unlist(nextElem(it))
+    url <- sprintf("https://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/CSV?%s=%s",
+                   as.integer(aid), idtype, join(achunk, ","))
+    if (!quiet) cat(" retrieving chunk", nchunk, "\n")
+    page <- .read.url(url)
+    if (!is.null(page)) {
+      dat <- read.csv(textConnection(page), header=TRUE, row.names=NULL, fill=TRUE)
+      chunks[[nchunk]] <- .clean.bioassay.csv(aid, dat, add.metadata=FALSE, quiet)
+    }
+    nchunk <- nchunk + 1
+  }
+  dat <- do.call(rbind, chunks)
+  .add.assay.metadata(aid, dat)
+}
+
+.getAssayDirect <- function(aid, quiet=TRUE) {
+  url <- sprintf("http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/CSV", as.integer(aid))
+  if (!quiet) cat("URL:", url, "\n")
+  page <- .read.url(url)
+  dat <- read.csv(textConnection(page), header=TRUE, row.names=NULL, fill=TRUE)
   .clean.bioassay.csv(aid, dat, quiet)
 }
 
-.clean.bioassay.csv <- function(aid, dat, quiet=TRUE) {
+.clean.bioassay.csv <- function(aid, dat, add.metadata=TRUE, quiet=TRUE) {
+  ## remove meta data rows
+  rowtypes <- dat[1,]
+  dat <- dat[-c(1:5),]
+  if (nrow(dat) == 0) return(dat)  
+  for (i in 1:length(rowtypes)) {
+    val <- switch(EXPR=as.character(rowtypes[i]),
+                  STRING = as.character(dat[,i]),
+                  FLOAT = as.numeric(dat[,i]),
+                  INTEGER = as.integer(dat[,i]))
+    if (!is.null(val)) dat[,i] <- val
+  }
   ## get rid of underscores in the names
   n <- names(dat)
   names(dat) <- gsub('_', '\\.', n)
   
-  ## recode the activity outcome column
-  f <- recode(dat[,3], "1='inactive'; 2='active'; 3='inconc'; 4='unspec'", as.factor.result=TRUE)
-  dat[,3] <- f
-
   ## lets get the descriptions and set col names and
   ## attributes
-  if (!quiet) cat('Processing descriptions\n')
+  if (add.metadata) dat <- .add.assay.metadata(aid, dat, quiet)
+  dat[,-1]
+}
+
+.add.assay.metadata <- function(aid, assay.data, quiet=FALSE) {
+  if (!quiet) cat('Processing descriptions for',aid,'\n')  
   desc <- get.assay.desc(aid)
   if (is.null(desc)) warning("couldn't get description data'")
-
-  attr(dat, 'description') <- desc$assay.desc
-  attr(dat, 'comments') <- desc$assay.comments
+  
+  attr(assay.data, 'description') <- desc$assay.desc
+  attr(assay.data, 'comments') <- desc$assay.comments
   types <- list()
   for (i in 1:nrow(desc$types)) {
     types[[desc$types[i,1]]] <- c(desc$types[i,2], desc$types[i,3])
   }
-  attr(dat, 'types') <- types
-  dat
+  attr(assay.data, 'types') <- types
+  return(assay.data)
 }
 
-## only one of cid or sid should be non-null
-.getAssay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
-  pxml <- NA
-  if (!is.null(cid)) 
-    pxml <- .get.assay.id.xml(aid, cid, 'cid')
-  else if (!is.null(sid)) 
-    pxml <- .get.assay.id.xml(aid, sid, 'sid')
-  else stop("Must specify one of cid or sid")
-  pugq <- .xml2pugq(pxml)
-
-  ## kick of PUG query
-  h = basicTextGatherer()
-  curlPerform(url = .get.pug.url(),
-              postfields = pugq,
-              writefunction = h$update)
-  ## extract query id
-  xml <- xmlTreeParse(h$value(), asText=TRUE, asTree=TRUE)
-  root <- xmlRoot(xml)
-  reqid <- xmlElementsByTagName(root, 'PCT-Waiting_reqid', recursive=TRUE)
-  if (length(reqid) != 1) {
-    if (!quiet) warning("Malformed request id document")
-    return(NULL)
-  }
-  reqid <- xmlValue(reqid[[1]])
-
-  ## start polling
-  if (!quiet) cat("Starting polling using reqid:", reqid, "\n")
-  root <- .poll.pubchem(reqid)
-
-  ## OK, got the link to our result
-  link <- xmlElementsByTagName(root, 'PCT-Download-URL_url', recursive=TRUE)
-  if (length(link) != 1) {
-    if (!quiet) warning("Polling finished but no download URL")
-    return(NULL)
-  }
-  link <- xmlValue(link[[1]])
-  if (!quiet) cat("Got link to download:", link, "\n")
-  
-  ## OK, get data file
-  tmpdest <- tempfile(pattern = 'abyc')
-  tmpdest <- paste(tmpdest, '.gz', sep='', collapse='')
-  status <- try(download.file(link,
-                              destfile=tmpdest,
-                              method='internal',
-                              mode='wb', quiet=TRUE),
-                silent=TRUE)
-  if (class(status) == 'try-error') {
-    if (!quiet) warning(status)
-    return(NULL)
-  }
-
-  ## OK, load the data
-  if (!quiet) cat("Downloaded temp file at", tmpdest, "\n")
-  dat <- read.csv(tmpdest, header=TRUE, fill=TRUE, row.names=NULL, as.is=TRUE)[,-1]
-  if (!quiet) cat('Loaded data\n')  
-  .clean.bioassay.csv(aid, dat, quiet)
-}
 
 
 .get.xml.file <- function(url, dest, quiet) {
