@@ -27,10 +27,10 @@ For the png package, I have tested [png-0.1-4](http://www.rforge.net/png/files/)
 
 ## rpubchem
 
-Allows you to access [PubChem](https://pubchem.ncbi.nlm.nih.gov/) structures and bioassay data. The `pug-rest` branch supports retrieval of any AID (even primary screens, though this can be quite slow) or subsets of a screen by CID or SID. To install
+Allows you to access [PubChem](https://pubchem.ncbi.nlm.nih.gov/) structures and bioassay data. The package supports retrieval of any AID (even primary screens, though this can be quite slow) or subsets of a screen by CID or SID. To install
 ```R
 library(devtools)
-install_github("rajarshi/cdkr@pug-rest", subdir="rpubchem")
+install_github("rajarshi/cdkr", subdir="rpubchem")
 ```
 Once installed you can retrieve assays using the `get.assay` method:
 ```R
