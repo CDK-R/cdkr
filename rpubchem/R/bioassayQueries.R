@@ -91,7 +91,8 @@ get.aid.by.cid <- function(cid, type='raw', quiet=TRUE) {
     return(NULL)
   }
   link <- xmlValue(link[[1]])
-
+  if (!quiet) cat("Got link to download:", link, "\n")
+  
   ## OK, get data file
   tmpdest <- tempfile(pattern = 'abyc')
   tmpdest <- paste(tmpdest, '.gz', sep='', collapse='')
