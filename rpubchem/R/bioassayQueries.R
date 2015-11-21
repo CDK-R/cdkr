@@ -95,24 +95,19 @@ get.aid.by.cid <- function(cid, type='raw', quiet=TRUE) {
   }
 
   ## OK, load the data
-  csvfile <- strsplit(tmpdest, '\\.')[[1]][1]
-  .gunzip(tmpdest, csvfile)
-  dat <- read.csv(csvfile,header=TRUE,fill=TRUE,
-                  quote='', row.names=NULL)
+  dat <- read.csv(tmpdest,header=TRUE,fill=TRUE,row.names=NULL)
   unlink(tmpdest)
 
   valid.rows <- grep("^[[:digit:]]*$", dat[,1])
-  dat <- dat[valid.rows,1:5]
+  dat <- dat[valid.rows,c(1,3,4,5)]
   row.names(dat) <- 1:nrow(dat)
-  for (i in 1:5) dat[,i] <- as.numeric(as.character(dat[,i]))
-  names(dat) <- c('aid', 'active', 'inactive', 'descrepant', 'tested')
+  names(dat) <- c('aid', 'active', 'inactive', 'tested')
   ret <- dat
 
   type <- type[1]
   switch(type,
          active = dat[dat$active == 1,1],
          inactive = dat[dat$inactive == 1,1],
-         discrepant = dat[dat$discrepant == 1,1],
          tested = dat[,1],
          raw = ret[,-5])
 }

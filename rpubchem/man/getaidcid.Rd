@@ -23,7 +23,7 @@ get.aid.by.cid(cid, type="raw", quiet=TRUE)
 \arguments{
   \item{cid}{A single compound ID}
   \item{type}{What type of query should be performed. Valid values are
-  'active', 'inactive', 'discrepant', 'tested' or 'raw'.}
+  'active', 'inactive', 'tested' or 'raw'.}
   \item{quiet}{If \code{FALSE}, output is verbose}
 }
 \value{
