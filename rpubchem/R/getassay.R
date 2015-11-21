@@ -155,7 +155,7 @@ find.assay.id <- function(query, quiet=TRUE) {
   
   ids
 }
-get.assay <- function(aid, quiet=TRUE) {
+get.assay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
   ## Lets see how many SID's we're going to pull down
   as <- get.assay.summary(aid)
   nsid <- as$SIDCountAll
