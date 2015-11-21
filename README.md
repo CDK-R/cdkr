@@ -2,7 +2,7 @@ Build Instructions
 ------------------
 
 If you use ```devtools```, installing the packages can be done by
-```
+```R
 library(devtools)
 install_github("rajarshi/cdkr", subdir="rcdklibs")
 install_github("rajarshi/cdkr", subdir="rcdk")
@@ -29,7 +29,7 @@ For the png package, I have tested [png-0.1-4](http://www.rforge.net/png/files/)
 ## rpubchem
 
 Allows you to access Pubchem structures and bioassay data. The `pug-rest` branch supports retrieval of any AID (even primary screens, though this can be quite slow) or subsets of a screen by CID or SID. To install
-```
+```R
 library(devtools)
 install_github("rajarshi/cdkr@pug-rest", subdir="rpubchem")
 ```
