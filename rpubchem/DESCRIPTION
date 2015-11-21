@@ -8,7 +8,7 @@ Author: Rajarshi Guha [aut, cre],
  John Buonagurio [ctb]
 Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
 Depends: R (>= 2.0.0)
-Imports: XML, car, RCurl, RJSONIO, data.table
+Imports: XML, car, RCurl, RJSONIO, data.table, iterators, itertools, stringr
 License: GPL (>= 2)
 Description: Access PubChem data (compounds, substance, assays) using R.
         Structural information is provided in the form of SMILES

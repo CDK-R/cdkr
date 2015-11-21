@@ -216,7 +216,7 @@ get.assay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
   while (itertools::hasNext(it)) {
     achunk <- unlist(nextElem(it))
     url <- sprintf("https://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/CSV?%s=%s",
-                   as.integer(aid), idtype, join(achunk, ","))
+                   as.integer(aid), idtype, .join(achunk, ","))
     if (!quiet) cat(" retrieving chunk", nchunk, "\n")
     page <- .read.url(url)
     if (!is.null(page)) {
