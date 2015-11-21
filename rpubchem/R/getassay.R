@@ -200,6 +200,7 @@ get.assay <- function(aid, quiet=TRUE) {
   dat
 }
 
+
 .get.xml.file <- function(url, dest, quiet) {
   status <- try(download.file(url, destfile=dest, method='internal', mode='wb', quiet=quiet),
                 silent=TRUE)

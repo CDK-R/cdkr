@@ -1,0 +1,12 @@
+<PCT-Data>
+  <PCT-Data_input>
+    <PCT-InputData>
+      <PCT-InputData_request>
+        <PCT-Request>
+          <PCT-Request_reqid>XXX</PCT-Request_reqid>
+          <PCT-Request_type value="status"/>
+        </PCT-Request>
+      </PCT-InputData_request>
+    </PCT-InputData>
+  </PCT-Data_input>
+</PCT-Data>

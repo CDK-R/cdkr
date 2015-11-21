@@ -69,7 +69,8 @@ get.aid.by.cid <- function(cid, type='raw', quiet=TRUE) {
   reqid <- xmlValue(reqid[[1]])
 
   ## start polling
-  pstring <- gsub("\\n", "", sprintf(.pollString, reqid))
+  if (!quiet) cat("Starting polling using reqid:", reqid, "\n")
+  pstring <- .xml2pugq(.get.poll.xml(reqid))
   reqid <- NA
   while(TRUE) {
     h = basicTextGatherer()
