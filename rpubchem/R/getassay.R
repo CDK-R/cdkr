@@ -240,7 +240,8 @@ get.assay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
 .clean.bioassay.csv <- function(aid, dat, add.metadata=TRUE, quiet=TRUE) {
   ## remove meta data rows
   rowtypes <- dat[1,]
-  dat <- dat[-c(1:5),]
+  rows.to.drop <- which(is.na(dat[,2]))
+  dat <- dat[-rows.to.drop,]
   if (nrow(dat) == 0) return(dat)  
   for (i in 1:length(rowtypes)) {
     val <- switch(EXPR=as.character(rowtypes[i]),
