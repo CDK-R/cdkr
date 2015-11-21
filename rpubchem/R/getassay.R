@@ -159,20 +159,24 @@ get.assay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
   ## Lets see how many SID's we're going to pull down
   as <- get.assay.summary(aid)
   nsid <- as$SIDCountAll
-  if (nsid > 8000) {
-    .getAssay(aid, quiet)
+  if (nsid > 8000 || !is.null(cid) || !is.null(sid)) {
+    if (!is.null(cid) && !is.null(sid)) cid <- NULL
+    .getAssay(aid, cid=cid, sid=sid, quiet)
   } else {
-    .getAssay(aid, quiet)
+    .getAssayDirect(aid, quiet)
   }
 }
 
-.getAssay <- function(aid, quiet=TRUE) {
+.getAssayDirect <- function(aid, quiet=TRUE) {
   qurl <- sprintf("http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/CSV", as.numeric(aid))
   urlcon <- url(qurl)
   dat <- read.csv(urlcon, header=TRUE, as.is=TRUE)
 
-  if (!quiet) cat('Loaded data\n')  
+  if (!quiet) cat('Loaded data\n')
+  .clean.bioassay.csv(aid, dat, quiet)
+}
 
+.clean.bioassay.csv <- function(aid, dat, quiet=TRUE) {
   ## get rid of underscores in the names
   n <- names(dat)
   names(dat) <- gsub('_', '\\.', n)
@@ -194,10 +198,65 @@ get.assay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
     types[[desc$types[i,1]]] <- c(desc$types[i,2], desc$types[i,3])
   }
   attr(dat, 'types') <- types
-  
-  names(dat)[7:ncol(dat)] <- desc$types[,1]
-
   dat
+}
+
+## only one of cid or sid should be non-null
+.getAssay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
+  pxml <- NA
+  if (!is.null(cid)) 
+    pxml <- .get.assay.id.xml(aid, cid, 'cid')
+  else if (!is.null(sid)) 
+    pxml <- .get.assay.id.xml(aid, sid, 'sid')
+  else stop("Must specify one of cid or sid")
+  pugq <- .xml2pugq(pxml)
+
+  ## kick of PUG query
+  h = basicTextGatherer()
+  curlPerform(url = .get.pug.url(),
+              postfields = pugq,
+              writefunction = h$update)
+  ## extract query id
+  xml <- xmlTreeParse(h$value(), asText=TRUE, asTree=TRUE)
+  root <- xmlRoot(xml)
+  reqid <- xmlElementsByTagName(root, 'PCT-Waiting_reqid', recursive=TRUE)
+  if (length(reqid) != 1) {
+    if (!quiet) warning("Malformed request id document")
+    return(NULL)
+  }
+  reqid <- xmlValue(reqid[[1]])
+
+  ## start polling
+  if (!quiet) cat("Starting polling using reqid:", reqid, "\n")
+  root <- .poll.pubchem(reqid)
+
+  ## OK, got the link to our result
+  link <- xmlElementsByTagName(root, 'PCT-Download-URL_url', recursive=TRUE)
+  if (length(link) != 1) {
+    if (!quiet) warning("Polling finished but no download URL")
+    return(NULL)
+  }
+  link <- xmlValue(link[[1]])
+  if (!quiet) cat("Got link to download:", link, "\n")
+  
+  ## OK, get data file
+  tmpdest <- tempfile(pattern = 'abyc')
+  tmpdest <- paste(tmpdest, '.gz', sep='', collapse='')
+  status <- try(download.file(link,
+                              destfile=tmpdest,
+                              method='internal',
+                              mode='wb', quiet=TRUE),
+                silent=TRUE)
+  if (class(status) == 'try-error') {
+    if (!quiet) warning(status)
+    return(NULL)
+  }
+
+  ## OK, load the data
+  if (!quiet) cat("Downloaded temp file at", tmpdest, "\n")
+  dat <- read.csv(tmpdest, header=TRUE, fill=TRUE, row.names=NULL, as.is=TRUE)[,-1]
+  if (!quiet) cat('Loaded data\n')  
+  .clean.bioassay.csv(aid, dat, quiet)
 }
 
 

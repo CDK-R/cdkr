@@ -24,7 +24,7 @@
                     <PCT-QueryUids>
                       <PCT-QueryUids_ids>
                         <PCT-ID-List>
-                          <PCT-ID-List_db>pccompound</PCT-ID-List_db>
+                          <PCT-ID-List_db>pcsubstance</PCT-ID-List_db>
                           <PCT-ID-List_uids>
                           </PCT-ID-List_uids>
                         </PCT-ID-List>
