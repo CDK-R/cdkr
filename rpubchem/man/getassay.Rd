@@ -14,12 +14,18 @@
   The assay data are obtained for a variety of targets using a variety
   of techniques. As a result though each assay dataset contains a set of
   fixed fields, they can have additional fields.
+
+  If \code{cid} or \code{sid} is not specified the entire bioassay is retrieved. This can 
+  be time consuming for primary screening assays. If both arguments are specified, then
+  \code{sid} is used in preference to \code{sid}.
 }
 \usage{
-get.assay(aid, quiet=TRUE)
+get.assay(aid, cid=NULL, sid=NULL, quiet=TRUE)
 }
 \arguments{
   \item{aid}{An assay ID}
+  \item{cid}{A list of CID's}
+  \item{sid}{A list of SID's}
   \item{quiet}{If \code{FALSE} the output is verbose}
 }
 \value{
