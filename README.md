@@ -34,7 +34,7 @@ library(devtools)
 install_github("rajarshi/cdkr@pug-rest", subdir="rpubchem")
 ```
 Once installed you can retrieve assays using the `get.assay` method:
-```
+```R
 ## Retrieve the whole of AID 2044
 dat <- get.assay(2044)
 
