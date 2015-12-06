@@ -83,9 +83,20 @@ view.molecule.2d <- function(molecule, ncol = 4, cellx = 200, celly = 200) {
       ret <- .jcall(v2d, "V", "draw")
     }
   } else { ## multiple molecules
-    array <- .jarray(molecule, contents.class="org/openscience/cdk/interfaces/IAtomContainer")
-    v2d <- .jnew("org/guha/rcdk/view/ViewMolecule2DTable", array,
-                 as.integer(ncol), as.integer(cellx), as.integer(celly))
+    if (is.osx) {
+      ## write out mols as a temp smi file
+      smi <- sapply(molecule, get.smiles, type='isomeric')
+      titles <- sapply(molecule, get.title)
+      tmp <- data.frame(smi, titles)
+      tf <- tempfile(pattern='rcdkv-', fileext='.smi')
+      write.table(tmp, file=tf, sep='\t', row.names=FALSE, col.names=FALSE, quote=FALSE)
+      cmd <- sprintf('java -cp \"%s/cont/*:%s/cont/rcdk.jar\" org.guha.rcdk.app.OSXHelper viewMolecule2Dtable "%s" %d %d %d &', rcdklibs, jarfile, tf, cellx, celly, ncol)
+      return(system(cmd))
+    } else {
+      array <- .jarray(molecule, contents.class="org/openscience/cdk/interfaces/IAtomContainer")
+      v2d <- .jnew("org/guha/rcdk/view/ViewMolecule2DTable", array,
+                   as.integer(ncol), as.integer(cellx), as.integer(celly))
+    }
   }
 }
 
@@ -157,7 +168,7 @@ copy.image.to.clipboard <-  function(molecule, width=200, height=200) {
     smi <- get.smiles(molecule)
     jarfile <- system.file(package='rcdk')
     rcdklibs <- system.file(package='rcdklibs')
-    cmd <- sprintf('java -cp %s/cont/cdk.jar:%s/cont/rcdk.jar org.guha.rcdk.app.OSXHelper copyToClipboard "%s" %d %d', rcdklibs, jarfile, smi, width, height)
+    cmd <- sprintf('java -cp %s/cont/*:%s/cont/rcdk.jar org.guha.rcdk.app.OSXHelper copyToClipboard "%s" %d %d', rcdklibs, jarfile, smi, width, height)
     return(system(cmd))
   }
   if (attr(molecule,"jclass") != "org/openscience/cdk/interfaces/IAtomContainer")
