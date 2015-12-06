@@ -23,7 +23,9 @@ Before performing the install, you should have the following dependencies instal
 * fingerprint
 * png
 
-For the png package, I have tested [png-0.1-4](http://www.rforge.net/png/files/)
+For the png package, I have tested [png-0.1-7](http://www.rforge.net/png/files/)
+
+Some users have reported that `rcdk` methods (such as `parse.smiles`) are returning errors related to class not found or class version mismatch. This can happen when you are using a prepackaged version of `rJava` from [CRAN](https://cran.r-project.org/) and is caused by that package not finding the correct JRE home if you have multiple Java versions installed. In such a case, reinstalling `rJava` from sources appears to resolve this issue.
 
 ## rpubchem
 
