@@ -1,6 +1,6 @@
 Package: rcdklibs
-Version: 1.5.11
-Date: 2015-07-25
+Version: 1.5.12
+Date: 2015-12-06
 Title: rcdklib - CDK libraries packaged for R
 Authors@R: c(person('Rajarshi', 'Guha', role=c('aut','cre'), email='rajarshi.guha@gmail.com'),
              person('CDK Project', '', role=c('ctb', 'cph'), comment='CDK Java library contained in multiple jar files'))
