@@ -69,6 +69,12 @@ get.assay.desc <- function(aid) {
   desc.comments <- lapply(desc.comments, xmlValue)
   desc.comments <- paste(desc.comments, sep=' ', collapse='')
 
+  xref.aids <- xmlElementsByTagName(root, 'PC-XRefData_aid', recursive=TRUE)
+  xref.aids <- as.numeric(sapply(xref.aids, xmlValue))
+
+  xref.pmids <- xmlElementsByTagName(root, 'PC-XRefData_pmid', recursive=TRUE)
+  xref.pmids <- as.numeric(sapply(xref.pmids, xmlValue))
+  
   result.types <- xmlElementsByTagName(root, 'PC-ResultType', recursive=TRUE)
 
   type.name <- list()
@@ -110,6 +116,7 @@ get.assay.desc <- function(aid) {
   
   list(assay.desc=desc.short,
        assay.comments=desc.comments,
+       aids=sort(xref.aids), pmids=sort(xref.pmids),
        types=type.info)
 }
 
