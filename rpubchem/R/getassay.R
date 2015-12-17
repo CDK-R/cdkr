@@ -1,4 +1,6 @@
-
+## Test urls
+## https://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/1653/description/JSON
+## https://pubchem.ncbi.nlm.nih.gov/bioassay/1653#section=By-Depositor
 .join <- function (x, delim = ",") 
   paste(x, sep = "", collapse = delim)
 
