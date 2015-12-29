@@ -9,44 +9,32 @@
   substance associations, synonyms etc.
 
   This function will extract a subset of the molecular property
-  information for one or more compound ID's
+  information for a single CID.
 }
 \usage{
-get.cid(cid, quiet=TRUE, from.file=FALSE)
+get.cid(cid, quiet=TRUE)
 }
 \arguments{
-  \item{cid}{A vector of one or more compound ID's}
+  \item{cid}{A single numeric CID}
   \item{quiet}{If \code{FALSE}, output is verbose}
-  \item{from.file}{If \code{TRUE} then the first argument is considered
-    to be the name of a file containing the XML data. If \code{FALSE}
-    the first argument must be a sequence of compound ID's and the data
-    will be downloaded from the PubChem FTP site}
 }
 \value{
-  A \code{data.frame} with 9 columns:
-    \item{CID}{The compound ID}
-    \item{IUPACName}{The IUPAC name of the compound}
-    \item{CanonicalSmiles}{The canonical SMILES for the compound}
-    \item{MolecularWeight}{Molecular weight}
-    \item{TotalFormalCharge}{The formal charge}    
-    \item{MolecularFormula}{The molecular formula}    
-    \item{TPSA}{Topological polar surface area}
-    \item{HeavyAtomCount}{Heavy atom count}
-    \item{FormalCharge}{Total formal charge}
-    \item{HydrogenBondDonor}{Hydrogen bond donor count}
-    \item{HydrogenBondAcceptor}{Hydrogen bond acceptor count}
+  A \code{data.frame} with at least 23 columns including the CID, IUPAC name, InChI and InChI key, canonical SMILES and a variety of molecular descriptors. In addition, a few physical properties  are also included.
 }
-\details{Processing a large number of compound ID's can take a long
-  time. For large numbers of CID's the resultant XML file can be many
-  megabytes. This may take a long time to download. After download it
-  takes approximate 20 sec to process a 23MB data file.
+\details{The method currently queries PubChem via the PUG REST interface. Since the method 
+processes a single CID at a time, the user can parallelize processing. However, this is usually 
+not recommended, at least in an unrestricted manner.
 
-  It should also be noted that the data files are downloaded using the R
-  interface to Curl. In addition, the PubChem servers do not allow very
-  large query URL's. This limits the number of compound ID's that can be
-  directly pulled of the PubChem servers to about 1000
+In addition, since the \code{data.frame} for each CID may have a different set of physical properties, it is recommended to either extract the common set of columns or else use something like \code{bind_rows} from the \code{dplyr} package to get a uniform \code{data.frame} if processing multiple CIDs
 }
-
+\examples{
+\dontrun{
+cids <- c(5282108, 5282148, 91754124)
+dat <- lapply(cids, get.cid)
+dat <- dplyr::bind_rows(dat)
+str(dat)
+}
+}
 \seealso{
   \code{\link{get.assay}},
   \code{\link{get.sid}},

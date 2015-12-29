@@ -56,7 +56,51 @@ get.sid <- function(sid, quiet=TRUE, from.file=FALSE) {
   .extract.fields(doc)
 }
 
-get.cid <- function(cid, quiet=TRUE, from.file=FALSE) {
+.isinchikey <- function(s) { 
+     (s==toupper(s))&(nchar(s) == 27)&(substr(s,15,15)=="-")&(substr(s,26,26)=="-") }
+
+get.cid <- function(cid, quiet=TRUE) {
+  url <- sprintf('https://pubchem.ncbi.nlm.nih.gov/rest/pug_view/data/compound/%d/JSON', cid)
+  page <- .read.url(url)
+  if (is.null(page)) {
+    warning(sprintf("No data found for %d", cid))
+    return(NULL)
+  }
+  record <- fromJSON(content=page)$Record
+  sections <- record$Section
+
+  ## Identifiers
+  ids <- .section.by.heading(sections, "Names and Identifiers")
+  ids <- .section.by.heading(ids$Section, "Computed Descriptors")
+  ivals <- lapply(ids$Section, .section.handler)
+  ivals <- do.call(cbind, unlist(Filter(function(x) !is.null(x), ivals), recursive=FALSE))  
+
+  ## Process chemprops
+  props <- .section.by.heading(sections, "Chemical and Physical Properties")
+  if (is.null(props)) {
+    warning(sprintf("No phys/chem properties section for %d", cid))
+    return(NULL)
+  }
+  
+  computed <- .section.by.heading(props$Section, "Computed Properties")
+  cvals <- lapply(computed$Section, .section.handler,
+                  ignore= c("CACTVS Substructure Key Fingerprint",
+                    "Compound Is Canonicalized",
+                    "Covalently-Bonded Unit Count"))
+  cvals <- do.call(cbind, unlist(Filter(function(x) !is.null(x), cvals), recursive=FALSE))
+          
+  experimental <- .section.by.heading(props$Section, "Experimental Properties")
+  if (is.null(experimental)) {
+    evals <- data.frame(pKa=NA)
+  } else {
+    evals <- lapply(experimental$Section, .section.handler,
+                    keep = c('pKa', "Kovats Retention Index"))
+    evals <- do.call(cbind, unlist(Filter(function(x) !is.null(x), evals), recursive=FALSE))
+  }
+  return(data.frame(CID=cid, ivals, cvals, evals))
+}
+
+.get.cid.old  <- function(cid, quiet=TRUE, from.file=FALSE) {
 
   datafile <- NA
   
@@ -122,8 +166,6 @@ get.sid.list <- function(cid, quiet=TRUE, from.file=FALSE) {
     nodes <- Filter(function(x) xmlGetAttr(x, 'Name') == 'SubstanceIDList', docsum['Item'])
     ids <- NA
     if (length(nodes) > 0 && length(nodes[[1]][[1]]) > 0) {
-      print(nodes[[1]])
-      print(length(nodes[[1]][[1]]))
       ids <- sapply(nodes[[1]]['Item'], xmlValue)
     }
     return(data.frame(CID=xmlValue(docsum[['Id']]), SID=ids))

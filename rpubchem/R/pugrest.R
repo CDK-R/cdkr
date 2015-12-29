@@ -16,3 +16,37 @@
   cids <- as.integer(read.table(textConnection(h$value()), header=FALSE)[,1])
   return(cids)
 }
+
+.section.by.heading <- function(seclist, heading) {
+  ret <- Filter(function(x) x$TOCHeading == heading, seclist)
+  if (length(ret) == 0) return(NULL)
+  return(ret[[1]])
+}
+
+.section.value <- function(seclist, heading) {
+  sec <- .section.by.heading(seclist, heading)
+  if (length(sec) == 0) return(NA)
+  return( sec[[1]]$Information[[1]]$NumValue )
+}
+
+.section.handler <- function(sec, keep = NULL, ignore = NULL) {
+  n <- sec$TOCHeading
+  if (!is.null(ignore) && n %in% ignore) return(NULL)
+  if (!is.null(keep) && !(n %in% keep)) return(NULL)
+
+  ret <- lapply(sec$Information, function(info) {
+    info.name <- info$Name
+    if (info.name == n) info.name <- ''
+    val <- NA
+    if ("NumValue" %in% names(info)) val <- as.numeric(info$NumValue)
+    else if ("StringValue" %in% names(info)) val <- info$StringValue
+    ret <- data.frame(val=val)
+    if (info.name != '') {
+      names(ret) <- sprintf("%s.%s", n, info.name)
+    } else {
+      names(ret) <- n
+    }
+    return(ret)
+  })
+  return(ret)
+}
