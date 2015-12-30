@@ -50,3 +50,52 @@
   })
   return(ret)
 }
+
+.inchikey.2.cid <- function(key) {
+  url <- sprintf("https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/inchikey/%s/cids/JSON", key)
+  page <- .read.url(url)
+  if (is.null(page)) return(NULL)
+  record <- fromJSON(content=page)
+}
+
+.cmpd.id2id <- function(id, src.type, dest.type, quiet=TRUE) {
+
+  entity <- switch(src.type,
+                   inchikey = 'compound',
+                   cid = 'compound',
+                   name = 'compound',
+                   inchi = 'compound',
+                   sid = 'substance',
+                   aid = 'assay')
+  if (is.null(entity)) {
+    warning("Invalid src.type specified")
+    return(NULL)
+  }
+  
+  if (!(dest.type %in% c('sids', 'cids', 'aids'))) {
+    warning("Invalid dest.type specified")
+    return(NULL)
+  }
+
+  url <- sprintf("https://pubchem.ncbi.nlm.nih.gov/rest/pug/%s/%s/%s/%s/JSON",
+                 entity, src.type, id, dest.type)
+  if (!quiet)
+    cat(url, '\n')
+  page <- .read.url(url)
+  if (is.null(page)) return(NULL)
+  record <- fromJSON(content=page)
+  if ('Fault' %in% names(record)) return(NULL)
+  else if ('IdentifierList' %in% names(record)) {
+    return(record$IdentifierList$CID[1])
+  } else if ('InformationList' %in% names(record)) {
+    info <- record$InformationList$Information[[1]]
+    if (dest.type == 'sids') ret <- info$SID
+    else if (dest.type == 'aids') ret <- info$AID
+    else if (dest.type == 'cids') ret <- info$CID
+    return(ret)
+  } else {
+    warning(sprintf("Unhandled response. Field names are: %s", paste0(names(record))))
+    return(NULL)
+  }
+}
+

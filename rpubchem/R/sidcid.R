@@ -119,59 +119,10 @@ get.cid <- function(cid, quiet=TRUE) {
   return(dat)
 }
 
-get.cid.list <- function(sid,  quiet=TRUE, from.file=FALSE) {
-  datafile <- NA
-  
-  if (!from.file) {
-    sidURL <- 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?tool=rpubchem&db=pcsubstance&id='
-    url <- paste(sidURL, paste(sid,sep='',collapse=','), sep='', collapse='')
-    datafile <- tempfile(pattern = 'sid')
-    .get.xml.file(url, datafile, quiet)
-  } else {
-    datafile <- sid
-  }
-
-  doc <- xmlParse(datafile)
-  
-  docsums <- getNodeSet(doc, '/eSummaryResult/DocSum')
-  ret <- lapply(docsums, function(docsum) {
-    nodes <- Filter(function(x) xmlGetAttr(x, 'Name') == 'CompoundIDList', docsum['Item'])
-    cids <- c(NA)
-    if (length(nodes) > 0 && length(nodes[[1]][[1]])) {
-      cids <- sapply(nodes[[1]]['Item'], xmlValue)
-    }
-    return(data.frame(SID=xmlValue(docsum[['Id']]), CID=cids))
-  })
-  ret <- do.call(rbind, ret)
-  rownames(ret) <- NULL
-  return(ret)
+get.cid.list <- function(sid,  quiet=TRUE) {
+  return(.cmpd.id2id(sid, 'sid', 'cids', quiet))
 }
 
-get.sid.list <- function(cid, quiet=TRUE, from.file=FALSE) {
-  
-  datafile <- NA
-  
-  if (!from.file) {
-    cidURL <- 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?tool=rpubchem&db=pccompound&id='
-    url <- paste(cidURL, paste(cid,sep='',collapse=','), sep='', collapse='')
-    datafile <- tempfile(pattern = 'cid')
-    .get.xml.file(url, datafile, quiet)
-  } else {
-    datafile <- cid
-  }
-  
-  doc <- xmlParse(datafile)
-  docsums <- getNodeSet(doc, '/eSummaryResult/DocSum')
-  ret <- lapply(docsums, function(docsum) {
-    nodes <- Filter(function(x) xmlGetAttr(x, 'Name') == 'SubstanceIDList', docsum['Item'])
-    ids <- NA
-    if (length(nodes) > 0 && length(nodes[[1]][[1]]) > 0) {
-      ids <- sapply(nodes[[1]]['Item'], xmlValue)
-    }
-    return(data.frame(CID=xmlValue(docsum[['Id']]), SID=ids))
-  })
-  ret <- do.call(rbind, ret)
-  rownames(ret) <- NULL
-  return(ret)
-  
+get.sid.list <- function(cid, quiet=TRUE) {
+  return(.cmpd.id2id(cid, 'cid', 'sids', quiet))    
 }
