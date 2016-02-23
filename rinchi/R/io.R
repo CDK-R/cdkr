@@ -58,3 +58,23 @@ get.inchi.key <- function(molecule) {
   .jcall("org/guha/rcdk/util/Misc", "S", "getInChiKey", molecule, check=FALSE)
 }
 
+parse.inchi <- function(inchis) {
+  OKAY <- .jcall("net/sf/jniinchi/INCHI_RET", "Lnet/sf/jniinchi/INCHI_RET;", "getValue", as.integer(0))
+  dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
+                 "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
+                 "getInstance")
+  igf <- .jcall("org/openscience/cdk/inchi/InChIGeneratorFactory",
+                "Lorg/openscience/cdk/inchi/InChIGeneratorFactory;",
+                "getInstance")
+  mols <- lapply(inchis, function(inchi) { 
+    i2s <- .jcall(igf, "Lorg/openscience/cdk/inchi/InChIToStructure;", "getInChIToStructure", inchi, dcob)
+    status <- i2s$getReturnStatus();
+    if (status == OKAY)
+          .jcast(i2s$getAtomContainer(), "org/openscience/cdk/interfaces/IAtomContainer")
+    else {
+      warning(paste0("InChI parsing error for ", inchi, ": ", status$toString()))
+      return(NULL)
+    }
+  })
+  return(mols)
+}
