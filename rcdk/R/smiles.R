@@ -18,7 +18,13 @@ parse.smiles <- function(smiles, kekulise=TRUE) {
   .jcall(parser, "V", "kekulise", kekulise)
   returnValue <- sapply(smiles, 
       function(x) {
-        mol <- .jcall(parser, "Lorg/openscience/cdk/interfaces/IAtomContainer;", "parseSmiles", x)    
+        mol <- tryCatch(
+                        {
+                          .jcall(parser, "Lorg/openscience/cdk/interfaces/IAtomContainer;", "parseSmiles", x)
+                        }, error = function(e) {
+                          return(NULL)
+                        }
+                        )
         if (is.null(mol)){
           return(NA)
         } else {
