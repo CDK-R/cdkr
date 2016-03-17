@@ -12,10 +12,12 @@
   obtained using the \code{\link{get.cid}} function.
 }
 \usage{
-get.synonyms(name, quiet=TRUE)
+get.synonyms(name, idtype = NULL, quiet=TRUE)
 }
 \arguments{
   \item{name}{A vector of one or more compound names}
+  \item{idtype}{The default value of \code{NULL} indicates that \code{name} should be considered a compound name. Alternative values are
+\code{inchikey} or \code{cid}, in which case \code{name} should be an InChI key or a Pubchem CID}
   \item{quiet}{If \code{FALSE}, output is verbose}
 }
 \value{

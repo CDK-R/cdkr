@@ -8,6 +8,9 @@
   }
   
   nval <- numeric()
+  if (is.na(dval))
+    return(NA)
+  
   result <- .jcall(dval, "Lorg/openscience/cdk/qsar/result/IDescriptorResult;", "getValue")
   methods <- .jmethods(result)
 
@@ -114,7 +117,9 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
     dnames <- gsub('-', '.', dnames)
     
     descvals <- lapply(molecules, function(a,b) {
-      .jcall(b, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", a)
+      val <- tryCatch({.jcall(b, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", a)},
+                      warning = function(e) return(NA),
+                      error = function(e) return(NA))
     }, b=desc)
 
     vals <- lapply(descvals, .get.desc.values, nexpected = length(dnames))
@@ -133,10 +138,16 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
       
       dnames <- .jcall(desc, "[Ljava/lang/String;", "getDescriptorNames")
       dnames <- gsub('-', '.', dnames)
-      
-      descvals <- lapply(molecules, function(a) {
-        .jcall(desc, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", a, check=FALSE)
-      })
+
+      descvals <- lapply(molecules, function(a,b) {
+        val <- tryCatch({.jcall(b, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", a)},
+                        warning = function(e) return(NA),
+                        error = function(e) return(NA))
+      }, check=FALSE)
+
+      ## descvals <- lapply(molecules, function(a) {
+      ##   .jcall(desc, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", a, check=FALSE)
+      ## })
       vals <- lapply(descvals, .get.desc.values, nexpected = length(dnames))
       vals <- data.frame(do.call('rbind', vals))
 

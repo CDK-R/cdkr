@@ -30,7 +30,7 @@
 }
 
 
-get.synonyms <- function(name, quiet=TRUE)
+get.synonyms <- function(name, idtype = NULL, quiet=TRUE)
 {
   ## Input: character vector of compound names
   ## Output: data.frame with matched names, PubChem CIDs, synonyms and CAS flag
@@ -50,9 +50,20 @@ get.synonyms <- function(name, quiet=TRUE)
   for (compound in name) {
     tryCatch(
       {
-        endpoint <- "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/synonyms/XML"
+        field = NULL
+        if (is.null(idtype)) {
+          field <- "name="
+          endpoint <- "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/synonyms/XML"
+        } else if (idtype == 'inchikey') {
+          field <- "inchikey="
+          endpoint <- "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/inchikey/synonyms/XML"
+        } else if (idtype == 'cid') {
+          field <- "cid="
+          endpoint <- "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/synonyms/XML"
+        } else stop("Invalid idtype specified")
+
         res <- dynCurlReader()
-        curlPerform(postfields=paste0("name=", compound), url=endpoint, post=1L,
+        curlPerform(postfields=paste0(field, compound), url=endpoint, post=1L,
                     curl=curlHandle, writefunction = res$update)
         doc <- xmlInternalTreeParse(res$value())
         rootNode <- xmlName(xmlRoot(doc))
