@@ -1,6 +1,6 @@
 citHeader("To cite rcdk in publications use:")
 citEntry(entry = "article",
-	author = personList(person(first="Rajarshi",last="Guha", email="rajarshi.guha@gmail.com")),
+	author = personList(person(given="Rajarshi",family="Guha", email="rajarshi.guha@gmail.com")),
 	journal = "Journal of Statistical Software",
 	number = 6,
 	title = "Chemical Informatics Functionality in R",
