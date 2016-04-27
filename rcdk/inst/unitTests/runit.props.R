@@ -9,8 +9,8 @@ test.get.properties <- function() {
   set.property(m, "foo", "bar")
   set.property(m, "baz", 1.23)  
   props <- get.properties(m)
-  checkEquals(length(props), 2)
-  checkTrue(all(sort(names(props)) == c('baz','foo')))
+  checkEquals(length(props), 3)
+  checkTrue(all(sort(names(props)) == c('baz','cdk:Title','foo')))
   checkEquals(props$foo,'bar')
   checkEquals(props$baz,1.23)  
 }

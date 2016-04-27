@@ -61,7 +61,7 @@ test.fp <- function() {
 test.desc.cats <- function() {
   cats <- get.desc.categories()
   print(cats)
-  checkEquals(6, length(cats))
+  checkEquals(5, length(cats))
 }
 
 test.desc.names <- function() {
