@@ -140,10 +140,10 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
       dnames <- gsub('-', '.', dnames)
 
       descvals <- lapply(molecules, function(a,b) {
-        val <- tryCatch({.jcall(b, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", a)},
+        val <- tryCatch({.jcall(b, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", a, check=FALSE)},
                         warning = function(e) return(NA),
                         error = function(e) return(NA))
-      }, check=FALSE)
+      })
 
       ## descvals <- lapply(molecules, function(a) {
       ##   .jcall(desc, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", a, check=FALSE)

@@ -338,7 +338,7 @@ single category. Of course, you can always provide the category name
 directly.
 
 <<>>=
-dn <- get.desc.names(dc[1])
+dn <- get.desc.names(dc[4])
 @ 
 
 Each descriptor name is actually a fully qualified Java class name for
