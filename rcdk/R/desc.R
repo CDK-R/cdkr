@@ -8,8 +8,9 @@
   }
   
   nval <- numeric()
-  if (is.na(dval))
+  if (!inherits(dval,'jobjRef') && is.na(dval)) {
     return(NA)
+  }
   
   result <- .jcall(dval, "Lorg/openscience/cdk/qsar/result/IDescriptorResult;", "getValue")
   methods <- .jmethods(result)
@@ -139,15 +140,10 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
       dnames <- .jcall(desc, "[Ljava/lang/String;", "getDescriptorNames")
       dnames <- gsub('-', '.', dnames)
 
-      descvals <- lapply(molecules, function(a,b) {
-        val <- tryCatch({.jcall(b, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", a, check=FALSE)},
-                        warning = function(e) return(NA),
-                        error = function(e) return(NA))
-      })
+      descvals <- lapply(molecules, function(a, check) {
+        val <- tryCatch({.jcall(desc, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", a, check=check)})
+      }, check=FALSE)
 
-      ## descvals <- lapply(molecules, function(a) {
-      ##   .jcall(desc, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", a, check=FALSE)
-      ## })
       vals <- lapply(descvals, .get.desc.values, nexpected = length(dnames))
       vals <- data.frame(do.call('rbind', vals))
 

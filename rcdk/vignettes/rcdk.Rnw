@@ -28,7 +28,6 @@ library(xtable)
 \parskip 1em
 
 \begin{document}
-\SweaveOpts{concordance=TRUE}
 
 \title{rcdk: Integrating the CDK with R}
 \author{Rajarshi Guha \\ Miguel Rojas Cherto}
@@ -347,7 +346,7 @@ the corresponding descriptor. These names can be supplied to
 one or more molecules.
 
 <<>>=
-aDesc <- eval.desc(mol, dn[1])
+aDesc <- eval.desc(mol, dn[4])
 allDescs <- eval.desc(mol, dn)
 @ 
 
