@@ -3,6 +3,7 @@ Version: 3.3.5
 Date: 2016-04-27
 Title: Interface to the CDK Libraries
 Authors@R: c(person('Rajarshi', 'Guha', role=c('aut','cre', 'cph'), email='rajarshi.guha@gmail.com'))
+Author: Rajarshi Guha <rajarshi.guha@gmail.com>
 Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
 Depends: fingerprint
 Imports: rJava, rcdklibs (>= 1.5.11), methods, png, iterators, itertools
