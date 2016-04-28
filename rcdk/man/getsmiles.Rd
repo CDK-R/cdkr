@@ -22,8 +22,7 @@ get.smiles(molecule, type = 'generic', aromatic = FALSE, atomClasses = FALSE)
   \item absolute - canonical SMILES string, different atom ordering produces the same SMILES. Isotope and stereochemistry is encoded.
   }}
   \item{aromatic}{If \code{TRUE} aromatic SMILES are generated. The default is to output Kekule form}
-  \item{atomClasses}{If \code{TRUE} include atom classes. See \href{http://pele.farmbio.uu.se/nightly/cdk-javadoc-1.5.6.git/org/openscience/cdk/smiles/SmilesGenerator.html}{CDK
-  docs} for more details}
+  \item{atomClasses}{If \code{TRUE} include atom classes.}
 }
 \value{
   An R character object containing the SMILES
