@@ -1,3 +1,4 @@
+S3method("hasNext", "iload.molecules")
 exportPattern("^[[:alpha:]]+")
 exportPattern(".get.desc.values")
 import('fingerprint', 'methods', 'rJava', 'png', 'iterators', 'itertools', 'rcdklibs')

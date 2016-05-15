@@ -1,5 +1,5 @@
 Package: rcdklibs
-Version: 1.5.12
+Version: 1.5.13
 Date: 2016-04-30
 Authors@R: c(person('Rajarshi', 'Guha', role=c('aut'), email='rajarshi.guha@gmail.com'),
              person('Zachary', 'Charlop-Powers', role=c('cre'), email='zach.charlop.powers@gmail.com'),

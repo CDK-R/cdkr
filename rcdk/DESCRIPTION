@@ -2,15 +2,23 @@ Package: rcdk
 Version: 3.3.5
 Date: 2016-04-27
 Title: Interface to the CDK Libraries
-Authors@R: c(person('Rajarshi', 'Guha', role=c('aut','cre', 'cph'), email='rajarshi.guha@gmail.com'))
-Author: Rajarshi Guha <rajarshi.guha@gmail.com>
-Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
-Depends: fingerprint
-Imports: rJava, rcdklibs (>= 1.5.11), methods, png, iterators, itertools
-Suggests: xtable, RUnit
-License: LGPL 
+Authors@R: c(person('Rajarshi', 'Guha', role=c('aut',"cph"), email='rajarshi.guha@gmail.com'),
+             person('Zachary', 'Charlop-Powers', role=c('cre'), email='zach.charlop.powers@gmail.com'))
+Depends:
+    fingerprint
+Imports:
+    rJava,
+    rcdklibs (>= 1.5.13),
+    methods,
+    png,
+    iterators,
+    itertools
+Suggests:
+    xtable,
+    RUnit
+License: LGPL
 LazyLoad: yes
 Description: Allows the user to access functionality in the
- CDK, a Java framework for cheminformatics. This allows the user to load
- molecules, evaluate fingerprints, calculate molecular descriptors and so on. 
- In addition the CDK API allows the user to view structures in 2D.
+    CDK, a Java framework for cheminformatics. This allows the user to load
+    molecules, evaluate fingerprints, calculate molecular descriptors and so on.
+    In addition the CDK API allows the user to view structures in 2D.
