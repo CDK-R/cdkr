@@ -1,7 +1,7 @@
-Sources for the CDK version that is included in this package can be obtained from https://github.com/cdk/cdk/tree/cdk-1.5.12. In general, if using Git, you can clone the repository corresponding to the version included here by doing 
+Sources for the CDK version that is included in this package can be obtained from https://github.com/cdk/cdk/tree/cdk-1.5.13. In general, if using Git, you can clone the repository corresponding to the version included here by doing 
 
 git clone git@github.com:cdk/cdk.git
 
 followed by 
 
-git checkout tags/cdk-1.5.12
+git checkout tags/cdk-1.5.13

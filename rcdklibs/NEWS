@@ -1,3 +1,4 @@
+v1.5.12 - Updated to the latest stable CDK release which features namy improvements including the new Depiction module.
 v1.4.1 - Updated to latest stable CDK release (updates many atom types)
 v1.3.11 - Updated to latest stable CDK release
 v1.0 - Wrap CDK libs as a separate R package. Allows for faster development on the

@@ -1,3 +1,5 @@
+v3.3.5 - update to work with CDK 1.5.13 with the new Depiction module
+
 v2.9 - Updated to the new package structure where the CDK libs are removed.
 As a result, this package now depends on the rcdklibs package
 
