@@ -1,5 +1,5 @@
 Package: rcdk
-Version: 3.3.5
+Version: 3.3.6
 Date: 2016-04-27
 Title: Interface to the CDK Libraries
 Authors@R: c(person('Rajarshi', 'Guha', role=c('aut',"cph"), email='rajarshi.guha@gmail.com'),
@@ -16,6 +16,8 @@ Imports:
 Suggests:
     xtable,
     RUnit
+SystemRequirements:
+  Java JDK 1.8 or higher
 License: LGPL
 LazyLoad: yes
 Description: Allows the user to access functionality in the
