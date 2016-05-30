@@ -45,22 +45,20 @@
 =================
 This version of rCDK uses a CDK library that requires Java 1.8 or greater.
 
-Please install Java 1.8 and let R know which java to use by running the config tool:
+Please install Java 1.8 and let R know which Java to use by running the config tool:
 
 sudo R CMD javareconf
 
-and re-installing rJava.
+Then you will need to re-install rJava.
 
 # re install fromfrom R
-install.packages('rJava', type="source")
+# install.packages('rJava', type='source')
 
 =================
 =================
          ")  
   }
-  
 }
-
 
 cdk.version <- function() {
   .jcall("org.openscience.cdk.CDK", "S", "getVersion")
