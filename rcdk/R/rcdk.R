@@ -34,8 +34,31 @@
   jar.rcdk <- paste(lib,pkg,"cont","rcdk.jar",sep=.Platform$file.sep)
   jar.png <- paste(lib,pkg,"cont","com.objectplanet.image.PngEncoder.jar",sep=.Platform$file.sep)
   .jinit(classpath=c(jar.rcdk,jar.png))
-}
+  
+  #check Java Version 
+  jversion <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
+  jversionnumeric <- as.numeric(paste0(strsplit(jversion, "\\.")[[1]][1:2], collapse = "."))
+  
+  if (jversionnumeric < 1.8) {
+    stop("
+=================
+=================
+This version of rCDK uses a CDK library that requires Java 1.8 or greater.
 
+Please install Java 1.8 and let R know which Java to use by running the config tool:
+
+sudo R CMD javareconf
+
+Then you will need to re-install rJava.
+
+# re install fromfrom R
+# install.packages('rJava', type='source')
+
+=================
+=================
+         ")  
+  }
+}
 
 cdk.version <- function() {
   .jcall("org.openscience.cdk.CDK", "S", "getVersion")
