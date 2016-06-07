@@ -37,26 +37,26 @@
   
   #check Java Version 
   jversion <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
-  jversionnumeric <- as.numeric(paste0(strsplit(jversion, "\\.")[[1]][1:2], collapse = "."))
+  jversionmajor <- as.numeric(paste0(strsplit(jversion, "\\.")[[1]][1], collapse = "."))
+  try(jversionminor <- as.numeric(paste0(strsplit(jversion, "\\.")[[1]][2], collapse = ".")))
+  isjavagood <- jversionmajor >=8 || (jversionmajor==1 && jversionminor >= 8)
   
-  if (jversionnumeric < 1.8) {
-    stop("
+  if (isjavagood == FALSE) { stop("
 =================
 =================
-This version of rCDK uses a CDK library that requires Java 1.8 or greater.
+This version of rCDK uses a CDK library that requires Java 8 or greater. 
 
-Please install Java 1.8 and let R know which Java to use by running the config tool:
+Please install Java 8 and let R know which Java to use by running the config tool:
 
 sudo R CMD javareconf
 
 Then you will need to re-install rJava.
 
-# re install fromfrom R
+# re-install from R
 # install.packages('rJava', type='source')
 
 =================
-=================
-         ")  
+=================")  
   }
 }
 
