@@ -1,5 +1,8 @@
 .check.cas <- function(cas)
 {
+  if (is.null(cas) || is.na(cas))
+    return(NA)
+  
   ## Input: character vector of CAS RNs
   ## Output: logical vector indicating valid CAS RNs
   
@@ -89,7 +92,8 @@ get.synonyms <- function(name, idtype = NULL, quiet=TRUE)
   }
   
   # CAS validation
-  out$CAS <- .check.cas(out$Synonym)
+  if (nrow(out) > 0)
+    out$CAS <- .check.cas(out$Synonym)
   
   # Cleanup
   rm(curlHandle)
