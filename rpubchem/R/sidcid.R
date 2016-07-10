@@ -91,11 +91,15 @@ get.cid <- function(cid, quiet=TRUE) {
           
   experimental <- .section.by.heading(props$Section, "Experimental Properties")
   if (is.null(experimental)) {
-    evals <- data.frame(pKa=NA)
+    evals <- data.frame(pKa=NA,"Kovats Retention Index"=NA)
   } else {
     evals <- lapply(experimental$Section, .section.handler,
                     keep = c('pKa', "Kovats Retention Index"))
-    evals <- do.call(cbind, unlist(Filter(function(x) !is.null(x), evals), recursive=FALSE))
+    evals <- unlist(Filter(function(x) !is.null(x), evals), recursive=FALSE)
+    if (is.null(evals))
+      evals <- data.frame(pKa=NA, "Kovats Retention Index"=NA)
+    else
+      evals <- do.call(cbind, evals)
   }
   return(data.frame(CID=cid, ivals, cvals, evals))
 }
