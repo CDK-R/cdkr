@@ -1,21 +1,32 @@
 Package: rpubchem
-Version: 1.5.7
+Version: 1.5.8
 Date: 2016-07-10
 Title: Interface to the PubChem Collection
 Authors@R: c(person("Rajarshi", "Guha", email="rajarshi.guha@gmail.com", role=c("aut","cre")),
-             person("John", "Buonagurio", email="jbuonagurio@exponent.com", role=c("ctb")))	
+             person("John", "Buonagurio", email="jbuonagurio@exponent.com", role=c("ctb")))
 Author: Rajarshi Guha [aut, cre],
- John Buonagurio [ctb]
+    John Buonagurio [ctb]
 Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
-Depends: R (>= 2.0.0)
-Imports: XML, car, RCurl, RJSONIO, data.table, iterators, itertools, stringr
-Suggests: testthat
+Depends:
+    R (>= 2.0.0)
+Imports:
+    XML,
+    car,
+    RCurl,
+    RJSONIO,
+    data.table,
+    iterators,
+    itertools,
+    stringr
+Suggests:
+    testthat
 License: GPL (>= 2)
 Description: Access PubChem data (compounds, substance, assays) using R.
-        Structural information is provided in the form of SMILES
-        strings. It currently only provides access to a subset of the
-        precalculated data stored by PubChem. Bio-assay data can be
-        accessed to obtain descriptions as well as the actual data. It
-        is also possible to search for assay ID's by keyword. Currently
-        the main limitation is that only 1000 molecules can be
-        downloaded at a time from the PubChem servers
+    Structural information is provided in the form of SMILES
+    strings. It currently only provides access to a subset of the
+    precalculated data stored by PubChem. Bio-assay data can be
+    accessed to obtain descriptions as well as the actual data. It
+    is also possible to search for assay ID's by keyword. Currently
+    the main limitation is that only 1000 molecules can be
+    downloaded at a time from the PubChem servers
+RoxygenNote: 5.0.1

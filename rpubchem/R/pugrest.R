@@ -40,6 +40,7 @@
     val <- NA
     if ("NumValue" %in% names(info)) val <- as.numeric(info$NumValue)
     else if ("StringValue" %in% names(info)) val <- info$StringValue
+    else if ("BinaryValue" %in% names(info)) val <- info$BinaryValue
     ret <- data.frame(val=val)
     if (info.name != '') {
       names(ret) <- sprintf("%s.%s", n, info.name)
