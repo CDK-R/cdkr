@@ -55,7 +55,7 @@ function (hexcode)
 #' @export 
 decodeCACTVS <- function(cactvs) {
   h <- base64decode(cactvs)
-  bits <- unlist(lapply(fph[-c(1:4)], function(x) hex2bin(as.character(x))))
+  bits <- unlist(lapply(h[-c(1:4)], function(x) .hex2bin(as.character(x))))
   bits <- bits[1:881]
   fp <- new('fingerprint', nbit=881, bits=which(bits==1), provider='pubchem')
   return(fp)

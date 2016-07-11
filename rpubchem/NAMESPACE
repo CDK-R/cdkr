@@ -4,6 +4,7 @@ exportPattern("^[[:alpha:]]+")
 # Import all packages listed as Imports or Depends
 importFrom("utils", "URLencode", "download.file", "read.csv")
 importFrom("stringr", "str_detect")
+importFrom("base64enc", "base64decode")
 import(
   XML,
   car,
@@ -11,5 +12,6 @@ import(
   RJSONIO,
   data.table,
   iterators,
-  itertools
+  itertools,
+  fingerprint     
 )
