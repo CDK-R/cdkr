@@ -49,6 +49,7 @@ function (hexcode)
 #'
 #' @param cactvs A character string containing the Base64 encoded fingerprint
 #' @return A \code{fingerprint} object
+#' @seealso \code{\link{get.cid}}
 #' @examples
 #' decodeCACTVS('AAADcYBAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAIAAAAAAAOAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==')
 #'
