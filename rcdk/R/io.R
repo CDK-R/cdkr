@@ -51,7 +51,7 @@ load.molecules <- function(molfiles=NA, aromaticity = TRUE, typing = TRUE, isoto
                       check=FALSE)
   exception <- .jgetEx(clear = TRUE)
   if (!is.null(exception)) {
-    stop(exception)
+    stop(exception$toString())
   }
 
   if (is.jnull(molecules)) {
