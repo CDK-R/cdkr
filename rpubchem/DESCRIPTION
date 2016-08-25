@@ -1,6 +1,6 @@
 Package: rpubchem
-Version: 1.5.9
-Date: 2016-07-11
+Version: 1.5.9.1
+Date: 2016-08-26
 Title: Interface to the PubChem Collection
 Authors@R: c(person("Rajarshi", "Guha", email="rajarshi.guha@gmail.com", role=c("aut","cre")),
              person("John", "Buonagurio", email="jbuonagurio@exponent.com", role=c("ctb")))
@@ -18,7 +18,8 @@ Imports:
     iterators,
     itertools,
     stringr,
-    fingerprint
+    fingerprint,
+    base64enc	
 Suggests:
     testthat
 License: GPL (>= 2)
