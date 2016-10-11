@@ -126,7 +126,7 @@ setMethod("distance", c("fingerprint", "fingerprint", "character", "missing", "m
               f1[fp1@bits] <- 1
               f2[fp2@bits] <- 1
               sim <- 0.0
-              ret <-  .C("fpdistance", as.double(f1), as.double(f1),
+              ret <-  .C("fpdistance", as.double(f1), as.double(f2),
                          as.integer(n), as.integer(2),
                          as.double(sim),
                          PACKAGE="fingerprint")
