@@ -15,7 +15,7 @@ setMethod('show', 'feature',
             cat(sprintf('%s:%d', object@feature, object@count), '\n')
           })
 setMethod('as.character', signature(x='feature'), function(x) sprintf("%s:%d", x@feature, x@count))
-setMethod('c', signature(x='feature'), function(x, ...) {
+setMethod('c', signature(x='feature'), function(x, ..., recursive=FALSE) {
   elems <- list(x, ...)
   ret <- list()
   for (i in seq_along(elems)) {
