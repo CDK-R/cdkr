@@ -1,10 +1,10 @@
-importFrom("methods")
+importFrom("methods", "new")
 exportClasses("fingerprint")
 exportClasses("featvec")
 exportClasses("feature")
 exportMethods("fold", "euc.vector", "distance",
               "random.fingerprint", "as.character",
-              "length", "show",
+              "length", 
               "feature", "count", 'feature<-', 'count<-')
 export("fp.sim.matrix", "fp.to.matrix", "fp.factor.matrix",
        "fp.read.to.matrix", "fp.read","shannon",
