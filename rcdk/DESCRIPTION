@@ -8,7 +8,7 @@ Depends:
     fingerprint
 Imports:
     rJava,
-    rcdklibs (>= 1.5.14),
+    rcdklibs (>= 1.5.12),
     methods,
     png,
     iterators,
