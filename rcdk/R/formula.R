@@ -313,3 +313,16 @@ generate.formula <- function(mass, window=0.01,
   
   return(object);
 }
+
+compare.isotope.pattern <- function(iso1, iso2, tol=NULL) {
+  cls <- unique(c(class(iso1), class(iso2)))
+  if (length(cls) != 1) stop("Must supply Java objects of class IsotopePattern")
+  if (cls != 'jobjRef') stop("Must supply Java objects of class IsotopePattern")
+  if(attr(iso1, "jclass") != "org/openscience/cdk/formula/IsotopePattern" ||
+     attr(iso2, "jclass") != "org/openscience/cdk/formula/IsotopePattern") {
+    stop("Must supply an IsotopePattern")
+  }
+  ips <- .jnew("org/openscience/cdk/formula/IsotopePatternSimilarity");
+  if (!is.null(tol)) ips$seTolerance(as.double(tol))
+  return(ips$compare(iso1, iso2))
+}
