@@ -314,7 +314,20 @@ generate.formula <- function(mass, window=0.01,
   return(object);
 }
 
-compare.isotope.pattern <- function(iso1, iso2, tol=NULL) {
+get.isotope.pattern.similarity <- function(tol = NULL) {
+  ips <- .jnew("org/openscience/cdk/formula/IsotopePatternSimilarity")
+  if (!is.null(tol)) ips$seTolerance(tol)
+  return(ips)
+}
+
+get.isotope.pattern.generator <- function(minAbundance = NULL) {
+  if (is.null(minAbundance))
+    .jnew("org/openscience/cdk/formula/IsotopePatternGenerator")
+  else
+    .jnew("org/openscience/cdk/formula/IsotopePatternGenerator", as.double(minAbundance))
+}
+
+compare.isotope.pattern <- function(iso1, iso2, ips = NULL) {
   cls <- unique(c(class(iso1), class(iso2)))
   if (length(cls) != 1) stop("Must supply Java objects of class IsotopePattern")
   if (cls != 'jobjRef') stop("Must supply Java objects of class IsotopePattern")
@@ -322,7 +335,6 @@ compare.isotope.pattern <- function(iso1, iso2, tol=NULL) {
      attr(iso2, "jclass") != "org/openscience/cdk/formula/IsotopePattern") {
     stop("Must supply an IsotopePattern")
   }
-  ips <- .jnew("org/openscience/cdk/formula/IsotopePatternSimilarity");
-  if (!is.null(tol)) ips$seTolerance(as.double(tol))
+  if (is.null(ips)) ips <- get.isotope.pattern.similarity()
   return(ips$compare(iso1, iso2))
 }
