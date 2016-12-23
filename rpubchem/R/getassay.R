@@ -39,7 +39,7 @@
 }
 
 get.assay.summary <- function(aid) {
-  urlcon <- url(sprintf('http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/summary/JSON', as.integer(aid)))
+  urlcon <- url(sprintf('https://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/summary/JSON', as.integer(aid)))
   j <- fromJSON(content=.join(readLines(urlcon), '\n'))
   close(urlcon)
   j <- j[[1]][[1]][[1]]
@@ -50,10 +50,10 @@ get.assay.summary <- function(aid) {
 }
 
 get.assay.desc <- function(aid) {
-  url <- sprintf('http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/description/XML', as.integer(aid))
+  url <- sprintf('https://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/description/XML', as.integer(aid))
   tmpdest <- tempfile(pattern = 'adesc')
 
-  status <- try(download.file(url, destfile=tmpdest, method='internal', mode='wb', quiet=TRUE),
+  status <- try(download.file(url, destfile=tmpdest, method='curl', mode='wb', quiet=TRUE),
                 silent=TRUE)
 
   if (class(status) == 'try-error') {
@@ -124,7 +124,7 @@ get.assay.desc <- function(aid) {
 
 
 find.assay.id <- function(query, quiet=TRUE) {
-  searchURL <- 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?tool=rpubchem&db=pcassay&term='
+  searchURL <- 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?tool=rpubchem&db=pcassay&term='
   url <- URLencode(paste(searchURL,query,sep='',collapse=''))
                                         #tmpdest <- tempfile(pattern = 'search')
   tmpdest <- 'srch'
@@ -239,11 +239,11 @@ get.assay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
 }
 
 .getAssayDirect <- function(aid, quiet=TRUE) {
-  url <- sprintf("http://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/CSV", as.integer(aid))
+  url <- sprintf("https://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/CSV", as.integer(aid))
   if (!quiet) cat("URL:", url, "\n")
   page <- .read.url(url)
-  dat <- read.csv(textConnection(page), header=TRUE, row.names=NULL, fill=TRUE)
-  .clean.bioassay.csv(aid, dat, quiet)
+  dat <- read.csv(textConnection(page), header=TRUE, row.names=NULL, fill=TRUE, check.names=FALSE)
+  .clean.bioassay.csv(aid, dat, quiet=quiet)
 }
 
 .clean.bioassay.csv <- function(aid, dat, add.metadata=TRUE, quiet=TRUE) {
@@ -265,7 +265,9 @@ get.assay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
   
   ## lets get the descriptions and set col names and
   ## attributes
-  if (add.metadata) dat <- .add.assay.metadata(aid, dat, quiet)
+  if (add.metadata) {
+    dat <- .add.assay.metadata(aid, dat, quiet)
+  }
   dat[,-1]
 }
 
