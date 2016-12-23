@@ -44,7 +44,26 @@
   </PCT-Data_input>
 </PCT-Data>'
 
-get.aid.by.cid <- function(cid, type='raw', quiet=TRUE) {
+get.aid.by.cid <- function(cid, type='tested', quiet=TRUE) {
+
+  if (!(type %in% c('tested','active','inactive')))
+      stop("Invalid type specified")
+
+  if (type == 'tested') type <- 'all'
+  url <- sprintf('https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/%d/aids/JSON?aids_type=%s', cid, type)
+  if (!quiet) {
+    cat("Retrieving from:", url, "\n")
+  }
+  page <- .read.url(url)
+  if (is.null(page)) {
+    warning(sprintf("No data found for %d", cid))
+    return(NULL)
+  }
+  print(fromJSON(content=page))
+  fromJSON(content=page)$InformationList$Information[[1]]$AID
+}
+
+get.aid.by.cid.old <- function(cid, type='raw', quiet=TRUE) {
 
   if (!(type %in% c('tested','active','inactive','discrepant','raw')))
       stop("Invalid type specified")
