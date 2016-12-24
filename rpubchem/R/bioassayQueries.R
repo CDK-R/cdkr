@@ -59,7 +59,6 @@ get.aid.by.cid <- function(cid, type='tested', quiet=TRUE) {
     warning(sprintf("No data found for %d", cid))
     return(NULL)
   }
-  print(fromJSON(content=page))
   fromJSON(content=page)$InformationList$Information[[1]]$AID
 }
 
