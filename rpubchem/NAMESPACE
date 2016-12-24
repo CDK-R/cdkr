@@ -5,6 +5,7 @@ exportPattern("^[[:alpha:]]+")
 importFrom("utils", "URLencode", "download.file", "read.csv")
 importFrom("stringr", "str_detect")
 importFrom("base64enc", "base64decode")
+importFrom("utils", "read.table")
 import(
   XML,
   car,
@@ -13,5 +14,6 @@ import(
   data.table,
   iterators,
   itertools,
-  fingerprint     
+  fingerprint,
+  methods
 )

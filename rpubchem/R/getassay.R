@@ -52,10 +52,8 @@ get.assay.summary <- function(aid) {
 get.assay.desc <- function(aid) {
   url <- sprintf('https://pubchem.ncbi.nlm.nih.gov/rest/pug/assay/aid/%d/description/XML', as.integer(aid))
   tmpdest <- tempfile(pattern = 'adesc')
-
-  status <- try(download.file(url, destfile=tmpdest, method='curl', mode='wb', quiet=TRUE),
+  status <- try(download.file(url, destfile=tmpdest, method='libcurl', mode='wb', quiet=TRUE, extra=c('--insecure')),
                 silent=TRUE)
-
   if (class(status) == 'try-error') {
     return(NULL)
   }

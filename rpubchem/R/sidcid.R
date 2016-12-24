@@ -50,15 +50,13 @@ function (hexcode)
 #' @param cactvs A character string containing the Base64 encoded fingerprint
 #' @return A \code{fingerprint} object
 #' @seealso \code{\link{get.cid}}
-#' @examples
-#' decodeCACTVS('AAADcYBAAAAGAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAGAIAAAAAAAOAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA==')
 #'
 #' @export 
 decodeCACTVS <- function(cactvs) {
   h <- base64decode(cactvs)
   bits <- unlist(lapply(h[-c(1:4)], function(x) .hex2bin(as.character(x))))
   bits <- bits[1:881]
-  fp <- new('fingerprint', nbit=881, bits=which(bits==1), provider='pubchem')
+  fp <- methods::new('fingerprint', nbit=881, bits=which(bits==1), provider='pubchem')
   return(fp)
 }
 

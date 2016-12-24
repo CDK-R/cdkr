@@ -62,7 +62,7 @@ get.aid.by.cid <- function(cid, type='tested', quiet=TRUE) {
   fromJSON(content=page)$InformationList$Information[[1]]$AID
 }
 
-get.aid.by.cid.old <- function(cid, type='raw', quiet=TRUE) {
+.get.aid.by.cid.old <- function(cid, type='raw', quiet=TRUE) {
 
   if (!(type %in% c('tested','active','inactive','discrepant','raw')))
       stop("Invalid type specified")

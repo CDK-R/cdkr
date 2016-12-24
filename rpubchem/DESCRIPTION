@@ -1,7 +1,7 @@
 Package: rpubchem
 Version: 1.5.10
-Date: 2016-12-23
-Title: Interface to the PubChem Collection
+Date: 2016-12-24
+Title: An Interface to the PubChem Collection
 Authors@R: c(person("Rajarshi", "Guha", email="rajarshi.guha@gmail.com", role=c("aut","cre")),
              person("John", "Buonagurio", email="jbuonagurio@exponent.com", role=c("ctb")))
 Author: Rajarshi Guha [aut, cre],
@@ -19,16 +19,14 @@ Imports:
     itertools,
     stringr,
     fingerprint,
-    base64enc	
+    base64enc, 
+    methods	
 Suggests:
     testthat
 License: GPL (>= 2)
 Description: Access PubChem data (compounds, substance, assays) using R.
-    Structural information is provided in the form of SMILES
-    strings. It currently only provides access to a subset of the
-    precalculated data stored by PubChem. Bio-assay data can be
-    accessed to obtain descriptions as well as the actual data. It
-    is also possible to search for assay ID's by keyword. Currently
-    the main limitation is that only 1000 molecules can be
-    downloaded at a time from the PubChem servers
+ Structural information is provided in the form of SMILES strings. 
+ It currently only provides access to a subset of the 
+ precalculated data stored by PubChem. Bio-assay data can be accessed to 
+ obtain descriptions as well as the actual data. It is also possible to search for assay ID's by keyword. 
 RoxygenNote: 5.0.1
