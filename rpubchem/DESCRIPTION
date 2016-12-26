@@ -24,6 +24,7 @@ Imports:
 Suggests:
     testthat
 License: GPL (>= 2)
+URL: https://github.com/rajarshi/cdkr, https://pubchem.ncbi.nlm.nih.gov/
 Description: Access PubChem data (compounds, substance, assays) using R.
  Structural information is provided in the form of SMILES strings. 
  It currently only provides access to a subset of the 
