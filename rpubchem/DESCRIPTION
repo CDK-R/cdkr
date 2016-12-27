@@ -1,6 +1,6 @@
 Package: rpubchem
-Version: 1.5.10
-Date: 2016-12-24
+Version: 1.5.11
+Date: 2016-12-28
 Title: An Interface to the PubChem Collection
 Authors@R: c(person("Rajarshi", "Guha", email="rajarshi.guha@gmail.com", role=c("aut","cre")),
              person("John", "Buonagurio", email="jbuonagurio@exponent.com", role=c("ctb")))
@@ -25,7 +25,8 @@ Suggests:
     testthat
 License: GPL (>= 2)
 URL: https://github.com/rajarshi/cdkr, https://pubchem.ncbi.nlm.nih.gov/
-Description: Access PubChem data (compounds, substance, assays) using R.
+Description: Access PubChem data (compounds, substance, assays) using R 
+ (see <https://pubchem.ncbi.nlm.nih.gov/> for more information about PubChem).
  Structural information is provided in the form of SMILES strings. 
  It currently only provides access to a subset of the 
  precalculated data stored by PubChem. Bio-assay data can be accessed to 
