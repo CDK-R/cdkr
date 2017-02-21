@@ -90,7 +90,7 @@ public class ViewMolecule2DDataTable {
         fontSize = f;
     }
 
-    public void display() {
+    public void display() throws IOException, CDKException {
 
         ncol = cnames.length;
         nrow = molecules.length;
@@ -260,7 +260,7 @@ public class ViewMolecule2DDataTable {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException, CDKException {
         String home = "/Users/rguha/";
         String[] fname = {home + "src/R/trunk/rcdk/data/dan001.sdf",
                 home + "src/R/trunk/rcdk/data/dan002.sdf",

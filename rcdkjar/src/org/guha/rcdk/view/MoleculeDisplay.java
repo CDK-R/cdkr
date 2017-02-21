@@ -9,6 +9,7 @@ import org.openscience.cdk.smiles.SmilesParser;
 
 import javax.swing.*;
 import java.awt.*;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -53,7 +54,7 @@ public class MoleculeDisplay extends JPanel {
         layout = new GridLayout(nrow, ncol, sep, sep);
     }
 
-    public void addMolecule(IAtomContainer molecule) {
+    public void addMolecule(IAtomContainer molecule) throws IOException, CDKException {
         MoleculeCell cell = new MoleculeCell(molecule, width, height);
         add(cell);
     }
@@ -66,7 +67,7 @@ public class MoleculeDisplay extends JPanel {
         return nmol;
     }
 
-    public static void main(String[] args) throws CDKException {
+    public static void main(String[] args) throws CDKException, IOException {
         MoleculeDisplay md = new MoleculeDisplay();
 
         SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());

@@ -50,7 +50,7 @@ class StructureTable2D {
         this.withHydrogen = withHydrogen;
     }
 
-    public void display() {
+    public void display() throws IOException, CDKException {
 
         int i = 0;
         int j = 0;
