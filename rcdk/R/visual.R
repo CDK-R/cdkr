@@ -71,11 +71,6 @@ view.molecule.2d <- function(molecule, ncol = 4, depictor = NULL) {
 
   if (is.null(depictor))
     depictor <- get.depictor()
-
-  if (!is.null(width))
-    .jcall(depictor, "V", "setWidth", as.integer(width))
-  if (!is.null(height))
-    .jcall(depictor, "V", "setHeight", as.integer(height))
   
   ## in case we're on OS X we need to prep some stuff
   ## so we can shell out 
