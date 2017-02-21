@@ -296,7 +296,7 @@ public class Misc {
      * @return A {@link RcdkDepictor} object with default values.
      * @throws IOException
      */
-    public RcdkDepictor getDefaultDepictor() throws IOException {
+    public static RcdkDepictor getDefaultDepictor() throws IOException {
         return new RcdkDepictor(300, 300, 1.3, "cow", "off", "on", true, false, 100, "");
     }
 
