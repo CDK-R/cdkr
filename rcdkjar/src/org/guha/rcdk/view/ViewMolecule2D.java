@@ -1,13 +1,9 @@
 package org.guha.rcdk.view;
 
-import org.guha.rcdk.util.Misc;
 import org.guha.rcdk.view.panels.MoleculeCell;
 import org.openscience.cdk.DefaultChemObjectBuilder;
-import org.openscience.cdk.exception.CDKException;
-import org.openscience.cdk.graph.ConnectivityChecker;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.smiles.SmilesParser;
-import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 
 import javax.swing.*;
 import java.awt.event.WindowAdapter;
@@ -36,10 +32,9 @@ public class ViewMolecule2D extends JFrame {
     public ViewMolecule2D(IAtomContainer molecule, int width, int height) throws Exception {
         this.width = width;
         this.height = height;
-
-        if (!ConnectivityChecker.isConnected(molecule)) throw new CDKException("Molecule must be connected");
-        molecule = AtomContainerManipulator.removeHydrogens(molecule);
-        molecule = Misc.getMoleculeWithCoordinates(molecule);
+//        if (!ConnectivityChecker.isConnected(molecule)) throw new CDKException("Molecule must be connected");
+//        molecule = AtomContainerManipulator.removeHydrogens(molecule);
+//        molecule = Misc.getMoleculeWithCoordinates(molecule);
         panel = new MoleculeCell(molecule, width, height);
         setTitle("2D Viewer");
         addWindowListener(new ApplicationCloser());
