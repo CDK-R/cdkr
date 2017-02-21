@@ -74,7 +74,7 @@ rasterImage(img, 0,8, 2,10)
 }
 }
 \seealso{
-  \code{\link{view.table}}, \code{\link{rasterImage}}, \code{link{readPNG}}
+  \code{\link{view.table}}, \code{\link{rasterImage}}, \code{\link{readPNG}}
 }
 \keyword{programming}
 
