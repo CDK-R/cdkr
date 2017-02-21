@@ -31,6 +31,7 @@ public class ViewMolecule2DDataTable {
     private IAtomContainer[] molecules;
     private String[] cnames;
     private Object[][] tabledata;
+    private RcdkDepictor depictor;
 
     private int fontSize = 14;
     private int cellx = 200;
@@ -55,7 +56,7 @@ public class ViewMolecule2DDataTable {
     }
 
     public ViewMolecule2DDataTable(String[] fnames, String[] cnames,
-                                   Object[][] tabledata) {
+                                   Object[][] tabledata, RcdkDepictor depictor) {
         try {
             molecules = Misc.loadMolecules(fnames, true, true, true);
         } catch (CDKException e) {
@@ -67,15 +68,17 @@ public class ViewMolecule2DDataTable {
         frame.addWindowListener(new ApplicationCloser());
         this.cnames = cnames;
         this.tabledata = tabledata;
+        this.depictor = depictor;
     }
 
     public ViewMolecule2DDataTable(IAtomContainer[] molecules, String[] cnames,
-                                   Object[][] tabledata) {
+                                   Object[][] tabledata, RcdkDepictor depictor) {
         frame = new JFrame("Table of Molecules");
         frame.addWindowListener(new ApplicationCloser());
         this.cnames = cnames;
         this.tabledata = tabledata;
         this.molecules = molecules;
+        this.depictor = depictor;
     }
 
     public void setCellX(int cellx) {
@@ -92,6 +95,9 @@ public class ViewMolecule2DDataTable {
 
     public void display() throws IOException, CDKException {
 
+        if (depictor == null)
+            depictor = Misc.getDefaultDepictor();
+
         ncol = cnames.length;
         nrow = molecules.length;
 
@@ -107,9 +113,7 @@ public class ViewMolecule2DDataTable {
             } catch (Exception e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-            data[i][0] = new MoleculeCell(molecules[i], this.cellx, this.celly,
-                    1.3, "cow", "off", "reagents",
-                    true, false, 100, "");
+            data[i][0] = new MoleculeCell(molecules[i], depictor);
         }
         // set the data
         for (int i = 0; i < molecules.length; i++) {
@@ -285,7 +289,7 @@ public class ViewMolecule2DDataTable {
             dat[i][3] = "By " + i;
             dat[i][4] = 3;
         }
-        ViewMolecule2DDataTable d = new ViewMolecule2DDataTable(acs, cnames, dat);
+        ViewMolecule2DDataTable d = new ViewMolecule2DDataTable(acs, cnames, dat, Misc.getDefaultDepictor());
         d.display();
     }
 }

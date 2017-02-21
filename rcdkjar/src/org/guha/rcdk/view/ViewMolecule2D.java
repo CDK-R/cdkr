@@ -24,20 +24,14 @@ public class ViewMolecule2D extends JFrame {
     }
 
     public ViewMolecule2D(IAtomContainer molecule, int width, int height) throws Exception {
-        this(molecule, width, height,
-                1.3, "cow", "off", "reagents",
-                true, false, 100, "");
+        this(molecule, new RcdkDepictor(width, height, 1.3, "cow", "off", "reagents", true, false, 100, ""));
     }
 
-    public ViewMolecule2D(IAtomContainer molecule, int width, int height,
-                          double zoom, String style, String annotate, String abbr,
-                          boolean suppressh, boolean showTitle,
-                          int smaLimit, String sma) throws Exception {
-        panel = new MoleculeCell(molecule, width, height,
-                zoom, style, annotate, abbr, suppressh, showTitle, smaLimit, sma);
+    public ViewMolecule2D(IAtomContainer molecule, RcdkDepictor depictor) throws Exception {
+        panel = new MoleculeCell(molecule, depictor);
         setTitle("2D Viewer");
         addWindowListener(new ApplicationCloser());
-        setSize(width, height);
+        setSize(depictor.getWidth(), depictor.getHeight());
 
     }
 

@@ -1,5 +1,6 @@
 package org.guha.rcdk.view;
 
+import org.guha.rcdk.util.Misc;
 import org.guha.rcdk.view.panels.MoleculeCell;
 import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.exception.CDKException;
@@ -55,8 +56,7 @@ public class MoleculeDisplay extends JPanel {
     }
 
     public void addMolecule(IAtomContainer molecule) throws IOException, CDKException {
-        MoleculeCell cell = new MoleculeCell(molecule, width, height, 1.3, "cow", "off", "reagents",
-                true, false, 100, "");
+        MoleculeCell cell = new MoleculeCell(molecule, Misc.getDefaultDepictor());
         add(cell);
     }
 

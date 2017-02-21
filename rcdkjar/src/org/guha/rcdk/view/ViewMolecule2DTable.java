@@ -1,10 +1,10 @@
 package org.guha.rcdk.view;
 
 import org.guha.rcdk.util.Misc;
+import org.guha.rcdk.view.panels.MoleculeCell;
 import org.guha.rcdk.view.table.StructureTableCellEditor2D;
 import org.guha.rcdk.view.table.StructureTableCellRenderer2D;
 import org.guha.rcdk.view.table.StructureTableModel;
-import org.guha.rcdk.view.panels.MoleculeCell;
 import org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector;
 import org.openscience.cdk.exception.CDKException;
 import org.openscience.cdk.interfaces.IAtomContainer;
@@ -27,7 +27,7 @@ class RowLabelRenderer extends DefaultTableCellRenderer {
 class StructureTable2D {
 
     private IAtomContainer[] v;
-    boolean withHydrogen = true;
+    RcdkDepictor depictor;
     private int cellx = 200;
     private int celly = 200;
     private int ncol = 4; // excludes the 1st column for row numbers
@@ -36,18 +36,18 @@ class StructureTable2D {
         this.v = structs;
     }
 
-    public StructureTable2D(IAtomContainer[] structs, int ncol, boolean withHydrogen) {
+    public StructureTable2D(IAtomContainer[] structs, int ncol, RcdkDepictor depictor) {
         this.v = structs;
         this.ncol = ncol;
-        this.withHydrogen = withHydrogen;
+        this.depictor = depictor;
     }
 
-    public StructureTable2D(IAtomContainer[] structs, int ncol, int cellx, int celly, boolean withHydrogen) {
+    public StructureTable2D(IAtomContainer[] structs, int ncol, int cellx, int celly, RcdkDepictor depictor) {
         this.v = structs;
         this.ncol = ncol;
         this.cellx = cellx;
         this.celly = celly;
-        this.withHydrogen = withHydrogen;
+        this.depictor = depictor;
     }
 
     public void display() throws IOException, CDKException {
@@ -72,15 +72,13 @@ class StructureTable2D {
         int cnt = 0;
         for (i = 0; i < nrow; i++) {
             for (j = 1; j < this.ncol + 1; j++) {
-                ndata[i][j] = new MoleculeCell(v[cnt], this.cellx, this.celly, 1.3, "cow", "off", "reagents",
-                                true, false, 100, "");
+                ndata[i][j] = new MoleculeCell(v[cnt], depictor);
                 cnt += 1;
             }
         }
         j = 1;
         while (cnt < v.length) {
-            ndata[nrow][j] = new MoleculeCell(v[cnt], this.cellx, this.celly, 1.3, "cow", "off", "reagents",
-                            true, false, 100, "");
+            ndata[nrow][j] = new MoleculeCell(v[cnt], depictor);
             cnt += 1;
             j += 1;
         }
@@ -139,7 +137,10 @@ class StructureTable2D {
 }
 
 public class ViewMolecule2DTable {
-    public ViewMolecule2DTable(IAtomContainer[] molecules, int ncol, int cellx, int celly) {
+    public ViewMolecule2DTable(IAtomContainer[] molecules, int ncol, int cellx, int celly, RcdkDepictor depictor) throws IOException {
+
+        if (depictor == null)
+            depictor = Misc.getDefaultDepictor();
 
         // set some default values
         boolean showH = false;
@@ -154,10 +155,10 @@ public class ViewMolecule2DTable {
 
             // some checks for visual niceness
             if (v.length < ncol) {
-                StructureTable2D st = new StructureTable2D(v, v.length, cellx, celly, showH);
+                StructureTable2D st = new StructureTable2D(v, v.length, cellx, celly, depictor);
                 st.display();
             } else {
-                StructureTable2D st = new StructureTable2D(v, ncol, cellx, celly, showH);
+                StructureTable2D st = new StructureTable2D(v, ncol, cellx, celly, depictor);
                 st.display();
             }
 
@@ -166,7 +167,7 @@ public class ViewMolecule2DTable {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         String home = "/Users/rguha/";
         String[] fname = {home + "src/R/trunk/rcdk/data/dan001.sdf",
                 home + "src/R/trunk/rcdk/data/dan002.sdf",
@@ -187,7 +188,7 @@ public class ViewMolecule2DTable {
         } catch (IOException e) {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
-        ViewMolecule2DTable v2dt = new ViewMolecule2DTable(acs, 3, 200, 200);
+        ViewMolecule2DTable v2dt = new ViewMolecule2DTable(acs, 3, 200, 200, Misc.getDefaultDepictor());
 
     }
 }

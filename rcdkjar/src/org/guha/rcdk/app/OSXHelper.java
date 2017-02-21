@@ -2,6 +2,7 @@ package org.guha.rcdk.app;
 
 import org.guha.rcdk.util.Misc;
 import org.guha.rcdk.view.MoleculeImageToClipboard;
+import org.guha.rcdk.view.RcdkDepictor;
 import org.guha.rcdk.view.ViewMolecule2D;
 import org.guha.rcdk.view.ViewMolecule2DTable;
 import org.openscience.cdk.DefaultChemObjectBuilder;
@@ -19,20 +20,19 @@ import org.openscience.cdk.smiles.SmilesParser;
  */
 public class OSXHelper {
 
+    private static RcdkDepictor depictor;
+
     public void copyToClipboard(IAtomContainer molecule, int width, int height) throws Exception {
         MoleculeImageToClipboard.copyImageToClipboard(molecule, width, height);
     }
 
-    public void viewMolecule2D(IAtomContainer molecule, int width, int height,
-                               double zoom, String style, String annotate, String abbr,
-                               boolean suppressh, boolean showTitle,
-                               int smaLimit, String sma) throws Exception {
-        ViewMolecule2D v = new ViewMolecule2D(molecule, width, height, zoom, style, annotate, abbr, suppressh, showTitle, smaLimit, sma);
+    public void viewMolecule2D(IAtomContainer molecule) throws Exception {
+        ViewMolecule2D v = new ViewMolecule2D(molecule, depictor);
         v.draw();
     }
 
     public void viewMoleculeTable(IAtomContainer[] mols, int ncol, int cellx, int celly) throws Exception {
-        ViewMolecule2DTable v = new ViewMolecule2DTable(mols, ncol, cellx, celly);
+        ViewMolecule2DTable v = new ViewMolecule2DTable(mols, ncol, cellx, celly, depictor);
     }
 
     public static void main(String[] args) throws Exception {
@@ -51,6 +51,9 @@ public class OSXHelper {
         int smaLimit = Integer.parseInt(args[10]);
         String sma = args[11];
 
+        depictor = new RcdkDepictor(width, height, zoom, style, annotate, abbr,
+                suppressh, showTitle, smaLimit, sma);
+
         int ncol = -1;
         if (args.length == 5)
             ncol = Integer.parseInt(args[4]);
@@ -63,8 +66,7 @@ public class OSXHelper {
                 helper.copyToClipboard(mol, width, height);
             } else if (method.equals("viewMolecule2D")) {
                 IAtomContainer mol = sp.parseSmiles(smiles);
-                helper.viewMolecule2D(mol, width, height,
-                        zoom, style, annotate, abbr, suppressh, showTitle, smaLimit, sma);
+                helper.viewMolecule2D(mol);
             } else if (method.equals("viewMolecule2Dtable")) {
                 IAtomContainer[] mols = Misc.loadMolecules(new String[]{smiles}, true, true, true);
                 helper.viewMoleculeTable(mols, ncol, width, height);
