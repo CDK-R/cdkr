@@ -107,7 +107,9 @@ public class ViewMolecule2DDataTable {
             } catch (Exception e) {
                 e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
             }
-            data[i][0] = new MoleculeCell(molecules[i], this.cellx, this.celly);
+            data[i][0] = new MoleculeCell(molecules[i], this.cellx, this.celly,
+                    1.3, "cow", "off", "reagents",
+                    true, false, 100, "");
         }
         // set the data
         for (int i = 0; i < molecules.length; i++) {

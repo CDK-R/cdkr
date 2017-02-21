@@ -72,13 +72,15 @@ class StructureTable2D {
         int cnt = 0;
         for (i = 0; i < nrow; i++) {
             for (j = 1; j < this.ncol + 1; j++) {
-                ndata[i][j] = new MoleculeCell(v[cnt], this.cellx, this.celly);
+                ndata[i][j] = new MoleculeCell(v[cnt], this.cellx, this.celly, 1.3, "cow", "off", "reagents",
+                                true, false, 100, "");
                 cnt += 1;
             }
         }
         j = 1;
         while (cnt < v.length) {
-            ndata[nrow][j] = new MoleculeCell(v[cnt], this.cellx, this.celly);
+            ndata[nrow][j] = new MoleculeCell(v[cnt], this.cellx, this.celly, 1.3, "cow", "off", "reagents",
+                            true, false, 100, "");
             cnt += 1;
             j += 1;
         }

@@ -343,7 +343,10 @@ public class MoleculeCell extends JPanel {
         }
     }
 
-    public MoleculeCell(IAtomContainer atomContainer, int w, int h) throws IOException, CDKException {
+    public MoleculeCell(IAtomContainer atomContainer, int w, int h,
+                        double zoom, String style, String annotate, String abbr,
+                        boolean suppressh, boolean showTitle,
+                        int smaLimit, String sma) throws IOException, CDKException {
         this.atomContainer = atomContainer;
         preferredHeight = h;
         preferredWidth = w;
@@ -351,15 +354,7 @@ public class MoleculeCell extends JPanel {
         this.setBackground(Color.WHITE);
         this.setBorder(BorderFactory.createEtchedBorder());
 
-        double zoom = 1.3;
-        String style = "COW"; // COB, BOW
-        String annotate = "off"; // number, mapidx, atomvalue, colmap
-        String abbr = "reagents";
         boolean alignRxnMap = true;
-        boolean suppressh = true;
-        boolean showTitle = false;
-        int smaLimit = 100;
-        String sma = "";
         String fmt = "PNG";
 
         this.abbreviations.loadFromFile("/org/openscience/cdk/app/abbreviations.smi");
@@ -387,7 +382,7 @@ public class MoleculeCell extends JPanel {
                         .withOuterGlowHighlight(6d);
                 break;
         }
-        myGenerator = myGenerator.withMappedRxnAlign(alignRxnMap);
+        // myGenerator = myGenerator.withMappedRxnAlign(alignRxnMap);
 
         final boolean isRxn = false; //!smi.contains("V2000") && isRxnSmi(smi);
         final boolean isRgp = false; //smi.contains("RG:");
@@ -484,7 +479,8 @@ public class MoleculeCell extends JPanel {
         SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
 //        IAtomContainer container = sp.parseSmiles("C1CN2CCN(CCCN(CCN(C1)Cc1ccccn1)CC2)C");
         IAtomContainer container = sp.parseSmiles("[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].CCCCc1ccc(CO[C@H]2O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](OS(=O)(=O)[O-])[C@@H]2O[C@H]3O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](O[C@H]4O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](O[C@H]5O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](OS(=O)(=O)[O-])[C@@H]5OS(=O)(=O)[O-])[C@@H]4OS(=O)(=O)[O-])[C@@H]3OS(=O)(=O)[O-])cc1 ");
-        MoleculeCell mcell = new MoleculeCell(container, 500,500);
+        MoleculeCell mcell = new MoleculeCell(container, 500, 500, 1.3, "cow", "off", "reagents",
+                true, false, 100, "");
         JFrame frame = new JFrame("Molecule Cell");
         frame.getContentPane().add(mcell);
         frame.pack();

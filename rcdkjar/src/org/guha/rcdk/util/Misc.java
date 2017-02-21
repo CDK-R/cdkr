@@ -107,10 +107,20 @@ public class Misc {
      */
     public static String getSmiles(IAtomContainer container, String type, boolean aromatic, boolean atomClasses) throws CDKException {
         SmilesGenerator smigen;
-        if (type.equals("generic")) smigen = SmilesGenerator.generic();
-        else if (type.equals("unique")) smigen = SmilesGenerator.unique();
-        else if (type.equals("isomeric")) smigen = SmilesGenerator.isomeric();
-        else smigen = SmilesGenerator.absolute();
+        switch (type) {
+            case "generic":
+                smigen = SmilesGenerator.generic();
+                break;
+            case "unique":
+                smigen = SmilesGenerator.unique();
+                break;
+            case "isomeric":
+                smigen = SmilesGenerator.isomeric();
+                break;
+            default:
+                smigen = SmilesGenerator.absolute();
+                break;
+        }
         if (aromatic) smigen = smigen.aromatic();
         if (atomClasses) smigen = smigen.withAtomClasses();
         return smigen.create(container);

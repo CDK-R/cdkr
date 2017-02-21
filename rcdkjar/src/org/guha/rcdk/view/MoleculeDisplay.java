@@ -55,7 +55,8 @@ public class MoleculeDisplay extends JPanel {
     }
 
     public void addMolecule(IAtomContainer molecule) throws IOException, CDKException {
-        MoleculeCell cell = new MoleculeCell(molecule, width, height);
+        MoleculeCell cell = new MoleculeCell(molecule, width, height, 1.3, "cow", "off", "reagents",
+                true, false, 100, "");
         add(cell);
     }
 
