@@ -45,7 +45,9 @@
 ##   }
 ## }
 
-view.molecule.2d <- function(molecule, ncol = 4, cellx = 200, celly = 200) {
+view.molecule.2d <- function(molecule, ncol = 4, cellx = 200, celly = 200,
+                             zoom = 1.3, style = "cow", annotate = "off", abbr = "reagents",
+                             suppressh = TRUE, showTitle = FALSE, smaLimit = 100, sma = NULL) {
   
   if (class(molecule) != 'character' &&
       class(molecule) != 'list' &&
@@ -76,7 +78,9 @@ view.molecule.2d <- function(molecule, ncol = 4, cellx = 200, celly = 200) {
 
     if (is.osx) {
       smi <- get.smiles(molecule)
-      cmd <- sprintf('java -cp \"%s/cont/*:%s/cont/rcdk.jar\" org.guha.rcdk.app.OSXHelper viewMolecule2D "%s" %d %d &', rcdklibs, jarfile, smi, cellx, celly)
+      if (is.null(sma))
+        sma = '""'
+      cmd <- sprintf('java -cp \"%s/cont/*:%s/cont/rcdk.jar\" org.guha.rcdk.app.OSXHelper viewMolecule2D "%s" %d %d %f %s %s %s %s %s %d %s &', rcdklibs, jarfile, smi, cellx, celly, zoom, style, annotate, abbr, suppressh, showTitle, smaLimit, sma)
       return(system(cmd))
     } else {
       v2d <- .jnew("org/guha/rcdk/view/ViewMolecule2D", molecule, as.integer(cellx), as.integer(celly))

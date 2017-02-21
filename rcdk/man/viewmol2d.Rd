@@ -16,7 +16,9 @@ a 2D depiction to the system clipboard, which can then be pasted into
 various external applications.
 }
 \usage{
-view.molecule.2d(molecule, ncol = 4, cellx = 200, celly = 200)
+view.molecule.2d(molecule, ncol = 4, cellx = 200, celly = 200,
+	zoom = 1.3, style = "cow", annotate = "off", abbr = "reagents",
+       suppressh = TRUE, showTitle = FALSE, smaLimit = 100, sma = NULL)
 view.image.2d(molecule, width = 200, height = 200)
 copy.image.to.clipboard(molecule, width = 200, height = 200)
 }
@@ -31,6 +33,14 @@ copy.image.to.clipboard(molecule, width = 200, height = 200)
   \item{celly}{The height of the grid cells}
   \item{width}{The width of the image}
   \item{height}{The height of the image}
+  \item{zoom}{Zoom factor}
+  \item{style}{Depiction style. Possible values are 'cow', 'bow', 'wob', 'cob', 'nob'}
+  \item{annotate}{Annotation style. By default no annotations are added. Possible values include 'number', 'mapidx', 'atomvalue', 'colmap'}
+  \item{abbr}{Abbreviation style for functional groups. Possible values are 'groups', 'reagents', 'on'}
+  \item{suppressh}{When \code{TRUE} show H's otherwise hide them}
+  \item{showTitle}{When \code{TRUE} display title}
+  \item{smaLimit}{How many SMARTS patterns should be highlighted?}
+  \item{sma}{A string containing the SMARTS pattern to match}
 }
 \value{
 \code{view.molecule.2d} and \code{copy.image.to.ckipboard} do not return anything. 

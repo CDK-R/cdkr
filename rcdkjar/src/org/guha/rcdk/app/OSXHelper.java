@@ -23,8 +23,11 @@ public class OSXHelper {
         MoleculeImageToClipboard.copyImageToClipboard(molecule, width, height);
     }
 
-    public void viewMolecule2D(IAtomContainer molecule, int width, int height) throws Exception {
-        ViewMolecule2D v = new ViewMolecule2D(molecule, width, height);
+    public void viewMolecule2D(IAtomContainer molecule, int width, int height,
+                               double zoom, String style, String annotate, String abbr,
+                               boolean suppressh, boolean showTitle,
+                               int smaLimit, String sma) throws Exception {
+        ViewMolecule2D v = new ViewMolecule2D(molecule, width, height, zoom, style, annotate, abbr, suppressh, showTitle, smaLimit, sma);
         v.draw();
     }
 
@@ -33,14 +36,21 @@ public class OSXHelper {
     }
 
     public static void main(String[] args) throws Exception {
-        if (args.length < 4 || args.length > 5) {
-            System.out.println("Must specify 4 or 5 arguments");
-        }
+
 
         String method = args[0];
         String smiles = args[1]; // if viewing mol table, this will be filename
         int width = Integer.parseInt(args[2]);
         int height = Integer.parseInt(args[3]);
+        double zoom = Double.parseDouble(args[4]);
+        String style = args[5];
+        String annotate = args[6];
+        String abbr = args[7];
+        boolean suppressh = args[8].equals("TRUE") ? true : false;
+        boolean showTitle = args[9].equals("TRUE") ? true : false;
+        int smaLimit = Integer.parseInt(args[10]);
+        String sma = args[11];
+
         int ncol = -1;
         if (args.length == 5)
             ncol = Integer.parseInt(args[4]);
@@ -53,11 +63,12 @@ public class OSXHelper {
                 helper.copyToClipboard(mol, width, height);
             } else if (method.equals("viewMolecule2D")) {
                 IAtomContainer mol = sp.parseSmiles(smiles);
-                helper.viewMolecule2D(mol, width, height);
+                helper.viewMolecule2D(mol, width, height,
+                        zoom, style, annotate, abbr, suppressh, showTitle, smaLimit, sma);
             } else if (method.equals("viewMolecule2Dtable")) {
                 IAtomContainer[] mols = Misc.loadMolecules(new String[]{smiles}, true, true, true);
                 helper.viewMoleculeTable(mols, ncol, width, height);
-            }else {
+            } else {
                 System.out.println("Didn't recognize method to run");
             }
         } else {
