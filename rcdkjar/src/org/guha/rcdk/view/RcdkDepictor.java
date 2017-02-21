@@ -19,7 +19,10 @@ import org.openscience.cdk.smiles.SmilesParser;
 import org.openscience.cdk.smiles.smarts.SmartsPattern;
 import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 
+import javax.imageio.ImageIO;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.*;
 
@@ -175,7 +178,29 @@ public class RcdkDepictor {
         this.sma = sma;
     }
 
-    public void generate(IAtomContainer atomContainer) throws CDKException {
+    public BufferedImage getImage(IAtomContainer atomContainer) throws CDKException {
+        return generate(atomContainer).toImg();
+    }
+
+    public byte[] getFormat(IAtomContainer atomContainer, String fmt) throws CDKException, IOException {
+        final String fmtlc = fmt.toLowerCase(Locale.ROOT);
+        Depiction depiction = generate(atomContainer);
+        switch (fmtlc) {
+            case Depiction.SVG_FMT:
+                return depiction.toSvgStr().getBytes();
+            case Depiction.PDF_FMT:
+                return depiction.toPdfStr().getBytes();
+            case Depiction.PNG_FMT:
+            case Depiction.JPG_FMT:
+            case Depiction.GIF_FMT:
+                ByteArrayOutputStream bao = new ByteArrayOutputStream();
+                ImageIO.write(depiction.toImg(), fmtlc, bao);
+                return bao.toByteArray();
+        }
+        throw new IllegalArgumentException("Unsupported format.");
+    }
+
+    private Depiction generate(IAtomContainer atomContainer) throws CDKException {
         DepictionGenerator myGenerator = generator.withSize(width, height).withZoom(zoom);
         myGenerator = withStyle(myGenerator, style);
         switch (annotate) {
@@ -263,18 +288,7 @@ public class RcdkDepictor {
         final Depiction depiction = isRxn ? myGenerator.depict(rxn)
                 : isRgp ? myGenerator.depict(mols, mols.size(), 1)
                 : myGenerator.depict(atomContainer);
-
-
-//        final String fmtlc = fmt.toLowerCase(Locale.ROOT);
-//        switch (fmtlc) {
-//            case Depiction.SVG_FMT:
-//            case Depiction.PDF_FMT:
-//            case Depiction.PNG_FMT:
-//            case Depiction.JPG_FMT:
-//            case Depiction.GIF_FMT:
-//                ByteArrayOutputStream bao = new ByteArrayOutputStream();
-//                ImageIO.write(depiction.toImg(), fmtlc, bao);
-//        }
+        return depiction;
     }
 
     private void contractHydrates(IAtomContainer mol) {
