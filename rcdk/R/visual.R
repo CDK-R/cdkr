@@ -101,7 +101,7 @@ view.molecule.2d <- function(molecule, width = 200, height = 200, ncol = 4, depi
     if (is.osx) {
       smi <- get.smiles(molecule)
       if (depictor$getSma() == "")
-        sma = "XXX"
+        sma = "\"\""
       else
         sma = depictor$getSma()
 
@@ -218,7 +218,17 @@ copy.image.to.clipboard <-  function(molecule, depictor = NULL) {
     smi <- get.smiles(molecule)
     jarfile <- system.file(package='rcdk')
     rcdklibs <- system.file(package='rcdklibs')
-    cmd <- sprintf('java -cp %s/cont/*:%s/cont/rcdk.jar org.guha.rcdk.app.OSXHelper copyToClipboard "%s" %d %d', rcdklibs, jarfile, smi, width, height)
+    if (depictor$getSma() == "") {
+      sma = "\"\""
+    } else {
+      sma = depictor$getSma()
+    }
+    cmd <- sprintf('java -cp %s/cont/*:%s/cont/rcdk.jar org.guha.rcdk.app.OSXHelper copyToClipboard "%s" %d %d %f %s %s %s %s %s %d %s',
+                   rcdklibs, jarfile, smi,
+                   depictor$getWidth(), depictor$getHeight(),
+                   depictor$getZoom(), depictor$getStyle(), depictor$getAnnotate(),
+                   depictor$getAbbr(), depictor$isSuppressh(), depictor$isShowTitle(),
+                   depictor$getSmaLimit(), sma)
     return(system(cmd))
   }
   if (attr(molecule,"jclass") != "org/openscience/cdk/interfaces/IAtomContainer")

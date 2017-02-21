@@ -1,4 +1,5 @@
 \name{view.molecule.2d}
+\alias{get.depictor}
 \alias{view.molecule.2d}
 \alias{view.image.2d}
 \alias{copy.image.to.clipboard}
@@ -16,11 +17,11 @@ a 2D depiction to the system clipboard, which can then be pasted into
 various external applications.
 }
 \usage{
-view.molecule.2d(molecule, ncol = 4, cellx = 200, celly = 200,
-	zoom = 1.3, style = "cow", annotate = "off", abbr = "reagents",
-       suppressh = TRUE, showTitle = FALSE, smaLimit = 100, sma = NULL)
-view.image.2d(molecule, width = 200, height = 200)
-copy.image.to.clipboard(molecule, width = 200, height = 200)
+get.depictor(width = 200, height = 200, zoom = 1.3, style = "cow", annotate = "off", abbr = "on",
+             suppressh = TRUE, showTitle = FALSE, smaLimit = 100, sma = NULL) 
+view.molecule.2d(molecule, width = 200, height = 200, ncol = 4, depictor = NULL)
+view.image.2d(molecule, depictor = NULL)
+copy.image.to.clipboard(molecule, depictor = NULL)
 }
 \arguments{
   \item{molecule}{If a single molecule is to be viewed this should be a
@@ -28,9 +29,8 @@ copy.image.to.clipboard(molecule, width = 200, height = 200)
     are to be viewed this should be a \code{list} of such objects. If a
     character is specified then it is taken as the name of a file and
     the molecules are loaded from the file}
+  \item{depictor}{A depiction object. If \code{NULL} then one with default settings is created}
   \item{ncol}{The number of columns if a grid is desired}
-  \item{cellx}{The width of the grid cells}
-  \item{celly}{The height of the grid cells}
   \item{width}{The width of the image}
   \item{height}{The height of the image}
   \item{zoom}{Zoom factor}
@@ -43,9 +43,9 @@ copy.image.to.clipboard(molecule, width = 200, height = 200)
   \item{sma}{A string containing the SMARTS pattern to match}
 }
 \value{
+\code{get.depictor} returns a depiction object that can be supplied to other methods.
 \code{view.molecule.2d} and \code{copy.image.to.ckipboard} do not return anything. 
-\code{view.image.2d} returns 
-an array of the dimensions height x width x channels, from the original
+\code{view.image.2d} returns  an array of the dimensions height x width x channels, from the original 
 PNG version of the 2D depiction. 	
 }
 \details{
@@ -78,7 +78,8 @@ slow due to invoking a new process.
 \examples{
 m <- parse.smiles('c1ccccc1C(=O)NC')[[1]]
 \dontrun{
-img <- view.image.2d(m, 100,100)
+dep <- get.depictor(width=200, height=200)
+img <- view.image.2d(m, depictor)
 plot(1:10, 1:10, pch=19)
 rasterImage(img, 0,8, 2,10)
 }
