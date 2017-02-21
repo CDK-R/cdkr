@@ -3,7 +3,7 @@
  */
 package org.guha.rcdk.util;
 
-import org.guha.rcdk.view.MoleculeImage;
+import org.guha.rcdk.view.RcdkDepictor;
 import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector;
 import org.openscience.cdk.config.Isotopes;
@@ -27,7 +27,10 @@ import org.openscience.cdk.smsd.Isomorphism;
 import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 import org.openscience.cdk.tools.manipulator.ChemFileManipulator;
 
-import java.io.*;
+import java.io.File;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -287,6 +290,16 @@ public class Misc {
         return gen.getInchiKey();
     }
 
+    /**
+     * Returns a depictor with default settings.
+     *
+     * @return A {@link RcdkDepictor} object with default values.
+     * @throws IOException
+     */
+    public RcdkDepictor getDefaultDepictor() throws IOException {
+        return new RcdkDepictor(300, 300, 1.3, "cow", "off", "on", true, false, 100, "");
+    }
+
     public static void main(String[] args) throws Exception, CloneNotSupportedException, IOException {
         IAtomContainer[] mols = Misc.loadMolecules(new String[]{"/Users/guhar/Downloads/Benzene.sdf"}, true, true, true);
 
@@ -298,12 +311,6 @@ public class Misc {
         CDKHueckelAromaticityDetector.detectAromaticity(mol2);
         AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(mol2);
         AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(mol1);
-        IAtomContainer mcs = getMcsAsNewContainer(mol1, mol2);
-        MoleculeImage mi = new MoleculeImage(mcs);
-        byte[] bytes = mi.getBytes(300, 300);
-        FileOutputStream fos = new FileOutputStream("test.png");
-        fos.write(bytes);
-
         int[][] map = getMcsAsAtomIndexMapping(mol1, mol2);
         for (int i = 0; i < map.length; i++) {
             System.out.println(map[i][0] + " <-> " + map[i][1]);
