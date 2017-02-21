@@ -61,7 +61,7 @@ get.depictor <- function(width = 200, height = 200, zoom = 1.3, style = "cow", a
                as.character(sma)))
 }
 
-view.molecule.2d <- function(molecule, width = 200, height = 200, ncol = 4, depictor = NULL) {
+view.molecule.2d <- function(molecule, ncol = 4, depictor = NULL) {
   
   if (class(molecule) != 'character' &&
       class(molecule) != 'list' &&

@@ -19,7 +19,7 @@ various external applications.
 \usage{
 get.depictor(width = 200, height = 200, zoom = 1.3, style = "cow", annotate = "off", abbr = "on",
              suppressh = TRUE, showTitle = FALSE, smaLimit = 100, sma = NULL) 
-view.molecule.2d(molecule, width = 200, height = 200, ncol = 4, depictor = NULL)
+view.molecule.2d(molecule, ncol = 4, depictor = NULL)
 view.image.2d(molecule, depictor = NULL)
 copy.image.to.clipboard(molecule, depictor = NULL)
 }
@@ -77,11 +77,17 @@ slow due to invoking a new process.
   }
 \examples{
 m <- parse.smiles('c1ccccc1C(=O)NC')[[1]]
+
 \dontrun{
 dep <- get.depictor(width=200, height=200)
 img <- view.image.2d(m, depictor)
 plot(1:10, 1:10, pch=19)
 rasterImage(img, 0,8, 2,10)
+
+dep$setHeight(as.integer(400))
+dep$setWidth(as.integer(400))
+copy.image.to.clipboard(m,d) ## Paste into Word
+
 }
 }
 \seealso{
