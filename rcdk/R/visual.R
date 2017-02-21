@@ -45,9 +45,23 @@
 ##   }
 ## }
 
-view.molecule.2d <- function(molecule, ncol = 4, cellx = 200, celly = 200,
-                             zoom = 1.3, style = "cow", annotate = "off", abbr = "reagents",
-                             suppressh = TRUE, showTitle = FALSE, smaLimit = 100, sma = NULL) {
+get.depictor <- function(width = 200, height = 200, zoom = 1.3, style = "cow", annotate = "off", abbr = "on",
+                         suppressh = TRUE, showTitle = FALSE, smaLimit = 100, sma = NULL) {
+  if (is.null(sma)) sma <- ""
+  return(.jnew("org/guha/rcdk/view/RcdkDepictor",
+               as.integer(width),
+               as.integer(height),
+               as.double(zoom),
+               as.character(style),
+               as.character(annotate),
+               as.character(abbr),
+               as.logical(suppressh),
+               as.logical(showTitle),
+               as.integer(smaLimit),
+               as.character(sma)))
+}
+
+view.molecule.2d <- function(molecule, width = 200, height = 200, ncol = 4, depictor = NULL) {
   
   if (class(molecule) != 'character' &&
       class(molecule) != 'list' &&
@@ -55,6 +69,14 @@ view.molecule.2d <- function(molecule, ncol = 4, cellx = 200, celly = 200,
     stop("Must supply a filename, single molecule object or list of molecule objects")
   }
 
+  if (is.null(depictor))
+    depictor <- get.depictor()
+
+  if (!is.null(width))
+    .jcall(depictor, "V", "setWidth", as.integer(width))
+  if (!is.null(height))
+    .jcall(depictor, "V", "setHeight", as.integer(height))
+  
   ## in case we're on OS X we need to prep some stuff
   ## so we can shell out 
   is.osx <- Sys.info()[1] == 'Darwin'
@@ -78,12 +100,19 @@ view.molecule.2d <- function(molecule, ncol = 4, cellx = 200, celly = 200,
 
     if (is.osx) {
       smi <- get.smiles(molecule)
-      if (is.null(sma))
-        sma = '""'
-      cmd <- sprintf('java -cp \"%s/cont/*:%s/cont/rcdk.jar\" org.guha.rcdk.app.OSXHelper viewMolecule2D "%s" %d %d %f %s %s %s %s %s %d %s &', rcdklibs, jarfile, smi, cellx, celly, zoom, style, annotate, abbr, suppressh, showTitle, smaLimit, sma)
+      if (depictor$getSma() == "")
+        sma = "XXX"
+      else
+        sma = depictor$getSma()
+
+      cmd <- sprintf('java -cp \"%s/cont/*:%s/cont/rcdk.jar\" org.guha.rcdk.app.OSXHelper viewMolecule2D "%s" %d %d %f %s %s %s %s %s %d %s &', rcdklibs, jarfile, smi,
+                     depictor$getWidth(), depictor$getHeight(),
+                     depictor$getZoom(), depictor$getStyle(), depictor$getAnnotate(),
+                     depictor$getAbbr(), depictor$isSuppressh(), depictor$isShowTitle(),
+                     depictor$getSmaLimit(), sma)
       return(system(cmd))
     } else {
-      v2d <- .jnew("org/guha/rcdk/view/ViewMolecule2D", molecule, as.integer(cellx), as.integer(celly))
+      v2d <- .jnew("org/guha/rcdk/view/ViewMolecule2D", molecule, as.integer(cellx), as.integer(celly), depictor)
       ret <- .jcall(v2d, "V", "draw")
     }
   } else { ## multiple molecules
@@ -94,12 +123,24 @@ view.molecule.2d <- function(molecule, ncol = 4, cellx = 200, celly = 200,
       tmp <- data.frame(smi, titles)
       tf <- tempfile(pattern='rcdkv-', fileext='.smi')
       write.table(tmp, file=tf, sep='\t', row.names=FALSE, col.names=FALSE, quote=FALSE)
-      cmd <- sprintf('java -cp \"%s/cont/*:%s/cont/rcdk.jar\" org.guha.rcdk.app.OSXHelper viewMolecule2Dtable "%s" %d %d %d &', rcdklibs, jarfile, tf, cellx, celly, ncol)
+
+      if (depictor$getSma() == "") {
+        sma = "\"\""
+      } else {
+        sma = depictor$getSma()
+      }
+      cmd <- sprintf('java -cp \"%s/cont/*:%s/cont/rcdk.jar\" org.guha.rcdk.app.OSXHelper viewMolecule2Dtable "%s" %d %d %f %s %s %s %s %s %d %s %d &',
+                     rcdklibs, jarfile, tf,
+                     depictor$getWidth(), depictor$getHeight(),
+                     depictor$getZoom(), depictor$getStyle(), depictor$getAnnotate(),
+                     depictor$getAbbr(), depictor$isSuppressh(), depictor$isShowTitle(),
+                     depictor$getSmaLimit(), sma,
+                     ncol)
       return(system(cmd))
     } else {
       array <- .jarray(molecule, contents.class="org/openscience/cdk/interfaces/IAtomContainer")
       v2d <- .jnew("org/guha/rcdk/view/ViewMolecule2DTable", array,
-                   as.integer(ncol), as.integer(cellx), as.integer(celly))
+                   as.integer(ncol), depictor)
     }
   }
 }
@@ -159,15 +200,20 @@ view.table <- function(molecules, dat, cellx = 200, celly = 200) {
 
 
 
-view.image.2d <- function(molecule, width=200, height=200) {
+view.image.2d <- function(molecule, depictor = NULL) {
+  if (is.null(depictor))
+    depictor <- get.depictor()
   if (attr(molecule,"jclass") != "org/openscience/cdk/interfaces/IAtomContainer")
     stop("Must supply an IAtomContainer object")
-  mi <- .jnew("org/guha/rcdk/view/MoleculeImage", molecule)
-  bytes <- .jcall(mi, "[B", "getBytes", as.integer(width), as.integer(height))
+  mi <- .jnew("org/guha/rcdk/view/MoleculeImage", molecule, depictor)
+  bytes <- .jcall(mi, "[B", "getBytes", as.integer(depictor$getWidth()), as.integer(depictor$getHeight()), "png")
   return(readPNG(bytes))
 }
 
-copy.image.to.clipboard <-  function(molecule, width=200, height=200) {
+copy.image.to.clipboard <-  function(molecule, depictor = NULL) {
+  if (is.null(depictor))
+    depictor <- get.depictor()
+
   if (Sys.info()[1] == 'Darwin') { ## try the standalone helper
     smi <- get.smiles(molecule)
     jarfile <- system.file(package='rcdk')
@@ -180,5 +226,5 @@ copy.image.to.clipboard <-  function(molecule, width=200, height=200) {
   .jcall('org/guha/rcdk/view/MoleculeImageToClipboard',
          'V',
          'copyImageToClipboard',
-         molecule, as.integer(width), as.integer(height));
+         molecule, depictor);
 }

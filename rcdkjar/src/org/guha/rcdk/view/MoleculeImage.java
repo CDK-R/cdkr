@@ -36,7 +36,7 @@ public class MoleculeImage {
 
         depictor.setWidth(width);
         depictor.setHeight(height);
-        return depictor.getFormat(molecule, "png");
+        return depictor.getFormat(molecule, fmt);
     }
 
     public static void main(String[] args) throws Exception {

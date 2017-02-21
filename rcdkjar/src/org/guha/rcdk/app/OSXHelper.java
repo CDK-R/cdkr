@@ -23,7 +23,7 @@ public class OSXHelper {
     private static RcdkDepictor depictor;
 
     public void copyToClipboard(IAtomContainer molecule, int width, int height) throws Exception {
-        MoleculeImageToClipboard.copyImageToClipboard(molecule, width, height);
+        MoleculeImageToClipboard.copyImageToClipboard(molecule, depictor);
     }
 
     public void viewMolecule2D(IAtomContainer molecule) throws Exception {
@@ -36,7 +36,6 @@ public class OSXHelper {
     }
 
     public static void main(String[] args) throws Exception {
-
 
         String method = args[0];
         String smiles = args[1]; // if viewing mol table, this will be filename
@@ -55,8 +54,8 @@ public class OSXHelper {
                 suppressh, showTitle, smaLimit, sma);
 
         int ncol = -1;
-        if (args.length == 5)
-            ncol = Integer.parseInt(args[4]);
+        if (args.length == 13)
+            ncol = Integer.parseInt(args[12]);
 
         if (smiles != null && !smiles.equals("")) {
             OSXHelper helper = new OSXHelper();
