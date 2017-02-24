@@ -80,7 +80,7 @@ m <- parse.smiles('c1ccccc1C(=O)NC')[[1]]
 
 \dontrun{
 dep <- get.depictor(width=200, height=200)
-img <- view.image.2d(m, depictor)
+img <- view.image.2d(m, dep)
 plot(1:10, 1:10, pch=19)
 rasterImage(img, 0,8, 2,10)
 
