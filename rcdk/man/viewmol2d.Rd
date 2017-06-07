@@ -17,9 +17,10 @@ a 2D depiction to the system clipboard, which can then be pasted into
 various external applications.
 }
 \usage{
-get.depictor(width = 200, height = 200, zoom = 1.3, style = "cow", annotate = "off", abbr = "on",
-             suppressh = TRUE, showTitle = FALSE, smaLimit = 100, sma = NULL) 
-view.molecule.2d(molecule, ncol = 4, depictor = NULL)
+get.depictor(width = 200, height = 200, zoom = 1.3, style = "cow", 
+	      annotate = "off", abbr = "on", suppressh = TRUE, 
+             showTitle = FALSE, smaLimit = 100, sma = NULL) 
+view.molecule.2d(molecule, ncol = 4, width = 200, height = 200, depictor = NULL)
 view.image.2d(molecule, depictor = NULL)
 copy.image.to.clipboard(molecule, depictor = NULL)
 }

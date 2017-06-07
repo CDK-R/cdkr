@@ -61,7 +61,7 @@ get.depictor <- function(width = 200, height = 200, zoom = 1.3, style = "cow", a
                as.character(sma)))
 }
 
-view.molecule.2d <- function(molecule, ncol = 4, depictor = NULL) {
+view.molecule.2d <- function(molecule, ncol = 4, width = 200, height = 200, depictor = NULL) {
   
   if (class(molecule) != 'character' &&
       class(molecule) != 'list' &&
@@ -107,7 +107,7 @@ view.molecule.2d <- function(molecule, ncol = 4, depictor = NULL) {
                      depictor$getSmaLimit(), sma)
       return(system(cmd))
     } else {
-      v2d <- .jnew("org/guha/rcdk/view/ViewMolecule2D", molecule, as.integer(cellx), as.integer(celly), depictor)
+      v2d <- .jnew("org/guha/rcdk/view/ViewMolecule2D", molecule, as.integer(width), as.integer(height), depictor)
       ret <- .jcall(v2d, "V", "draw")
     }
   } else { ## multiple molecules

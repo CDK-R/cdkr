@@ -204,6 +204,9 @@ get.bonds <- function(molecule) {
 }
 
 do.aromaticity <- function(molecule) {
+  #print(attributes(molecule))
+  #print(is.null(attr(molecule, 'jclass')))
+  #print(attr(molecule, 'jclass'))
   if (is.null(attr(molecule, 'jclass')))
     stop("molecule must be of class IAtomContainer")
   if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
