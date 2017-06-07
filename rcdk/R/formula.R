@@ -314,12 +314,33 @@ generate.formula <- function(mass, window=0.01,
   return(object);
 }
 
+#' Construct an isotope pattern similarity calculator.
+#'
+#' A method that returns an instance of the CDK \code{IsotopePatternSimilarity}
+#' class which can be used to compute similarity scores between pairs of
+#' isotope abundance patterns.
+#'
+#' @param tol The tolerance
+#' @return A \code{jobjRef} corresponding to an instance of \code{IsotopePatternSimilarity}
+#' @seealso \code{\link{compare.isotope.pattern}}
+#' @references \url{http://cdk.github.io/cdk/1.5/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html}
+#' @author Miguel Rojas Cherto
 get.isotope.pattern.similarity <- function(tol = NULL) {
   ips <- .jnew("org/openscience/cdk/formula/IsotopePatternSimilarity")
   if (!is.null(tol)) ips$seTolerance(tol)
   return(ips)
 }
 
+#' Construct an isotope pattern generator.
+#'
+#' Constructs an instance of the CDK \code{IsotopePatternGenerator}, with an optional
+#' minimum abundance specified. This object can be used to generate all combinatorial
+#' chemical isotopes given a structure.
+#'
+#' @param minAbundance The minimum abundance
+#' @return A \code{jobjRef} corresponding to an instance of \code{IsotopePatternGenerator}
+#' @references \url{http://cdk.github.io/cdk/1.5/docs/api/org/openscience/cdk/formula/IsotopePatternGenerator.html}
+#' @author Miguel Rojas Cherto
 get.isotope.pattern.generator <- function(minAbundance = NULL) {
   if (is.null(minAbundance))
     .jnew("org/openscience/cdk/formula/IsotopePatternGenerator")
@@ -327,6 +348,18 @@ get.isotope.pattern.generator <- function(minAbundance = NULL) {
     .jnew("org/openscience/cdk/formula/IsotopePatternGenerator", as.double(minAbundance))
 }
 
+#' Compare isotope patterns.
+#'
+#' Computes a similarity score between two different isotope abundance patterns.
+#'
+#' @param iso1 The first isotope pattern, which should be a \code{jobjRef} corresponding to the \code{IsotopePattern} class
+#' @param iso2 The second isotope pattern, which should be a \code{jobjRef} corresponding to the \code{IsotopePattern} class
+#' @param ips An instance of the \code{IsotopePatternSimilarity} class. if \code{NULL} one will be constructed automatically
+#'
+#' @return A numeric value between 0 and 1 indicating the similarity between the two patterns
+#' @seealso \code{\link{get.isotope.pattern.similarity}}
+#' @references \url{http://cdk.github.io/cdk/2.0/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html}
+#' @author Miguel Rojas Cherto
 compare.isotope.pattern <- function(iso1, iso2, ips = NULL) {
   cls <- unique(c(class(iso1), class(iso2)))
   if (length(cls) != 1) stop("Must supply Java objects of class IsotopePattern")
