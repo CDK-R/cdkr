@@ -1,6 +1,6 @@
 Package: rcdklibs
-Version: 1.5.14
-Date: 2016-04-30
+Version: 2.0
+Date: 2017-06-10
 Authors@R: c(person('Rajarshi', 'Guha', role=c('aut'), email='rajarshi.guha@gmail.com'),
              person('Zachary', 'Charlop-Powers', role=c('cre'), email='zach.charlop.powers@gmail.com'),
              person('CDK Project', '', role=c('ctb', 'cph'), comment='CDK Java library contained in multiple jar files'))
@@ -12,8 +12,8 @@ Title: The CDK Libraries Packaged for R
 Description: An R interface to the Chemistry Development Kit, a Java library
     for chemoinformatics. Given the size of the library itself, this package is
     not expected to change very frequently. To make use of the CDK within R, it is
-    suggested that you use the rcdk package. Note that it is possible to directly
-    interact with the CDK using rJava. However rcdk exposes functionality in a more
+    suggested that you use the 'rcdk' package. Note that it is possible to directly
+    interact with the CDK using 'rJava'. However 'rcdk' exposes functionality in a more
     idiomatic way. The CDK library itself is released as LGPL and the sources can be
-    obtained from https://github.com/cdk/cdk.
+    obtained from <https://github.com/cdk/cdk>.
 RoxygenNote: 5.0.1
