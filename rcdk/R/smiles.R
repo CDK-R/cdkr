@@ -26,7 +26,7 @@ parse.smiles <- function(smiles, kekulise=TRUE) {
                         }
                         )
         if (is.null(mol)){
-          return(NA)
+          return(NULL)
         } else {
           return(.jcast(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
         }
