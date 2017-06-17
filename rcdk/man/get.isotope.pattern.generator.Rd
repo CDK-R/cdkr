@@ -17,10 +17,9 @@ Constructs an instance of the CDK \code{IsotopePatternGenerator}, with an option
 minimum abundance specified. This object can be used to generate all combinatorial
 chemical isotopes given a structure.
 }
-\author{
-Miguel Rojas Cherto
-}
 \references{
 \url{http://cdk.github.io/cdk/1.5/docs/api/org/openscience/cdk/formula/IsotopePatternGenerator.html}
 }
-
+\author{
+Miguel Rojas Cherto
+}

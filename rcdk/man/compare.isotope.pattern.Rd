@@ -19,13 +19,12 @@ A numeric value between 0 and 1 indicating the similarity between the two patter
 \description{
 Computes a similarity score between two different isotope abundance patterns.
 }
-\author{
-Miguel Rojas Cherto
-}
 \references{
 \url{http://cdk.github.io/cdk/2.0/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html}
 }
 \seealso{
 \code{\link{get.isotope.pattern.similarity}}
 }
-
+\author{
+Miguel Rojas Cherto
+}

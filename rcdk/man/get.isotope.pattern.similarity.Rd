@@ -17,13 +17,12 @@ A method that returns an instance of the CDK \code{IsotopePatternSimilarity}
 class which can be used to compute similarity scores between pairs of
 isotope abundance patterns.
 }
-\author{
-Miguel Rojas Cherto
-}
 \references{
 \url{http://cdk.github.io/cdk/1.5/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html}
 }
 \seealso{
 \code{\link{compare.isotope.pattern}}
 }
-
+\author{
+Miguel Rojas Cherto
+}
