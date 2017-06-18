@@ -39,19 +39,23 @@ smiles.flavors(flavors = c("Generic"))
 }}
 }
 \value{
-A numeric representign the bitwise OR of the specified flavors
+A numeric representing the bitwise OR of the specified flavors
 }
 \description{
 The CDK supports a variety of customizations for SMILES generation including
 the use of lower case symbols for aromatic compounds to the use of the ChemAxon
-CxSiles format. Each 'flavor' is represented by an integer and multiple
+CxSmiles format. Each 'flavor' is represented by an integer and multiple
 customizations are bitwise OR'ed. This method accepts the names of one or
 more customizations and returns the bitwise OR of them. See \href{https://cdk.github.io/cdk/2.0/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation} for the list of flavors and what they mean.
 }
 \examples{
 m <- parse.smiles('C1C=CCC1N(C)c1ccccc1')[[1]]
 get.smiles(m)
-get.smiles(m, smiles.flavor(c('Generic','UseAromaticSymbols'))
+get.smiles(m, smiles.flavors(c('Generic','UseAromaticSymbols')))
+
+m <- parse.smiles("OS(=O)(=O)c1ccc(cc1)C(CC)CC |Sg:n:13:m:ht,Sg:n:11:n:ht|")[[1]]
+get.smiles(m,flavor = smiles.flavors(c("CxSmiles")))
+get.smiles(m,flavor = smiles.flavors(c("CxSmiles","UseAromaticSymbols")))
 
 }
 \references{
