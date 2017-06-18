@@ -7,7 +7,7 @@
 smiles.flavors(flavors = c("Generic"))
 }
 \arguments{
-\item{flavors}{A character vector of flavors. The default is \code{Generic}. Possible values are
+\item{flavors}{A character vector of flavors. The default is \code{Generic} (Output non-canonical SMILES without stereochemistry, atomic masses). Possible values are
 \itemize{
 \item Absolute
 \item AtomAtomMap
@@ -44,9 +44,12 @@ A numeric representing the bitwise OR of the specified flavors
 \description{
 The CDK supports a variety of customizations for SMILES generation including
 the use of lower case symbols for aromatic compounds to the use of the ChemAxon
-CxSmiles format. Each 'flavor' is represented by an integer and multiple
+\href{https://www.chemaxon.com/marvin-archive/latest/help/formats/cxsmiles-doc.html}{CxSmiles}
+format. Each 'flavor' is represented by an integer and multiple
 customizations are bitwise OR'ed. This method accepts the names of one or
-more customizations and returns the bitwise OR of them. See \href{https://cdk.github.io/cdk/2.0/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation} for the list of flavors and what they mean.
+more customizations and returns the bitwise OR of them.
+See \href{https://cdk.github.io/cdk/2.0/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
+for the list of flavors and what they mean.
 }
 \examples{
 m <- parse.smiles('C1C=CCC1N(C)c1ccccc1')[[1]]
