@@ -3,7 +3,11 @@ fp.sim.matrix <- function(fplist, fplist2=NULL, method='tanimoto') {
   sim <- NA
   
   if (!is.null(fplist2)) {
-    sim <- do.call('rbind', lapply(fplist, function(fp) unlist(lapply(fplist2, function(x) distance(x,fp)))))
+      sim <- do.call('rbind', lapply(fplist,
+                                     function(fp) unlist(lapply(fplist2,
+                                                                function(x) distance(x,fp, method=method)))))
+      diag(sim) <- 1.0
+      return(sim)
   }
 
   if (method == 'dice') {

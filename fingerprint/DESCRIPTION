@@ -1,6 +1,6 @@
 Package: fingerprint
-Version: 3.5.3
-Date: 2016-10-24
+Version: 3.5.5
+Date: 2017-06-26
 Title: Functions to Operate on Binary Fingerprint Data
 Author: Rajarshi Guha <rajarshi.guha@gmail.com>
 Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
