@@ -26,7 +26,7 @@ get.smiles(molecule, flavor = smiles.flavors(c('Generic')), smigen = NULL)
 \examples{
 m <- parse.smiles('C1C=CCC1N(C)c1ccccc1')[[1]]
 get.smiles(m)
-get.smiles(m, smiles.flavor(c('Generic','UseAromaticSymbols'))
+get.smiles(m, smiles.flavors(c('Generic','UseAromaticSymbols')))
 }
 \keyword{programming}
 
