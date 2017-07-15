@@ -135,8 +135,9 @@ get.cid <- function(cid, quiet=TRUE) {
   ids <- .section.by.heading(sections, "Names and Identifiers")
   ids <- .section.by.heading(ids$Section, "Computed Descriptors")
   ivals <- lapply(ids$Section, .section.handler)
-  ivals <- do.call(cbind, unlist(Filter(function(x) !is.null(x), ivals), recursive=FALSE))  
-
+  ivals.unlisted <- unlist(Filter(function(x) !is.null(x), ivals), recursive=TRUE)
+  ivals <- do.call(cbind, as.list(ivals.unlisted)  )
+  
   ## Process chemprops
   props <- .section.by.heading(sections, "Chemical and Physical Properties")
   if (is.null(props)) {
@@ -145,11 +146,14 @@ get.cid <- function(cid, quiet=TRUE) {
   }
   
   computed <- .section.by.heading(props$Section, "Computed Properties")
-  cvals <- lapply(computed$Section, .section.handler,
+  cvals <- lapply(list(computed), .section.handler,
                   ignore= c(##"CACTVS Substructure Key Fingerprint",
                     "Compound Is Canonicalized",
                     "Covalently-Bonded Unit Count"))
-  cvals <- do.call(cbind, unlist(Filter(function(x) !is.null(x), cvals), recursive=FALSE))
+  cvals <- do.call(cbind, as.list(unlist(Filter(function(x) !is.null(x), cvals), recursive=FALSE)))
+  cols2remove <- which(names(cvals) %in% c("Compound Is Canonicalized",
+                                           "Covalently-Bonded Unit Count"))
+  cvals <- cvals[,-cols2remove]
   
   experimental <- .section.by.heading(props$Section, "Experimental Properties")
   if (is.null(experimental)) {
@@ -163,6 +167,7 @@ get.cid <- function(cid, quiet=TRUE) {
     else
       evals <- do.call(cbind, evals)
   }
+
   return(data.frame(CID=cid, ivals, cvals, evals))
 }
 
