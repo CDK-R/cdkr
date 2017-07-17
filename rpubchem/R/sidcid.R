@@ -90,6 +90,9 @@ decodeCACTVS <- function(cactvs) {
       else if (types[i] == 'Float') dat[,i] <- as.numeric(dat[,i])    
     }
 
+    print(.itemNames)
+    print(dat)
+    
     ## Look for the CompoundIdList item
     cid <- NA
     cidl <- Filter(function(x) xmlGetAttr(x, 'Name') == 'CompoundIDList', docsum['Item'])
@@ -106,7 +109,7 @@ get.sid <- function(sid, quiet=TRUE, from.file=FALSE) {
   datafile <- NA
   
   if (!from.file) {
-    sidURL <- 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?tool=rpubchem&db=pcsubstance&id='
+    sidURL <- 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?tool=rpubchem&db=pcsubstance&id='
     url <- paste(sidURL, paste(sid,sep='',collapse=','), sep='', collapse='')
     datafile <- tempfile(pattern = 'sid')
     .get.xml.file(url, datafile, quiet)

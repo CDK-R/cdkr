@@ -287,7 +287,7 @@ get.assay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
 
 
 .get.xml.file <- function(url, dest, quiet) {
-  status <- try(download.file(url, destfile=dest, method='internal', mode='wb', quiet=quiet),
+  status <- try(download.file(url, destfile=dest, method='curl', mode='wb', quiet=quiet),
                 silent=TRUE)
 
   if (class(status) == 'try-error') {
