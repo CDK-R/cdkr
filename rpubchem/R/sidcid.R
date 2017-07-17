@@ -89,9 +89,6 @@ decodeCACTVS <- function(cactvs) {
       else if (types[i] == 'Integer') dat[,i] <- as.integer(dat[,i])
       else if (types[i] == 'Float') dat[,i] <- as.numeric(dat[,i])    
     }
-
-    print(.itemNames)
-    print(dat)
     
     ## Look for the CompoundIdList item
     cid <- NA
