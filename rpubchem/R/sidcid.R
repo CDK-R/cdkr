@@ -171,24 +171,24 @@ get.cid <- function(cid, quiet=TRUE) {
   return(data.frame(CID=cid, ivals, cvals, evals))
 }
 
-.get.cid.old  <- function(cid, quiet=TRUE, from.file=FALSE) {
+## .get.cid.old  <- function(cid, quiet=TRUE, from.file=FALSE) {
 
-  datafile <- NA
+##   datafile <- NA
   
-  if (!from.file) {
-    cidURL <- 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?tool=rpubchem&db=pccompound&id='
-    url <- paste(cidURL, paste(cid,sep='',collapse=','), sep='', collapse='')
-    datafile <- tempfile(pattern = 'cid')
-    .get.xml.file(url, datafile, quiet)
-  } else {
-    datafile <- cid
-  }
+##   if (!from.file) {
+##     cidURL <- 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?tool=rpubchem&db=pccompound&id='
+##     url <- paste(cidURL, paste(cid,sep='',collapse=','), sep='', collapse='')
+##     datafile <- tempfile(pattern = 'cid')
+##     .get.xml.file(url, datafile, quiet)
+##   } else {
+##     datafile <- cid
+##   }
 
-  doc <- xmlParse(datafile)
-  dat <- .extract.fields(doc)
-  dat$CID <- cid
-  return(dat)
-}
+##   doc <- xmlParse(datafile)
+##   dat <- .extract.fields(doc)
+##   dat$CID <- cid
+##   return(dat)
+## }
 
 get.cid.list <- function(sid,  quiet=TRUE) {
   return(.cmpd.id2id(sid, 'sid', 'cids', quiet))
