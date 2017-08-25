@@ -58,6 +58,13 @@ Then you will need to re-install rJava.
 =================
 =================")  
   }
+
+  ## generate some Java objects which get reused, so as to avoid repeated .jnew()
+  nRule <- .jnew("org/openscience/cdk/formula/rules/NitrogenRule");
+  rdbeRule <- .jnew("org/openscience/cdk/formula/rules/RDBERule");
+  assign(".rcdk.GlobalEnv", new.env(parent = emptyenv()), envir = topenv())
+  assign("nRule", nRule, envir = .rcdk.GlobalEnv)
+  assign("rdbeRule", rdbeRule, envir = .rcdk.GlobalEnv)  
 }
 
 cdk.version <- function() {

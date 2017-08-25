@@ -96,28 +96,28 @@ set.charge.formula <- function(formula,charge = -1) {
 ##  Validate a cdkFormula.
 ########################################################
 
+
 isvalid.formula <- function(formula,rule=c("nitrogen","RDBE")){
   
   if (class(formula) != "cdkFormula")
     stop("Supplied object should be a cdkFormula Class")
   
   molecularFormula <- formula@objectJ;
-  
+
+  nRule <- get("nRule", envir = .rcdk.GlobalEnv)
+  rdbeRule <- get("rdbeRule", envir = .rcdk.GlobalEnv)
+
   for(i in 1:length(rule)){
     ##Nitrogen Rule
     if(rule[i] == "nitrogen"){
-      nRule <- .jnew("org/openscience/cdk/formula/rules/NitrogenRule");
       valid <- .jcall(nRule,"D","validate",molecularFormula);
-      
       if(valid != 1.0){
         return (FALSE)
       }
     }	  
     ##RDBE Rule
     if(rule[i] == "RDBE"){
-      rdbeRule <- .jnew("org/openscience/cdk/formula/rules/RDBERule");
       valid <- .jcall(rdbeRule,"D","validate",molecularFormula);
-      
       if(valid != 1.0){
         return (FALSE)
       }
