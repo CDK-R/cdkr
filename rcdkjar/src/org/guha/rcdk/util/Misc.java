@@ -6,14 +6,14 @@ package org.guha.rcdk.util;
 import org.guha.rcdk.view.RcdkDepictor;
 import org.openscience.cdk.DefaultChemObjectBuilder;
 import org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector;
+import org.openscience.cdk.config.IsotopeFactory;
 import org.openscience.cdk.config.Isotopes;
 import org.openscience.cdk.exception.CDKException;
+import org.openscience.cdk.formula.MolecularFormulaGenerator;
+import org.openscience.cdk.formula.MolecularFormulaRange;
 import org.openscience.cdk.inchi.InChIGenerator;
 import org.openscience.cdk.inchi.InChIGeneratorFactory;
-import org.openscience.cdk.interfaces.IAtom;
-import org.openscience.cdk.interfaces.IAtomContainer;
-import org.openscience.cdk.interfaces.IChemFile;
-import org.openscience.cdk.interfaces.IChemObjectBuilder;
+import org.openscience.cdk.interfaces.*;
 import org.openscience.cdk.io.ISimpleChemObjectReader;
 import org.openscience.cdk.io.ReaderFactory;
 import org.openscience.cdk.io.SDFWriter;
@@ -21,11 +21,12 @@ import org.openscience.cdk.io.SMILESReader;
 import org.openscience.cdk.io.listener.PropertiesListener;
 import org.openscience.cdk.isomorphism.UniversalIsomorphismTester;
 import org.openscience.cdk.layout.StructureDiagramGenerator;
+import org.openscience.cdk.silent.SilentChemObjectBuilder;
 import org.openscience.cdk.smiles.SmilesGenerator;
-import org.openscience.cdk.smiles.SmilesParser;
 import org.openscience.cdk.smsd.Isomorphism;
 import org.openscience.cdk.tools.manipulator.AtomContainerManipulator;
 import org.openscience.cdk.tools.manipulator.ChemFileManipulator;
+import org.openscience.cdk.tools.manipulator.MolecularFormulaManipulator;
 
 import java.io.File;
 import java.io.FileReader;
@@ -300,20 +301,62 @@ public class Misc {
         return new RcdkDepictor(300, 300, 1.3, "cow", "off", "on", true, false, 100, "");
     }
 
+    /**
+     * Construct {@link MolecularFormulaRange} object from a text representation of ranges.
+     *
+     * @param ranges An array of range strings, of the form <code>X min max</code>, where
+     *               <code>X</code> is the element symbol, <code>min</code> is the minimum
+     *               number of this element and <code>max</code> is the maximum
+     * @return A {@link MolecularFormulaRange} object, other <code>null</code> if any error occurs
+     */
+    public static MolecularFormulaRange getMFRange(String[] ranges) throws IOException {
+        if (ranges == null)
+            return (null);
+
+        IsotopeFactory ifac = Isotopes.getInstance();
+        MolecularFormulaRange mfRange = new MolecularFormulaRange();
+        for (String rstr : ranges) {
+            String[] toks = rstr.split(" ");
+            if (toks.length != 3)
+                throw new IllegalArgumentException("Each range string must have three elements");
+            String element = toks[0];
+            int min = Integer.parseInt(toks[1]);
+            int max = Integer.parseInt(toks[2]);
+            IIsotope i;
+            if (element.equals("D"))
+                i = ifac.getIsotope("H", 2);
+            else
+                i = ifac.getMajorIsotope(element);
+            mfRange.addIsotope(i, min, max);
+        }
+        return mfRange;
+    }
+
     public static void main(String[] args) throws Exception, CloneNotSupportedException, IOException {
-        IAtomContainer[] mols = Misc.loadMolecules(new String[]{"/Users/guhar/Downloads/Benzene.sdf"}, true, true, true);
-
-        SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
-
-        IAtomContainer mol1 = sp.parseSmiles("c1cccc(COC(=O)NC(CC(C)C)C(=O)NC(CCc2ccccc2)C(=O)COC)c1");
-        IAtomContainer mol2 = sp.parseSmiles("c1cccc(COC(=O)NC(CC(C)C)C(=O)NCC#N)c1");
-        CDKHueckelAromaticityDetector.detectAromaticity(mol1);
-        CDKHueckelAromaticityDetector.detectAromaticity(mol2);
-        AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(mol2);
-        AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(mol1);
-        int[][] map = getMcsAsAtomIndexMapping(mol1, mol2);
-        for (int i = 0; i < map.length; i++) {
-            System.out.println(map[i][0] + " <-> " + map[i][1]);
+//        IAtomContainer[] mols = Misc.loadMolecules(new String[]{"/Users/guhar/Downloads/Benzene.sdf"}, true, true, true);
+//
+//        SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
+//
+//        IAtomContainer mol1 = sp.parseSmiles("c1cccc(COC(=O)NC(CC(C)C)C(=O)NC(CCc2ccccc2)C(=O)COC)c1");
+//        IAtomContainer mol2 = sp.parseSmiles("c1cccc(COC(=O)NC(CC(C)C)C(=O)NCC#N)c1");
+//        CDKHueckelAromaticityDetector.detectAromaticity(mol1);
+//        CDKHueckelAromaticityDetector.detectAromaticity(mol2);
+//        AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(mol2);
+//        AtomContainerManipulator.percieveAtomTypesAndConfigureAtoms(mol1);
+//        int[][] map = getMcsAsAtomIndexMapping(mol1, mol2);
+//        for (int i = 0; i < map.length; i++) {
+//            System.out.println(map[i][0] + " <-> " + map[i][1]);
+//        }
+        String[] ranges = new String[]{"C 0 50", "N 0 20", "O 0 20", "H 0 50"};
+        MolecularFormulaRange mfr = getMFRange(ranges);
+        IChemObjectBuilder builder = SilentChemObjectBuilder.getInstance();
+        double mass = 300;
+        double tol = 5e-3;
+        MolecularFormulaGenerator gen = new MolecularFormulaGenerator(builder, mass - tol, mass + tol, mfr);
+        IMolecularFormula formula;
+        while ((formula = gen.getNextFormula()) != null) {
+            String formulaString = MolecularFormulaManipulator.getString(formula);
+            System.out.println(formulaString);
         }
     }
 }
