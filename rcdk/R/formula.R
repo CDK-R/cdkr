@@ -161,6 +161,28 @@ get.isotopes.pattern <- function(formula,minAbund=0.1){
 ##  a mass tolerance.
 ########################################################
 
+generate.formula2 <- function(mass, window = 0.01,
+                              elements = list(
+                                C=c(0,50),
+                                H=c(0,50),
+                                N=c(0,50),
+                                O=c(0,50),
+                                S=c(0,50)), validation = FALSE, charge = 0.0) {
+  ## Construct range strings
+  rstrs <- sapply(names(elements), function(x) paste0(c(x, elements[[x]][1], elements[[x]][2]), sep='', collapse=' '))
+  ## Get MF range object
+  mfRange <- .jcall("org/guha/rcdk/util/Misc",
+                    "Lorg/openscience/cdk/formula/MolecularFormulaRange;",
+                    "getMFRange",
+                    .jarray(rstrs))
+  ## construct generator
+  mfgen <- .jnew("org/openscience/cdk/formula/MolecularFormulaGenerator",
+                 get("dcob", env = .rcdk.GlobalEnv),
+                 as.double(mass-window),
+                 as.double(mass+window),
+                 mfRange)
+}
+
 generate.formula <- function(mass, window=0.01, 
                              elements=list(c("C",0,50),c("H",0,50),c("N",0,50),c("O",0,50),c("S",0,50)), 
                              validation=FALSE, charge=0.0){

@@ -40,6 +40,9 @@ import java.util.*;
 
 public class Misc {
 
+    public Misc() {
+    }
+
     public static void writeMoleculesInOneFile(IAtomContainer[] molecules,
                                                String filename,
                                                int writeProps) throws Exception {

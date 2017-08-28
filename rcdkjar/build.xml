@@ -23,7 +23,7 @@
         <mkdir dir="${build.dir}"/>
         <javac srcdir="${src.dir}" destdir="${build.dir}"
                debug="${debug}" deprecation="${deprecation}"
-               optimize="${optimization}" source="1.7" verbose="no">
+               optimize="${optimization}" source="1.8" verbose="no" target="1.8">
             <classpath refid="project.class.path"/>
             <exclude name="org/guha/rcdk/test/**"/>
             <exclude name="org/guha/rcdk/draw/**"/>
