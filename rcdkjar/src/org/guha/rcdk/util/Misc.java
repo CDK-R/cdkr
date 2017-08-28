@@ -306,6 +306,7 @@ public class Misc {
 
     /**
      * Construct {@link MolecularFormulaRange} object from a text representation of ranges.
+     * Parts of the code lifted from https://github.com/cdk/cdk-paper-3/blob/master/formula_generator_benchmark/CDK/CDKFormulaGeneratorCLI.java
      *
      * @param ranges An array of range strings, of the form <code>X min max</code>, where
      *               <code>X</code> is the element symbol, <code>min</code> is the minimum
