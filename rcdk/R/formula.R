@@ -167,7 +167,10 @@ generate.formula2 <- function(mass, window = 0.01,
                                 H=c(0,50),
                                 N=c(0,50),
                                 O=c(0,50),
-                                S=c(0,50)), validation = FALSE, charge = 0.0) {
+                                S=c(0,50)),
+                              validation = FALSE,
+                              charge = 0.0,
+                              as.string=TRUE) {
   ## Construct range strings
   rstrs <- sapply(names(elements), function(x) paste0(c(x, elements[[x]][1], elements[[x]][2]), sep='', collapse=' '))
   ## Get MF range object
@@ -176,11 +179,39 @@ generate.formula2 <- function(mass, window = 0.01,
                     "getMFRange",
                     .jarray(rstrs))
   ## construct generator
-  mfgen <- .jnew("org/openscience/cdk/formula/MolecularFormulaGenerator",
+  mfgen <- .jnew("org/openscience/cdk/formula/RoundRobinFormulaGenerator",
                  get("dcob", env = .rcdk.GlobalEnv),
                  as.double(mass-window),
                  as.double(mass+window),
                  mfRange)
+
+  hasNext <- NA
+  formula <- NA
+  
+  ## hasNx <- function() {
+  ##   hasNext <<- .jcall(mfgen, "Lorg/openscience/cdk/interfaces/IMolecularFormula;", "getNextFormula")
+  ##   if (is.jnull(hasNext)) {
+  ##     ## nothing to do
+  ##     formula <<- NA
+  ##   } else formula <<- hasNext
+  ##   return(!is.jnull(hasNext))
+  ## }
+  
+  nextEl <- function() {
+    hasNext <<- NA
+    formula <- .jcall(mfgen, "Lorg/openscience/cdk/interfaces/IMolecularFormula;", "getNextFormula")
+    if (is.jnull(formula)) stop("StopIteration")
+    if (!as.string) {
+      return(formula)
+    } else {
+      return(.jcall("org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator", "S", "getString", formula))
+    }
+  }
+
+  ##obj <- list(nextElem = nextEl, hasNext = hasNx)
+  obj <- list(nextElem = nextEl)  
+  class(obj) <- c("generate.formula2", "abstractiter", "iter")
+  return(obj)
 }
 
 generate.formula <- function(mass, window=0.01, 
