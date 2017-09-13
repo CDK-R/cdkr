@@ -6,7 +6,7 @@ fp.sim.matrix <- function(fplist, fplist2=NULL, method='tanimoto') {
       sim <- do.call('rbind', lapply(fplist,
                                      function(fp) unlist(lapply(fplist2,
                                                                 function(x) distance(x,fp, method=method)))))
-      diag(sim) <- 1.0
+      ##diag(sim) <- 1.0
       return(sim)
   }
 
