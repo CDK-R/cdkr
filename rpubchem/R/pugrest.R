@@ -46,7 +46,7 @@
     else if ("Table" %in% names(info)) {
       return(.handle.json.table(info$Table))
     }
-    ret <- data.frame(val=val)
+    ret <- data.frame(val=val, stringsAsFactors=FALSE)
     if (info.name != '') {
       names(ret) <- sprintf("%s.%s", n, info.name)
     } else {
@@ -69,7 +69,7 @@
                 StringValue = as.character(v),
                 DateValue = as.character(v),
                 BinaryValue = as.character(v))
-    df <- data.frame(v)
+    df <- data.frame(v, stringsAsFactors=FALSE)
     names(df) <- k
     return(df)
   })

@@ -136,8 +136,8 @@ get.cid <- function(cid, quiet=TRUE) {
   ids <- .section.by.heading(ids$Section, "Computed Descriptors")
   ivals <- lapply(ids$Section, .section.handler)
   ivals.unlisted <- unlist(Filter(function(x) !is.null(x), ivals), recursive=TRUE)
-  ivals <- do.call(cbind, as.list(ivals.unlisted)  )
-  
+  ivals <- data.frame(do.call(cbind, as.list(ivals.unlisted)), stringsAsFactors=FALSE)
+
   ## Process chemprops
   props <- .section.by.heading(sections, "Chemical and Physical Properties")
   if (is.null(props)) {
@@ -168,7 +168,7 @@ get.cid <- function(cid, quiet=TRUE) {
       evals <- do.call(cbind, evals)
   }
 
-  return(data.frame(CID=cid, ivals, cvals, evals))
+  return(data.frame(CID=cid, ivals, cvals, evals, stringsAsFactors=FALSE))
 }
 
 ## .get.cid.old  <- function(cid, quiet=TRUE, from.file=FALSE) {

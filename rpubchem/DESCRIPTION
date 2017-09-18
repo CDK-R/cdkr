@@ -1,6 +1,6 @@
 Package: rpubchem
-Version: 1.5.13
-Date: 2017-07-17
+Version: 1.5.14
+Date: 2017-09-17
 Title: An Interface to the PubChem Collection
 Authors@R: c(person("Rajarshi", "Guha", email="rajarshi.guha@gmail.com", role=c("aut","cre")),
              person("John", "Buonagurio", email="jbuonagurio@exponent.com", role=c("ctb")))
