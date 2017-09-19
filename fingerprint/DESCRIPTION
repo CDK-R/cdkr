@@ -4,6 +4,7 @@ Date: 2017-09-13
 Title: Functions to Operate on Binary Fingerprint Data
 Author: Rajarshi Guha <rajarshi.guha@gmail.com>
 Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
+BugReports: https://github.com/rajarshi/cdkr/issues
 Description: Functions to manipulate binary fingerprints
  of arbitrary length. A fingerprint is represented by an object of S4 class 'fingerprint'
  which is internally represented a vector of integers, such
