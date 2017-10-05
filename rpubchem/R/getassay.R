@@ -126,7 +126,7 @@ find.assay.id <- function(query, quiet=TRUE) {
   url <- URLencode(paste(searchURL,query,sep='',collapse=''))
                                         #tmpdest <- tempfile(pattern = 'search')
   ## first get the count of results
-  curl <- getCurlHandle()
+  curlHandle <- getCurlHandle()
   res <- dynCurlReader()
   curlPerform(url=url, curl=curlHandle, writefunction = res$update)
   xml <- xmlInternalTreeParse(res$value())
