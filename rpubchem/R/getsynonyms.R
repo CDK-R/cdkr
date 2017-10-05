@@ -56,18 +56,20 @@ get.synonyms <- function(name, idtype = NULL, quiet=TRUE)
         field = NULL
         if (is.null(idtype)) {
           field <- "name="
-          endpoint <- "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/synonyms/XML"
+          endpoint <- "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/name/%s/synonyms/XML"
         } else if (idtype == 'inchikey') {
           field <- "inchikey="
-          endpoint <- "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/inchikey/synonyms/XML"
+          endpoint <- "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/inchikey/%s/synonyms/XML"
         } else if (idtype == 'cid') {
           field <- "cid="
-          endpoint <- "http://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/synonyms/XML"
+          endpoint <- "https://pubchem.ncbi.nlm.nih.gov/rest/pug/compound/cid/%s/synonyms/XML"
         } else stop("Invalid idtype specified")
 
         res <- dynCurlReader()
-        curlPerform(postfields=paste0(field, compound), url=endpoint, post=1L,
-                    curl=curlHandle, writefunction = res$update)
+        curlPerform(##postfields=paste0(field, compound),
+            url=sprintf(endpoint, URLencode(compound)),
+            ##post=1L,
+            curl=curlHandle, writefunction = res$update)
         doc <- xmlInternalTreeParse(res$value())
         rootNode <- xmlName(xmlRoot(doc))
         if (rootNode == "InformationList") {
