@@ -168,7 +168,32 @@ get.cid <- function(cid, quiet=TRUE) {
       evals <- do.call(cbind, evals)
   }
 
-  return(data.frame(CID=cid, ivals, cvals, evals, stringsAsFactors=FALSE))
+  ## Record descriptions, added as attrs to the final data.frame
+  .find.ref.by.id <- function(rid) Filter(function(x) as.numeric(x$ReferenceNumber) == rid, record$Reference)
+  
+  ids <- .section.by.heading(sections, "Names and Identifiers")
+  ids <- .section.by.heading(ids$Section, "Record Description")
+  si.items <- lapply(ids$Information, function(x) {
+      if ("Description" %in% names(x)) {
+          desc <- x$Description
+      } else desc <- ""
+      ref <- as.numeric(x$ReferenceNumber)
+      val <- x$StringValue
+
+      refitem <- .find.ref.by.id(ref)
+      if (length(refitem) == 1)
+          refitem = refitem[[1]]
+      
+      list(refnum=ref, desc=desc, value=val,
+           refsource=refitem$SourceName,
+           refsourceid=refitem$SourceID,
+           refurl=refitem$URL)
+  })
+
+  ret <- data.frame(CID=cid, ivals, cvals, evals, stringsAsFactors=FALSE)
+  attr(ret, "Summary.Information") <- si.items
+  
+  return(ret)
 }
 
 ## .get.cid.old  <- function(cid, quiet=TRUE, from.file=FALSE) {

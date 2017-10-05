@@ -19,7 +19,7 @@ get.cid(cid, quiet=TRUE)
   \item{quiet}{If \code{FALSE}, output is verbose}
 }
 \value{
-  A \code{data.frame} with at least 23 columns including the CID, IUPAC name, InChI and InChI key, canonical SMILES and a variety of molecular descriptors. In addition, a few physical properties  are also included.
+  A \code{data.frame} with at least 23 columns including the CID, IUPAC name, InChI and InChI key, canonical SMILES and a variety of molecular descriptors. In addition, a few physical properties  are also included. The text from the \code{Summary Information} section of the compound page page is included as an attribute of the \code{data.frame} with the name \code{Summary.Information}.
 }
 \details{The method currently queries PubChem via the PUG REST interface. Since the method 
 processes a single CID at a time, the user can parallelize processing. However, this is usually 
