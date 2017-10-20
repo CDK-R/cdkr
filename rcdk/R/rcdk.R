@@ -37,8 +37,8 @@
   
   #check Java Version 
   jversion <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
-  jversionmajor <- as.numeric(paste0(strsplit(jversion, "\\.")[[1]][1], collapse = "."))
-  try(jversionminor <- as.numeric(paste0(strsplit(jversion, "\\.")[[1]][2], collapse = ".")))
+  jversionmajor <- as.numeric(paste0(strsplit(jversion, "(\\.|\\+)")[[1]][1], collapse = "."))
+  try(jversionminor <- as.numeric(paste0(strsplit(jversion, "(\\.|\\+)")[[1]][2], collapse = ".")))
   isjavagood <- jversionmajor >=7 || (jversionmajor==1 && jversionminor >= 7)
   
   if (isjavagood == FALSE) { stop("
