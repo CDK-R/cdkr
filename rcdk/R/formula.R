@@ -161,7 +161,7 @@ get.isotopes.pattern <- function(formula,minAbund=0.1){
 ##  a mass tolerance.
 ########################################################
 
-generate.formula2 <- function(mass, window = 0.01,
+generate.formula.iter <- function(mass, window = 0.01,
                               elements = list(
                                 C=c(0,50),
                                 H=c(0,50),
