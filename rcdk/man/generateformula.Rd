@@ -56,7 +56,7 @@ for (i in mfSet) {
 }
 
 mit <- generate.formula.iter(18.03383,charge=1,
-                          elements=list(elements=list(C=c(0,50), H=c(0,50), N=c(0,50))))
+                          elements=list(C=c(0,50), H=c(0,50), N=c(0,50))))
 hit <- ihasNext(it)
 while (hasNext(hit)) 
   print(nextElem(hit))			  
