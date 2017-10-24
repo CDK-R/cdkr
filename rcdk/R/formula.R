@@ -175,6 +175,7 @@ generate.formula.iter <- function(mass, window = 0.01,
   rstrs <- sapply(names(elements), function(x) paste0(c(x, elements[[x]][1], elements[[x]][2]), sep='', collapse=' '))
   if (length(rstrs) == 0)
     warning("The element specification resulted in a 0 length vector. This is worrisome")
+  
   ## Get MF range object
   mfRange <- .jcall("org/guha/rcdk/util/Misc",
                     "Lorg/openscience/cdk/formula/MolecularFormulaRange;",
