@@ -49,6 +49,7 @@ generate.formula.iter(mass, window = 0.01,
 	List of \code{IMolecularFormula} objects or strings, representing molecular formulae
 }
 \examples{
+
 mfSet <- generate.formula(18.03383,charge=1,
                           elements=list(c("C",0,50),c("H",0,50),c("N",0,50)))
 for (i in mfSet) {
@@ -56,10 +57,10 @@ for (i in mfSet) {
 }
 
 mit <- generate.formula.iter(18.03383,charge=1,
-                          elements=list(c("C",0,50),c("H",0,50),c("N",0,50)))
-hit <- ihasNext(it)
-while (hasNext(hit)) 
-  print(nextElem(hit))			  
+                          elements=list(C=c(0,50), H=c(0,50), N=c(0,50)))
+hit <- itertools::ihasNext(mit)
+while (itertools::hasNext(hit)) 
+  print(iterators::nextElem(hit))			  
 }
 \keyword{programming}
 \seealso{
