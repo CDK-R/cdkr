@@ -13,7 +13,7 @@
 #' get.adjacency.matrix(m)
 #' @export
 get.adjacency.matrix <- function(mol) {
-    am <- .jcall('org.openscience.cdk.graph.matrix.AdjacencyMatrix','[[I','getMatrix',m)
+    am <- .jcall('org.openscience.cdk.graph.matrix.AdjacencyMatrix','[[I','getMatrix', mol)
     do.call(rbind, lapply(am, .jevalArray))
 }
 
@@ -32,6 +32,6 @@ get.adjacency.matrix <- function(mol) {
 #' get.connection.matrix(m)
 #' @export
 get.connection.matrix <- function(mol) {
-    cm <- .jcall('org.openscience.cdk.graph.matrix.ConnectionMatrix','[[D','getMatrix',m)
+    cm <- .jcall('org.openscience.cdk.graph.matrix.ConnectionMatrix','[[D','getMatrix', mol)
     do.call(rbind, lapply(cm, .jevalArray))
 }
