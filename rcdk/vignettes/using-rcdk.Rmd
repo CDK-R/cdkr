@@ -1,15 +1,19 @@
 ---
-title: "Using rcdk"
+title: "Using the CDK from R"
 author: "Rajarshi Guha"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette
+output: rmarkdown::html_vignette:
+		toc: true
+	
 vignette: >
-  %\VignetteIndexEntry{Using rcdk}
+  %\VignetteIndexEntry{Using the CDK from R}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-# Introduction
+# Using the CDK from R
+
+## Introduction
 
 Given that much of cheminformatics involves mathematical and statistical
 modeling of chemical information, R is a natural platform for such work.
@@ -19,16 +23,18 @@ run these applications to generate data that is then imported into R, it can
 be convenient to be able to manipulate chemical structures and generate
 chemical information with the R environment.
 
-The CDK is a Java library for cheminformatics that supports a wide variety
+The [CDK](https://cdk.github.io) is a Java library for cheminformatics that supports a wide variety
 of cheminformatics functionality ranging from reading molecular file
 formats, performing ring perception and armaticity detection to fingerprint
-generation and molecular descriptors.
+generation and molecular descriptors. The CDK website provides links to useful documentation as well as complete [Javadocs](https://cdk.github.io/cdk/2.0/docs/api/index.html?overview-summary.html)
+
+## Getting started
 
 The goal of the `rcdk` package is to allow an R user to access the cheminformatics
-functionality of the CDK from within R. While one can use the
-rJava package to make direct calls to specific methods in the CDK, from R,
+functionality of the [CDK](https://cdk.github.io) from within R. While one can use the
+rJava package to make direct calls to specific methods in the [CDK](https://cdk.github.io), from R,
 such usage does not usually follow common R idioms. Thus `rcdk` aims to 
- allow users to use the CDK classes and methods in an R-like fashion.
+ allow users to use the [CDK](https://cdk.github.io) classes and methods in an R-like fashion.
 
 The library is loaded as follows
 ```{r echo=TRUE}
@@ -41,7 +47,7 @@ Molecules names are used as row names:
 ```{r echo=FALSE}
 str(bpdata)
 ```
-# Input and Output
+## Input and Output
 
 Chemical structures come in a variety of formats and the CDK supports
 many of them. Many such formats are disk based and these files can be
@@ -117,7 +123,7 @@ get.smiles(mols[[1]])
 unlist(lapply(mols, get.smiles))
  ```
 
-# Visualization
+## Visualization
 
 The `rcdk` package supports 2D rendering of chemical structures. This can be
 used to view the structure of individual molecules or multiple molecules in
@@ -128,7 +134,7 @@ associated with the molecules.
 Due to Java event handling issues on OS X, depictions are handled using an external helper, which means that 
 depiction generation can be slower on OS X compared to other platforms. 
 
-Molecule visualization is performed using the `view.molecule.2d` function. For viewing a single molecule or a list of multiple molecules, it is simply
+Molecule visualization is performed using the `view.molecule.2d` function. This handles individual molecules as well as a list of molecules. In the latter case, the depictions are arranged in a grid (with 4 columns by default).
 ```{r eval=FALSE}
 smiles <- c('CCC', 'CCN', 'CCN(C)(C)',
             'c1ccccc1Cc1ccccc1',
@@ -137,17 +143,104 @@ mols <- parse.smiles(smiles)
 view.molecule.2d(mols[[1]])
 view.molecule.2d(mols)
 ```
+The CDK depiction routines allow for extensive customization. These customizations can be accessed by creating a depictor object using `get.depictor`, which allows you to specify the size of the depiction, the depiction style (black and white, color on white, etc.), atom annotations (e.g., atom index), whether functional group abbreviations should be used or not and so on.
+```{r eval=FALSE}
+depictor <- get.depictor(style='cob', abbr='reagents', width=300, height=300)
+view.molecule.2d(mols[[5]], depictor=depictor)
+```
+Once you have a depictor object, you can set individual properties using the `$` notation. This can be useful if you plan to generate a lot of depictions so that a new depictor is not recreated for each new structure.
+```{r eval=FALSE}
+depictor <- get.depictor(style='cob', abbr='reagents', width=300, height=300)
+view.molecule.2d(mols[[5]], depictor=depictor)
+depictor$setStyle('cow')
+view.molecule.2d(mols[[5]], depictor=depictor)
+```
 
-# Manipulating Molecules
+The method also allows you to highlight substructures using [SMARTS](https://en.wikipedia.org/wiki/Smiles_arbitrary_target_specification). This is useful in highlight commen substructures in a set of molecules
+```{r eval=FALSE}
+depictor <- get.depictor(style='cob', abbr='reagents', sma='N(C)(C)')
+view.molecule.2d(mols, depictor=depictor)
+```
 
-## Adding Information to Molecules
+In many cases, it is useful to view a “molecular spreadsheet”, which is a table
+of molecular structures along with information (numeric or textual) related to the molecules being viewed. The data is arranged in a spreadsheet like manner, with one of the columns
+being molecules and the remainder being textual or numeric information.
 
-## Atoms and Bonds
+This can be achieved using the `view.table` method which takes a list of
+molecule objects and a `data.frame` containing the associated data. As expected,
+the number of rows in the `data.frame` should equal the length of
+the molecule list. Note that currently, there is not explicit binding between the rows of the `data.frame` and the elements of the list containing the molecules. Thus the user should take care that the ordering of the `data.frame` matches that of the list.
+```{r eval=FALSE}
+smiles <- c('CCC', 'CCN', 'CCN(C)(C)','c1ccccc1Cc1ccccc1')
+mols <- parse.smiles(smiles)
+dframe <- data.frame(x = runif(4),
+  toxicity = factor(c('Toxic', 'Toxic', 'Nontoxic', 'Nontoxic')),
+  solubility = c('yes', 'yes', 'no', 'yes'))
+view.table(mols, dframe)
+```
 
-## Substructure matching
+While the `view.molecule.2d` function is useful to visualize structures, the depictions can't be included in other visualizations such as plots. For such use cases, the `view.image.2d` function produces a raster image that can be included in plots. This function handles one molecule at a time.
+```{r eval=FALSE}
+img <- view.image.2d(parse.smiles("B([C@H](CC(C)C)NC(=O)[C@H](CC1=CC=CC=C1)NC(=O)C2=NC=CN=C2)(O)O")[[1]])
+plot(1:10, 1:10, pch=19)
+rasterImage(img, 0,8, 2,10)
+```
 
-# Molecular Descriptors
+Finally, the `copy.image.to.clipboard` function allows you to copy a depiction to the system clipboard, from where it can be pasetd into other applications. This can be more convenient than saving a raster image.
 
-# Fingerprints
+## Manipulating Molecules
 
-# Handling Molecular Formulae
+### Adding Information to Molecules
+
+### Atoms and Bonds
+
+### Substructure matching
+
+## Molecular Descriptors
+
+## Fingerprints
+
+Fingerprints are a common representation used for a variety of purposes such as similarity searching and predictive modeling. The [CDK](https://cdk.github.io/) provides a variety of fingerprints ranging from path-based hashed fingerprints to circular (specifically, an implementation fo the [ECFP](http://pubs.acs.org/doi/abs/10.1021/ci100050t) fingerprints) and signature fingerprints (based on the [signature](http://pubs.acs.org/doi/abs/10.1021/ci020345w) molecular descriptor). Some of the fingerprints are represented as binary strings and other by integer vectors. The `rcdk` employs the [fingerprint](https://cran.rstudio.com/web/packages/fingerprint/index.html) package to support operations on the resultant fingerprints.
+
+In this section, we present an example of using fingerprints to generate a hierarchical clustering of a set of molecules from the included boiling point dataset. We first parse the SMILES for the molecules in the dataset and then compute the fingerprints, specifying the `circular` type.
+```{r}
+data(bpdata)
+mols <- parse.smiles(bpdata[,1])
+fps <- lapply(mols, get.fingerprint, type='circular')
+```
+
+With the fingerprints, we can then compute a pairwise similarity matrix using the [Tanimoto](https://en.wikipedia.org/wiki/Chemical_similarity) metric. Since R's `hclust` method requires a distance matrix, we convert the similarity matrix to a distance matrix
+```{r}
+fp.sim <- fingerprint::fp.sim.matrix(fps, method='tanimoto')
+fp.dist <- 1 - fp.sim
+```
+Finally, we can perform the clustering. In this case we use the `hclust` method though any of R's clustering methods could be used.
+```{r}
+cls <- hclust(as.dist(fp.dist))
+plot(cls, main='A Clustering of the BP dataset', labels=FALSE)
+```
+
+Another common task for fingerprints is similarity searching. That is, 
+given a collection of _target_ molecules, find those molecules that are similar
+to a _query_ molecule. This is achieved by evaluating a similarity metric
+between the query and each of the target molecules. Those target molecules
+exceeding a user defined cutoff will be returned. With the help of the [fingerprint](https://cran.rstudio.com/web/packages/fingerprint/index.html) package this is easily accomplished.
+
+For example, we can identify all the molecules in the BP dataset that have
+a Tanimoto similarity of 0.3 or more with acetalehyde, and then create a tabular
+summary. Note that this could also be accomplished with
+molecular descriptors, in which case you’d probably evaluate the Euclidean
+distance between descriptor vectors.
+
+```{r}
+query.mol <- parse.smiles('CC(=O)')[[1]]
+target.mols <- parse.smiles(bpdata[,1])
+query.fp <- get.fingerprint(query.mol, type='circular')
+target.fps <- lapply(target.mols, get.fingerprint, type='circular')
+sims <- data.frame(sim=do.call(rbind, lapply(target.fps,
+     fingerprint::distance,
+     fp2=query.fp, method='tanimoto')))
+subset(sims, sim >= 0.3)
+```
+
+## Handling Molecular Formulae
