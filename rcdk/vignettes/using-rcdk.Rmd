@@ -61,9 +61,9 @@ Note that the above function will load any file format that is supported by
 the CDK, so there’s no need to specify formats. In addition one can specify a
 URL (which should start with `http://`) to specify remote files as well. The
 result of this function is a list of molecule objects. The molecule objects
-are of class `jobjRef` (provided by the rJava package). As a result,they
+are of class `jobjRef` (provided by the [rJava](https://cran.r-project.org/web/packages/rJava/index.html) package). As a result,they
 are pretty opaque to the user and are really meant to be processed using
-methods from the rcdk or rJava packages.
+methods from the `rcdk` or [rJava](https://cran.r-project.org/web/packages/rJava/index.html) packages.
 
 However, since it loads all the molecules from the specified file into a list,
 large files can lead to out of memory errors. In such a situtation it is preferable
@@ -180,23 +180,198 @@ view.table(mols, dframe)
 ```
 
 While the `view.molecule.2d` function is useful to visualize structures, the depictions can't be included in other visualizations such as plots. For such use cases, the `view.image.2d` function produces a raster image that can be included in plots. This function handles one molecule at a time.
-```{r eval=FALSE}
+```{r}
 img <- view.image.2d(parse.smiles("B([C@H](CC(C)C)NC(=O)[C@H](CC1=CC=CC=C1)NC(=O)C2=NC=CN=C2)(O)O")[[1]])
 plot(1:10, 1:10, pch=19)
-rasterImage(img, 0,8, 2,10)
+rasterImage(img, 1,6, 5,10)
 ```
 
-Finally, the `copy.image.to.clipboard` function allows you to copy a depiction to the system clipboard, from where it can be pasetd into other applications. This can be more convenient than saving a raster image.
+Finally, the `copy.image.to.clipboard` function allows you to copy a depiction to the system clipboard, from where it can be pasted into other applications. This can be more convenient than saving a raster image.
 
 ## Manipulating Molecules
 
+In general, given a `jobjRef` for a molecule object one can access all the
+class and methods of the [CDK](https://cdk.github.io) library via rJava. However this can be
+cumbersome. The `rcdk` package exposes methods and
+classes that manipulate molecules.
+
 ### Adding Information to Molecules
+
+In many scenarios it’s useful to associate information with molecules. Within
+R, you could always create a `data.frame` and store the molecule objects
+along with relevant information in it. However, when serializing the molecules,
+you want to be able to store the associated information with the structure itself (though keep in mind that only certain chemical file formats support metadata along with the structure).
+
+Using the [CDK](https://cdk.github.io) it’s possible to directly add information to a molecule object
+using properties. Note that adding such properties uses a key-value
+paradigm, where the key should be of class character. The value can be
+of class `integer`, `double`, `character` or `jobjRef`. Obviously, after setting
+a property, you can get a property by its key.
+
+```{r}
+mol <- parse.smiles('c1ccccc1')[[1]]
+set.property(mol, "title", "Molecule 1")
+set.property(mol, "hvyAtomCount", 6)
+get.property(mol, "title")
+```
+It is also possible to get all available properties at once in the from of a list.
+The property names are used as the list names.
+```{r}
+get.properties(mol)
+```
+After adding such properties to the molecule, you can write it out to an SD
+file, so that the property values become SD tags.
+```{r eval=FALSE}
+write.molecules(mol, 'tagged.sdf', write.props=TRUE)
+```
 
 ### Atoms and Bonds
 
+Probably the most important thing to do is to get the atoms and bonds of
+a molecule. The code below gets the atoms and bonds as lists of `jobjRef`
+objects, which can be manipulated using rJava or via other methods of this
+package.
+```{r}
+mol <- parse.smiles('c1ccccc1C(Cl)(Br)c1ccccc1')[[1]]
+atoms <- get.atoms(mol)
+bonds <- get.bonds(mol)
+cat('No. of atoms =', length(atoms), '\n')
+cat('No. of bonds =', length(bonds), '\n')
+```
+Given an atom the `rcdk` package does not offer a lot of methods
+to operate on it. One must access the [CDK](https://cdk.github.io) directly.
+In the future more
+manipulators will be added. Right now, you can get the symbol for each
+atom
+
+```{r}
+unlist(lapply(atoms, get.symbol))
+```
+It’s also possible to get the 3D (or 2D coordinates) for an atom.
+```{r}
+coords <- get.point3d(atoms[[1]])
+```
+Given this, it’s quite easy to get the 3D coordinate matrix for a molecule
+```{r}
+coords <- do.call('rbind', lapply(atoms, get.point3d))
+```
+Once you have the coordinate matrix, a quick way to check whether the
+molecule is flat is to do
+```{r}
+if ( any(apply(coords, 2, function(x) length(unique(x))) == 1) ) {
+    print("molecule is flat")
+}
+```
+This is quite a simplistic check that just looks at whether the X, Y or
+Z coordinates are constant. To be more rigorous one could evaluate the
+moments of inertia about the axes.
+
 ### Substructure matching
 
+The [CDK](https://cdk.github.io) library supports substructure searches using [SMARTS](https://en.wikipedia.org/wiki/Smiles_arbitrary_target_specification) (or SMILES)
+patterns. The implementation allows one to check whether a target molecule
+contains a substructure or not as well as to retrieve the atoms and bonds
+of the target molecule that match the query substructure. At this point,
+the `rcdk` only support the former operation - given a query pattern, does it
+occur or not in a list of target molecules. The `matches` method of this package
+returns a logical vector where the $i$'th element is `TRUE` if the $i$'th target molecules contains the query substructure. An example of its
+usage would be to identify molecules that contain a carbon atom that has
+exactly two bonded neighbors.
+```{r}
+mols <- parse.smiles(c('CC(C)(C)C','c1ccc(Cl)cc1C(=O)O', 'CCC(N)(N)CC'))
+query <- '[#6D2]'
+matches(query, mols)
+```
+
 ## Molecular Descriptors
+
+A key requirement for the predictive modeling of molecular properties and activities are [molecular descriptors](https://en.wikipedia.org/wiki/Molecular_descriptor) - numerical charaterizations of the molecular structure.  The [CDK](https://cdk.github.io/) implements a variety of molecular descriptors, categorized into topological, constitutional, geometric, electronic and hybrid. It is possible to evaluate all available descriptors at one go, or evaluate individual descriptors.
+
+First, we can take a look at the available descriptor categories.
+```{r}
+dc <- get.desc.categories()
+dc
+```
+Given the categories we can get the names of the descriptors for a single
+category. Of course, you can always provide the category name directly.
+```{r}
+dn <- get.desc.names(dc[4])
+dn
+```
+Each descriptor name is actually a fully qualified Java class name for the
+corresponding descriptor. These names can be supplied to `eval.desc` to
+evaluate a single or multiple descriptors for one or more molecules.
+```{r eval=FALSE}
+aDesc <- eval.desc(mol, dn[4])
+allDescs <- eval.desc(mol, dn)
+```
+
+The return value of eval.desc is a `data.frame` with the descriptors in the
+columns and the molecules in the rows. For the above example we get a single
+row. But given a list of molecules, we can easily get a descriptor matrix.
+
+For example, let's build a linear regression model to predict boiling points
+for the BP dataset. First we need a set of descriptors and so we evaluate
+all available descriptors. Also note that since a descriptor might belong to
+more than one category, we should obtain a unique set of descriptor names
+```{r}
+descNames <- unique(unlist(sapply(get.desc.categories(), get.desc.names)))
+```
+For the current discussion we focus on a few, manually selected descriptors
+that we know will be related to boiling point.
+```{r}
+data(bpdata)
+mols <- parse.smiles(bpdata[,1])
+descNames <- c(
+ 'org.openscience.cdk.qsar.descriptors.molecular.KierHallSmartsDescriptor',
+ 'org.openscience.cdk.qsar.descriptors.molecular.APolDescriptor',
+ 'org.openscience.cdk.qsar.descriptors.molecular.HBondDonorCountDescriptor')
+descs <- eval.desc(mols, descNames)
+class(descs)
+dim(descs)
+```
+When a descriptor value cannot be computed, it's value is set to `NA`. This may happen if a descriptor requires 3D coordinates, but only 2D coordinates are available. In this case, we have manually selected descriptors such that there will be no undefined values.
+
+Given the ubiquity of certain descriptors, some of them are directly available
+via their own functions. Specifically, one can calculate [TPSA](https://www.ncbi.nlm.nih.gov/pubmed/19149561) (topological
+polar surface area), [AlogP](http://pubs.acs.org/doi/abs/10.1021/jp980230o) and [XlogP](http://www.compchemcons.com/xlogp/xlogp.html) without having to go through
+`eval.desc`. (Note that AlogP and XlogP assume that hydrogens are explicitly specified in the molecule. This may not be true if the molecules were obtained from SMILES)
+```{r}
+mol <- parse.smiles('CC(=O)CC(=O)NCN')[[1]]
+convert.implicit.to.explicit(mol)
+get.tpsa(mol)
+get.xlogp(mol)
+get.alogp(mol)
+```
+
+Now that we have a descriptor matrix, we easily build a linear
+regression model. First, remove `NA`’s, correlated and constant columns. The
+code is shown below, but since it involves a stochastic element, we will not
+run it for this example. If we were to perform feature selection, then this
+type of reduction would have to be performed.
+
+```{r}
+descs <- descs[, !apply(descs, 2, function(x) any(is.na(x)) )]
+descs <- descs[, !apply( descs, 2, function(x) length(unique(x)) == 1 )]
+r2 <- which(cor(descs)^2 > .6, arr.ind=TRUE)
+r2 <- r2[ r2[,1] > r2[,2] , ]
+descs <- descs[, -unique(r2[,2])]
+```
+
+Note that the above correlation reduction step is pretty crude and there
+are better ways to do it. Given the reduced descriptor matrix, we can
+perform feature selection (say using [leaps](https://cran.r-project.org/web/packages/leaps/index.html), [caret](https://cran.r-project.org/web/packages/caret/index.html) or a [GA](https://cran.r-project.org/web/packages/GenAlgo/index.html) to identify a suitable
+subset of descriptors. Given that we selected the descriptors by hand, we can skip this section, and directly build the model and generate a plot of predicte versus observed BP. (Note that this is a toy example and is not an example of good QSAR practice!)
+```{r}
+model <- lm(BP ~ khs.sCH3 + khs.sF + apol + nHBDon, data.frame(bpdata, descs))
+summary(model)
+plot(bpdata$BP, predict(model, descs),
+     xlab="Observed BP", ylab="Predicted BP",
+     pch=19, xlim=c(100, 700), ylim=c(100, 700))
+abline(0,1, col='red')
+```
+ 
+
 
 ## Fingerprints
 
