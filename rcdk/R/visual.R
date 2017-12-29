@@ -100,7 +100,7 @@ view.molecule.2d <- function(molecule, ncol = 4, width = 200, height = 200, depi
       else
         sma = depictor$getSma()
 
-      cmd <- sprintf('java -cp \"%s/cont/*:%s/cont/rcdk.jar\" org.guha.rcdk.app.OSXHelper viewMolecule2D "%s" %d %d %f %s %s %s %s %s %d %s &', rcdklibs, jarfile, smi,
+      cmd <- sprintf('java -cp \"%s/cont/*:%s/cont/rcdk.jar\" org.guha.rcdk.app.OSXHelper viewMolecule2D "%s" %d %d %f %s %s %s %s %s %d "%s" &', rcdklibs, jarfile, smi,
                      depictor$getWidth(), depictor$getHeight(),
                      depictor$getZoom(), depictor$getStyle(), depictor$getAnnotate(),
                      depictor$getAbbr(), depictor$isSuppressh(), depictor$isShowTitle(),
@@ -124,7 +124,7 @@ view.molecule.2d <- function(molecule, ncol = 4, width = 200, height = 200, depi
       } else {
         sma = depictor$getSma()
       }
-      cmd <- sprintf('java -cp \"%s/cont/*:%s/cont/rcdk.jar\" org.guha.rcdk.app.OSXHelper viewMolecule2Dtable "%s" %d %d %f %s %s %s %s %s %d %s %d &',
+      cmd <- sprintf('java -cp \"%s/cont/*:%s/cont/rcdk.jar\" org.guha.rcdk.app.OSXHelper viewMolecule2Dtable "%s" %d %d %f %s %s %s %s %s %d "%s" %d &',
                      rcdklibs, jarfile, tf,
                      depictor$getWidth(), depictor$getHeight(),
                      depictor$getZoom(), depictor$getStyle(), depictor$getAnnotate(),
