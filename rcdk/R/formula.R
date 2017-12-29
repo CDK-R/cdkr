@@ -294,7 +294,7 @@ generate.formula <- function(mass, window=0.01,
       isValid = isvalid.formula(object);
     
     if(isValid==TRUE){ ## if it's true add to the list
-      ecList[count] = object;
+      ecList[[count]] = object;
       count = count+1;
     }
   }
