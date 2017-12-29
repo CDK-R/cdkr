@@ -113,7 +113,7 @@ view.molecule.2d <- function(molecule, ncol = 4, width = 200, height = 200, depi
   } else { ## multiple molecules
     if (is.osx) {
       ## write out mols as a temp smi file
-      smi <- sapply(molecule, get.smiles, type='isomeric')
+      smi <- sapply(molecule, get.smiles, flavor = smiles.flavors(c('Isomeric')))
       titles <- sapply(molecule, get.title)
       tmp <- data.frame(smi, titles)
       tf <- tempfile(pattern='rcdkv-', fileext='.smi')
