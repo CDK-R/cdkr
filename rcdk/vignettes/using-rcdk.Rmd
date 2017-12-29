@@ -2,9 +2,8 @@
 title: "Using the CDK from R"
 author: "Rajarshi Guha"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette:
-		toc: true
-	
+output: rmarkdown::html_vignette: toc: yes
+
 vignette: >
   %\VignetteIndexEntry{Using the CDK from R}
   %\VignetteEngine{knitr::rmarkdown}
@@ -32,12 +31,12 @@ generation and molecular descriptors. The CDK website provides links to useful d
 
 The goal of the `rcdk` package is to allow an R user to access the cheminformatics
 functionality of the [CDK](https://cdk.github.io) from within R. While one can use the
-rJava package to make direct calls to specific methods in the [CDK](https://cdk.github.io), from R,
+[rJava](https://cran.r-project.org/web/packages/rJava/index.html) package to make direct calls to specific methods in the [CDK](https://cdk.github.io), from R,
 such usage does not usually follow common R idioms. Thus `rcdk` aims to 
  allow users to use the [CDK](https://cdk.github.io) classes and methods in an R-like fashion.
 
 The library is loaded as follows
-```{r echo=TRUE}
+```{r}
 library(rcdk)
 ```
 The package also provides an example data set, called `bpdata` which contains
@@ -45,6 +44,7 @@ The package also provides an example data set, called `bpdata` which contains
 in Kelvin. The `data.frame` has two columns, viz., the SMILES and the BP.
 Molecules names are used as row names:
 ```{r echo=FALSE}
+data(bpdata)
 str(bpdata)
 ```
 ## Input and Output
@@ -77,6 +77,8 @@ while(hasNext(iter)) {
  print(get.property(mol, "cdk:Title"))
 }
 ```
+
+### Parsing SMILES
 
 Another common way to obtain molecule objects is by parsing SMILES
 strings. The simplest way to do this is
@@ -115,6 +117,9 @@ files (which are prefixed by the value of filename):
 ```{r eval=FALSE}
  write.molecules(mols, filename='mymols.sdf', together=FALSE)
  ```
+ 
+### Generating SMILES
+ 
  Finally, we can generate a SMILES representation of a molecule using
  ```{r}
 smiles <- c('CCC', 'c1ccccc1', 'CCCC(C)(C)CC(=O)NC')
@@ -122,6 +127,20 @@ mols <- parse.smiles(smiles)
 get.smiles(mols[[1]])
 unlist(lapply(mols, get.smiles))
  ```
+ The [CDK](https://cdk.github.io) supports a number of _flavors_ when generating SMILES. For example, you can generate a SMILES with or without chirality information or generate SMILES in [Kekule form](https://www.chemguide.co.uk/basicorg/bonding/benzene1.html). The `smiles.flavors` generates an object that represents the various flavors desired for SMILES output. See the [SmiFlavor javadocs](https://cdk.github.io/cdk/2.0/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html) for the full list of possible flavors. Eaxmple usage is
+ ```{r}
+smiles <- c('CCC', 'c1ccccc1', 'CCc1ccccc1CC(C)(C)CC(=O)NC')
+mols <- parse.smiles(smiles)
+get.smiles(mols[[3]], smiles.flavors(c('UseAromaticSymbols')))
+get.smiles(mols[[3]], smiles.flavors(c('Generic','CxSmiles')))
+```
+Using the [CxSmiles](https://www.chemaxon.com/marvin-archive/latest/help/formats/cxsmiles-doc.html) flavors allows the user to encode a variety of information in the SMILES string, such as 2D or 3D coordinates.
+```{r}
+m <- parse.smiles('CCC')[[1]]
+m <- generate.2d.coordinates(m)
+get.smiles(m, smiles.flavors(c('CxSmiles')))
+get.smiles(m, smiles.flavors(c('CxCoordinates')))
+```
 
 ## Visualization
 
@@ -418,4 +437,3 @@ sims <- data.frame(sim=do.call(rbind, lapply(target.fps,
 subset(sims, sim >= 0.3)
 ```
 
-## Handling Molecular Formulae
