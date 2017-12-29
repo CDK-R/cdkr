@@ -105,7 +105,7 @@ isvalid.formula(formula,rule=c("nitrogen","RDBE"))
 ```
 The `generate.formula` method can perform these validation tests during formula generation by setting `validation=TRUE`. However, this can significantly slow down the process of genersating formulae, especially with larger mass windows. When the default of `FALSE` is used, nonsensical formulae may be generated, and it's up to the user to filter them out.
 
-In contrast, the `generate.formula.iter` method employs the Round Robin formula generation akgorithm, which is significantly faster than the default method. In contrast to `generate/formula`, this method returns an iterator which allows you to process large formula sets without excessive memory usage.
+In contrast, the `generate.formula.iter` method employs the Round Robin formula generation algorithm, which is significantly faster than the default method. In contrast to `generate/formula`, this method returns an iterator which allows you to process large formula sets without excessive memory usage.
 ```{r warn=FALSE}
 mit <- generate.formula.iter(100, charge=0, window=0.1,
                              elements=list(C=c(0,50), H=c(0,50), N=c(0,50)))
@@ -122,7 +122,7 @@ Due to the measurement errors in medium resolution spectrometry, a given
 error window can result in a massive number of candidate formulae. The
 isotope pattern of ions obtained experimentally can be compared with the
 theoretical ones. The best match is reflected as the most probable elemental
-formula. `rcdk` provides the function `get.isotopexss.pattern` which predicts
+formula. `rcdk` provides the function `get.isotope.pattern` which predicts
 the theoretical isotope pattern given a formula.
 
 ```{r}
@@ -133,7 +133,7 @@ isotopes
 
 In this example we generate a formula for a possible compound with a charge
 ($z \approx 0$) containing the standard elements C, H, and Cl. The isotope
-pattern can be visually inspectd, as shown below.
+pattern can be visually inspected, as shown below.
 ```{r}
 plot(isotopes, type="h", xlab="m/z", ylab="Intensity")
 ```
