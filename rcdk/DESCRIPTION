@@ -16,7 +16,9 @@ Imports:
     itertools
 Suggests:
     xtable,
-    RUnit
+    RUnit,
+    knitr,
+    rmarkdown
 SystemRequirements: Java JDK 1.7 or higher
 License: LGPL
 LazyLoad: yes
@@ -25,3 +27,4 @@ Description: Allows the user to access functionality in the
     molecules, evaluate fingerprints, calculate molecular descriptors and so on.
     In addition, the 'CDK' API allows the user to view structures in 2D.
 RoxygenNote: 6.0.1
+VignetteBuilder: knitr

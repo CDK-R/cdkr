@@ -1,0 +1,134 @@
+---
+title: "Using rcdk"
+author: "Rajarshi Guha"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using rcdk}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+# Introduction
+
+Given that much of cheminformatics involves mathematical and statistical
+modeling of chemical information, R is a natural platform for such work.
+There are many cheminformatics applications that will generate useful information
+such as descriptors, fingerprints and so on. While one can always
+run these applications to generate data that is then imported into R, it can
+be convenient to be able to manipulate chemical structures and generate
+chemical information with the R environment.
+
+The CDK is a Java library for cheminformatics that supports a wide variety
+of cheminformatics functionality ranging from reading molecular file
+formats, performing ring perception and armaticity detection to fingerprint
+generation and molecular descriptors.
+
+The goal of the `rcdk` package is to allow an R user to access the cheminformatics
+functionality of the CDK from within R. While one can use the
+rJava package to make direct calls to specific methods in the CDK, from R,
+such usage does not usually follow common R idioms. Thus `rcdk` aims to 
+ allow users to use the CDK classes and methods in an R-like fashion.
+
+The library is loaded as follows
+```{r echo=TRUE}
+library(rcdk)
+```
+The package also provides an example data set, called `bpdata` which contains
+277 molecules, in SMILES format and their associated boiling points (BP)
+in Kelvin. The `data.frame` has two columns, viz., the SMILES and the BP.
+Molecules names are used as row names:
+```{r echo=FALSE}
+str(bpdata)
+```
+# Input and Output
+
+Chemical structures come in a variety of formats and the CDK supports
+many of them. Many such formats are disk based and these files can be
+parsed and loaded by specifying their full paths
+
+```{r, eval=FALSE}
+mols <- load.molecules( c('data1.sdf', '/some/path/data2.sdf') )
+```
+
+Note that the above function will load any file format that is supported by
+the CDK, so there’s no need to specify formats. In addition one can specify a
+URL (which should start with `http://`) to specify remote files as well. The
+result of this function is a list of molecule objects. The molecule objects
+are of class `jobjRef` (provided by the rJava package). As a result,they
+are pretty opaque to the user and are really meant to be processed using
+methods from the rcdk or rJava packages.
+
+However, since it loads all the molecules from the specified file into a list,
+large files can lead to out of memory errors. In such a situtation it is preferable
+to iterate over the file, one structure at a time. Currently this behavior
+is supported for SDF and SMILES files. An example of such a usage for a large
+SD file would be
+```{r eval=FALSE}
+iter <- iload.molecules('verybig.sdf', type='sdf')
+while(hasNext(iter)) {
+ mol <- nextElem(iter)
+ print(get.property(mol, "cdk:Title"))
+}
+```
+
+Another common way to obtain molecule objects is by parsing SMILES
+strings. The simplest way to do this is
+```{r eval=FALSE}
+smile <- 'c1ccccc1CC(=O)C(N)CC1CCCCOC1'
+mol <- parse.smiles(smile)[[1]]
+```
+Usage is more efficient when multiple SMILE are supplied, since then a single
+SMILES parser object is used to parse all the supplied SMILES.
+
+If you plan on parsing a large number of SMILES, you may run into memory
+issues, due to the large size of `IAtomContainer` objects. In such a case, it
+can be useful to call the Java and R garbage collectors explicitly at the
+appropriate time. In addition it can be useful to explicitly allocate a large
+amount of memory for the JVM. For example,
+```{r eval=FALSE}
+options("java.parameters"=c("-Xmx4000m"))
+library(rcdk)
+for (smile in smiles) {
+    m <- parse.smiles(smile)
+    ## perform operations on this molecule
+    
+    jcall("java/lang/System","V","gc")
+    gc()
+}
+```
+Given a list of molecule objects, it is possible to serialize them to a file in
+some specified format. Currently, the only output formats are SMILES or
+SDF. To write molecules to a disk file in SDF format.
+```{r eval=FALSE}
+write.molecules(mols, filename='mymols.sdf')
+```
+By default, if mols is a list of multiple molecules, all of them will be written
+to a single SDF file. If this is not desired, you can write each on to individual
+files (which are prefixed by the value of filename):
+```{r eval=FALSE}
+ write.molecules(mols, filename='mymols.sdf', together=FALSE)
+ ```
+ Finally, we can generate a SMILES representation of a molecule using
+ ```{r}
+smiles <- c('CCC', 'c1ccccc1', 'CCCC(C)(C)CC(=O)NC')
+mols <- parse.smiles(smiles)
+get.smiles(mols[[1]])
+unlist(lapply(mols, get.smiles))
+ ```
+
+# Visualization
+
+# Manipulating Molecules
+
+## Adding Information to Molecules
+
+## Atoms and Bonds
+
+## Substructure matching
+
+# Molecular Descriptors
+
+# Fingerprints
+
+# Handling Molecular Formulae
