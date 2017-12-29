@@ -119,6 +119,25 @@ unlist(lapply(mols, get.smiles))
 
 # Visualization
 
+The `rcdk` package supports 2D rendering of chemical structures. This can be
+used to view the structure of individual molecules or multiple molecules in
+a tabular format. It is also possible to view a molecular-data table, where
+one of the columns is the 2D image and the remainder can contain data
+associated with the molecules.
+
+Due to Java event handling issues on OS X, depictions are handled using an external helper, which means that 
+depiction generation can be slower on OS X compared to other platforms. 
+
+Molecule visualization is performed using the `view.molecule.2d` function. For viewing a single molecule or a list of multiple molecules, it is simply
+```{r eval=FALSE}
+smiles <- c('CCC', 'CCN', 'CCN(C)(C)',
+            'c1ccccc1Cc1ccccc1',
+            'C1CCC1CC(CN(C)(C))CC(=O)CC')
+mols <- parse.smiles(smiles)
+view.molecule.2d(mols[[1]])
+view.molecule.2d(mols)
+```
+
 # Manipulating Molecules
 
 ## Adding Information to Molecules
