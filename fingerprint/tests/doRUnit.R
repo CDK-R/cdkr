@@ -38,7 +38,7 @@ if(require("RUnit", quietly=TRUE)) {
   cat("------------------- UNIT TEST SUMMARY ---------------------\n\n")
   printTextProtocol(tests, showDetails=FALSE)
   #printTextProtocol(tests, showDetails=FALSE,
-                    fileName=paste(pathReport, "Summary.txt", sep=""))
+  #  fileName=paste(pathReport, "Summary.txt", sep=""))
   #printTextProtocol(tests, showDetails=TRUE,
   #                  fileName=paste(pathReport, ".txt", sep=""))
  
