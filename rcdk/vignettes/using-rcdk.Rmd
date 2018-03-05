@@ -39,6 +39,10 @@ The library is loaded as follows
 ```{r}
 library(rcdk)
 ```
+We can also check the version of the [CDK](https://cdk.github.io) that is being used in the package
+```{r}
+cdk.version()
+```
 The package also provides an example data set, called `bpdata` which contains
 277 molecules, in SMILES format and their associated boiling points (BP)
 in Kelvin. The `data.frame` has two columns, viz., the SMILES and the BP.
