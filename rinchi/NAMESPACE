@@ -4,3 +4,4 @@ exportPattern("^[[:alpha:]]+")
 
 # Import all packages listed as Imports or Depends
 import('rJava')
+importFrom(rcdk,parse.smiles)
