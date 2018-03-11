@@ -1,6 +1,6 @@
 Package: rcdk
-Version: 3.4.6
-Date: 2017-12-29
+Version: 3.4.7
+Date: 2018-03-11
 Title: Interface to the 'CDK' Libraries
 Authors@R: c(person('Rajarshi', 'Guha', role=c('aut',"cph"), email='rajarshi.guha@gmail.com'),
              person('Zachary', 'Charlop-Powers', role=c('cre'), email='zach.charlop.powers@gmail.com'),
