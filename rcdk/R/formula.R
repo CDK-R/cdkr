@@ -163,11 +163,11 @@ get.isotopes.pattern <- function(formula,minAbund=0.1){
 
 generate.formula.iter <- function(mass, window = 0.01,
                                   elements = list(
-                                      C=c(0,50),
-                                      H=c(0,50),
-                                      N=c(0,50),
-                                      O=c(0,50),
-                                      S=c(0,50)),
+                                      c('C', 0,50),
+                                      c('H', 0,50),
+                                      c('N', 0,50),
+                                      c('O', 0,50),
+                                      c('S', 0,50)),
                                   validation = FALSE,
                                   charge = 0.0,
                                   as.string=TRUE) {
@@ -176,32 +176,33 @@ generate.formula.iter <- function(mass, window = 0.01,
     ifac <- .jcall("org/openscience/cdk/config/Isotopes",
                    "Lorg/openscience/cdk/config/Isotopes;",
                    "getInstance");
-    for (i in names(elements)) {
+    for (i in 1:length(elements)) {
+      
+      ## If the element list is 3, then we have sym, min, max
+      ## otherwise it should be sym, min, max, massNumber
+      if (length(elements[[i]]) == 3) {
+        isotope <- .jcall(ifac,
+                          "Lorg/openscience/cdk/interfaces/IIsotope;",
+                          "getMajorIsotope",
+                          as.character( elements[[i]][1] ), use.true.class=FALSE)
+      } else if(length(elements[[i]]) == 4) {
+        isotope <- .jcall(ifac,
+                          "Lorg/openscience/cdk/interfaces/IIsotope;",
+                          "getIsotope",
+                          as.character( elements[[i]][1] ),
+                          as.integer( elements[[i]][4] ),
+                          use.true.class=FALSE)
+        if (is.null(isotope)) stop(sprintf("Invalid mass number specified for element %s",elements[[i]][1]))
+      } else stop("Elements must be 3-tuples or 4-tuples")
 
-        ## If the element list is 3, then we have sym, min, max
-        ## otherwise it should be sym, min, max, massNumber
-        if (length(elements[[i]]) == 2) {
-            isotope <- .jcall(ifac,
-                              "Lorg/openscience/cdk/interfaces/IIsotope;",
-                              "getMajorIsotope",
-                              as.character( i ), use.true.class=FALSE)
-        } else if(length(elements[[i]]) == 3) {
-            isotope <- .jcall(ifac,
-                              "Lorg/openscience/cdk/interfaces/IIsotope;",
-                              "getIsotope",
-                              as.character( i ),
-                              as.integer( elements[[i]][3] ),
-                              use.true.class=FALSE)
-            if (is.null(isotope)) stop(sprintf("Invalid mass number specified for element %s",i))
-        } else stop("Elements must be 3-tuples or 4-tuples")
-        .jcall(mfRange,
-               returnSig="V",
-               method="addIsotope",
-               isotope,
-               as.integer( elements[[i]][1] ),
-               as.integer( elements[[i]][2] )
-               )
-
+      .jcall(mfRange,
+             returnSig="V",
+             method="addIsotope",
+             isotope,
+             as.integer( elements[[i]][2] ),
+             as.integer( elements[[i]][3] )
+             )
+      
     }
 
     ## Construct range strings
