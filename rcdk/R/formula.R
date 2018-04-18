@@ -242,7 +242,8 @@ generate.formula.iter <- function(mass, window = 0.01,
         if (!as.string) {
             return(formula)
         } else {
-            return(.jcall("org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator", "S", "getString", formula))
+            return(.jcall("org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator",
+                          "S", "getString", formula, FALSE, TRUE))
         }
     }
 
