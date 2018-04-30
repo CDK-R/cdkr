@@ -2,8 +2,9 @@
 title: "Using the CDK from R"
 author: "Rajarshi Guha"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette: toc: yes
-
+output: 
+  rmarkdown::html_vignette:
+    toc: true
 vignette: >
   %\VignetteIndexEntry{Using the CDK from R}
   %\VignetteEngine{knitr::rmarkdown}
