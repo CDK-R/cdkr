@@ -7,40 +7,12 @@
   }
 
   jar.rcdk <- paste(lib,pkg,"cont","rcdk.jar",sep=.Platform$file.sep)
-  jars <- list.files(path=paste(lib,pkg,"cont", sep=.Platform$file.sep),
-                      pattern="jar$", full.names=TRUE)
-
-  .jinit(classpath=c(jars))
-
-  assign("rinchi_globals", new.env(), envir=parent.env(environment()))
-  assign("parser", .jnew("org/openscience/cdk/smiles/SmilesParser", .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
-                                                                           "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
-                                                                           "getInstance")))
+  .jinit(classpath=c(jar.rcdk))
 }
-
-
-.parse.smiles <- function(smiles, kekulise=TRUE) {
-  if (!is.character(smiles)) {
-    stop("Must supply a character vector of SMILES strings")
-  }
-  parser <- get("parser", rinchi_globals) 
-  .jcall(parser, "V", "kekulise", kekulise)
-  returnValue <- sapply(smiles, 
-      function(x) {
-        mol <- .jcall(parser, "Lorg/openscience/cdk/interfaces/IAtomContainer;", "parseSmiles", x)    
-        if (is.null(mol)){
-          return(NA)
-        } else {
-          return(.jcast(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
-        }
-      })
-  return(returnValue)
-}
-
 
 get.inchi <- function(molecule) {
   if (is.character(molecule)) {
-    molecule <- .parse.smiles(molecule)[[1]]
+    molecule <- rcdk::parse.smiles(molecule)[[1]]
   } else if (is.null(attr(molecule, 'jclass')) ||
              attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object or a SMILES string")
@@ -50,7 +22,8 @@ get.inchi <- function(molecule) {
 
 get.inchi.key <- function(molecule) {
   if (is.character(molecule)) {
-    molecule <- .parse.smiles(molecule)[[1]]
+      ##molecule <- .parse.smiles(molecule)[[1]]
+      molecule <- rcdk::parse.smiles(molecule)[[1]]
   } else if (is.null(attr(molecule, 'jclass')) ||
              attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object or a SMILES string")
