@@ -2,9 +2,9 @@
 title: "Handling Molecular Formulae"
 author: "Rajarshi Guha"
 date: "`r Sys.Date()`"
-output: rmarkdown::html_vignette:
-		toc: true
-	
+output: 
+  rmarkdown::html_vignette:
+    toc: true	
 vignette: >
   %\VignetteIndexEntry{Handling Molecular Formulae}
   %\VignetteEngine{knitr::rmarkdown}

@@ -1,3 +1,5 @@
+v3.4.7 - minor update to comply with CRAN policy. Minimum Java 8 required; fix an issue where unittests were writing to system files.
+
 v3.3.5 - update to work with CDK 1.5.13 with the new Depiction module
 
 v2.9 - Updated to the new package structure where the CDK libs are removed.
