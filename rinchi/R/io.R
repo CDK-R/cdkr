@@ -13,6 +13,7 @@
 get.inchi <- function(molecule) {
   if (is.character(molecule)) {
     molecule <- rcdk::parse.smiles(molecule)[[1]]
+    if (is.null(molecule)) stop("Must supply a valid SMILES string")
   } else if (is.null(attr(molecule, 'jclass')) ||
              attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object or a SMILES string")
