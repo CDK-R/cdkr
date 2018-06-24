@@ -140,7 +140,7 @@ view.molecule.2d <- function(molecule, ncol = 4, width = 200, height = 200, depi
   }
 }
 
-view.table <- function(molecules, dat, cellx = 200, celly = 200) {
+view.table <- function(molecules, dat, depictor = NULL) {
 ##  stop("Currently disabled")
 
   if (cellx <= 0 || celly <= 0) {
@@ -159,6 +159,9 @@ view.table <- function(molecules, dat, cellx = 200, celly = 200) {
     stop("The number of rows in datatable must be the same as the number of molecules")
   }
 
+  if (is.null(depictor))
+    depictor <- get.depictor()
+  
   if (is.null(names(dat))) cnames <- c('Molecule', paste('V',1:ncol(dat)), sep='')
   else cnames <- c('Molecule', names(dat))
 
@@ -187,9 +190,7 @@ view.table <- function(molecules, dat, cellx = 200, celly = 200) {
   ## now make our object table
   xval.arr <- .jarray(rows, "[Ljava/lang/Object;")
   obj <- .jnew("org/guha/rcdk/view/ViewMolecule2DDataTable",
-               molecules, carr, xval.arr)
-  .jcall(obj, "V", "setCellX", as.integer(cellx))
-  .jcall(obj, "V", "setCellY", as.integer(celly))
+               molecules, carr, xval.arr, depictor)
   .jcall(obj, "V", "display")
 }
 
