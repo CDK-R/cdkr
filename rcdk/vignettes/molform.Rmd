@@ -108,7 +108,7 @@ The `generate.formula` method can perform these validation tests during formula 
 In contrast, the `generate.formula.iter` method employs the Round Robin formula generation algorithm, which is significantly faster than the default method. In contrast to `generate/formula`, this method returns an iterator which allows you to process large formula sets without excessive memory usage.
 ```{r warn=FALSE}
 mit <- generate.formula.iter(100, charge=0, window=0.1,
-                             elements=list(C=c(0,50), H=c(0,50), N=c(0,50)))
+                             elements=list(c("C",0,50), c("H",0,50), c("N",0,50)))
 hit <- itertools::ihasNext(mit)
 while (itertools::hasNext(hit)) 
     print(iterators::nextElem(hit))
