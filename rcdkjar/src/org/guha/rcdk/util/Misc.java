@@ -244,10 +244,12 @@ public class Misc {
         Isomorphism mcs = new Isomorphism(org.openscience.cdk.smsd.interfaces.Algorithm.DEFAULT, true);
         mcs.init(mol1, mol2, true, true);
         mcs.setChemFilters(true, true, true);
-
+	    
         mol1 = mcs.getReactantMolecule();
         mol2 = mcs.getProductMolecule();
-
+	if (mol1 == null || mol2 == null || mcs.getFirstMapping() == null)
+	    return(null);
+	
         IAtomContainer mcsmolecule = DefaultChemObjectBuilder.getInstance().newInstance(IAtomContainer.class, mol1);
 
         List<IAtom> atomsToBeRemoved = new ArrayList<IAtom>();
