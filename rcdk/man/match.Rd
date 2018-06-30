@@ -42,7 +42,7 @@ IAtomContainer} in which the atoms and bonds are clones of the corresponding mat
 atoms and bonds in one of the molecule. Or else as a 2D array of dimensions Nx2 of
 atom index mappings. Here N is the size of the MCS and the first column represents the 
 atom index from the first molecule and the second column the atom index from the second
-molecule.
+molecule. If no MCS is found, \code{NULL} is returned.
 
 Note that since the CDK SMARTS matcher internally will perform aromaticity perception and
 atom typing, the target molecules need not have these operations done on them 
