@@ -1,7 +1,7 @@
 .packageName <- "rcdk"
 
 .get.chem.object.builder <- function() {
-  dcob <- .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
+  dcob <- .jcall("org/openscience/cdk/silent/SilentChemObjectBuilder",
                  "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
                  "getInstance")
   return(dcob)
@@ -65,7 +65,7 @@ Then you will need to re-install rJava.
   assign(".rcdk.GlobalEnv", new.env(parent = emptyenv()), envir = topenv())
   assign("nRule", nRule, envir = .rcdk.GlobalEnv)
   assign("rdbeRule", rdbeRule, envir = .rcdk.GlobalEnv)
-  assign("dcob", .jcall("org/openscience/cdk/DefaultChemObjectBuilder",
+  assign("dcob", .jcall("org/openscience/cdk/silent/SilentChemObjectBuilder",
                         "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
                         "getInstance"), envir = .rcdk.GlobalEnv)
   assign("mfManipulator", .jnew("org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator"), envir = .rcdk.GlobalEnv)
