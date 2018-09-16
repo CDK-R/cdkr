@@ -215,16 +215,26 @@ get.bonds <- function(molecule) {
 }
 
 do.aromaticity <- function(molecule) {
-  #print(attributes(molecule))
-  #print(is.null(attr(molecule, 'jclass')))
-  #print(attr(molecule, 'jclass'))
   if (is.null(attr(molecule, 'jclass')))
     stop("molecule must be of class IAtomContainer")
   if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
     stop("molecule must be of class IAtomContainer")
 
-  .jcall("org.openscience.cdk.aromaticity.CDKHueckelAromaticityDetector",
-         "Z", "detectAromaticity", molecule)
+  model <- .jcall("org/openscience/cdk/aromaticity/ElectronDonation",
+                  "Lorg/openscience/cdk/aromaticity/ElectronDonation;",
+                  "daylight")
+  cycles.all <- .jcall("org/openscience/cdk/graph/Cycles", 
+                      "Lorg/openscience/cdk/graph/CycleFinder;",
+                      "all")
+  cycles.6 <- .jcall("org.openscience.cdk.graph.Cycles", 
+                    "Lorg/openscience/cdk/graph/CycleFinder;",
+                    "all", as.integer(6))
+  cycles <- .jcall("org.openscience.cdk.graph.Cycles", 
+                  "Lorg/openscience/cdk/graph/CycleFinder;",
+                  "or", cycles.all, cycles.6)
+  aromaticity <- .jnew("org/openscience/cdk.aromaticity/Aromaticity",
+                       model, cycles)
+  .jcall(aromaticity, "Z", "apply", molecule)
 }
 
 do.typing <- function(molecule) {
