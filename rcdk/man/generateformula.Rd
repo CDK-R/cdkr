@@ -23,11 +23,11 @@ generate.formula(mass, window=0.01, elements=list(c("C",0,50),c("H",0,50),
                  validation=FALSE, charge=0.0)
 generate.formula.iter(mass, window = 0.01,
                               elements = list(
-                                C=c(0,50),
-                                H=c(0,50),
-                                N=c(0,50),
-                                O=c(0,50),
-                                S=c(0,50)),
+                                c("C",0,50),
+                                c("H",0,50),
+                                c("N",0,50),
+                                c("O",0,50),
+                                c("S",0,50)),
                               validation = FALSE,
                               charge = 0.0,
                               as.string=TRUE)
