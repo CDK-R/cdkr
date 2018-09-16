@@ -8,7 +8,7 @@
 }
 
 .check.class <- function(obj, klass) {
-  attr(obj, "jclass") == klass
+  !is.null(attr(molecule, 'jclass')) && attr(obj, "jclass") == klass
 }
 
 .trim.whitespace <- function(x) {
@@ -75,38 +75,32 @@ cdk.version <- function() {
   .jcall("org.openscience.cdk.CDK", "S", "getVersion")
 }
 
-remove.hydrogens <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')) ||
-      attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
-    stop("Must supply an IAtomContainer object")
-  }
+remove.hydrogens <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+    stop("molecule must be of class IAtomContainer")
   newmol <- .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
                    'Lorg/openscience/cdk/interfaces/IAtomContainer;',
                    'removeHydrogens',
-                   molecule);
+                   mol);
   newmol
 }
 
-get.total.hydrogen.count <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')) ||
-      attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
-    stop("Must supply an IAtomContainer object")
-  }
+get.total.hydrogen.count <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+    stop("molecule must be of class IAtomContainer")
   .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
          'I',
          'getTotalHydrogenCount',
-         molecule);
+         mol);
 }
 
-get.exact.mass <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')) ||
-      attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
-    stop("Must supply an IAtomContainer object")
-  }
+get.exact.mass <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+    stop("molecule must be of class IAtomContainer")
   ret <- .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
                 'D',
                 'getTotalExactMass',
-                molecule,
+                mol,
                 check=FALSE)
   ex <- .jgetEx(clear=TRUE)
   if (is.null(ex)) return(ret)
@@ -116,15 +110,13 @@ get.exact.mass <- function(molecule) {
   }
 }
 
-get.natural.mass <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')) ||
-      attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
-    stop("Must supply an IAtomContainer object")
-  }
+get.natural.mass <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+    stop("molecule must be of class IAtomContainer")
   ret <- .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
                 'D',
                 'getNaturalExactMass',
-                molecule,
+                mol,
                 check=FALSE)
   ex <- .jgetEx(clear=TRUE)
   if (is.null(ex)) return(ret)
@@ -135,50 +127,45 @@ get.natural.mass <- function(molecule) {
 }
 
 
-get.total.charge <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')) ||
-      attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
-    stop("Must supply an IAtomContainer object")
-  }
-
+get.total.charge <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+    stop("molecule must be of class IAtomContainer")
+  
   ## check to see if we have partial charges
-  atoms <- get.atoms(molecule)
+  atoms <- get.atoms(mol)
   pcharges <- unlist(lapply(atoms, get.charge))
 
   ## If any are null, partial charges were not set, so
   ## just return the total formal charge
-  if (any(is.null(pcharges))) return(get.total.formal.charge(molecule))
+  if (any(is.null(pcharges))) return(get.total.formal.charge(mol))
   else {
     .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
            'D',
            'getTotalCharge',
-           molecule);
+           mol);
   }
 }
 
-get.total.formal.charge <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')) ||
-      attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
-    stop("Must supply an IAtomContainer object")
-  }
+get.total.formal.charge <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+    stop("molecule must be of class IAtomContainer")
   .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
          'I',
          'getTotalFormalCharge',
-         molecule);
+         mol);
 }
 
 
-convert.implicit.to.explicit <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')) ||
-      attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
-    stop("Must supply an IAtomContainer object")
-  }
-  if (any(is.null(unlist(lapply(get.atoms(molecule), .jcall, returnSig = "Ljava/lang/Integer;", method="getImplicitHydrogenCount"))))) {
+convert.implicit.to.explicit <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+    stop("molecule must be of class IAtomContainer")
+
+    if (any(is.null(unlist(lapply(get.atoms(molecule), .jcall, returnSig = "Ljava/lang/Integer;", method="getImplicitHydrogenCount"))))) {
     ## add them in
     dcob <- .get.chem.object.builder()
     hadder <- .jcall("org/openscience/cdk/tools/CDKHydrogenAdder", "Lorg/openscience/cdk/tools/CDKHydrogenAdder;",
                      "getInstance", dcob)
-    .jcall(hadder, "V", "addImplicitHydrogens", molecule)
+    .jcall(hadder, "V", "addImplicitHydrogens", mol)
   }
   .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator', 'V', 'convertImplicitToExplicitHydrogens', molecule)
 }
@@ -201,25 +188,21 @@ get.atoms <- function(object) {
   atoms
 }
 
-get.bonds <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')))
+get.bonds <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
-    stop("molecule must be of class IAtomContainer")
-
-  nbond <- .jcall(molecule, "I", "getBondCount")
+  
+  nbond <- .jcall(mol, "I", "getBondCount")
   bonds <- list()
   for (i in 0:(nbond-1))
-    bonds[[i+1]] <- .jcall(molecule, "Lorg/openscience/cdk/interfaces/IBond;", "getBond", as.integer(i))
+    bonds[[i+1]] <- .jcall(mol, "Lorg/openscience/cdk/interfaces/IBond;", "getBond", as.integer(i))
   bonds
 }
 
-do.aromaticity <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')))
+do.aromaticity <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
-    stop("molecule must be of class IAtomContainer")
-
+  
   model <- .jcall("org/openscience/cdk/aromaticity/ElectronDonation",
                   "Lorg/openscience/cdk/aromaticity/ElectronDonation;",
                   "daylight")
@@ -234,46 +217,47 @@ do.aromaticity <- function(molecule) {
                   "or", cycles.all, cycles.6)
   aromaticity <- .jnew("org/openscience/cdk.aromaticity/Aromaticity",
                        model, cycles)
-  .jcall(aromaticity, "Z", "apply", molecule)
+  .jcall(aromaticity, "Z", "apply", mol)
 }
 
-do.typing <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')))
+do.typing <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
-    stop("molecule must be of class IAtomContainer")
-
+  
   .jcall("org.openscience.cdk.tools.manipulator.AtomContainerManipulator",
-         "V", "percieveAtomTypesAndConfigureAtoms", molecule)
+         "V", "percieveAtomTypesAndConfigureAtoms", mol)
 }
 
-do.isotopes <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')))
-    stop("molecule must be of class IAtomContainer")
-  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
+do.isotopes <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
   ifac <- .jcall('org.openscience.cdk.config.Isotopes',
                  'Lorg/openscience/cdk/config/Isotopes;',
                  'getInstance')
-  .jcall(ifac, 'V', 'configureAtoms', molecule)
+  .jcall(ifac, 'V', 'configureAtoms', mol)
 }
 
-is.neutral <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')))
+is.neutral <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
-    stop("molecule must be of class IAtomContainer")
-  atoms <- get.atoms(molecule)
+  
+  atoms <- get.atoms(mol)
   fc <- unlist(lapply(atoms, get.formal.charge))
   return(all(fc == 0))
 }
 
 is.connected <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+    stop("molecule must be of class IAtomContainer")
+  
   .jcall("org.openscience.cdk.graph.ConnectivityChecker",
          "Z", "isConnected", mol)
 }
 
 get.largest.component <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+    stop("molecule must be of class IAtomContainer")
+  
   isConnected <- .jcall("org.openscience.cdk.graph.ConnectivityChecker",
                         "Z", "isConnected", mol)
   if (isConnected) return(mol)
@@ -298,27 +282,22 @@ get.largest.component <- function(mol) {
 }
 
 get.atom.count <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')))
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
-    stop("molecule must be of class IAtomContainer")
-
+  
   .jcall(molecule, "I", "getAtomCount")
 }
 
 get.title <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')))
-    stop("molecule must be of class IAtomContainer")
-  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
   get.property(molecule, "cdk:Title")
 }
 
 generate.2d.coordinates <- function(molecule) {
-  if (is.null(attr(molecule, 'jclass')))
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  if (attr(molecule, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer")
-    stop("molecule must be of class IAtomContainer")
+  
   .jcall('org/guha/rcdk/util/Misc', 'Lorg/openscience/cdk/interfaces/IAtomContainer;',
          'getMoleculeWithCoordinates', molecule)
 }
