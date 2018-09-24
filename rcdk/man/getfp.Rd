@@ -24,6 +24,7 @@
   \item signature - A feature,count type of fingerprint, similar in nature to circular fingerprints, but based on the signature 
     descriptor
   \item circular - An implementation of the ECFP6 fingerprint
+  \item substructure - Fingerprint based on list of SMARTS pattern. By default a set of functional groups is tested.
   }
 
   Depending on whether the input is a single \code{IAtomContainer}
@@ -33,7 +34,8 @@
 }
 \usage{
     get.fingerprint(molecule, type = 'standard', 
-                    fp.mode = 'bit', depth=6, size=1024, verbose=FALSE)
+                    fp.mode = 'bit', depth=6, size=1024, substructure.pattern=character(),
+                    verbose=FALSE)
 }
 \arguments{
   \item{molecule}{An \code{IAtomContainer} object that can be obtained
@@ -50,6 +52,8 @@
   'pubchem', 'maccs', 'kr' and 'estate' fingerprints}
   \item{size}{The length of the fingerprint bit string. This argument is ignored for the
   'pubchem', 'maccs', 'kr', 'signature', 'circular' and 'estate' fingerprints}
+  \item{substructure.pattern}{List of characters containing the SMARTS pattern to match. If the an empty list is provided
+  than the functional groups substructures (default in CDK) are used.}
   \item{verbose}{If \code{TRUE}, exceptions, if they occur, will be printed}
 }
 \value{
@@ -61,7 +65,7 @@
 sp <- get.smiles.parser()
 smiles <- c('CCC', 'CCN', 'CCN(C)(C)', 'c1ccccc1Cc1ccccc1','C1CCC1CC(CN(C)(C))CC(=O)CC')
 mols <- parse.smiles(smiles)
-
+ 
 ## get a single fingerprint using the standard
 ## (hashed, path based) fingerprinter
 fp <- get.fingerprint(mols[[1]])
@@ -72,6 +76,15 @@ fps <- lapply(mols, get.fingerprint, type='maccs')
 ## get Signature fingerprint
 ## feature, count fingerprinter
 fps <- lapply(mols, get.fingerprint, type='signature', fp.mode='raw')
+
+## get Substructure fingerprint for functional group fragments
+fps <- lapply(mols, get.fingerprint, type='substructure')
+
+## get Substructure count fingerprint for user defined fragments
+mol1 <- parse.smiles("c1ccccc1CCC")[[1]]
+smarts <- c("c1ccccc1", "[CX4H3][#6]", "[CX2]#[CX2]")
+fps <- get.fingerprint(mol1, type='substructure', fp.mode='count',
+    substructure.pattern=smarts)
 }      
 
 \seealso{
