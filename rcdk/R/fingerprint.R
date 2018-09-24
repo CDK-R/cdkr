@@ -1,4 +1,4 @@
-get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=6, size=1024, verbose=FALSE) {
+get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=6, size=1024,  substructure.pattern=character(), verbose=FALSE) {
   if (is.null(attr(molecule, 'jclass'))) stop("Must supply an IAtomContainer or something coercable to it")
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     ## try casting it
@@ -22,6 +22,13 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
            shortestpath = .jnew('org/openscience/cdk/fingerprint/ShortestPathFingerprinter', size),
            signature = .jnew('org/openscience/cdk/fingerprint/SignatureFingerprinter', depth),
            circular = .jnew('org/openscience/cdk/fingerprint/CircularFingerprinter'),
+           substructure = 
+               if (length(substructure.pattern) == 0) 
+                   # Loads the default group substructures
+                   { .jnew('org/openscience/cdk/fingerprint/SubstructureFingerprinter') }
+               else
+                   # Loads the substructures defined by the user
+                   { .jnew('org/openscience/cdk/fingerprint/SubstructureFingerprinter', .jarray(substructure.pattern)) },
            )
   if (is.null(fingerprinter)) stop("Invalid fingerprint type specified")
 
@@ -41,7 +48,7 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
   }
   
   e <- .jgetEx()
-  if (.jcheck(silent=TRUE)) {
+  if (.jcheck(silent=TRUE)) { 
     if (verbose) print(e)
     return(NULL)
   }
@@ -56,6 +63,7 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
     else if (type == 'estate') nbit <- 79
     else if (type == 'pubchem') nbit <- 881
     else if (type == 'kr') nbit <- 4860
+    else if (type == 'substructure') nbit <- .jcall(fingerprinter, "I", "getSize")
     else nbit <- size
     
     bitset <- .jcall(bitset, "S", "toString")
