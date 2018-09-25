@@ -1,4 +1,6 @@
-get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=6, size=1024,  substructure.pattern=character(), verbose=FALSE) {
+get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', 
+                            depth = 6, size = 1024, substructure.pattern=character(),
+                            circular.type = "ECFP6", verbose = FALSE) {
   if (is.null(attr(molecule, 'jclass'))) stop("Must supply an IAtomContainer or something coercable to it")
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     ## try casting it
@@ -7,6 +9,19 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
 
   mode(size) <- 'integer'
   mode(depth) <- 'integer'
+  
+  # Determine integer ID for the circular fingerprint given its desired type.
+  # This allows us to use also ECFP4, ... 
+  if (type == 'circular') {
+        circular.type.id <- switch(circular.type, 
+             ECFP0 = 1, ECFP2 = 2, ECFP4 = 3, ECFP6 = 4,
+             FCFP0 = 5, FCFP2 = 6, FCFP4 = 7, FCFP6 = 8,
+             NULL)
+        
+        if (is.null(circular.type.id)) stop(paste('Invalid circular fingerprint type: ', circular.type))
+        
+        mode(circular.type.id) <- 'integer'
+  }
 
   fingerprinter <-
     switch(type,
@@ -21,7 +36,7 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
            kr = .jnew('org/openscience/cdk/fingerprint/KlekotaRothFingerprinter'),
            shortestpath = .jnew('org/openscience/cdk/fingerprint/ShortestPathFingerprinter', size),
            signature = .jnew('org/openscience/cdk/fingerprint/SignatureFingerprinter', depth),
-           circular = .jnew('org/openscience/cdk/fingerprint/CircularFingerprinter'),
+           circular = .jnew('org/openscience/cdk/fingerprint/CircularFingerprinter', circular.type.id),
            substructure = 
                if (length(substructure.pattern) == 0) 
                    # Loads the default group substructures
@@ -64,6 +79,7 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
     else if (type == 'pubchem') nbit <- 881
     else if (type == 'kr') nbit <- 4860
     else if (type == 'substructure') nbit <- .jcall(fingerprinter, "I", "getSize")
+    else if (type == 'circular') nbit <- .jcall(fingerprinter, "I", "getSize")
     else nbit <- size
     
     bitset <- .jcall(bitset, "S", "toString")

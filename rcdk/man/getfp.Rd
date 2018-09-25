@@ -23,7 +23,8 @@
   \item shortestpath - A fingerprint based on the shortest paths between pairs of atoms and takes into account ring systems, charges etc.
   \item signature - A feature,count type of fingerprint, similar in nature to circular fingerprints, but based on the signature 
     descriptor
-  \item circular - An implementation of the ECFP6 fingerprint
+  \item circular - An implementation of the ECFP6 (default) fingerprint. Other circular types can be chosen by modifying the
+    \code{circular.type} parameter.
   \item substructure - Fingerprint based on list of SMARTS pattern. By default a set of functional groups is tested.
   }
 
@@ -33,9 +34,8 @@
   which can be manipulated with the fingerprint package.
 }
 \usage{
-    get.fingerprint(molecule, type = 'standard', 
-                    fp.mode = 'bit', depth=6, size=1024, substructure.pattern=character(),
-                    verbose=FALSE)
+  function(molecule, type = 'standard', fp.mode = 'bit', depth = 6, size = 1024,
+           substructure.pattern=character(), circular.type = "ECFP6", verbose = FALSE)
 }
 \arguments{
   \item{molecule}{An \code{IAtomContainer} object that can be obtained
@@ -52,8 +52,10 @@
   'pubchem', 'maccs', 'kr' and 'estate' fingerprints}
   \item{size}{The length of the fingerprint bit string. This argument is ignored for the
   'pubchem', 'maccs', 'kr', 'signature', 'circular' and 'estate' fingerprints}
-  \item{substructure.pattern}{List of characters containing the SMARTS pattern to match. If the an empty list is provided
+  \item{substructure.pattern}{List of characters containing the SMARTS pattern to match. If the an empty list is provided (default)
   than the functional groups substructures (default in CDK) are used.}
+  \item{circular.type}{Name of the circular fingerprint type that should be computed given as string. Possible values are: 
+  'ECFP0', 'ECFP2', 'ECFP4', 'ECFP6' (default), 'FCFP0', 'FCFP2', 'FCFP4' and 'FCFP6'.}
   \item{verbose}{If \code{TRUE}, exceptions, if they occur, will be printed}
 }
 \value{
@@ -85,7 +87,12 @@ mol1 <- parse.smiles("c1ccccc1CCC")[[1]]
 smarts <- c("c1ccccc1", "[CX4H3][#6]", "[CX2]#[CX2]")
 fps <- get.fingerprint(mol1, type='substructure', fp.mode='count',
     substructure.pattern=smarts)
-}      
+
+## get ECFP0 count fingerprints 
+mol2 <- parse.smiles("C1=CC=CC(=C1)CCCC2=CC=CC=C2")[[1]]
+fps <- get.fingerprint(mol2, type='circular', fp.mode='count', 
+    circular.type='ECFP0')
+}
 
 \seealso{
   \code{\link{load.molecules}}
