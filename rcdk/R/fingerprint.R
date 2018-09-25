@@ -75,6 +75,19 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
 
   mode(size) <- 'integer'
   mode(depth) <- 'integer'
+  
+  # Determine integer ID for the circular fingerprint given its desired type.
+  # This allows us to use also ECFP4, ... 
+  if (type == 'circular') {
+        circular.type.id <- switch(circular.type, 
+             ECFP0 = 1, ECFP2 = 2, ECFP4 = 3, ECFP6 = 4,
+             FCFP0 = 5, FCFP2 = 6, FCFP4 = 7, FCFP6 = 8,
+             NULL)
+        
+        if (is.null(circular.type.id)) stop(paste('Invalid circular fingerprint type: ', circular.type))
+        
+        mode(circular.type.id) <- 'integer'
+  }
 
   # Determine integer ID for the circular fingerprint given its desired type.
   # This allows us to use also ECFP4, ... 
