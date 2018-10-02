@@ -35,28 +35,11 @@
   jar.png <- paste(lib,pkg,"cont","com.objectplanet.image.PngEncoder.jar",sep=.Platform$file.sep)
   .jinit(classpath=c(jar.rcdk,jar.png))
   
-  #check Java Version 
-  jversion <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
-  jversionmajor <- as.numeric(paste0(strsplit(jversion, "(\\.|\\+)")[[1]][1], collapse = "."))
-  try(jversionminor <- as.numeric(paste0(strsplit(jversion, "(\\.|\\+)")[[1]][2], collapse = ".")))
-  isjavagood <- jversionmajor >=8 || (jversionmajor==1 && jversionminor >= 8)
-  
-  if (isjavagood == FALSE) { stop("
-=================
-=================
-This version of rCDK uses a CDK library that requires Java 8 or greater. 
-
-Please install Java 8 and let R know which Java to use by running the config tool:
-
-sudo R CMD javareconf
-
-Then you will need to re-install rJava.
-
-# re-install from R
-# install.packages('rJava', type='source')
-
-=================
-=================")  
+  # check Java Version 
+  jv <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
+  if(substr(jv, 1L, 2L) == "1.") {
+    jvn <- as.numeric(paste0(strsplit(jv, "[.]")[[1L]][1:2], collapse = "."))
+    if(jvn < 1.8) stop("Java >= 8 is needed for this package but not available")
   }
 
   ## generate some Java objects which get reused, so as to avoid repeated .jnew()
