@@ -8,7 +8,7 @@
 }
 
 .check.class <- function(obj, klass) {
-  !is.null(attr(molecule, 'jclass')) && attr(obj, "jclass") == klass
+  !is.null(attr(obj, 'jclass')) && attr(obj, "jclass") == klass
 }
 
 .trim.whitespace <- function(x) {
