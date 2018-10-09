@@ -9,7 +9,7 @@ require(rJava, quietly=TRUE)
     }
     jars <- list.files(path=paste(lib,pkg,"cont", sep=.Platform$file.sep),
                        pattern="jar$", full.names=TRUE)
-    .jinit(classpath=c(jars))
+    .jinit(classpath=c(jars),parameters="-Xmx4096m")
 }
     
 
