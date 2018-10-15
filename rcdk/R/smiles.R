@@ -12,7 +12,7 @@
 #' @param flavors A character vector of flavors. The default is \code{Generic} (Output non-canonical SMILES without stereochemistry, atomic masses). Possible values are
 #' * Absolute
 #' * AtomAtomMap
-#' * AtomicMass 
+#' * AtomicMass
 #' * AtomicMassStrict
 #' * Canonical
 #' * Cx2dCoordinates
@@ -45,7 +45,7 @@
 #' m <- parse.smiles('C1C=CCC1N(C)c1ccccc1')[[1]]
 #' get.smiles(m)
 #' get.smiles(m, smiles.flavors(c('Generic','UseAromaticSymbols')))
-#' 
+#'
 #' m <- parse.smiles("OS(=O)(=O)c1ccc(cc1)C(CC)CC |Sg:n:13:m:ht,Sg:n:11:n:ht|")[[1]]
 #' get.smiles(m,flavor = smiles.flavors(c("CxSmiles")))
 #' get.smiles(m,flavor = smiles.flavors(c("CxSmiles","UseAromaticSymbols")))
@@ -53,14 +53,14 @@
 #' @author Rajarshi Guha \email{rajarshi.guha@@gmail.com}
 smiles.flavors <- function(flavors = c('Generic')) {
     valid.flavors <- c('Absolute',
-                       'AtomAtomMap',  
-                       'AtomicMass',   
+                       'AtomAtomMap',
+                       'AtomicMass',
                        'AtomicMassStrict',
                        'Canonical',
                        'Cx2dCoordinates',
                        'Cx3dCoordinates',
-                       'CxAtomLabel',  
-                       'CxAtomValue',  
+                       'CxAtomLabel',
+                       'CxAtomValue',
                        'CxCoordinates',
                        'CxFragmentGroup',
                        'CxMulticenter',
@@ -99,13 +99,13 @@ get.smiles.parser <- function() {
     .jnew("org/openscience/cdk/smiles/SmilesParser", dcob)
 }
 
-parse.smiles <- function(smiles, kekulise=TRUE) {
+parse.smiles <- function(smiles, kekulise=TRUE, omit.nulls=FALSE, which.nulls=FALSE) {
     if (!is.character(smiles)) {
         stop("Must supply a character vector of SMILES strings")
     }
     parser <- get.smiles.parser()
     .jcall(parser, "V", "kekulise", kekulise)
-    returnValue <- sapply(smiles, 
+    returnValue_withnulls <- sapply(smiles,
                           function(x) {
                               mol <- tryCatch(
                               {
@@ -120,5 +120,26 @@ parse.smiles <- function(smiles, kekulise=TRUE) {
                                   return(.jcast(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
                               }
                           })
-    return(returnValue)
+    returnValue_nonulls <- Filter(Negate(is.null), returnValue_withnulls)
+    returnValue <- returnValue_withnulls
+
+    if (omit.nulls==TRUE) {
+        returnValue <- returnValue_nonulls
+    }
+
+    nulls_count <- length(returnValue_withnulls)-length(returnValue_nonulls)
+
+    if (nulls_count > 0) {
+        warning(paste(nulls_count)," out of ",paste(length(returnValue_withnulls)),
+        " SMILES were not successfully parsed, resulting in NULLs.")
+    }
+
+    returnList <- returnValue
+    ### find non-parseable SMILES
+    smiles_notparsed <- Filter((is.null), returnValue_withnulls)
+    if (which.nulls==TRUE) {
+        returnList <- list(returnValue,smiles_notparsed)
+    }
+
+    return(returnList)
 }
