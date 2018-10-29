@@ -9,11 +9,11 @@ addons:
     packages:
       - openjdk-8-jdk
 
-r_binary_packages:
-  - devtools
-      
-## Fake an install, will be done in script below
+## Because we have several packages in the git repo, 
+## we need to manually install and test: 
+## https://docs.travis-ci.com/user/languages/r/#customizing-the-travis-build-steps
 install: 
+  - R -e 'install.packages("devtools")'
   - R -e 'devtools::install_deps(pkgdir = "rcdklibs", dep = T)'
 
 ## Inspired by 
