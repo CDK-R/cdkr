@@ -8,6 +8,9 @@ addons:
   apt:
     packages:
       - openjdk-8-jdk
+
+r_binary_packages:
+  - devtools
       
 ## Fake an install, will be done in script below
 install: 
