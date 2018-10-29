@@ -14,7 +14,7 @@ addons:
 ## https://docs.travis-ci.com/user/languages/r/#customizing-the-travis-build-steps
 install: 
   - R -e 'install.packages("devtools")'
-  - R -e 'devtools::install_deps(pkgdir = "./rcdklibs/", dep = T)'
+  - R -e 'getwd(); devtools::install_deps(pkgdir = "./rcdklibs/", dep = T)'
   - R -e 'devtools::install_deps(pkgdir = "./rcdk/", dep = T)'
 
 ## Inspired by 
