@@ -4,8 +4,14 @@ language: R
 sudo: false
 cache: packages
 
+jdk:
+  - openjdk8
+  
 r_packages:
-- rJava
+  - rJava
+
+## Fake an install, will be done in script below
+install: /bin/true
 
 ## Inspired by 
 ## http://jtleek.com/protocols/travis_bioc_devel/#Configuring_R_CMD_check
