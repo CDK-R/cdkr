@@ -119,30 +119,38 @@ write.molecules(mols, filename='mymols.sdf')
 By default, if mols is a list of multiple molecules, all of them will be written
 to a single SDF file. If this is not desired, you can write each on to individual
 files (which are prefixed by the value of filename):
+
 ```{r eval=FALSE}
  write.molecules(mols, filename='mymols.sdf', together=FALSE)
- ```
+```
  
 ### Generating SMILES
  
  Finally, we can generate a SMILES representation of a molecule using
- ```{r}
+ 
+```{r}
 smiles <- c('CCC', 'c1ccccc1', 'CCCC(C)(C)CC(=O)NC')
 mols <- parse.smiles(smiles)
 get.smiles(mols[[1]])
 unlist(lapply(mols, get.smiles))
- ```
- The [CDK](https://cdk.github.io) supports a number of _flavors_ when generating SMILES. For example, you can generate a SMILES with or without chirality information or generate SMILES in [Kekule form](https://www.chemguide.co.uk/basicorg/bonding/benzene1.html). The `smiles.flavors` generates an object that represents the various flavors desired for SMILES output. See the [SmiFlavor javadocs](https://cdk.github.io/cdk/2.0/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html) for the full list of possible flavors. Eaxmple usage is
+```
+
+ 
+ The [CDK](https://cdk.github.io) supports a number of _flavors_ when generating SMILES. For example, you can generate a SMILES with or without chirality information or generate SMILES in [Kekule form](https://www.chemguide.co.uk/basicorg/bonding/benzene1.html). The `smiles.flavors` generates an object that represents the various flavors desired for SMILES output. See the [SmiFlavor javadocs](https://cdk.github.io/cdk/2.0/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html) for the full list of possible flavors. Example usage is
+ 
  ```{r}
 smiles <- c('CCC', 'c1ccccc1', 'CCc1ccccc1CC(C)(C)CC(=O)NC')
 mols <- parse.smiles(smiles)
 get.smiles(mols[[3]], smiles.flavors(c('UseAromaticSymbols')))
 get.smiles(mols[[3]], smiles.flavors(c('Generic','CxSmiles')))
 ```
+
 Using the [CxSmiles](https://www.chemaxon.com/marvin-archive/latest/help/formats/cxsmiles-doc.html) flavors allows the user to encode a variety of information in the SMILES string, such as 2D or 3D coordinates.
+
 ```{r}
 m <- parse.smiles('CCC')[[1]]
 m <- generate.2d.coordinates(m)
+m
 get.smiles(m, smiles.flavors(c('CxSmiles')))
 get.smiles(m, smiles.flavors(c('CxCoordinates')))
 ```
@@ -159,6 +167,7 @@ Due to Java event handling issues on OS X, depictions are handled using an exter
 depiction generation can be slower on OS X compared to other platforms. 
 
 Molecule visualization is performed using the `view.molecule.2d` function. This handles individual molecules as well as a list of molecules. In the latter case, the depictions are arranged in a grid (with 4 columns by default).
+
 ```{r eval=FALSE}
 smiles <- c('CCC', 'CCN', 'CCN(C)(C)',
             'c1ccccc1Cc1ccccc1',
@@ -167,7 +176,9 @@ mols <- parse.smiles(smiles)
 view.molecule.2d(mols[[1]])
 view.molecule.2d(mols)
 ```
+
 The CDK depiction routines allow for extensive customization. These customizations can be accessed by creating a depictor object using `get.depictor`, which allows you to specify the size of the depiction, the depiction style (black and white, color on white, etc.), atom annotations (e.g., atom index), whether functional group abbreviations should be used or not and so on.
+
 ```{r eval=FALSE}
 depictor <- get.depictor(style='cob', abbr='reagents', width=300, height=300)
 view.molecule.2d(mols[[5]], depictor=depictor)
@@ -313,21 +324,21 @@ A key requirement for the predictive modeling of molecular properties and activi
 
 First, we can take a look at the available descriptor categories.
 ```{r}
-dc <- get.desc.categories()
-dc
+#dc <- get.desc.categories()
+#dc
 ```
 Given the categories we can get the names of the descriptors for a single
 category. Of course, you can always provide the category name directly.
 ```{r}
-dn <- get.desc.names(dc[4])
-dn
+#dn <- get.desc.names(dc[4])
+#dn
 ```
 Each descriptor name is actually a fully qualified Java class name for the
 corresponding descriptor. These names can be supplied to `eval.desc` to
 evaluate a single or multiple descriptors for one or more molecules.
 ```{r eval=FALSE}
-aDesc <- eval.desc(mol, dn[4])
-allDescs <- eval.desc(mol, dn)
+#aDesc <- eval.desc(mol, dn[4])
+#allDescs <- eval.desc(mol, dn)
 ```
 
 The return value of eval.desc is a `data.frame` with the descriptors in the
@@ -339,7 +350,7 @@ for the BP dataset. First we need a set of descriptors and so we evaluate
 all available descriptors. Also note that since a descriptor might belong to
 more than one category, we should obtain a unique set of descriptor names
 ```{r}
-descNames <- unique(unlist(sapply(get.desc.categories(), get.desc.names)))
+#descNames <- unique(unlist(sapply(get.desc.categories(), get.desc.names)))
 ```
 For the current discussion we focus on a few, manually selected descriptors
 that we know will be related to boiling point.
