@@ -143,7 +143,7 @@ convert.implicit.to.explicit <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
 
-    if (any(is.null(unlist(lapply(get.atoms(molecule), .jcall, returnSig = "Ljava/lang/Integer;", method="getImplicitHydrogenCount"))))) {
+    if (any(is.null(unlist(lapply(get.atoms(mol), .jcall, returnSig = "Ljava/lang/Integer;", method="getImplicitHydrogenCount"))))) {
     ## add them in
     dcob <- .get.chem.object.builder()
     hadder <- .jcall("org/openscience/cdk/tools/CDKHydrogenAdder", "Lorg/openscience/cdk/tools/CDKHydrogenAdder;",
