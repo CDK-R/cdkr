@@ -150,7 +150,7 @@ convert.implicit.to.explicit <- function(mol) {
                      "getInstance", dcob)
     .jcall(hadder, "V", "addImplicitHydrogens", mol)
   }
-  .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator', 'V', 'convertImplicitToExplicitHydrogens', molecule)
+  .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator', 'V', 'convertImplicitToExplicitHydrogens', mol)
 }
 
 
