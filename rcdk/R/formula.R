@@ -416,7 +416,7 @@ generate.formula <- function(mass, window=0.01,
         massNum          <-  isotope$getMassNumber()
         #exactMass        <- .jcall(isotope,"Ljava/lang/Double;","getExactMass");
         exactMass        <- isotope$getExactMass()
-        print(exactMass)
+        #print(exactMass)
         isotopes         <- J("org/openscience/cdk/config/Isotopes")
         
         if (is.null(massNum)) {
@@ -442,6 +442,7 @@ generate.formula <- function(mass, window=0.01,
         
         #ch <- .jcall(isotope,"Ljava/lang/Double;","getExactMass");
         isotopeList[i,3] <- exactMass
+        
     }
     
     object@string <- .cdkFormula.getString(molecularformula);
