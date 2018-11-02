@@ -278,7 +278,7 @@ get.title <- function(molecule) {
 }
 
 generate.2d.coordinates <- function(molecule) {
-  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+  if (!.check.class(molecule, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
   
   .jcall('org/guha/rcdk/util/Misc', 'Lorg/openscience/cdk/interfaces/IAtomContainer;',
