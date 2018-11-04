@@ -1,6 +1,6 @@
 Package: rcdklibs
-Version: 2.2.1
-Date: 2018-09-29
+Version: 2.2
+Date: 2018-11-02
 Authors@R: c(person('Rajarshi', 'Guha', role=c('aut'), email='rajarshi.guha@gmail.com'),
              person('Zachary', 'Charlop-Powers', role=c('cre'), email='zach.charlop.powers@gmail.com'),
              person('CDK Project', '', role=c('ctb', 'cph'), comment='CDK Java library contained in multiple jar files'))

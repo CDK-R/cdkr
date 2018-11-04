@@ -35,28 +35,11 @@
   jar.png <- paste(lib,pkg,"cont","com.objectplanet.image.PngEncoder.jar",sep=.Platform$file.sep)
   .jinit(classpath=c(jar.rcdk,jar.png))
   
-  #check Java Version 
-  jversion <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
-  jversionmajor <- as.numeric(paste0(strsplit(jversion, "(\\.|\\+)")[[1]][1], collapse = "."))
-  try(jversionminor <- as.numeric(paste0(strsplit(jversion, "(\\.|\\+)")[[1]][2], collapse = ".")))
-  isjavagood <- jversionmajor >=8 || (jversionmajor==1 && jversionminor >= 8)
-  
-  if (isjavagood == FALSE) { stop("
-=================
-=================
-This version of rCDK uses a CDK library that requires Java 8 or greater. 
-
-Please install Java 8 and let R know which Java to use by running the config tool:
-
-sudo R CMD javareconf
-
-Then you will need to re-install rJava.
-
-# re-install from R
-# install.packages('rJava', type='source')
-
-=================
-=================")  
+  # check Java Version 
+  jv <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
+  if(substr(jv, 1L, 2L) == "1.") {
+    jvn <- as.numeric(paste0(strsplit(jv, "[.]")[[1L]][1:2], collapse = "."))
+    if(jvn < 1.8) stop("Java >= 8 is needed for this package but not available")
   }
 
   ## generate some Java objects which get reused, so as to avoid repeated .jnew()
@@ -160,14 +143,14 @@ convert.implicit.to.explicit <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
 
-    if (any(is.null(unlist(lapply(get.atoms(molecule), .jcall, returnSig = "Ljava/lang/Integer;", method="getImplicitHydrogenCount"))))) {
+    if (any(is.null(unlist(lapply(get.atoms(mol), .jcall, returnSig = "Ljava/lang/Integer;", method="getImplicitHydrogenCount"))))) {
     ## add them in
     dcob <- .get.chem.object.builder()
     hadder <- .jcall("org/openscience/cdk/tools/CDKHydrogenAdder", "Lorg/openscience/cdk/tools/CDKHydrogenAdder;",
                      "getInstance", dcob)
     .jcall(hadder, "V", "addImplicitHydrogens", mol)
   }
-  .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator', 'V', 'convertImplicitToExplicitHydrogens', molecule)
+  .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator', 'V', 'convertImplicitToExplicitHydrogens', mol)
 }
 
 
@@ -295,7 +278,7 @@ get.title <- function(molecule) {
 }
 
 generate.2d.coordinates <- function(molecule) {
-  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+  if (!.check.class(molecule, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
   
   .jcall('org/guha/rcdk/util/Misc', 'Lorg/openscience/cdk/interfaces/IAtomContainer;',

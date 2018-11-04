@@ -404,14 +404,45 @@ generate.formula <- function(mass, window=0.01,
     iterable <- .jcall(molecularformula,"Ljava/lang/Iterable;","isotopes"); 
     isoIter <- .jcall(iterable,"Ljava/util/Iterator;","iterator");
     size <- .jcall(molecularformula,"I","getIsotopeCount");
+    
     isotopeList = matrix(ncol=3,nrow=size);
     colnames(isotopeList) <- c("isoto","number","mass");
+    
     for(i in 1:size){
         isotope = .jcast(.jcall(isoIter,"Ljava/lang/Object;","next"), "org/openscience/cdk/interfaces/IIsotope");
         isotopeList[i,1] <- .jcall(isotope,"S","getSymbol");
         isotopeList[i,2] <- .jcall(molecularformula,"I","getIsotopeCount",isotope);
-        ch <- .jcall(isotope,"Ljava/lang/Double;","getExactMass");
-        isotopeList[i,3] <- .jcall(ch,"D","doubleValue");
+        #massNum          <- .jcall(isotope,"Ljava/lang/Double;","getMassNumber");
+        massNum          <-  isotope$getMassNumber()
+        #exactMass        <- .jcall(isotope,"Ljava/lang/Double;","getExactMass");
+        exactMass        <- isotope$getExactMass()
+        #print(exactMass)
+        isotopes         <- J("org/openscience/cdk/config/Isotopes")
+        
+        if (is.null(massNum)) {
+         
+          isos         <- isotopes$getInstance()
+          majorIsotope <- isos$getMajorIsotope(isotope$getSymbol())
+          
+          if (!is.null(majorIsotope)) {
+            
+            exactMass <- majorIsotope$getExactMass()
+          }
+        } else {
+          
+          if (is.null(exactMass)) {
+            isos    <- isotopes$getInstance()
+            temp    <- isos$getIsotope(isotope$getSymbol(), massNum);
+            
+            if (!is.null(temp)) {
+              exactMass <- temp$getExactMass()
+            }
+          }
+        }
+        
+        #ch <- .jcall(isotope,"Ljava/lang/Double;","getExactMass");
+        isotopeList[i,3] <- exactMass
+        
     }
     
     object@string <- .cdkFormula.getString(molecularformula);
