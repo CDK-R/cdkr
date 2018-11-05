@@ -1,3 +1,5 @@
+[![Build Status](https://api.travis-ci.org/rajarshi/cdkr.svg?branch=master)](https://travis-ci.org/rajarshi/cdkr)
+
 ## rcdk
 
 
