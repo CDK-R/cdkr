@@ -324,21 +324,21 @@ A key requirement for the predictive modeling of molecular properties and activi
 
 First, we can take a look at the available descriptor categories.
 ```{r}
-#dc <- get.desc.categories()
-#dc
+dc <- get.desc.categories()
+dc
 ```
 Given the categories we can get the names of the descriptors for a single
 category. Of course, you can always provide the category name directly.
 ```{r}
-#dn <- get.desc.names(dc[4])
-#dn
+dn <- get.desc.names(dc[4])
+dn
 ```
 Each descriptor name is actually a fully qualified Java class name for the
 corresponding descriptor. These names can be supplied to `eval.desc` to
 evaluate a single or multiple descriptors for one or more molecules.
 ```{r eval=FALSE}
-#aDesc <- eval.desc(mol, dn[4])
-#allDescs <- eval.desc(mol, dn)
+aDesc <- eval.desc(mol, dn[4])
+allDescs <- eval.desc(mol, dn)
 ```
 
 The return value of eval.desc is a `data.frame` with the descriptors in the
@@ -350,7 +350,7 @@ for the BP dataset. First we need a set of descriptors and so we evaluate
 all available descriptors. Also note that since a descriptor might belong to
 more than one category, we should obtain a unique set of descriptor names
 ```{r}
-#descNames <- unique(unlist(sapply(get.desc.categories(), get.desc.names)))
+descNames <- unique(unlist(sapply(get.desc.categories(), get.desc.names)))
 ```
 For the current discussion we focus on a few, manually selected descriptors
 that we know will be related to boiling point.
