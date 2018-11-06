@@ -265,14 +265,14 @@ get.largest.component <- function(mol) {
 }
 
 get.atom.count <- function(molecule) {
-  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+  if (!.check.class(molecule, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
   
   .jcall(molecule, "I", "getAtomCount")
 }
 
 get.title <- function(molecule) {
-  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+  if (!.check.class(molecule, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
   get.property(molecule, "cdk:Title")
 }
