@@ -32,5 +32,5 @@ test.frag3 <- function() {
   checkEquals(length(f), 3)
 
   fworks <- unlist(lapply(f, function(x) unlist(lapply(x$frameworks, .jclass))))
-  checkTrue(all(fworks == "org.openscience.cdk.AtomContainer2"))
+  checkTrue(all(fworks == "org.openscience.cdk.silent.AtomContainer2"))
 }
