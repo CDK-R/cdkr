@@ -85,7 +85,7 @@ get.exact.mass <- function(mol) {
   formulaJ <- .jcall('org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator',
                      "Lorg/openscience/cdk/interfaces/IMolecularFormula;",
                      "getMolecularFormula",
-                     molecule,
+                     mol,
                      use.true.class=FALSE);
   
   
