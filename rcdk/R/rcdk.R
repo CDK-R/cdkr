@@ -123,6 +123,22 @@ get.natural.mass <- function(mol) {
 }
 
 
+get.molecular.weight <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+    stop("molecule must be of class IAtomContainer")
+  ret <- .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
+                'D',
+                'getMolecularWeight',
+                mol,
+                check=FALSE)
+  ex <- .jgetEx(clear=TRUE)
+  if (is.null(ex)) return(ret)
+  else{
+    print(ex)
+    stop("Couldn't get molecular weight. Maybe you have not performed aromaticity, atom type or isotope configuration?")
+  }  
+}
+
 get.total.charge <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
