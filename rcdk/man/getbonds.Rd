@@ -8,10 +8,10 @@
 	from a molecule
 }
 \usage{
-get.bonds(molecule)
+get.bonds(mol)
 }
 \arguments{
-  \item{molecule}{A \code{jObjRef} representing an IAtomContainer,
+  \item{mol}{A \code{jObjRef} representing an IAtomContainer,
   IMolecule}
 }
 \value{

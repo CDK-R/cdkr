@@ -17,11 +17,11 @@ determines net charge on a molecule.
 In general, you will want to use the \code{get.total.charge} function.
 }
 \usage{
-get.total.charge(molecule)
-get.total.formal.charge(molecule)
+get.total.charge(mol)
+get.total.formal.charge(mol )
 }
 \arguments{
-  \item{molecule}{A Java object of class \code{IAtomContainer}}
+  \item{mol}{A Java object of class \code{IAtomContainer}}
 }
 \value{
 A double value indicating the total partial charge or total formal

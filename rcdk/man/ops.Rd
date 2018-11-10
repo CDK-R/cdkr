@@ -14,12 +14,12 @@ these operations are not performed and so the user should call one or
 both of these methods to corrrectly configure a molecule.
 }
 \usage{
-do.aromaticity(molecule)
-do.typing(molecule)
-do.isotopes(molecule)
+do.aromaticity(mol)
+do.typing(mol)
+do.isotopes(mol)
 }
 \arguments{
-  \item{molecule}{The molecule on which the operation is to be
+  \item{mol}{The molecule on which the operation is to be
   performed. Should of class \code{jobjRef} with a \code{jclass}
   attribute of \code{IAtomContainer}}
 }
