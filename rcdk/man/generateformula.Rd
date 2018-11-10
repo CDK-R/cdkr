@@ -1,4 +1,4 @@
-\name{generate.formula}
+,50\name{generate.formula}
 \alias{generate.formula}
 \alias{generate.formula.iter}
 \title{
@@ -66,14 +66,14 @@ for (i in mfSet) {
 
 
 mit <- generate.formula.iter(18.03383,charge=1,
-                          elements=list(C=c(0,50), H=c(0,50), N=c(0,50)))
+                          elements=list(C=c("C", 0,50), H=c("H", 0,50), N=c("N", 0,50)))
 hit <- itertools::ihasNext(mit)
 while (itertools::hasNext(hit)) 
   print(iterators::nextElem(hit))
 
 ## Generate formulae using N15
 mit <- generate.formula.iter(18.03383, window=0.1, charge=1,
-                          elements=list(C=c(0,50), H=c(0,50), N=c(0,50,15)))
+                          elements=list(C=c("C", 0,50), H=c("H", 0,50), N=c("N", 0,50,15)))
 hit <- itertools::ihasNext(mit)
 while (itertools::hasNext(hit)) 
   print(iterators::nextElem(hit))			  
