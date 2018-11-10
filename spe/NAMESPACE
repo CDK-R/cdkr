@@ -1,3 +1,0 @@
-useDynLib("spe")
-export(spe, eval.stress, sample.max.distance)
-

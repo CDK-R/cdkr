@@ -8,10 +8,10 @@
   the specified  AtomContainer
 }
 \usage{
-get.total.hydrogen.count(molecule)
+get.total.hydrogen.count(mol)
 }
 \arguments{
-  \item{molecule}{A Java object of class \code{IAtomContainer}}
+  \item{mol}{A Java object of class \code{IAtomContainer}}
 }
 \value{
   An integer value indicating the number of implicit hydrogens

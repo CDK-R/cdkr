@@ -141,11 +141,6 @@ view.molecule.2d <- function(molecule, ncol = 4, width = 200, height = 200, depi
 }
 
 view.table <- function(molecules, dat, depictor = NULL) {
-##  stop("Currently disabled")
-
-  if (cellx <= 0 || celly <= 0) {
-    stop("Invalid cell width or height specified")
-  }
 
   if (!is.list(molecules)) {
     stop("Must provide a list of molecule objects")

@@ -21,13 +21,13 @@
 	have a formal charge of 0, otherwise \code{FALSE}
 }
 \usage{
-get.exact.mass(molecule)
-get.natural.mass(molecule)
-convert.implicit.to.explicit(molecule)
-is.neutral(molecule)
+get.exact.mass(mol)
+get.natural.mass(mol)
+convert.implicit.to.explicit(mol)
+is.neutral(mol)
 }
 \arguments{
-  \item{molecule}{A \code{jObjRef} representing an IAtomContainer or IMolecule object}
+  \item{mol}{A \code{jObjRef} representing an IAtomContainer or IMolecule object}
 }
 \value{
 	\code{exact.mass} returns a numeric

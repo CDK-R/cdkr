@@ -9,10 +9,10 @@
   calculations.
 }
 \usage{
-remove.hydrogens(molecule)
+remove.hydrogens(mol)
 }
 \arguments{
-  \item{molecule}{A Java object of class \code{IAtomContainer}}
+  \item{mol}{A Java object of class \code{IAtomContainer}}
 }
 \value{
   A \code{jobref} that refers to a \code{IAtomContainer} object

@@ -1,4 +1,4 @@
-,50\name{generate.formula}
+\name{generate.formula}
 \alias{generate.formula}
 \alias{generate.formula.iter}
 \title{
