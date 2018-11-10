@@ -9,7 +9,7 @@ import org.openscience.cdk.exception.CDKException;
 import org.openscience.cdk.interfaces.IAtomContainer;
 import org.openscience.cdk.smiles.SmilesParser;
 
-import javax.swing.JFrame;
+import javax.swing.*;
 import java.io.IOException;
 
 /**
@@ -28,7 +28,7 @@ public class View2DTest {
     public void testMoleculeCell() throws Exception {
         SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
         IAtomContainer container = sp.parseSmiles("C1CN2CCN(CCCN(CCN(C1)Cc1ccccn1)CC2)C");
-        MoleculeCell mcell = new MoleculeCell(container, 200, 200);
+        MoleculeCell mcell = new MoleculeCell(container, Misc.getDefaultDepictor());
         JFrame frame = new JFrame("Molecule Cell");
         frame.getContentPane().add(mcell);
         frame.pack();
@@ -74,7 +74,7 @@ public class View2DTest {
 //        fail();
     }
 
-    public void testView2DT() {
+    public void testView2DT() throws IOException {
         String[] fname = {home + "src/R/trunk/rcdk/data/dan001.hin",
                 home + "src/R/trunk/rcdk/data/dan002.hin",
                 home + "src/R/trunk/rcdk/data/dan008.hin"};
@@ -87,7 +87,7 @@ public class View2DTest {
             e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
         }
 
-        ViewMolecule2DTable v2dt = new ViewMolecule2DTable(acs, 3, 200, 200);
+        ViewMolecule2DTable v2dt = new ViewMolecule2DTable(acs, 3, 200, 200, Misc.getDefaultDepictor());
 //        fail();
     }
 }

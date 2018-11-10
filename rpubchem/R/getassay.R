@@ -125,15 +125,11 @@ find.assay.id <- function(query, quiet=TRUE) {
   searchURL <- 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esearch.fcgi?tool=rpubchem&db=pcassay&term='
   url <- URLencode(paste(searchURL,query,sep='',collapse=''))
                                         #tmpdest <- tempfile(pattern = 'search')
-  tmpdest <- 'srch'
-
   ## first get the count of results
-  status <- try(download.file(url, destfile=tmpdest, method='internal', mode='wb', quiet=quiet),
-                silent=TRUE)
-  if (class(status) == 'try-error') {
-    stop("Couldn't perform search")
-  }
-  xml <- xmlTreeParse(tmpdest)
+  curlHandle <- getCurlHandle()
+  res <- dynCurlReader()
+  curlPerform(url=url, curl=curlHandle, writefunction = res$update)
+  xml <- xmlInternalTreeParse(res$value())
   root <- xmlRoot(xml)
   count <- xmlValue(xmlElementsByTagName(root, "Count", recursive=TRUE)[[1]])
 
@@ -143,13 +139,9 @@ find.assay.id <- function(query, quiet=TRUE) {
 
   ## now get the results
   url <- sprintf("%s&retmax=%s", url, count)
-  status <- try(download.file(url, destfile=tmpdest, method='internal', mode='wb', quiet=quiet),
-                silent=TRUE)
-
-  if (class(status) == 'try-error') {
-    stop("Couldn't perform search")
-  }
-  xml <- xmlTreeParse(tmpdest)
+  res <- dynCurlReader()
+  curlPerform(url=url, curl=curlHandle, writefunction = res$update)
+  xml <- xmlInternalTreeParse(res$value())
   root <- xmlRoot(xml)
   idlist <- xmlElementsByTagName(root, 'IdList', recursive=TRUE)
   if (length(idlist) != 1) {
@@ -158,8 +150,6 @@ find.assay.id <- function(query, quiet=TRUE) {
   ids <- xmlElementsByTagName(idlist[[1]], 'Id', recursive=TRUE)
   ids <- sort(as.numeric(unlist(lapply(ids, xmlValue))))
 
-  unlink(tmpdest)
-  
   ids
 }
 
@@ -287,7 +277,7 @@ get.assay <- function(aid, cid=NULL, sid=NULL, quiet=TRUE) {
 
 
 .get.xml.file <- function(url, dest, quiet) {
-  status <- try(download.file(url, destfile=dest, method='internal', mode='wb', quiet=quiet),
+  status <- try(download.file(url, destfile=dest, method='curl', mode='wb', quiet=quiet),
                 silent=TRUE)
 
   if (class(status) == 'try-error') {

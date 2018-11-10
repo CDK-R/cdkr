@@ -8,7 +8,6 @@ importFrom("base64enc", "base64decode")
 importFrom("utils", "read.table")
 import(
   XML,
-  car,
   RCurl,
   RJSONIO,
   data.table,

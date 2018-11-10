@@ -1,26 +1,30 @@
 Package: rcdk
-Version: 3.3.9
-Date: 2016-11-28
-Title: Interface to the CDK Libraries
+Version: 3.4.9.1
+Date: 2018-08-06
+Title: Interface to the 'CDK' Libraries
 Authors@R: c(person('Rajarshi', 'Guha', role=c('aut',"cph"), email='rajarshi.guha@gmail.com'),
-             person('Zachary', 'Charlop-Powers', role=c('cre'), email='zach.charlop.powers@gmail.com'))
+             person('Zachary', 'Charlop-Powers', role=c('cre'), email='zach.charlop.powers@gmail.com'),
+             person('Emma', 'Schymanski', role=c('ctb'), email='schymane@gmail.com'))
 Depends:
-    fingerprint
+    rcdklibs (>= 2.2)
 Imports:
+    fingerprint,
     rJava,
-    rcdklibs (>= 1.5.12),
     methods,
     png,
     iterators,
     itertools
 Suggests:
     xtable,
-    RUnit
-SystemRequirements:
-  Java JDK 1.7 or higher
+    RUnit,
+    knitr,
+    rmarkdown
+SystemRequirements: Java JDK 8 or higher
 License: LGPL
 LazyLoad: yes
 Description: Allows the user to access functionality in the
-    CDK, a Java framework for chemoinformatics. This allows the user to load
+    'CDK', a Java framework for chemoinformatics. This allows the user to load
     molecules, evaluate fingerprints, calculate molecular descriptors and so on.
-    In addition the CDK API allows the user to view structures in 2D.
+    In addition, the 'CDK' API allows the user to view structures in 2D.
+RoxygenNote: 6.0.1
+VignetteBuilder: knitr

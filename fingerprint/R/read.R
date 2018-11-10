@@ -101,7 +101,7 @@ fp.read <- function(f='fingerprint.txt', size=1024, lf=cdk.lf, header=FALSE, bin
                          misc=misc)
     }
     c <- c+1
-  }
+      }
   close(fcon)
   fplist
 }

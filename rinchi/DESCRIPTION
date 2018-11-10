@@ -1,12 +1,11 @@
 Package: rinchi
-Version: 0.4
-Date: 2016-02-23
-Title: rinchi - Generate InChI and InChI keys from SMILES and other chemical file formats
+Version: 0.5
+Date: 2018-03-04
+Title: Generate InChI and InChI Keys from SMILES and Other Chemical File Formats
 Author: Rajarshi Guha <rajarshi.guha@gmail.com>
 Maintainer: Rajarshi Guha <rajarshi.guha@gmail.com>
 Depends: R (>= 2.0.0)
-Imports: rJava
-Suggests: rcdk 
+Imports: rJava, rcdklibs, rcdk
 License: GPL (>= 2)
 Description: Generate InChI and InChI keys from SMILES and other chemical file formats.
  In addition, if the rcdk library is available, CDK AtomContainer objects can be directly

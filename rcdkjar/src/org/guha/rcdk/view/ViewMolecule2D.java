@@ -11,13 +11,7 @@ import java.awt.event.WindowEvent;
 
 
 public class ViewMolecule2D extends JFrame {
-    IAtomContainer molecule;
-
     MoleculeCell panel;
-
-    int width = 300;
-    int height = 300;
-    double scale = 0.9;
 
     class ApplicationCloser extends WindowAdapter {
         public void windowClosing(WindowEvent e) {
@@ -30,15 +24,15 @@ public class ViewMolecule2D extends JFrame {
     }
 
     public ViewMolecule2D(IAtomContainer molecule, int width, int height) throws Exception {
-        this.width = width;
-        this.height = height;
-//        if (!ConnectivityChecker.isConnected(molecule)) throw new CDKException("Molecule must be connected");
-//        molecule = AtomContainerManipulator.removeHydrogens(molecule);
-//        molecule = Misc.getMoleculeWithCoordinates(molecule);
-        panel = new MoleculeCell(molecule, width, height);
+        this(molecule, new RcdkDepictor(width, height, 1.3, "cow", "off", "reagents", true, false, 100, ""));
+    }
+
+    public ViewMolecule2D(IAtomContainer molecule, RcdkDepictor depictor) throws Exception {
+        panel = new MoleculeCell(molecule, depictor);
         setTitle("2D Viewer");
         addWindowListener(new ApplicationCloser());
-        setSize(width, height);
+        setSize(depictor.getWidth(), depictor.getHeight());
+
     }
 
     public void draw() {

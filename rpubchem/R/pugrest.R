@@ -34,6 +34,7 @@
   if (!is.null(ignore) && n %in% ignore) return(NULL)
   if (!is.null(keep) && !(n %in% keep)) return(NULL)
 
+
   ret <- lapply(sec$Information, function(info) {
     info.name <- info$Name
     if (info.name == n) info.name <- ''
@@ -41,7 +42,11 @@
     if ("NumValue" %in% names(info)) val <- as.numeric(info$NumValue)
     else if ("StringValue" %in% names(info)) val <- info$StringValue
     else if ("BinaryValue" %in% names(info)) val <- info$BinaryValue
-    ret <- data.frame(val=val)
+    else if ("DateValue" %in% names(info)) val <- info$DateValue
+    else if ("Table" %in% names(info)) {
+      return(.handle.json.table(info$Table))
+    }
+    ret <- data.frame(val=val, stringsAsFactors=FALSE)
     if (info.name != '') {
       names(ret) <- sprintf("%s.%s", n, info.name)
     } else {
@@ -50,6 +55,25 @@
     return(ret)
   })
   return(ret)
+}
+
+.handle.json.table <- function(tbl) {
+  cns <- tbl$ColumnName
+  rows <- lapply(tbl$Row, function(row) {
+    k <- as.character(row$Cell[[1]])
+    v <- row$Cell[[2]][1] ## TODO check for units and store it somehow
+    vtype <- names(row$Cell[[2]])[1]
+    v <- switch(vtype,
+                NumValue = as.numeric(v),
+                BoolValue = as.logical(v),
+                StringValue = as.character(v),
+                DateValue = as.character(v),
+                BinaryValue = as.character(v))
+    df <- data.frame(v, stringsAsFactors=FALSE)
+    names(df) <- k
+    return(df)
+  })
+  rows <- do.call(cbind, rows)
 }
 
 .inchikey.2.cid <- function(key) {

@@ -23,6 +23,8 @@ public class DescriptorUtilities {
             if (dictClasses == null) {
                 if (className.indexOf("AcidicGroupCountDescriptor") >= 0)
                     dictClasses = new String[]{"constitutionalDescriptor"};
+                if (className.indexOf("FractionalCSP3Descriptor") >= 0)
+                    dictClasses = new String[]{"constitutionalDescriptor"};
             }
             for (String dictClass : dictClasses) {
                 if (category.equals(dictClass)) {

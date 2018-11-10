@@ -11,4 +11,4 @@ export("fp.sim.matrix", "fp.to.matrix", "fp.factor.matrix",
        ##"featvec.to.binaryfp",
        "moe.lf", "bci.lf", "cdk.lf", "ecfp.lf", "fps.lf", "jchem.binary.lf",
        "bit.spectrum", "balance", "bit.importance")
-useDynLib(fingerprint)
+useDynLib(fingerprint,.registration = TRUE)

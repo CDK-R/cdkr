@@ -25,16 +25,18 @@ load.molecules <- function(molfiles=NA, aromaticity = TRUE, typing = TRUE, isoto
   }
 
   for (f in molfiles) {
-    if (!file.exists(f) && length(grep('http://', f)) == 0)
+    if (!file.exists(f) && length(grep('http://', f)) == 0 && length(grep('https://', f)) == 0)
       stop(paste(f, ": Does not exist", sep=''))
   }
 
-  urls <- grep('http://', molfiles)
+  urls <- grep('http|https', molfiles)
   if (length(urls) > 0) { ## download the files and replace the URL's with the temp names
     for (idx in urls) {
       url <- molfiles[idx]
       tmpdest <- tempfile(pattern='xxx')
-      status <- try(download.file(url, destfile=tmpdest, method='internal', mode='wb', quiet=!verbose),
+      status <- try(download.file(url, destfile=tmpdest,
+                                  method='curl',
+                                  mode='wb', quiet=!verbose),
                     silent=verbose)
       if (class(status) == 'try-error') {
         molfiles[idx] <- NA

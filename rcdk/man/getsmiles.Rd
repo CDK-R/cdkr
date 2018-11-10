@@ -10,27 +10,23 @@
   method may fail. See CDK Javadocs for more information
 }
 \usage{
-get.smiles(molecule, type = 'generic', aromatic = FALSE, atomClasses = FALSE)
+get.smiles(molecule, flavor = smiles.flavors(c('Generic')), smigen = NULL)
 }
 \arguments{
   \item{molecule}{A Java object of class \code{IAtomContainer}}
-  \item{type}{The type of SMILES to output. Possible values are
-  \enumerate{
-  \item generic - non-canonical SMILES string, different atom ordering produces different SMILES. No isotope or stereochemistry encoded.
-  \item unique - canonical SMILES string, different atom ordering produces the same* SMILES. No isotope or stereochemistry encoded.
-  \item isomeric - non-canonical SMILES string, different atom ordering produces different SMILES. Isotope and stereochemistry is encoded.
-  \item absolute - canonical SMILES string, different atom ordering produces the same SMILES. Isotope and stereochemistry is encoded.
-  }}
-  \item{aromatic}{If \code{TRUE} aromatic SMILES are generated. The default is to output Kekule form}
-  \item{atomClasses}{If \code{TRUE} include atom classes.}
+  \item{flavor}{Customizations for SMILES generation. See \code{\link{smiles.flavors}}}
+  \item{smigen}{An instance of \code{SmilesGenerator}, which can be useful if you are generating SMILES for a large number of molecules}
+}
+\seealso{
+\code{\link{smiles.flavors}}, \code{\link{parse.smiles}}
 }
 \value{
   An R character object containing the SMILES
 }
 \examples{
-sp <- get.smiles.parser()
-smiles <- c('CCC', 'CCN', 'CCN(C)(C)', 'c1ccccc1Cc1ccccc1','C1CCC1CC(CN(C)(C))CC(=O)CC')
-mols <- parse.smiles(smiles)
+m <- parse.smiles('C1C=CCC1N(C)c1ccccc1')[[1]]
+get.smiles(m)
+get.smiles(m, smiles.flavors(c('Generic','UseAromaticSymbols')))
 }
 \keyword{programming}
 

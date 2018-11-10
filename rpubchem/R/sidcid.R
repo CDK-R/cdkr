@@ -89,7 +89,7 @@ decodeCACTVS <- function(cactvs) {
       else if (types[i] == 'Integer') dat[,i] <- as.integer(dat[,i])
       else if (types[i] == 'Float') dat[,i] <- as.numeric(dat[,i])    
     }
-
+    
     ## Look for the CompoundIdList item
     cid <- NA
     cidl <- Filter(function(x) xmlGetAttr(x, 'Name') == 'CompoundIDList', docsum['Item'])
@@ -106,7 +106,7 @@ get.sid <- function(sid, quiet=TRUE, from.file=FALSE) {
   datafile <- NA
   
   if (!from.file) {
-    sidURL <- 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?tool=rpubchem&db=pcsubstance&id='
+    sidURL <- 'https://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?tool=rpubchem&db=pcsubstance&id='
     url <- paste(sidURL, paste(sid,sep='',collapse=','), sep='', collapse='')
     datafile <- tempfile(pattern = 'sid')
     .get.xml.file(url, datafile, quiet)
@@ -135,7 +135,8 @@ get.cid <- function(cid, quiet=TRUE) {
   ids <- .section.by.heading(sections, "Names and Identifiers")
   ids <- .section.by.heading(ids$Section, "Computed Descriptors")
   ivals <- lapply(ids$Section, .section.handler)
-  ivals <- do.call(cbind, unlist(Filter(function(x) !is.null(x), ivals), recursive=FALSE))  
+  ivals.unlisted <- unlist(Filter(function(x) !is.null(x), ivals), recursive=TRUE)
+  ivals <- data.frame(do.call(cbind, as.list(ivals.unlisted)), stringsAsFactors=FALSE)
 
   ## Process chemprops
   props <- .section.by.heading(sections, "Chemical and Physical Properties")
@@ -145,11 +146,14 @@ get.cid <- function(cid, quiet=TRUE) {
   }
   
   computed <- .section.by.heading(props$Section, "Computed Properties")
-  cvals <- lapply(computed$Section, .section.handler,
+  cvals <- lapply(list(computed), .section.handler,
                   ignore= c(##"CACTVS Substructure Key Fingerprint",
                     "Compound Is Canonicalized",
                     "Covalently-Bonded Unit Count"))
-  cvals <- do.call(cbind, unlist(Filter(function(x) !is.null(x), cvals), recursive=FALSE))
+  cvals <- do.call(cbind, as.list(unlist(Filter(function(x) !is.null(x), cvals), recursive=FALSE)))
+  cols2remove <- which(names(cvals) %in% c("Compound Is Canonicalized",
+                                           "Covalently-Bonded Unit Count"))
+  cvals <- cvals[,-cols2remove]
   
   experimental <- .section.by.heading(props$Section, "Experimental Properties")
   if (is.null(experimental)) {
@@ -163,27 +167,53 @@ get.cid <- function(cid, quiet=TRUE) {
     else
       evals <- do.call(cbind, evals)
   }
-  return(data.frame(CID=cid, ivals, cvals, evals))
-}
 
-.get.cid.old  <- function(cid, quiet=TRUE, from.file=FALSE) {
-
-  datafile <- NA
+  ## Record descriptions, added as attrs to the final data.frame
+  .find.ref.by.id <- function(rid) Filter(function(x) as.numeric(x$ReferenceNumber) == rid, record$Reference)
   
-  if (!from.file) {
-    cidURL <- 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?tool=rpubchem&db=pccompound&id='
-    url <- paste(cidURL, paste(cid,sep='',collapse=','), sep='', collapse='')
-    datafile <- tempfile(pattern = 'cid')
-    .get.xml.file(url, datafile, quiet)
-  } else {
-    datafile <- cid
-  }
+  ids <- .section.by.heading(sections, "Names and Identifiers")
+  ids <- .section.by.heading(ids$Section, "Record Description")
+  si.items <- lapply(ids$Information, function(x) {
+      if ("Description" %in% names(x)) {
+          desc <- x$Description
+      } else desc <- ""
+      ref <- as.numeric(x$ReferenceNumber)
+      val <- x$StringValue
 
-  doc <- xmlParse(datafile)
-  dat <- .extract.fields(doc)
-  dat$CID <- cid
-  return(dat)
+      refitem <- .find.ref.by.id(ref)
+      if (length(refitem) == 1)
+          refitem = refitem[[1]]
+      
+      list(refnum=ref, desc=desc, value=val,
+           refsource=refitem$SourceName,
+           refsourceid=refitem$SourceID,
+           refurl=refitem$URL)
+  })
+
+  ret <- data.frame(CID=cid, ivals, cvals, evals, stringsAsFactors=FALSE)
+  attr(ret, "Summary.Information") <- si.items
+  
+  return(ret)
 }
+
+## .get.cid.old  <- function(cid, quiet=TRUE, from.file=FALSE) {
+
+##   datafile <- NA
+  
+##   if (!from.file) {
+##     cidURL <- 'http://eutils.ncbi.nlm.nih.gov/entrez/eutils/esummary.fcgi?tool=rpubchem&db=pccompound&id='
+##     url <- paste(cidURL, paste(cid,sep='',collapse=','), sep='', collapse='')
+##     datafile <- tempfile(pattern = 'cid')
+##     .get.xml.file(url, datafile, quiet)
+##   } else {
+##     datafile <- cid
+##   }
+
+##   doc <- xmlParse(datafile)
+##   dat <- .extract.fields(doc)
+##   dat$CID <- cid
+##   return(dat)
+## }
 
 get.cid.list <- function(sid,  quiet=TRUE) {
   return(.cmpd.id2id(sid, 'sid', 'cids', quiet))
