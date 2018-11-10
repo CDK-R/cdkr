@@ -30,7 +30,7 @@
 #' @param size The final length of the fingerprint. 
 #' This argument is ignored for the `pubchem`, `maccs`, `kr`, `signature`, `circular` and 
 #' `estate` fingerprints
-#' @param verboe Verbose output if \code{TRUE}
+#' @param verbose Verbose output if \code{TRUE}
 #' @return an S4 object of class \code{\link{fingerprint-class}} or \code{\link{featvec-class}}, 
 #' which can be manipulated with the fingerprint package.
 #' @export

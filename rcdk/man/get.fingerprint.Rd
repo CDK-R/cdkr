@@ -40,7 +40,7 @@ descriptor
 This argument is ignored for the `pubchem`, `maccs`, `kr`, `signature`, `circular` and 
 `estate` fingerprints}
 
-\item{verboe}{Verbose output if \code{TRUE}}
+\item{verbose}{Verbose output if \code{TRUE}}
 }
 \value{
 an S4 object of class \code{\link{fingerprint-class}} or \code{\link{featvec-class}}, 
