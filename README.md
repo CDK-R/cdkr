@@ -54,4 +54,4 @@ sudo R CMD javareconf
 install.packages('rJava', type="source")
 ```
 
-Further informaiton about R's use of Java can be [found here](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Java-support). 
+Further informaiton about R's use of Java can be [found here](https://cran.r-project.org/doc/manuals/r-release/R-admin.html#Java-support).   
