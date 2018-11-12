@@ -8,15 +8,22 @@ test.get.mass <- function() {
   ) 
   #atrzine
   m <- parse.smiles(smiles[1])[[1]]
+  f <- get.mol2formula(m)
   # Dashboard ref mass: 215.093773, 215.69
   #checkEquals(get.mass(m,type="total.exact"),215.0938, tolerance=1e-6) #currently NPE
   #checkEquals(get.mass(m,type="natural.exact"),215.6835, tolerance=1e-6) #currently NPE
   checkEquals(get.mass(m,type="mass.number"),215, tolerance=1e-6) #215
   checkEquals(get.mass(m,type="major.isotope"),215.0938, tolerance=1e-6) #215.0938
   checkEquals(get.mass(m,type="molecular.weight"),215.6835, tolerance=1e-6) #215.6835
-  #fails ith NPE right now
+  #fails with NPE right now
   #checkEquals(get.exact.mass(m),get.mass(m,type="total.exact"), tolerance=1e-6)
   #checkEquals(get.natural.mass(m),get.mass(m,type="natural.exact"), tolerance=1e-6)
+  ###formula testing
+  checkEquals(get.mass(f,type="total.exact"),215.0938, tolerance=1e-6) 
+  #checkEquals(get.mass(f,type="natural.exact"),215.6835, tolerance=1e-6) #currently returns wrong mass
+  checkEquals(get.mass(f,type="mass.number"),215, tolerance=1e-6) #215
+  checkEquals(get.mass(f,type="major.isotope"),215.0938, tolerance=1e-6) #215.0938 # NPE
+  #checkEquals(get.mass(f,type="molecular.weight"),215.6835, tolerance=1e-6) #215.6835
   
   #deuterium on exchangeable locations
   m <- parse.smiles(smiles[2])[[1]]
@@ -91,5 +98,14 @@ test.get.mass <- function() {
   #checkEquals(get.natural.mass(m),get.mass(m,type="natural.exact"), tolerance=1e-6)
   #checkEquals(get.exact.mass(m),196.9955, tolerance=1e-6)
   #checkEquals(get.natural.mass(m),196.1059, tolerance=1e-6) #quite a discrepancy in ref value
+  
+  #formula checks on benzene
+  checkEquals(get.mass(get.formula("C6H6"),type="total.exact"),78.04695, tolerance=1e-6) 
+  #wrong, these two below should be Average Mass: 78.114 g/mol
+  #checkEquals(get.mass(get.formula("C6H6"),type="natural.exact"),78.04695, tolerance=1e-6) 
+  #checkEquals(get.mass(get.formula("C6H6"),type="molecular.weight"),78.114, tolerance=1e-6) #NPE
+  checkEquals(get.mass(get.formula("C6H6"),type="mass.number"),78, tolerance=1e-6) 
+  checkEquals(get.mass(get.formula("C6H6"),type="major.isotope"),78.04695, tolerance=1e-6) 
+  
   
 }
