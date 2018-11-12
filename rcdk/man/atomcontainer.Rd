@@ -1,6 +1,4 @@
 \name{Molecule}
-\alias{get.exact.mass}
-\alias{get.natural.mass}
 \alias{is.neutral}
 \alias{convert.implicit.to.explicit}
 \title{
@@ -8,10 +6,6 @@
 }
 \description{
 	Various functions to perform operations on molecules. 
-
-	\code{get.exact.mass} returns the exact mass of a molecule
-
-	\code{get.natural.mass} returns the natural exact mass of a molecule	
 
 	\code{convert.implicit.explicit} converts implicit hydrogens
 	to explicit hydrogens. This function does not return any value
@@ -21,8 +15,6 @@
 	have a formal charge of 0, otherwise \code{FALSE}
 }
 \usage{
-get.exact.mass(mol)
-get.natural.mass(mol)
 convert.implicit.to.explicit(mol)
 is.neutral(mol)
 }
@@ -30,10 +22,6 @@ is.neutral(mol)
   \item{mol}{A \code{jObjRef} representing an IAtomContainer or IMolecule object}
 }
 \value{
-	\code{exact.mass} returns a numeric
-
-	\code{get.natural.mass} returns a numeric
-
 	\code{convert.implicit.to.explicit} has no return value
 
 	\code{is.neutral} returns a boolean.
@@ -56,15 +44,7 @@ such cases, make sure that the molecule has been typed beforehand.
   do.aromaticity(m)
   do.typing(m)
   do.isotopes(m)
-
-  get.exact.mass(m)
-  get.natural.mass(m)
-
   convert.implicit.to.explicit(m)
-  get.natural.mass(m) 
-  do.isotopes(m) # Configure isotopes of newly added hydrogens
-  get.exact.mass(m)
-
   is.neutral(m)
 }
 \author{Rajarshi Guha (\email{rajarshi.guha@gmail.com})}
