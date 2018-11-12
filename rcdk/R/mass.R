@@ -1,6 +1,6 @@
 .fmla2atomcontainer <- function(f){
   .jcall('org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator',
-         "Lorg/openscience/cdk/interfaces/IAtomContainer;",
+         "org/openscience/cdk/interfaces/IAtomContainer;",
          "getAtomContainer",
          f,
          use.true.class = FALSE)
