@@ -22,8 +22,8 @@ test.get.mass <- function() {
   checkEquals(get.mass(f,type="total.exact"),215.0938, tolerance=1e-6) 
   #checkEquals(get.mass(f,type="natural.exact"),215.6835, tolerance=1e-6) #currently returns wrong mass
   checkEquals(get.mass(f,type="mass.number"),215, tolerance=1e-6) #215
-  checkEquals(get.mass(f,type="major.isotope"),215.0938, tolerance=1e-6) #215.0938 # NPE
-  #checkEquals(get.mass(f,type="molecular.weight"),215.6835, tolerance=1e-6) #215.6835
+  checkEquals(get.mass(f,type="major.isotope"),215.0938, tolerance=1e-6) #215.0938 
+  #checkEquals(get.mass(f,type="molecular.weight"),215.6835, tolerance=1e-6) #215.6835 # NPE
   
   #deuterium on exchangeable locations
   m <- parse.smiles(smiles[2])[[1]]
