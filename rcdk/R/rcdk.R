@@ -77,6 +77,7 @@ get.total.hydrogen.count <- function(mol) {
          mol);
 }
 
+
 get.total.charge <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
