@@ -6,16 +6,16 @@
 If you use ```devtools```, installing the packages can be done by
 ```R
 library(devtools)
-install_github("rajarshi/rcdklibs")
-install_github("rajarshi/cdkr", subdir="rcdk")
+install_github("CDK-R/rcdklibs")
+install_github("CDK-R/cdkr", subdir="rcdk")
 ```
 
 Otherwise if you prefer the command line
 ``` 
 	cd /tmp/
-	git clone git@github.com:rajarshi/rcdklibs.git
+	git clone git@github.com:CDK-R/rcdklibs.git
 	R CMD INSTALL rcdklibs
-	git clone git@github.com:rajarshi/cdkr.git
+	git clone git@github.com:CDK-R/cdkr.git
 	cd cdkr/rcdkjar
 	ant clean jar
 	cd ../
