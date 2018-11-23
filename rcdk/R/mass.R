@@ -56,9 +56,11 @@ get.mass <- function(obj, type = c('default','total.exact','natural.exact',
 }
 
 get.exact.mass <- function(mol) {
+  warning("This function is deprecated. Consider using get.mass")
   return(get.mass(mol, type='total.exact'))
 }
 
 get.natural.mass <- function(mol) {
+  warning("This function is deprecated. Consider using get.mass")
   return(get.mass(mol, type='natural.exact'))
 }
