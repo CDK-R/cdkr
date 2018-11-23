@@ -54,10 +54,25 @@
   assign("mfManipulator", .jnew("org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator"), envir = .rcdk.GlobalEnv)
 }
 
+#' Get Version of the CDK Library
+#' 
+#' @return A character string reporting the version of the CDK library used in this package
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @export
 cdk.version <- function() {
   .jcall("org.openscience.cdk.CDK", "S", "getVersion")
 }
 
+#' Remove Hydrogens from a Molecule
+#' 
+#' This function generate a new `IAtomContainer`` object in which the
+#' hydrogens have been removed. This can be useful for descriptor
+#' calculations.
+#' 
+#' @param mol A `jobjRef` object of Java class `IAtomContainer`
+#' @return A `jobjRef` object of Java class `IAtomContainer`, with no hydrogens
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @export
 remove.hydrogens <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -68,6 +83,16 @@ remove.hydrogens <- function(mol) {
   newmol
 }
 
+#' Get the Total Hydrogen Count for a Molecule
+#' 
+#' The function will return the summed implicit hydrogens of all atoms in
+#' the specified  `IAtomContainer`
+#' 
+#' @param mol  A `jobjRef` objects of Java class `IAtomContainer`
+#' @return An integer value indicating the number of implicit hydrogens
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @seealso \code{\link{remove.hydrogens}}
+#' @export
 get.total.hydrogen.count <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -76,36 +101,6 @@ get.total.hydrogen.count <- function(mol) {
          'getTotalHydrogenCount',
          mol);
 }
-
-
-get.total.charge <- function(mol) {
-  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
-    stop("molecule must be of class IAtomContainer")
-  
-  ## check to see if we have partial charges
-  atoms <- get.atoms(mol)
-  pcharges <- unlist(lapply(atoms, get.charge))
-
-  ## If any are null, partial charges were not set, so
-  ## just return the total formal charge
-  if (any(is.null(pcharges))) return(get.total.formal.charge(mol))
-  else {
-    .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
-           'D',
-           'getTotalCharge',
-           mol);
-  }
-}
-
-get.total.formal.charge <- function(mol) {
-  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
-    stop("molecule must be of class IAtomContainer")
-  .jcall('org/openscience/cdk/tools/manipulator/AtomContainerManipulator',
-         'I',
-         'getTotalFormalCharge',
-         mol);
-}
-
 
 convert.implicit.to.explicit <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
