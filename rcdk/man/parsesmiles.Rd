@@ -9,22 +9,27 @@
   not have any 2D or 3D coordinates.
 
   Note that the molecules obtained from this method will not have any
-  aromaticity perception, atom typing or isotopic configuration 
+  aromaticity perception, atom typing or isotopic configuration
   done on them. This is in
   contrast to the \link{load.molecules} method. Thus, you should
   perform these steps manually on the molecules.
 }
 \usage{
-parse.smiles(smiles, kekulise=TRUE)
+parse.smiles(smiles, kekulise=TRUE, omit.nulls=FALSE, which.nulls=FALSE)
 }
 \arguments{
   \item{smiles}{A SMILES string}
-  \item{kekulise}{If set to \code{FALSE} disables electron checking and 
+  \item{kekulise}{If set to \code{FALSE} disables electron checking and
   allows for parsing of incorrect SMILES. If a SMILES does not parse by default, try
   setting this to \code{FALSE} - though the resultant molecule may not have consistent
   bonding. As an example, c4ccc2c(cc1=Nc3ncccc3(Cn12))c4 will not be parsed by default
   because it is missing a nitrogen. With this argument set to \code{FALSE} it will parse
-  succesfully, but this is a hack to handle an incorrect SMILES}
+  successfully, but this is a hack to handle an incorrect SMILES}
+  \item{omit.nulls}{If set to \code{TRUE}, omits SMILES which were parsed as
+  \code{NULL}.}
+  \item{which.nulls}{If set to \code{TRUE}, returns the SMILES parsed as
+  \code{NULL} as the second element of a list (whose first element contains the
+  \code{IAtomContainer} objects).}
 }
 \examples{
 smiles <- c('CCC', 'c1ccccc1', 'C(C)(C=O)C(CCNC)C1CC1C(=O)')
@@ -33,7 +38,9 @@ mols <- parse.smiles(smiles)
 }
 \value{
   A list of \code{jobjRef}s to their corresponding CDK \code{IAtomContainer} objects. If a
-  SMILES string could not be parsed, \code{NA} is returned instead.
+  SMILES string could not be parsed, and \code{omit.nulls=TRUE} and
+  \code{which.nulls=TRUE}, returns a 2-element list of \code{IAtomContainer} objects and
+  unparseable SMILES string(s) respectively.
 }
 \keyword{programming}
 \seealso{
