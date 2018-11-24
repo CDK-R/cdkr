@@ -99,7 +99,7 @@ get.smiles.parser <- function() {
     .jnew("org/openscience/cdk/smiles/SmilesParser", dcob)
 }
 
-parse.smiles <- function(smiles, kekulise=TRUE, omit.nulls=FALSE, which.nulls=FALSE) {
+parse.smiles <- function(smiles, kekulise=TRUE, omit.nulls=FALSE) {
     if (!is.character(smiles)) {
         stop("Must supply a character vector of SMILES strings")
     }
@@ -133,13 +133,5 @@ parse.smiles <- function(smiles, kekulise=TRUE, omit.nulls=FALSE, which.nulls=FA
         warning(paste(nulls_count)," out of ",paste(length(returnValue_withnulls)),
         " SMILES were not successfully parsed, resulting in NULLs.")
     }
-
-    returnList <- returnValue
-    ### find non-parseable SMILES
-    smiles_notparsed <- Filter((is.null), returnValue_withnulls)
-    if (which.nulls==TRUE) {
-        returnList <- list(returnValue,smiles_notparsed)
-    }
-
-    return(returnList)
+    return(returnValue)
 }
