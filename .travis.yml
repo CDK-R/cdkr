@@ -14,7 +14,6 @@ addons:
 ## https://docs.travis-ci.com/user/languages/r/#customizing-the-travis-build-steps
 install: 
   - R -e 'install.packages("devtools")'
-  - R -e 'devtools::install_deps(pkg = "rcdklibs", dep = T)'
   - R -e 'devtools::install_deps(pkg = "rcdk", dep = T)'
 
 ## Inspired by 
@@ -23,9 +22,6 @@ install:
 ## Make sure to INSTALL after checking, so that rcdk has its latest 
 ## dependencies from this github available, overwriting above 
 script:
-- R CMD build rcdklibs
-- R CMD check $(ls -1t *.tar.gz | head -n 1)
-- R CMD INSTALL $(ls -1t *.tar.gz | head -n 1)
 - R CMD build rcdk
 - R CMD check $(ls -1t *.tar.gz | head -n 1)
 
