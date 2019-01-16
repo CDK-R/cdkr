@@ -1,8 +1,0 @@
-Sources for the utility JAR file included with this package can be found at https://github.com/rajarshi/cdkr/tree/master/rcdkjar. They are not included with the package since they require a few large dependency JAR files, which would bloat the package. In addition, CDK functionality is included as well and sources for the CDK can be found at https://github.com/cdk/cdk/commit/cb690f9f41378d742977af68aa8f1f77c20d55af. In general, if using Git, you can clone the repository corresponding to the version included here by doing 
-
-git clone git@github.com:cdk/cdk.git
-
-followed by 
-
-git checkout cb690f9f41
-

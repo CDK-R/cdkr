@@ -1,8 +1,0 @@
-eval.stress             Evaluates the Sammon stress of an embedding
-phone                   3D data points for an image of a phone
-sample.max.distance     Samples the distances in the input dimensions
-                        to get the maximum distance
-spe                     Implements the stochastic proximity embedding
-                        algorithm
-swissroll               Data points for the Swiss Roll function in 3
-                        dimensions
