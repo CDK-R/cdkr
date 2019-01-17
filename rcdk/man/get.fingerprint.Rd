@@ -5,7 +5,8 @@
 \title{Generate molecular fingerprints}
 \usage{
 get.fingerprint(molecule, type = "standard", fp.mode = "bit", depth = 6,
-  size = 1024, verbose = FALSE)
+  size = 1024, substructure.pattern=character(), circular.type = "ECFP6",
+  verbose = FALSE)
 }
 \arguments{
 \item{molecule}{A \code{jobjRef} object to an \code{IAtomContaine}}
@@ -26,7 +27,8 @@ atomic properties into account into account
 \item shortestpath - A fingerprint based on the shortest paths between pairs of atoms and takes into account ring systems, charges etc.
 \item signature - A feature,count type of fingerprint, similar in nature to circular fingerprints, but based on the signature 
 descriptor
-\item circular - An implementation of the ECFP6 fingerprint
+\item circular - An implementation of the ECFP6 (default) fingerprint. Other circular types can be chosen by modifying the \code{circular.type} parameter.
+\item substructure - Fingerprint based on list of SMARTS pattern. By default a set of functional groups is tested.
 }}
 
 \item{fp.mode}{The style of fingerprint. Specifying "`bit`" will return a binary fingerprint,
@@ -39,6 +41,10 @@ descriptor
 \item{size}{The final length of the fingerprint. 
 This argument is ignored for the `pubchem`, `maccs`, `kr`, `signature`, `circular` and 
 `estate` fingerprints}
+
+\item{substructure.pattern}{List of characters containing the SMARTS pattern to match. If the an empty list is provided (default) than the functional groups substructures (default in CDK) are used.}
+
+\item{circular.type}{Name of the circular fingerprint type that should be computed given as string. Possible values are: 'ECFP0', 'ECFP2', 'ECFP4', 'ECFP6' (default), 'FCFP0', 'FCFP2', 'FCFP4' and 'FCFP6'.}
 
 \item{verbose}{Verbose output if \code{TRUE}}
 }
