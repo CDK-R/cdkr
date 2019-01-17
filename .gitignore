@@ -2,3 +2,4 @@
 rcdkjar/rcdk.jar
 rcdkjar/classes/
 .Rproj.user
+*.Rcheck
