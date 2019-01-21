@@ -1,3 +1,23 @@
+#' Set a property value of the molecule.
+#' 
+#' This function sets the value of a keyed property on the molecule. 
+#' Properties enable us to associate arbitrary pieces of data with a 
+#' molecule. Such data can be text, numeric or a Java object 
+#' (represented as a `jobjRef`).
+#' 
+#' @param molecule The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @param key The property key as a character string
+#' @param value The value of the property. This can be a character, numeric or 
+#' `jobjRef` R object
+#' @seealso \code{\link{get.property}}, \code{\link{get.properties}}, \code{\link{remove.property}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @examples
+#' mol <- parse.smiles("CC1CC(C=O)CCC1")[[1]]
+#' set.property(mol, 'prop1', 23.45)
+#' set.property(mol, 'prop2', 'inactive')
+#' get.property(mol, 'prop1')
+#' 
 set.property <- function(molecule, key, value) {
   if (!is.character(key)) {
     stop("The property key must be a character")
@@ -26,12 +46,30 @@ set.property <- function(molecule, key, value) {
   
 }
 
+#' Get a property value of the molecule.
+#' 
+#' This function retrieves the value of a keyed property that has
+#' previously been set on the molecule. Properties enable us to 
+#' associate arbitrary pieces of data with a molecule. Such data
+#' can be text, numeric or a Java object (represented as a `jobjRef`).
+#' 
+#' @param molecule The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @param key The property key as a character string
+#' @return The value of the property. If there is no property with the specified key, `NA` is returned
+#' @seealso \code{\link{set.property}}, \code{\link{get.properties}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @examples 
+#' mol <- parse.smiles("CC1CC(C=O)CCC1")[[1]]
+#' set.property(mol, 'prop1', 23.45)
+#' set.property(mol, 'prop2', 'inactive')
+#' get.property(mol, 'prop1')
 get.property <- function(molecule, key) {
   if (is.jnull(molecule)) {
     warning("Molecule object was null")
     return(NA)
   }
-  if (!is.character(key)) {
+  if (is.null(key) || is.na(key) || !is.character(key)) {
     stop("The property key must be a character")
   }
   if (!.check.class(molecule, "org/openscience/cdk/interfaces/IAtomContainer") &&
@@ -51,6 +89,23 @@ get.property <- function(molecule, key) {
   else return(.jsimplify(value))
 }
 
+#' Get all properties associated with a molecule.
+#' 
+#' In this context a property is a value associated with a key and stored
+#' with the molecule. This methd returns a list of all the properties of 
+#' a molecule. The names of the list are set to the property names.
+#' 
+#' @param molecule The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @return A named `list` with the property values. Element names are the keys 
+#' for each property. If no properties have been defined, an empty list.
+#' @seealso \code{\link{set.property}}, \code{\link{get.property}}, \code{\link{remove.property}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @examples 
+#' mol <- parse.smiles("CC1CC(C=O)CCC1")[[1]]
+#' set.property(mol, 'prop1', 23.45)
+#' set.property(mol, 'prop2', 'inactive')
+#' get.properties(mol)
 get.properties <- function(molecule) {
   if (!.check.class(molecule, "org/openscience/cdk/interfaces/IAtomContainer") &&
       !.check.class(molecule, "org/openscience/cdk/AtomContainer"))
@@ -87,6 +142,24 @@ get.properties <- function(molecule) {
   ret
 }
 
+#' Remove a property associated with a molecule.
+#' 
+#' In this context a property is a value associated with a key and stored
+#' with the molecule. This methd will remove the property defined by the key.
+#' If there is such key, a warning is raised.
+#' 
+#' @param molecule The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @param The property key as a character string
+#' @seealso \code{\link{set.property}}, \code{\link{get.property}}, \code{\link{get.properties}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @examples 
+#' mol <- parse.smiles("CC1CC(C=O)CCC1")[[1]]
+#' set.property(mol, 'prop1', 23.45)
+#' set.property(mol, 'prop2', 'inactive')
+#' get.properties(mol)
+#' remove.property(mol, 'prop2')
+#' get.properties(mol)
 remove.property <- function(molecule, key) {
   if (!is.character(key)) {
     stop("The property key must be a character")

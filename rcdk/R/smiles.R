@@ -95,8 +95,7 @@ get.smiles <- function(molecule, flavor = smiles.flavors(c('Generic')), smigen =
 }
 
 get.smiles.parser <- function() {
-    dcob <- .get.chem.object.builder()
-    .jnew("org/openscience/cdk/smiles/SmilesParser", dcob)
+    .jnew("org/openscience/cdk/smiles/SmilesParser", get.chem.object.builder())
 }
 
 parse.smiles <- function(smiles, kekulise=TRUE, omit.nulls=FALSE) {

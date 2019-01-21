@@ -395,23 +395,69 @@ get.largest.component <- function(mol) {
   .jcast(m, "org/openscience/cdk/interfaces/IAtomContainer")
 }
 
-get.atom.count <- function(molecule) {
-  if (!.check.class(molecule, "org/openscience/cdk/interfaces/IAtomContainer"))
+#' Get the number of atoms in the molecule.
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @return An integer representing the number of atoms in the molecule
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+get.atom.count <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  
   .jcall(molecule, "I", "getAtomCount")
 }
 
-get.title <- function(molecule) {
-  if (!.check.class(molecule, "org/openscience/cdk/interfaces/IAtomContainer"))
+#' Get the title of the molecule.
+#' 
+#' Some molecules may not have a title (such as when parsing in a SMILES
+#' with not title).
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @return A character string with the title, `NA` is no title is specified
+#' @seealso \code{\link{set.title}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+get.title <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  get.property(molecule, "cdk:Title")
+  get.property(mol, "cdk:Title")
 }
 
-generate.2d.coordinates <- function(molecule) {
-  if (!.check.class(molecule, "org/openscience/cdk/interfaces/IAtomContainer"))
+#' Set the title of the molecule.
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @param title The title of the molecule as a character string. This will overwrite
+#' any pre-existing title. The default value is an empty string.
+#' @seealso \code{\link{get.title}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+set.title <- function(mol, title = "") {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+    stop("molecule must be of class IAtomContainer")
+  set.property(mol, "cdk:Title", title)
+}
+
+#' Generate 2D coordinates for a molecule.
+#' 
+#' Some file formats such as SMILES do not support 2D (or 3D) coordinates
+#' for the atoms. Other formats such as SD or MOL have support for coordinates
+#' but may not include them. This method will generate reasonable 2D coordinates 
+#' based purely on connectivity information, overwriting
+#' any existing coordinates if present. 
+#' 
+#' Note that when depicting a molecule (\code{\link{view.molecule.2d}}), 2D coordinates
+#' are generated, but since it does not modify the input molecule, we do not have access
+#' to the generated coordinates.
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @return The input molecule, with 2D coordinates added
+#' @seealso \code{\link{get.point2d}}, \code{\link{view.molecule.2d}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+generate.2d.coordinates <- function(mol) {
+  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
   
   .jcall('org/guha/rcdk/util/Misc', 'Lorg/openscience/cdk/interfaces/IAtomContainer;',
-         'getMoleculeWithCoordinates', molecule)
+         'getMoleculeWithCoordinates', mol)
 }
