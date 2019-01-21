@@ -8,7 +8,7 @@
 #' object to function. While most functions in this package handle
 #' this internally, it is useful to be able to get an instance of
 #' a builder object when directly working with the CDK API via
-#' \code{\link{rJava}}.
+#' `rJava`.
 #' 
 #' This method returns an instance of the \href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}. 
 #' Note that this is a static object that is created at package load time, 
@@ -18,7 +18,7 @@
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 get.chem.object.builder <- function() {
-  return(get("dcob", env = .rcdk.GlobalEnv))
+  return(get("dcob", envir = .rcdk.GlobalEnv))
 }
 
 .check.class <- function(obj, klass) {
@@ -215,7 +215,7 @@ convert.implicit.to.explicit <- function(mol) {
 
     if (any(is.null(unlist(lapply(get.atoms(mol), .jcall, returnSig = "Ljava/lang/Integer;", method="getImplicitHydrogenCount"))))) {
     ## add them in
-    dcob <- .get.chem.object.builder()
+    dcob <- get.chem.object.builder()
     hadder <- .jcall("org/openscience/cdk/tools/CDKHydrogenAdder", "Lorg/openscience/cdk/tools/CDKHydrogenAdder;",
                      "getInstance", dcob)
     .jcall(hadder, "V", "addImplicitHydrogens", mol)
@@ -250,8 +250,8 @@ get.atoms <- function(object) {
 
 #' Get the bonds in a molecule.
 #' 
-#' @param object A `jobjRef` representing either a bond (`IBond`) object.
-#' @return A list of `jobjRef` representing the atom (`IAtom`) objects in the bond
+#' @param mol A `jobjRef` representing the molecule (`IAtomContainer`) object.
+#' @return A list of `jobjRef` representing the bonds (`IBond`) objects in the molecule
 #' @seealso \code{\link{get.atoms}}, \code{\link{get.connected.atoms}}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
@@ -404,7 +404,7 @@ get.largest.component <- function(mol) {
 get.atom.count <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  .jcall(molecule, "I", "getAtomCount")
+  .jcall(mol, "I", "getAtomCount")
 }
 
 #' Get the title of the molecule.

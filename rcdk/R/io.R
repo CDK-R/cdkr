@@ -181,7 +181,7 @@ iload.molecules<- function(molfile, type = 'smi',
     stop(paste(molfile, ": Does not exist", sep=''))
   
   fr <- .jnew("java/io/FileReader", as.character(molfile))
-  dcob <- .get.chem.object.builder()
+  dcob <- get.chem.object.builder()
   if (type == 'smi') {
     sreader <- .jnew("org/openscience/cdk/io/iterator/IteratingSMILESReader",.jcast(fr, "java/io/Reader"), dcob)
   } else if (type == 'sdf') {

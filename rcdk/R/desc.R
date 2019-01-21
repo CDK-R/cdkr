@@ -47,7 +47,7 @@
     interface <- J("org.openscience.cdk.qsar.IBondDescriptor")        
   }
   dklass <- interface@jobj
-  dcob <- .get.chem.object.builder()
+  dcob <- get.chem.object.builder()
   dengine <- .jnew('org/openscience/cdk/qsar/DescriptorEngine', dklass, dcob)
   attr(dengine, 'descType') <- type
   pkg <- c('org.openscience.cdk.qsar.descriptors.atomic',
@@ -108,7 +108,7 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
     }
   }
 
-  dcob <- .get.chem.object.builder()
+  dcob <- get.chem.object.builder()
   
   if (length(which.desc) == 1) {
     desc <- .jnew(which.desc)

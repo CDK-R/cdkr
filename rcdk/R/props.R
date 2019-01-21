@@ -149,7 +149,7 @@ get.properties <- function(molecule) {
 #' If there is such key, a warning is raised.
 #' 
 #' @param molecule The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
-#' @param The property key as a character string
+#' @param key The property key as a character string
 #' @seealso \code{\link{set.property}}, \code{\link{get.property}}, \code{\link{get.properties}}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})

@@ -147,14 +147,15 @@ get.smiles.parser <- function() {
 #' \code{\link{load.molecules}} method. Thus, you should
 #' perform these steps manually on the molecules.
 #' @param smiles A single SMILES string or a vector of SMILES strings
-#' @param kekulize If set to `FALSE` disables electron checking and
+#' @param kekulise If set to `FALSE` disables electron checking and
 #' allows for parsing of incorrect SMILES. If a SMILES does not parse by default, try
 #' setting this to `FALSE` - though the resultant molecule may not have consistent
 #' bonding. As an example, `c4ccc2c(cc1=Nc3ncccc3(Cn12))c4` will not be parsed by default
 #' because it is missing a nitrogen. With this argument set to `FALSE` it will parse
 #' successfully, but this is a hack to handle an incorrect SMILES
 #' @param omit.nulls If set to `TRUE`, omits SMILES which were parsed as `NULL`
-#' @return A `list`` of `jobjRef`s to their corresponding CDK `IAtomContainer` 
+#' @param smiles.parser A SMILES parser object obtained from \code{\link{get.smiles.parser}}
+#' @return A `list` of `jobjRef`s to their corresponding CDK `IAtomContainer` 
 #' objects. If a SMILES string could not be parsed and `omit.nulls=TRUE` it 
 #' is omited from the output list.
 #' @seealso \code{\link{get.smiles}}, \code{\link{parse.smiles}}
