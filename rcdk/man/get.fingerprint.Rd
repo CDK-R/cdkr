@@ -5,8 +5,8 @@
 \title{Generate molecular fingerprints}
 \usage{
 get.fingerprint(molecule, type = "standard", fp.mode = "bit", depth = 6,
-  size = 1024, substructure.pattern=character(), circular.type = "ECFP6",
-  verbose = FALSE)
+  size = 1024, substructure.pattern = character(),
+  circular.type = "ECFP6", verbose = FALSE)
 }
 \arguments{
 \item{molecule}{A \code{jobjRef} object to an \code{IAtomContaine}}
@@ -72,6 +72,18 @@ fps <- lapply(mols, get.fingerprint, type='maccs')
 ## get Signature fingerprint
 ## feature, count fingerprinter
 fps <- lapply(mols, get.fingerprint, type='signature', fp.mode='raw')
+## get Substructure fingerprint for functional group fragments
+fps <- lapply(mols, get.fingerprint, type='substructure')
+
+## get Substructure count fingerprint for user defined fragments
+mol1 <- parse.smiles("c1ccccc1CCC")[[1]]
+smarts <- c("c1ccccc1", "[CX4H3][#6]", "[CX2]#[CX2]")
+fps <- get.fingerprint(mol1, type='substructure', fp.mode='count',
+    substructure.pattern=smarts)
+
+## get ECFP0 count fingerprints 
+mol2 <- parse.smiles("C1=CC=CC(=C1)CCCC2=CC=CC=C2")[[1]]
+fps <- get.fingerprint(mol2, type='circular', fp.mode='count', circular.type='ECFP0')
 }
 \author{
 Rajarshi Guha (\email{rajarshi.guha@gmail.com})
