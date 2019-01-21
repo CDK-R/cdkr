@@ -1,8 +1,6 @@
 \name{Molecule}
 \alias{get.exact.mass}
 \alias{get.natural.mass}
-\alias{is.neutral}
-\alias{convert.implicit.to.explicit}
 \title{
 	Operations on molecules
 }
@@ -34,16 +32,7 @@ is.neutral(mol)
 
 	\code{get.natural.mass} returns a numeric
 
-	\code{convert.implicit.to.explicit} has no return value
-
 	\code{is.neutral} returns a boolean.
-}
-\details{
-In some cases, a molecule may not have any hydrogens (such as when read
-in from an MDL MOL file that did not have hydrogens). In such cases, 
-\code{\link{convert.implicit.to.explicit}} 
-will add implicit hydrogens and then convert them to explicit ones. In addition, for
-such cases, make sure that the molecule has been typed beforehand.
 }
 \keyword{programming}
 \seealso{

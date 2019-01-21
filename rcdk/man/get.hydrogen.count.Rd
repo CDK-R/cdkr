@@ -2,6 +2,7 @@
 % Please edit documentation in R/atoms.R
 \name{get.hydrogen.count}
 \alias{get.hydrogen.count}
+\alias{hydrogen}
 \title{Get the implicit hydrogen count for the atom.}
 \usage{
 get.hydrogen.count(atom)

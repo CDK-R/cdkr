@@ -130,6 +130,7 @@ get.formal.charge <- function(atom) {
 #' 
 #' @param atom The atom to query
 #' @return An integer representing the hydrogen count
+#' @aliases hydrogen
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 get.hydrogen.count <- function(atom) {

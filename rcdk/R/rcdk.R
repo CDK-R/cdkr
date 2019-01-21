@@ -68,10 +68,27 @@ get.chem.object.builder <- function() {
   assign("mfManipulator", .jnew("org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator"), envir = .rcdk.GlobalEnv)
 }
 
+#' Get the current CDK version used in the package.
+#' 
+#' @return Returns a character containing the version of the CDK used in this package
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 cdk.version <- function() {
   .jcall("org.openscience.cdk.CDK", "S", "getVersion")
 }
 
+#' Remove explicit hydrogens.
+#' 
+#' Create an copy of the original structure with explicit hydrogens removed. 
+#' Stereochemistry is updated but up and down bonds in a depiction may need 
+#' to be recalculated. This can also be useful for descriptor calculations.
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @return A copy of the original molecule, with explicit hydrogens removed
+#' @seealso \code{\link{get.hydrogen.count}}, \code{\link{get.total.hydrogen.count}}
+#' @aliases hydrogen
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 remove.hydrogens <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -82,6 +99,19 @@ remove.hydrogens <- function(mol) {
   newmol
 }
 
+#' Get total number of implicit hydrogens in the molecule.
+#' 
+#' Counts the number of hydrogens on the provided molecule. As this method 
+#' will sum all implicit hydrogens on each atom it is important to ensure 
+#' the molecule has already been configured (and thus each atom has an 
+#' implicit hydrogen count). 
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @return An integer representing the total number of implicit hydrogens
+#' @seealso \code{\link{get.hydrogen.count}}, \code{\link{remove.hydrogens}}
+#' @aliases hydrogen
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 get.total.hydrogen.count <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -165,7 +195,20 @@ get.total.formal.charge <- function(mol) {
          mol);
 }
 
-
+#' Convert implicit hydrogens to explicit.
+#' 
+#' In some cases, a molecule may not have any hydrogens (such as when read
+#' in from an MDL MOL file that did not have hydrogens or SMILES with no
+#' explicit hydrogens). In such cases, this method
+#' will add implicit hydrogens and then convert them to explicit ones. The 
+#' newly added H's will not have any 2D or 3D coordinates associated with them.
+#' Ensure that the molecule has been typed beforehand.
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @seealso \code{\link{get.hydrogen.count}}, \code{\link{remove.hydrogens}}, \code{\link{do.typing}}
+#' @aliases hydrogen
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 convert.implicit.to.explicit <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -181,7 +224,14 @@ convert.implicit.to.explicit <- function(mol) {
 }
 
 
-
+#' Get the atoms from a molecule or bond.
+#' 
+#' @param object A `jobjRef` representing either a molecule (`IAtomContainer`) or 
+#' bond (`IBond`) object.
+#' @return A list of `jobjRef` representing the `IAtom` objects in the molecule or bond
+#' @seealso \code{\link{get.bonds}}, \code{\link{get.connected.atoms}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 get.atoms <- function(object) {
   if (is.null(attr(object, 'jclass')))
     stop("object must be of class IAtomContainer or IObject or IBond")
@@ -198,6 +248,13 @@ get.atoms <- function(object) {
   atoms
 }
 
+#' Get the bonds in a molecule.
+#' 
+#' @param object A `jobjRef` representing either a bond (`IBond`) object.
+#' @return A list of `jobjRef` representing the atom (`IAtom`) objects in the bond
+#' @seealso \code{\link{get.atoms}}, \code{\link{get.connected.atoms}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 get.bonds <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -247,6 +304,15 @@ do.isotopes <- function(mol) {
   .jcall(ifac, 'V', 'configureAtoms', mol)
 }
 
+#' Tests whether the molecule is neutral.
+#' 
+#' The test checks whether all atoms in the molecule have a formal charge of 0.
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @return `TRUE` if molecule is neutral, `FALSE` otherwise
+#' @aliases charge
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 is.neutral <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -256,6 +322,25 @@ is.neutral <- function(mol) {
   return(all(fc == 0))
 }
 
+#' Tests whether the molecule is fully connected.
+#' 
+#' A single molecule will be represented as a 
+#' \href{https://en.wikipedia.org/wiki/Complete_graph}{complete} graph. 
+#' In some cases, such as for molecules in salt form, or after certain 
+#' operations such as bond splits, the molecular graph may contained 
+#' \href{http://mathworld.wolfram.com/DisconnectedGraph.html}{disconnected components}.
+#' This method can be used to tested whether the molecule is complete (i.e. fully
+#' connected).
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @return `TRUE` if molecule is complete, `FALSE` otherwise
+#' @aliases graph
+#' @seealso \code{\link{get.largest.component}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @examples 
+#' m <- parse.smiles("CC.CCCCCC.CCCC")[[1]]
+#' is.connected(m)
 is.connected <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -264,6 +349,25 @@ is.connected <- function(mol) {
          "Z", "isConnected", mol)
 }
 
+#' Gets the largest component in a disconnected molecular graph.
+#' 
+#' A molecule may be represented as a 
+#' \href{http://mathworld.wolfram.com/DisconnectedGraph.html}{disconnected graph}, such as
+#' when read in as a salt form. This method will return the larges connected component
+#' or if there is only a single component (i.e., the molecular graph is 
+#' \href{https://en.wikipedia.org/wiki/Complete_graph}{complete} or fully connected), that
+#' component is returned.
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @return The largest component as an `IAtomContainer` object or else the input molecule itself
+#' @aliases graph
+#' @seealso \code{\link{is.connected}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @examples 
+#' m <- parse.smiles("CC.CCCCCC.CCCC")[[1]]
+#' largest <- get.largest.component(m)
+#' length(get.atoms(largest)) == 6
 get.largest.component <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
