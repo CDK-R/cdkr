@@ -24,6 +24,11 @@
 #' @seealso \code{\link{get.point2d}}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @examples 
+#' \dontrun{
+#' atoms <- get.atoms(mol)
+#' coords <- do.call('rbind', lapply(apply, get.point3d))
+#' }
 get.point3d <- function(atom) {
   atom <- .valid.atom(atom)
   p3d <- .jcall(atom, "Ljavax/vecmath/Point3d;", "getPoint3d")
@@ -46,6 +51,11 @@ get.point3d <- function(atom) {
 #' @seealso \code{\link{get.point3d}}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @examples 
+#' \dontrun{
+#' atoms <- get.atoms(mol)
+#' coords <- do.call('rbind', lapply(apply, get.point2d))
+#' }
 get.point2d <- function(atom) {
   atom <- .valid.atom(atom)    
   p3d <- .jcall(atom, "Ljavax/vecmath/Point2d;", "getPoint2d")

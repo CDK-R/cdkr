@@ -10,6 +10,19 @@
 ##}
 ##
 
+#' Get the atom connected to an atom in a bond.
+#' 
+#' This function returns the atom that is connected to a
+#' specified in a specified bond. Note that this function assumes
+#' 2-atom bonds, mainly because the CDK does not currently
+#' support other types of bonds
+#' 
+#' @param bond A \code{jObjRef} representing an `IBond` object
+#' @param atom A \code{jObjRef} representing an `IAtom` object
+#' @return A \code{jObjRef} representing an `IAtom`` object
+#' @seealso \code{\link{get.atoms}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 get.connected.atom <- function(bond, atom) {
   if (is.null(attr(bond,"jclass")) || is.null(attr(atom,"jclass")))
     stop("Must supply an IBond object or Bond")

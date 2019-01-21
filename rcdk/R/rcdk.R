@@ -1,10 +1,24 @@
 .packageName <- "rcdk"
 
-.get.chem.object.builder <- function() {
-  dcob <- .jcall("org/openscience/cdk/silent/SilentChemObjectBuilder",
-                 "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
-                 "getInstance")
-  return(dcob)
+#' Get the default chemical object builder.
+#' 
+#' The CDK employs a builder design pattern to construct
+#' instances of new chemical objects (e.g., atoms, bonds, parsers
+#' and so on). Many methods require an instance of a builder 
+#' object to function. While most functions in this package handle
+#' this internally, it is useful to be able to get an instance of
+#' a builder object when directly working with the CDK API via
+#' \code{\link{rJava}}.
+#' 
+#' This method returns an instance of the \href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}. 
+#' Note that this is a static object that is created at package load time, 
+#' and the same instance is returned whenever this function is called.
+#' 
+#' @return An instance of \href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+get.chem.object.builder <- function() {
+  return(get("dcob", env = .rcdk.GlobalEnv))
 }
 
 .check.class <- function(obj, klass) {

@@ -17,6 +17,12 @@ In case, coordinates are unavailable (e.g., molecule was read in from a
 SMILES file) or have not been generated yet, `NA`'s are returned for the 
 X & Y coordinates.
 }
+\examples{
+\dontrun{
+atoms <- get.atoms(mol)
+coords <- do.call('rbind', lapply(apply, get.point2d))
+}
+}
 \seealso{
 \code{\link{get.point3d}}
 }
