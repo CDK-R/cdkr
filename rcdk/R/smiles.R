@@ -9,7 +9,9 @@
 #' See \href{https://cdk.github.io/cdk/2.0/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
 #' for the list of flavors and what they mean.
 #'
-#' @param flavors A character vector of flavors. The default is \code{Generic} (Output non-canonical SMILES without stereochemistry, atomic masses). Possible values are
+#' @param flavors A character vector of flavors. The default is \code{Generic} 
+#' (output non-canonical SMILES without stereochemistry, atomic masses). Possible 
+#' values are
 #' * Absolute
 #' * AtomAtomMap
 #' * AtomicMass
@@ -38,7 +40,7 @@
 #' * UniversalSmiles
 #' * UseAromaticSymbols
 #' @md
-#' @return A numeric representing the bitwise OR of the specified flavors
+#' @return A numeric representing the bitwise `OR`` of the specified flavors
 #' @seealso \code{\link{get.smiles}}
 #' @references \href{https://cdk.github.io/cdk/2.0/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
 #' @examples
@@ -50,6 +52,7 @@
 #' get.smiles(m,flavor = smiles.flavors(c("CxSmiles")))
 #' get.smiles(m,flavor = smiles.flavors(c("CxSmiles","UseAromaticSymbols")))
 #'
+#' @export
 #' @author Rajarshi Guha \email{rajarshi.guha@@gmail.com}
 smiles.flavors <- function(flavors = c('Generic')) {
     valid.flavors <- c('Absolute',
@@ -88,21 +91,88 @@ smiles.flavors <- function(flavors = c('Generic')) {
     Reduce(bitwOr, vals, 0)
 }
 
+#' Generate a SMILES representation of a molecule.
+#' 
+#' The function will generate a SMILES representation of an
+#' `IAtomContainer` object. The default parameters of the CDK SMILES
+#' generator are used. This can mean that for large ring systems the
+#' method may fail. See CDK \href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/smiles/SmilesGenerator.html}{Javadocs}
+#' for more information
+#' @param molecule The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @param flavor The type of SMILES to generate. See \code{\link{smiles.flavors}}. Default is `Generic`
+#' SMILES
+#' @param smigen A pre-existing SMILES generator object. By default, a new one is created from the specified flavor
+#' @return A character string containing the generated SMILES
+#' @seealso \code{\link{parse.smiles}}, \code{\link{smiles.flavors}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @references \href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/smiles/SmilesGenerator.html}{SmilesGenerator} 
+#' @examples 
+#' m <- parse.smiles('C1C=CCC1N(C)c1ccccc1')[[1]]
+#' get.smiles(m)
+#' get.smiles(m, smiles.flavors(c('Generic','UseAromaticSymbols')))
 get.smiles <- function(molecule, flavor = smiles.flavors(c('Generic')), smigen = NULL) {
     if (is.null(smigen))
         smigen <- .jnew("org/openscience/cdk/smiles/SmilesGenerator", flavor)
     return(.jcall(smigen, 'S', 'create', molecule))
 }
 
+#' Get a SMILES parser object.
+#' 
+#' This function returns a reference to a SMILES parser
+#' object. If you are parsing multiple SMILES strings using multiple
+#' calls to \code{\link{parse.smiles}}, it is
+#' preferable to create your own parser and supply it to
+#' \code{\link{parse.smiles}} rather than forcing that function
+#' to instantiate a new parser for each call
+#' 
+#' @return A `jobjRef` object corresponding to the CDK 
+#' \href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/smiles/SmilesParser.html}{SmilesParser} class
+#' @seealso \code{\link{get.smiles}}, \code{\link{parse.smiles}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 get.smiles.parser <- function() {
     .jnew("org/openscience/cdk/smiles/SmilesParser", get.chem.object.builder())
 }
 
-parse.smiles <- function(smiles, kekulise=TRUE, omit.nulls=FALSE) {
+#' Parse SMILES strings into molecule objects.
+#' 
+#' This function parses a vector of SMILES strings to generate a list of
+#' `IAtomContainer` objects. Note that the resultant molecule will
+#' not have any 2D or 3D coordinates.
+#' Note that the molecules obtained from this method will not have any
+#' aromaticity perception (unless aromatic symbols are encountered, in which 
+#' case the relevant atoms are automatically set to aromatic), atom typing or 
+#' isotopic configuration done on them. This is in contrast to the 
+#' \code{\link{load.molecules}} method. Thus, you should
+#' perform these steps manually on the molecules.
+#' @param smiles A single SMILES string or a vector of SMILES strings
+#' @param kekulize If set to `FALSE` disables electron checking and
+#' allows for parsing of incorrect SMILES. If a SMILES does not parse by default, try
+#' setting this to `FALSE` - though the resultant molecule may not have consistent
+#' bonding. As an example, `c4ccc2c(cc1=Nc3ncccc3(Cn12))c4` will not be parsed by default
+#' because it is missing a nitrogen. With this argument set to `FALSE` it will parse
+#' successfully, but this is a hack to handle an incorrect SMILES
+#' @param omit.nulls If set to `TRUE`, omits SMILES which were parsed as `NULL`
+#' @return A `list`` of `jobjRef`s to their corresponding CDK `IAtomContainer` 
+#' objects. If a SMILES string could not be parsed and `omit.nulls=TRUE` it 
+#' is omited from the output list.
+#' @seealso \code{\link{get.smiles}}, \code{\link{parse.smiles}}
+#' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+parse.smiles <-
+  function(smiles,
+           kekulise = TRUE,
+           omit.nulls = FALSE,
+           smiles.parser = NULL) {
     if (!is.character(smiles)) {
-        stop("Must supply a character vector of SMILES strings")
+      stop("Must supply a character vector of SMILES strings")
     }
-    parser <- get.smiles.parser()
+    if (!is.null(smiles.parser)) {
+      parser <- smiles.parser
+    } else {
+      parser <- get.smiles.parser()
+    }
     .jcall(parser, "V", "kekulise", kekulise)
     returnValue_withnulls <- sapply(smiles,
                           function(x) {

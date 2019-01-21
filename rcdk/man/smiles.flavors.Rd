@@ -7,7 +7,9 @@
 smiles.flavors(flavors = c("Generic"))
 }
 \arguments{
-\item{flavors}{A character vector of flavors. The default is \code{Generic} (Output non-canonical SMILES without stereochemistry, atomic masses). Possible values are
+\item{flavors}{A character vector of flavors. The default is \code{Generic}
+(output non-canonical SMILES without stereochemistry, atomic masses). Possible
+values are
 \itemize{
 \item Absolute
 \item AtomAtomMap
@@ -39,7 +41,7 @@ smiles.flavors(flavors = c("Generic"))
 }}
 }
 \value{
-A numeric representing the bitwise OR of the specified flavors
+A numeric representing the bitwise `OR`` of the specified flavors
 }
 \description{
 The CDK supports a variety of customizations for SMILES generation including
