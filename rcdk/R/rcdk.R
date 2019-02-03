@@ -39,6 +39,15 @@ get.chem.object.builder <- function() {
   return(rl)
 }
 
+#'
+#' @import fingerprint
+#' @import methods
+#' @import rJava
+#' @import png
+#' @import iterators
+#' @import itertools
+#' @import rcdklibs
+#'
 .onLoad <- function(lib, pkg) {
   dlp<-Sys.getenv("DYLD_LIBRARY_PATH")
   if (dlp!="") { # for Mac OS X we need to remove X11 from lib-path
