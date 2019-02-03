@@ -1,21 +1,39 @@
 [![Build Status](https://api.travis-ci.org/CDK-R/cdkr.svg?branch=master)](https://travis-ci.org/CDK-R/cdkr)
+[![CRAN Version](https://www.r-pkg.org/badges/version/badger?color=green)](https://cran.r-project.org/package=rcdk)
+[![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/badger?color=green)](https://cran.r-project.org/package=rcdk)
+[![CRAN Downloads Monthyl](http://cranlogs.r-pkg.org/badges/last-month/badger?color=green)](https://cran.r-project.org/package=rcdk)
 
-## rcdk
+# rcdk: a chemistry library
 
+rCDK is an interface to the [CDK](https://github.com/cdk/cdk) chemoinformatics library.
 
-If you use ```devtools```, installing the packages can be done by
+## Installation
+
+rCDK package releases are available on CRAN:
+
 ```R
-library(devtools)
-install_github("rajarshi/rcdklibs")
-install_github("rajarshi/cdkr", subdir="rcdk")
+install.packages("rcdk")
 ```
 
+Development releases of `cdkr` are also available on github uinsg devtools:
+
+
+```R
+library(devtools)
+install_github("https://github.com/CDK-R/rcdklibs")
+install_github("https://github.com/CDK-R/cdkr")
+```
+
+
+## Building and Development
+
+Information on building and devloping the CDKR package is available in teh
 Otherwise if you prefer the command line
 ``` 
 	cd /tmp/
-	git clone git@github.com:rajarshi/rcdklibs.git
+	git clone git@github.com:CDK-R/rcdklibs.git
 	R CMD INSTALL rcdklibs
-	git clone git@github.com:rajarshi/cdkr.git
+	git clone git@github.com:CDK-R/cdkr.git
 	cd cdkr/rcdkjar
 	ant clean jar
 	cd ../
@@ -34,7 +52,7 @@ For the png package, I have tested [png-0.1-7](http://www.rforge.net/png/files/)
 
 Some users have reported that `rcdk` methods (such as `parse.smiles`) are returning errors related to class not found or class version mismatch. This can happen when you are using a prepackaged version of `rJava` from [CRAN](https://cran.r-project.org/) and is caused by that package not finding the correct JRE home if you have multiple Java versions installed. In such a case, reinstalling `rJava` from sources appears to resolve this issue. See this [discussion](http://stackoverflow.com/questions/26948777/how-can-i-make-rjava-use-the-newer-version-of-java-on-osx).
 
-## Installing Java
+### Installing Java
 
 rCDK uses the CDK library that requires the Java JDK >= 1.8. In order to install rCDK, this requirement must be satisfied. You can check your java version on the command line as follows:
 
