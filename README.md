@@ -21,7 +21,7 @@ Development releases of `cdkr` are also available on github uinsg devtools:
 ```R
 library(devtools)
 install_github("https://github.com/CDK-R/rcdklibs")
-install_github("https://github.com/CDK-R/cdkr")
+install_github("https://github.com/CDK-R/cdkr", subdir="rcdk")
 ```
 
 
