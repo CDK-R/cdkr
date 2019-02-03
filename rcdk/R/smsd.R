@@ -1,3 +1,4 @@
+#' @export
 get.mcs <- function(mol1, mol2, as.molecule = TRUE) {
   if (as.molecule) {
     return(.jcall("org.guha.rcdk.util.Misc",
