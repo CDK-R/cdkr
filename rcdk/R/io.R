@@ -71,6 +71,7 @@ write.molecules <- function(mols, filename, together=TRUE, write.props=FALSE) {
 #' @return A `list` of CDK `IAtomContainer` objects, represented as `jobjRef` objects 
 #' in R, which can be used in other `rcdk` functions
 #' @seealso \code{\link{write.molecules}}, \code{\link{parse.smiles}}, \code{\link{iload.molecules}}
+#' @importFrom utils download.file
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @examples 
