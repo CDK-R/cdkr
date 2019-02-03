@@ -17,6 +17,7 @@ setClass("cdkFormula", representation(mass = "numeric",
 ########################################################
 ##  create a cdkFormula function from the characters   
 
+#' @export
 get.formula <- function(mf, charge=0) {
     
     manipulator <- get("mfManipulator", envir = .rcdk.GlobalEnv)
@@ -48,6 +49,7 @@ setMethod("show", "cdkFormula",
 ########################################################
 ##  Set the charge to a cdkFormula function.
 ########################################################
+#' @export
 get.mol2formula <- function(molecule, charge=0) {
     if(attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
         stop("Must supply an IAtomContainerobject")
@@ -77,6 +79,7 @@ get.mol2formula <- function(molecule, charge=0) {
 ########################################################
 ##  Set the charge to a cdkFormula function.
 ########################################################
+#' @export
 set.charge.formula <- function(formula,charge = -1) {
     if (class(formula) != "cdkFormula")
         stop("Supplied object should be a cdkFormula Class")
@@ -130,6 +133,7 @@ isvalid.formula <- function(formula,rule=c("nitrogen","RDBE")){
 #############################################################
 ##  Generate the isotope pattern given a formula class
 #############################################################
+#' @export
 get.isotopes.pattern <- function(formula,minAbund=0.1){
     
     if (class(formula) != "cdkFormula")
@@ -160,7 +164,7 @@ get.isotopes.pattern <- function(formula,minAbund=0.1){
 ##  Generate a list of possible formula objects given a mass and 
 ##  a mass tolerance.
 ########################################################
-
+#' @export
 generate.formula.iter <- function(mass, window = 0.01,
                                   elements = list(
                                       c('C', 0,50),
@@ -252,7 +256,7 @@ generate.formula.iter <- function(mass, window = 0.01,
     class(obj) <- c("generate.formula2", "abstractiter", "iter")
     return(obj)
 }
-
+#' @export
 generate.formula <- function(mass, window=0.01, 
                              elements=list(c("C",0,50),c("H",0,50),c("N",0,50),c("O",0,50),c("S",0,50)), 
                              validation=FALSE, charge=0.0){
@@ -501,6 +505,7 @@ get.isotope.pattern.generator <- function(minAbundance = NULL) {
 #'
 #' @return A numeric value between 0 and 1 indicating the similarity between the two patterns
 #' @seealso \code{\link{get.isotope.pattern.similarity}}
+#' @export
 #' @references \url{http://cdk.github.io/cdk/2.0/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html}
 #' @author Miguel Rojas Cherto
 compare.isotope.pattern <- function(iso1, iso2, ips = NULL) {

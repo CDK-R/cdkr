@@ -70,7 +70,7 @@
   unique(unlist(cnames)  )
 }
 
-
+#' @export
 get.desc.names <- function(type = "all") {
   if (type == 'all') return(.get.desc.all.classnames())
   if (!(type %in% c('topological', 'geometrical', 'hybrid',
@@ -87,13 +87,14 @@ get.desc.names <- function(type = "all") {
   }
 }
 
-
+#' @export
 get.desc.categories <- function() {
   cats <- .jcall("org/guha/rcdk/descriptors/DescriptorUtilities", "[Ljava/lang/String;",
                  "getDescriptorCategories");
   gsub("Descriptor", "", cats)
 }
 
+#' @export
 eval.desc <- function(molecules, which.desc, verbose = FALSE) {
   if (class(molecules) != 'list') {
     jclassAttr <- attr(molecules, "jclass")
@@ -162,6 +163,7 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
   }
 }
 
+#' @export
 get.atomic.desc.names <- function(type = "all") {
   if (type == 'all') return(.get.desc.all.classnames('atomic'))
   if (!(type %in% c('topological', 'geometrical', 'hybrid',
@@ -172,6 +174,7 @@ get.atomic.desc.names <- function(type = "all") {
                 "getDescriptorNamesByCategory", type))
 }
 
+#' @export
 eval.atomic.desc <- function(molecule, which.desc, verbose = FALSE) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object")
@@ -209,6 +212,7 @@ eval.atomic.desc <- function(molecule, which.desc, verbose = FALSE) {
   }
 }
 
+#' @export
 get.tpsa <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object")
@@ -220,6 +224,7 @@ get.tpsa <- function(molecule) {
   return(value)
 }
 
+#' @export
 get.alogp <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object")
@@ -231,6 +236,7 @@ get.alogp <- function(molecule) {
   return(value[1])
 }
 
+#' @export
 get.xlogp <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object")
@@ -242,6 +248,7 @@ get.xlogp <- function(molecule) {
   return(value)
 }
 
+#' @export
 get.volume <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object")

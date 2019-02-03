@@ -1,3 +1,4 @@
+#' @export
 matches <- function(query, target, return.matches=FALSE) {
   if (!is.list(target)) target <- list(target)
   if (!all(unlist(lapply(target, class)) == 'jobjRef'))

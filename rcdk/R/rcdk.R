@@ -39,6 +39,15 @@ get.chem.object.builder <- function() {
   return(rl)
 }
 
+#'
+#' @import fingerprint
+#' @import methods
+#' @import rJava
+#' @import png
+#' @import iterators
+#' @import itertools
+#' @import rcdklibs
+#'
 .onLoad <- function(lib, pkg) {
   dlp<-Sys.getenv("DYLD_LIBRARY_PATH")
   if (dlp!="") { # for Mac OS X we need to remove X11 from lib-path
@@ -121,6 +130,7 @@ get.total.hydrogen.count <- function(mol) {
          mol);
 }
 
+#' @export
 get.exact.mass <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -150,6 +160,7 @@ get.exact.mass <- function(mol) {
 }
   
 
+#' @export
 get.natural.mass <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -166,7 +177,7 @@ get.natural.mass <- function(mol) {
   }  
 }
 
-
+#' @export
 get.total.charge <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -186,6 +197,7 @@ get.total.charge <- function(mol) {
   }
 }
 
+#' @export
 get.total.formal.charge <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -266,6 +278,7 @@ get.bonds <- function(mol) {
   bonds
 }
 
+#' @export
 do.aromaticity <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -287,6 +300,7 @@ do.aromaticity <- function(mol) {
   .jcall(aromaticity, "Z", "apply", mol)
 }
 
+#' @export
 do.typing <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -295,6 +309,7 @@ do.typing <- function(mol) {
          "V", "percieveAtomTypesAndConfigureAtoms", mol)
 }
 
+#' @export
 do.isotopes <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
