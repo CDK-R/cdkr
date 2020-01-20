@@ -100,6 +100,7 @@ set.charge.formula <- function(formula,charge = -1) {
 ########################################################
 
 
+#' @export
 isvalid.formula <- function(formula,rule=c("nitrogen","RDBE")){
     
     if (class(formula) != "cdkFormula")

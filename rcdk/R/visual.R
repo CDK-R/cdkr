@@ -192,7 +192,7 @@ view.table <- function(molecules, dat, depictor = NULL) {
 }
 
 
-
+#' @export
 view.image.2d <- function(molecule, depictor = NULL) {
   if (is.null(depictor))
     depictor <- get.depictor()
