@@ -130,6 +130,9 @@ get.total.hydrogen.count <- function(mol) {
          mol);
 }
 
+#' get.exact.mass
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 get.exact.mass <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -160,6 +163,9 @@ get.exact.mass <- function(mol) {
 }
   
 
+#' get.natural.mass
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 get.natural.mass <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -177,6 +183,9 @@ get.natural.mass <- function(mol) {
   }  
 }
 
+#' get.total.charge
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 get.total.charge <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -197,6 +206,9 @@ get.total.charge <- function(mol) {
   }
 }
 
+#' get.total.formal.charge
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 get.total.formal.charge <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -282,6 +294,7 @@ get.bonds <- function(mol) {
 #' 
 #' detect aromoticity of an input compound
 #' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 do.aromaticity <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -308,6 +321,7 @@ do.aromaticity <- function(mol) {
 #' 
 #' configure atom typings.
 #' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 do.typing <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -321,6 +335,7 @@ do.typing <- function(mol) {
 #' 
 #' configure isotopes
 #' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 do.isotopes <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))

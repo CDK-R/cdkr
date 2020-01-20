@@ -6,6 +6,9 @@
 \usage{
 do.isotopes(mol)
 }
+\arguments{
+\item{mol}{The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`}
+}
 \description{
 configure isotopes
 }
