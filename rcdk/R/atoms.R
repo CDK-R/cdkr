@@ -216,7 +216,7 @@ get.connected.atoms <- function(atom, mol) {
 #' @param atom The atom object
 #' @param mol The `IAtomContainer` object containing the atom
 #' @return An integer representing the atom index. 
-#' @seealso \code{\link{get.bond.index}}
+#' @seealso \code{\link{get.connected.atom}}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 get.atom.index <- function(atom, mol) {
