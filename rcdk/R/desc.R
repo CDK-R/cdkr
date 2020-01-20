@@ -70,6 +70,10 @@
   unique(unlist(cnames)  )
 }
 
+#' get.desc.names
+#' 
+#' get Descriptor names
+#' 
 #' @export
 get.desc.names <- function(type = "all") {
   if (type == 'all') return(.get.desc.all.classnames())
@@ -87,6 +91,10 @@ get.desc.names <- function(type = "all") {
   }
 }
 
+#' get.desc.categories
+#' 
+#' get Descriptor Categories
+#' 
 #' @export
 get.desc.categories <- function() {
   cats <- .jcall("org/guha/rcdk/descriptors/DescriptorUtilities", "[Ljava/lang/String;",
@@ -95,6 +103,7 @@ get.desc.categories <- function() {
 }
 
 #' @export
+#' 
 eval.desc <- function(molecules, which.desc, verbose = FALSE) {
   if (class(molecules) != 'list') {
     jclassAttr <- attr(molecules, "jclass")

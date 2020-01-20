@@ -134,8 +134,9 @@ load.molecules <- function(molfiles=NA, aromaticity = TRUE,
   }
 }
 
-
+#' @importFrom itertools hasNext
 hasNext <- function(obj, ...) { UseMethod("hasNext") } 
+#' @export
 hasNext.iload.molecules <- function(obj, ...) obj$hasNext()
 
 #' Load molecules using an iterator.
@@ -165,7 +166,6 @@ hasNext.iload.molecules <- function(obj, ...) obj$hasNext()
 #' @param isotopes If `TRUE` then atoms are configured with isotopic masses
 #' @seealso \code{\link{write.molecules}}, \code{\link{load.molecules}}, \code{\link{parse.smiles}}
 #' @export
-#' @S3method hasNext iload.molecules 
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @examples 
 #' \dontrun{
