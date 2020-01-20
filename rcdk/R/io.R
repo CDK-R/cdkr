@@ -76,7 +76,7 @@ write.molecules <- function(mols, filename, together=TRUE, write.props=FALSE) {
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @examples 
 #' \dontrun{
-#' sdffile <- system.file("data/dhfr00008.sdf", package="rcdk")
+#' sdffile <- system.file("molfiles/dhfr00008.sdf", package="rcdk")
 #' mols <- load.molecules(c('mol1.sdf', 'mol2.smi', sdfile))
 
 #' }
