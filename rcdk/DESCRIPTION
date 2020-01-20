@@ -6,7 +6,7 @@ Authors@R: c(person('Rajarshi', 'Guha', role=c('aut',"cph"), email='rajarshi.guh
              person('Zachary', 'Charlop-Powers', role=c('cre'), email='zach.charlop.powers@gmail.com'),
              person('Emma', 'Schymanski', role=c('ctb'), email='schymane@gmail.com'))
 Depends:
-    rcdklibs (>= 2.2)
+    rcdklibs (>= 2.0)
 Imports:
     fingerprint,
     rJava,
