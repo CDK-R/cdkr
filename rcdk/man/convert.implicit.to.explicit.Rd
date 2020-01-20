@@ -2,7 +2,6 @@
 % Please edit documentation in R/rcdk.R
 \name{convert.implicit.to.explicit}
 \alias{convert.implicit.to.explicit}
-\alias{hydrogen}
 \title{Convert implicit hydrogens to explicit.}
 \usage{
 convert.implicit.to.explicit(mol)

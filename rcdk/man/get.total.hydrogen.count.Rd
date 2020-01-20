@@ -2,7 +2,6 @@
 % Please edit documentation in R/rcdk.R
 \name{get.total.hydrogen.count}
 \alias{get.total.hydrogen.count}
-\alias{hydrogen}
 \title{Get total number of implicit hydrogens in the molecule.}
 \usage{
 get.total.hydrogen.count(mol)
