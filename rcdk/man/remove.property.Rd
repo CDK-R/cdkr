@@ -9,7 +9,7 @@ remove.property(molecule, key)
 \arguments{
 \item{molecule}{The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`}
 
-\item{The}{property key as a character string}
+\item{key}{The property key as a character string}
 }
 \description{
 In this context a property is a value associated with a key and stored
