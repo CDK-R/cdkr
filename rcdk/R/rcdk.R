@@ -278,6 +278,10 @@ get.bonds <- function(mol) {
   bonds
 }
 
+#' do.aromaticity
+#' 
+#' detect aromoticity of an input compound
+#' 
 #' @export
 do.aromaticity <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -300,6 +304,10 @@ do.aromaticity <- function(mol) {
   .jcall(aromaticity, "Z", "apply", mol)
 }
 
+#' do.typing
+#' 
+#' configure atom typings.
+#' 
 #' @export
 do.typing <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -309,6 +317,10 @@ do.typing <- function(mol) {
          "V", "percieveAtomTypesAndConfigureAtoms", mol)
 }
 
+#' do.isotopes
+#' 
+#' configure isotopes
+#' 
 #' @export
 do.isotopes <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))

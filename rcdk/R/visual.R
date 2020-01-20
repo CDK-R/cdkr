@@ -192,6 +192,8 @@ view.table <- function(molecules, dat, depictor = NULL) {
 }
 
 
+#' view.image.2d
+#' 
 #' @export
 view.image.2d <- function(molecule, depictor = NULL) {
   if (is.null(depictor))
@@ -203,6 +205,9 @@ view.image.2d <- function(molecule, depictor = NULL) {
   return(readPNG(bytes))
 }
 
+#' copy.image.to.clipboard
+#' 
+#' @export
 copy.image.to.clipboard <-  function(molecule, depictor = NULL) {
   if (is.null(depictor))
     depictor <- get.depictor()

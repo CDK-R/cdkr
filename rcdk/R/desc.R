@@ -102,8 +102,9 @@ get.desc.categories <- function() {
   gsub("Descriptor", "", cats)
 }
 
-#' @export
+#' eval.desc
 #' 
+#' @export
 eval.desc <- function(molecules, which.desc, verbose = FALSE) {
   if (class(molecules) != 'list') {
     jclassAttr <- attr(molecules, "jclass")
@@ -172,6 +173,8 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
   }
 }
 
+#' get.atomic.desc.names
+#' 
 #' @export
 get.atomic.desc.names <- function(type = "all") {
   if (type == 'all') return(.get.desc.all.classnames('atomic'))
@@ -183,6 +186,8 @@ get.atomic.desc.names <- function(type = "all") {
                 "getDescriptorNamesByCategory", type))
 }
 
+#' eval.atomic.desc
+#' 
 #' @export
 eval.atomic.desc <- function(molecule, which.desc, verbose = FALSE) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
@@ -221,6 +226,8 @@ eval.atomic.desc <- function(molecule, which.desc, verbose = FALSE) {
   }
 }
 
+#' get.tpsa
+#' 
 #' @export
 get.tpsa <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
@@ -233,6 +240,8 @@ get.tpsa <- function(molecule) {
   return(value)
 }
 
+#' get.alogp
+#' 
 #' @export
 get.alogp <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
@@ -245,6 +254,8 @@ get.alogp <- function(molecule) {
   return(value[1])
 }
 
+#' get.xlogp
+#' 
 #' @export
 get.xlogp <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
@@ -257,6 +268,8 @@ get.xlogp <- function(molecule) {
   return(value)
 }
 
+#' get.volume
+#' 
 #' @export
 get.volume <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
