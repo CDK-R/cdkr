@@ -14,9 +14,10 @@ setClass("cdkFormula", representation(mass = "numeric",
                    isotopes = matrix(nrow = 0, ncol = 0))
          )
 
-########################################################
-##  create a cdkFormula function from the characters   
-
+#' get.formulaa
+#' 
+#' obtain molecular formula from formula string
+#' 
 #' @export
 get.formula <- function(mf, charge=0) {
     
@@ -46,9 +47,9 @@ setMethod("show", "cdkFormula",
                   ', mass = ',object@mass, ', charge = ',
                   object@charge,  '\n')
           })
-########################################################
-##  Set the charge to a cdkFormula function.
-########################################################
+#' 
+#' get.mol2formula
+#' 
 #' @export
 get.mol2formula <- function(molecule, charge=0) {
     if(attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
@@ -76,9 +77,11 @@ get.mol2formula <- function(molecule, charge=0) {
     formula <- .cdkFormula.createObject(.jcast(moleculaJT,.IMolecularFormula))
     return(formula);
 }
-########################################################
-##  Set the charge to a cdkFormula function.
-########################################################
+#' 
+#' set.charge.formula
+#' 
+#' Set the charge to a cdkFormula function.
+#' 
 #' @export
 set.charge.formula <- function(formula,charge = -1) {
     if (class(formula) != "cdkFormula")
@@ -95,11 +98,12 @@ set.charge.formula <- function(formula,charge = -1) {
     return(formula)
 }
 
-########################################################
-##  Validate a cdkFormula.
-########################################################
-
-
+#' 
+#' isvalid.formula
+#' 
+#' Validate a cdkFormula.
+#' 
+#' @export
 isvalid.formula <- function(formula,rule=c("nitrogen","RDBE")){
     
     if (class(formula) != "cdkFormula")
@@ -129,10 +133,11 @@ isvalid.formula <- function(formula,rule=c("nitrogen","RDBE")){
     }
     return(TRUE);
 }
-
-#############################################################
-##  Generate the isotope pattern given a formula class
-#############################################################
+#' 
+#' get.isotopes.pattern
+#' 
+#' Generate the isotope pattern given a formula class
+#'    
 #' @export
 get.isotopes.pattern <- function(formula,minAbund=0.1){
     
@@ -159,11 +164,10 @@ get.isotopes.pattern <- function(formula,minAbund=0.1){
     }
     return (massVSabun);
 }
-
-########################################################
-##  Generate a list of possible formula objects given a mass and 
-##  a mass tolerance.
-########################################################
+#' 
+#' generate.formula.iter
+#' 
+#' Generate a list of possible formula objects given a mass and a mass tolerance.
 #' @export
 generate.formula.iter <- function(mass, window = 0.01,
                                   elements = list(
@@ -256,6 +260,8 @@ generate.formula.iter <- function(mass, window = 0.01,
     class(obj) <- c("generate.formula2", "abstractiter", "iter")
     return(obj)
 }
+#' generate.formula
+#' 
 #' @export
 generate.formula <- function(mass, window=0.01, 
                              elements=list(c("C",0,50),c("H",0,50),c("N",0,50),c("O",0,50),c("S",0,50)), 

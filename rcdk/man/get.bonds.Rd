@@ -7,10 +7,10 @@
 get.bonds(mol)
 }
 \arguments{
-\item{object}{A `jobjRef` representing either a bond (`IBond`) object.}
+\item{mol}{A `jobjRef` representing the molecule (`IAtomContainer`) object.}
 }
 \value{
-A list of `jobjRef` representing the atom (`IAtom`) objects in the bond
+A list of `jobjRef` representing the bonds (`IBond`) objects in the molecule
 }
 \description{
 Get the bonds in a molecule.

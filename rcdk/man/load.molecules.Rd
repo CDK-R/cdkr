@@ -4,8 +4,13 @@
 \alias{load.molecules}
 \title{Load molecular structures from disk or URL}
 \usage{
-load.molecules(molfiles = NA, aromaticity = TRUE, typing = TRUE,
-  isotopes = TRUE, verbose = FALSE)
+load.molecules(
+  molfiles = NA,
+  aromaticity = TRUE,
+  typing = TRUE,
+  isotopes = TRUE,
+  verbose = FALSE
+)
 }
 \arguments{
 \item{molfiles}{A `character` vector of filenames. Note that the full
@@ -49,9 +54,8 @@ such as SMILES, implicit or explicit hydrogens will be present.
 }
 \examples{
 \dontrun{
-mols <- load.molecules(c('mol1.sdf', 'mol2.smi', 
-                        'https://github.com/rajarshi/cdkr/blob/master/data/set2/dhfr00008.sdf?raw=true'))
-
+sdffile <- system.file("molfiles/dhfr00008.sdf", package="rcdk")
+mols <- load.molecules(c('mol1.sdf', 'mol2.smi', sdfile))
 }
 }
 \seealso{

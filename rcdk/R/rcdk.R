@@ -95,7 +95,6 @@ cdk.version <- function() {
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @return A copy of the original molecule, with explicit hydrogens removed
 #' @seealso \code{\link{get.hydrogen.count}}, \code{\link{get.total.hydrogen.count}}
-#' @aliases hydrogen
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 remove.hydrogens <- function(mol) {
@@ -118,7 +117,6 @@ remove.hydrogens <- function(mol) {
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @return An integer representing the total number of implicit hydrogens
 #' @seealso \code{\link{get.hydrogen.count}}, \code{\link{remove.hydrogens}}
-#' @aliases hydrogen
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 get.total.hydrogen.count <- function(mol) {
@@ -130,6 +128,9 @@ get.total.hydrogen.count <- function(mol) {
          mol);
 }
 
+#' get.exact.mass
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 get.exact.mass <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -160,6 +161,9 @@ get.exact.mass <- function(mol) {
 }
   
 
+#' get.natural.mass
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 get.natural.mass <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -177,6 +181,9 @@ get.natural.mass <- function(mol) {
   }  
 }
 
+#' get.total.charge
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 get.total.charge <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -197,6 +204,9 @@ get.total.charge <- function(mol) {
   }
 }
 
+#' get.total.formal.charge
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 get.total.formal.charge <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -218,7 +228,6 @@ get.total.formal.charge <- function(mol) {
 #' 
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @seealso \code{\link{get.hydrogen.count}}, \code{\link{remove.hydrogens}}, \code{\link{do.typing}}
-#' @aliases hydrogen
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 convert.implicit.to.explicit <- function(mol) {
@@ -278,6 +287,11 @@ get.bonds <- function(mol) {
   bonds
 }
 
+#' do.aromaticity
+#' 
+#' detect aromoticity of an input compound
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 do.aromaticity <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -300,6 +314,11 @@ do.aromaticity <- function(mol) {
   .jcall(aromaticity, "Z", "apply", mol)
 }
 
+#' do.typing
+#' 
+#' configure atom typings.
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 do.typing <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -309,6 +328,11 @@ do.typing <- function(mol) {
          "V", "percieveAtomTypesAndConfigureAtoms", mol)
 }
 
+#' do.isotopes
+#' 
+#' configure isotopes
+#' 
+#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 do.isotopes <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
@@ -349,7 +373,6 @@ is.neutral <- function(mol) {
 #' 
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @return `TRUE` if molecule is complete, `FALSE` otherwise
-#' @aliases graph
 #' @seealso \code{\link{get.largest.component}}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
@@ -375,7 +398,6 @@ is.connected <- function(mol) {
 #' 
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @return The largest component as an `IAtomContainer` object or else the input molecule itself
-#' @aliases graph
 #' @seealso \code{\link{is.connected}}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})

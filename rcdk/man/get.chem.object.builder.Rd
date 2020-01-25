@@ -16,7 +16,7 @@ and so on). Many methods require an instance of a builder
 object to function. While most functions in this package handle
 this internally, it is useful to be able to get an instance of
 a builder object when directly working with the CDK API via
-\code{\link{rJava}}.
+`rJava`.
 }
 \details{
 This method returns an instance of the \href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}. 

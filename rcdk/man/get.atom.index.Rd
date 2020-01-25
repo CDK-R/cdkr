@@ -19,7 +19,7 @@ Acces the index of an atom in the context of an IAtomContainer.
 Indexing starts from 0. If the index is not known, -1 is returned.
 }
 \seealso{
-\code{\link{get.bond.index}}
+\code{\link{get.connected.atom}}
 }
 \author{
 Rajarshi Guha (\email{rajarshi.guha@gmail.com})

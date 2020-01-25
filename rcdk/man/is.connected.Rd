@@ -2,7 +2,6 @@
 % Please edit documentation in R/rcdk.R
 \name{is.connected}
 \alias{is.connected}
-\alias{graph}
 \title{Tests whether the molecule is fully connected.}
 \usage{
 is.connected(mol)

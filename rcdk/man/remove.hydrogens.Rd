@@ -2,7 +2,6 @@
 % Please edit documentation in R/rcdk.R
 \name{remove.hydrogens}
 \alias{remove.hydrogens}
-\alias{hydrogen}
 \title{Remove explicit hydrogens.}
 \usage{
 remove.hydrogens(mol)

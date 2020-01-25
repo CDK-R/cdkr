@@ -2,7 +2,6 @@
 % Please edit documentation in R/rcdk.R
 \name{get.largest.component}
 \alias{get.largest.component}
-\alias{graph}
 \title{Gets the largest component in a disconnected molecular graph.}
 \usage{
 get.largest.component(mol)

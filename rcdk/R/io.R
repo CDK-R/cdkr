@@ -76,9 +76,9 @@ write.molecules <- function(mols, filename, together=TRUE, write.props=FALSE) {
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @examples 
 #' \dontrun{
-#' mols <- load.molecules(c('mol1.sdf', 'mol2.smi', 
-#'                         'https://github.com/rajarshi/cdkr/blob/master/data/set2/dhfr00008.sdf?raw=true'))
-#'
+#' sdffile <- system.file("molfiles/dhfr00008.sdf", package="rcdk")
+#' mols <- load.molecules(c('mol1.sdf', 'mol2.smi', sdfile))
+
 #' }
 load.molecules <- function(molfiles=NA, aromaticity = TRUE, 
                            typing = TRUE, isotopes = TRUE, 
@@ -134,8 +134,9 @@ load.molecules <- function(molfiles=NA, aromaticity = TRUE,
   }
 }
 
-
+#' @importFrom itertools hasNext
 hasNext <- function(obj, ...) { UseMethod("hasNext") } 
+#' @export
 hasNext.iload.molecules <- function(obj, ...) obj$hasNext()
 
 #' Load molecules using an iterator.
@@ -165,7 +166,6 @@ hasNext.iload.molecules <- function(obj, ...) obj$hasNext()
 #' @param isotopes If `TRUE` then atoms are configured with isotopic masses
 #' @seealso \code{\link{write.molecules}}, \code{\link{load.molecules}}, \code{\link{parse.smiles}}
 #' @export
-#' @S3method hasNext iload.molecules 
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @examples 
 #' \dontrun{

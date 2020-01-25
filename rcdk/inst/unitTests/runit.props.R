@@ -17,7 +17,8 @@ test.get.properties <- function() {
 
 ## test.props.from.file <- function() {
 ##   print(getwd())
-##   f <- load.molecules("../../../data/kegg.sdf")
+##   kegg_file <- system.file("molfiles/kegg.sdf", packge="rcdk")
+##   f <- load.molecules(kegg_file)
 ##   checkEquals(length(f), 10)
 ##   proplens <- unlist(lapply(lapply(f, get.properties), length))
 ##   checkEquals(proplens, c(5,5,5,5,5,5,5,3,5,5))
