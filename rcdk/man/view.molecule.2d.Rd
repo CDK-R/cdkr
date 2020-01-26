@@ -4,8 +4,13 @@
 \alias{view.molecule.2d}
 \title{view.molecule.2d}
 \usage{
-view.molecule.2d(molecule, ncol = 4, width = 200, height = 200,
-  depictor = NULL)
+view.molecule.2d(
+  molecule,
+  ncol = 4,
+  width = 200,
+  height = 200,
+  depictor = NULL
+)
 }
 \arguments{
 \item{molecule}{The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`}
