@@ -70,10 +70,17 @@
   unique(unlist(cnames)  )
 }
 
-#' get.desc.names
+#' Get descriptor class names
 #' 
-#' get Descriptor names
-#' 
+#' @param type A string indicating which class of descriptors to return. Specifying
+#' `"all"` will return class names for all molecular descriptors. Options include
+#' * topological
+#' * geometrical
+#' * hybrid
+#' * constitutional
+#' * protein
+#' * electronic
+#' @seealso \link{get.atomic.desc.names}
 #' @export
 get.desc.names <- function(type = "all") {
   if (type == 'all') return(.get.desc.all.classnames())
@@ -91,10 +98,11 @@ get.desc.names <- function(type = "all") {
   }
 }
 
-#' get.desc.categories
+#' List available descriptor categories
 #' 
-#' get Descriptor Categories
-#' 
+#' @return A character vector listing available descriptor categories. This can be 
+#' used in \link{get.descriptor.names}
+#' @seealso \link{get.descriptor.names}
 #' @export
 get.desc.categories <- function() {
   cats <- .jcall("org/guha/rcdk/descriptors/DescriptorUtilities", "[Ljava/lang/String;",
@@ -102,8 +110,13 @@ get.desc.categories <- function() {
   gsub("Descriptor", "", cats)
 }
 
-#' eval.desc
+#' Compute descriptor values for a set of molecules
 #' 
+#' @param molecules A `list` of molecule objects
+#' @param which.desc A character vector listing descriptor class names
+#' @param verbose If `TRUE`, verbose output
+#' @return A `data.frame` with molecules in the rows and descriptors in the columns. If
+#' a descriptor value cannot be computed for a molecule, `NA` is returned.
 #' @export
 eval.desc <- function(molecules, which.desc, verbose = FALSE) {
   if (class(molecules) != 'list') {
@@ -173,22 +186,22 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
   }
 }
 
-#' get.atomic.desc.names
-#' 
+#' Get class names for atomic descriptors
+#' @return A character vector containing class names for atomic descriptors
 #' @export
-get.atomic.desc.names <- function(type = "all") {
+get.atomic.desc.names <- function() {
   if (type == 'all') return(.get.desc.all.classnames('atomic'))
-  if (!(type %in% c('topological', 'geometrical', 'hybrid',
-                    'constitutional', 'protein', 'electronic'))) {
-    stop("Invalid descriptor category specified")
-  }
   return(.jcall("org/guha/rcdk/descriptors/DescriptorUtilities", "[Ljava/lang/String;",
                 "getDescriptorNamesByCategory", type))
 }
 
-#' eval.atomic.desc
+#' Compute descriptors for each atom in a molecule
 #' 
+#' @param molecule A molecule object
+#' @wparam hich.desc A character vector of atomic descriptor class names
+#' @return A `data.frame` with atoms in the rows and descriptors in the columns
 #' @export
+#' @seealso \link{get.atomic.desc.names}
 eval.atomic.desc <- function(molecule, which.desc, verbose = FALSE) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object")
@@ -226,8 +239,9 @@ eval.atomic.desc <- function(molecule, which.desc, verbose = FALSE) {
   }
 }
 
-#' get.tpsa
-#' 
+#' Compute TPSA for a molecule
+#' @param molecule A molecule object
+#' @return A double value representing the TPSA value
 #' @export
 get.tpsa <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
@@ -240,8 +254,9 @@ get.tpsa <- function(molecule) {
   return(value)
 }
 
-#' get.alogp
-#' 
+#' Compute ALogP for a molecule
+#' @param molecule A molecule object
+#' @return A double value representing the ALogP value
 #' @export
 get.alogp <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
@@ -254,8 +269,9 @@ get.alogp <- function(molecule) {
   return(value[1])
 }
 
-#' get.xlogp
-#' 
+#' Compute XLogP for a molecule
+#' @param molecule A molecule object
+#' @return A double value representing the XLogP value
 #' @export
 get.xlogp <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
@@ -268,8 +284,12 @@ get.xlogp <- function(molecule) {
   return(value)
 }
 
-#' get.volume
+#' Compute volume of a molecule
 #' 
+#' This method does not require 3D coordinates. As a result its an 
+#' approximation
+#' @param molecule A molecule object
+#' @return A double value representing the volume
 #' @export
 get.volume <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {

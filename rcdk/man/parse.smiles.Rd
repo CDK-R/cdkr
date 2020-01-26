@@ -4,7 +4,8 @@
 \alias{parse.smiles}
 \title{Parse SMILES strings into molecule objects.}
 \usage{
-parse.smiles(smiles, kekulise = TRUE, omit.nulls = FALSE, smiles.parser = NULL)
+parse.smiles(smiles, kekulise = TRUE, omit.nulls = FALSE,
+  smiles.parser = NULL)
 }
 \arguments{
 \item{smiles}{A single SMILES string or a vector of SMILES strings}

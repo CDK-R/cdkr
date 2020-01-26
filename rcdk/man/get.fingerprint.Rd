@@ -4,16 +4,9 @@
 \alias{get.fingerprint}
 \title{Generate molecular fingerprints}
 \usage{
-get.fingerprint(
-  molecule,
-  type = "standard",
-  fp.mode = "bit",
-  depth = 6,
-  size = 1024,
-  substructure.pattern = character(),
-  circular.type = "ECFP6",
-  verbose = FALSE
-)
+get.fingerprint(molecule, type = "standard", fp.mode = "bit", depth = 6,
+  size = 1024, substructure.pattern = character(),
+  circular.type = "ECFP6", verbose = FALSE)
 }
 \arguments{
 \item{molecule}{A \code{jobjRef} object to an \code{IAtomContaine}}

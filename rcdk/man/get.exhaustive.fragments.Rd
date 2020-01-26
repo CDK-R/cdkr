@@ -31,14 +31,6 @@ clustering of the whole collection, especially when it is large.
 Note that exhaustive fragmentation of large molecules (with many single bonds) can become
 time consuming.
 }
-\examples{
-mol <- parse.smiles('c1ccc(cc1)CN(c2cc(ccc2[N+](=O)[O-])c3c(nc(nc3CC)N)N)C')[[1]]
-mf1 <- get.murcko.fragments(mol, as.smiles=TRUE, single.framework=TRUE)
-mf1 <- get.murcko.fragments(mol, as.smiles=TRUE, single.framework=FALSE)
-}
 \seealso{
 [get.exhuastive.fragments()]
-}
-\author{
-Rajarshi Guha (\email{rajarshi.guha@gmail.com})
 }

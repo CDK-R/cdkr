@@ -4,7 +4,7 @@
 \alias{do.typing}
 \title{do.typing}
 \usage{
-do.typing(mol)
+\method{do}{typing}(mol)
 }
 \arguments{
 \item{mol}{The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`}

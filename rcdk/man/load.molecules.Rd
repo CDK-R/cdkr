@@ -4,13 +4,8 @@
 \alias{load.molecules}
 \title{Load molecular structures from disk or URL}
 \usage{
-load.molecules(
-  molfiles = NA,
-  aromaticity = TRUE,
-  typing = TRUE,
-  isotopes = TRUE,
-  verbose = FALSE
-)
+load.molecules(molfiles = NA, aromaticity = TRUE, typing = TRUE,
+  isotopes = TRUE, verbose = FALSE)
 }
 \arguments{
 \item{molfiles}{A `character` vector of filenames. Note that the full

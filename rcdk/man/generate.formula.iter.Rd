@@ -4,15 +4,9 @@
 \alias{generate.formula.iter}
 \title{generate.formula.iter}
 \usage{
-generate.formula.iter(
-  mass,
-  window = 0.01,
-  elements = list(c("C", 0, 50), c("H", 0, 50), c("N", 0, 50), c("O", 0, 50), c("S", 0,
-    50)),
-  validation = FALSE,
-  charge = 0,
-  as.string = TRUE
-)
+generate.formula.iter(mass, window = 0.01, elements = list(c("C", 0, 50),
+  c("H", 0, 50), c("N", 0, 50), c("O", 0, 50), c("S", 0, 50)),
+  validation = FALSE, charge = 0, as.string = TRUE)
 }
 \description{
 Generate a list of possible formula objects given a mass and a mass tolerance.

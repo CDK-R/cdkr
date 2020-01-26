@@ -4,14 +4,8 @@
 \alias{iload.molecules}
 \title{Load molecules using an iterator.}
 \usage{
-iload.molecules(
-  molfile,
-  type = "smi",
-  aromaticity = TRUE,
-  typing = TRUE,
-  isotopes = TRUE,
-  skip = TRUE
-)
+iload.molecules(molfile, type = "smi", aromaticity = TRUE, typing = TRUE,
+  isotopes = TRUE, skip = TRUE)
 }
 \arguments{
 \item{molfile}{A string containing the filename to load. Must be a local file}
