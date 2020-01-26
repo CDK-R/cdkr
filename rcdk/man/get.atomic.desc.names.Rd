@@ -2,10 +2,16 @@
 % Please edit documentation in R/desc.R
 \name{get.atomic.desc.names}
 \alias{get.atomic.desc.names}
-\title{get.atomic.desc.names}
+\title{Get class names for atomic descriptors}
 \usage{
-get.atomic.desc.names(type = "all")
+get.atomic.desc.names()
+}
+\value{
+A character vector containing class names for atomic descriptors
 }
 \description{
-get.atomic.desc.names
+Get class names for atomic descriptors
+}
+\author{
+Rajarshi Guha (\email{rajarshi.guha@gmail.com})
 }

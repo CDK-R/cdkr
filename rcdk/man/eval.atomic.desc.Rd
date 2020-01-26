@@ -2,10 +2,24 @@
 % Please edit documentation in R/desc.R
 \name{eval.atomic.desc}
 \alias{eval.atomic.desc}
-\title{eval.atomic.desc}
+\title{Compute descriptors for each atom in a molecule}
 \usage{
 eval.atomic.desc(molecule, which.desc, verbose = FALSE)
 }
+\arguments{
+\item{molecule}{A molecule object}
+
+\item{which.desc}{A character vector of atomic descriptor class names}
+}
+\value{
+A `data.frame` with atoms in the rows and descriptors in the columns
+}
 \description{
-eval.atomic.desc
+Compute descriptors for each atom in a molecule
+}
+\seealso{
+\link{get.atomic.desc.names}
+}
+\author{
+Rajarshi Guha (\email{rajarshi.guha@gmail.com})
 }

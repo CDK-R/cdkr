@@ -2,10 +2,20 @@
 % Please edit documentation in R/desc.R
 \name{get.desc.categories}
 \alias{get.desc.categories}
-\title{get.desc.categories}
+\title{List available descriptor categories}
 \usage{
 get.desc.categories()
 }
+\value{
+A character vector listing available descriptor categories. This can be 
+used in \link{get.descriptor.names}
+}
 \description{
-get Descriptor Categories
+List available descriptor categories
+}
+\seealso{
+\link{get.descriptor.names}
+}
+\author{
+Rajarshi Guha (\email{rajarshi.guha@gmail.com})
 }

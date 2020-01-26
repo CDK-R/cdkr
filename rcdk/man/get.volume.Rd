@@ -2,10 +2,20 @@
 % Please edit documentation in R/desc.R
 \name{get.volume}
 \alias{get.volume}
-\title{get.volume}
+\title{Compute volume of a molecule}
 \usage{
 get.volume(molecule)
 }
+\arguments{
+\item{molecule}{A molecule object}
+}
+\value{
+A double value representing the volume
+}
 \description{
-get.volume
+This method does not require 3D coordinates. As a result its an 
+approximation
+}
+\author{
+Rajarshi Guha (\email{rajarshi.guha@gmail.com})
 }

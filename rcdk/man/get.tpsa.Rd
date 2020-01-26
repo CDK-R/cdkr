@@ -2,10 +2,19 @@
 % Please edit documentation in R/desc.R
 \name{get.tpsa}
 \alias{get.tpsa}
-\title{get.tpsa}
+\title{Compute TPSA for a molecule}
 \usage{
 get.tpsa(molecule)
 }
+\arguments{
+\item{molecule}{A molecule object}
+}
+\value{
+A double value representing the TPSA value
+}
 \description{
-get.tpsa
+Compute TPSA for a molecule
+}
+\author{
+Rajarshi Guha (\email{rajarshi.guha@gmail.com})
 }

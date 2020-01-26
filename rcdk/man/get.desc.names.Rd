@@ -2,10 +2,26 @@
 % Please edit documentation in R/desc.R
 \name{get.desc.names}
 \alias{get.desc.names}
-\title{get.desc.names}
+\title{Get descriptor class names}
 \usage{
 get.desc.names(type = "all")
 }
+\arguments{
+\item{type}{A string indicating which class of descriptors to return. Specifying
+`"all"` will return class names for all molecular descriptors. Options include
+* topological
+* geometrical
+* hybrid
+* constitutional
+* protein
+* electronic}
+}
 \description{
-get Descriptor names
+Get descriptor class names
+}
+\seealso{
+\link{get.atomic.desc.names}
+}
+\author{
+Rajarshi Guha (\email{rajarshi.guha@gmail.com})
 }

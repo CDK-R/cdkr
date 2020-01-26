@@ -2,10 +2,19 @@
 % Please edit documentation in R/desc.R
 \name{get.xlogp}
 \alias{get.xlogp}
-\title{get.xlogp}
+\title{Compute XLogP for a molecule}
 \usage{
 get.xlogp(molecule)
 }
+\arguments{
+\item{molecule}{A molecule object}
+}
+\value{
+A double value representing the XLogP value
+}
 \description{
-get.xlogp
+Compute XLogP for a molecule
+}
+\author{
+Rajarshi Guha (\email{rajarshi.guha@gmail.com})
 }

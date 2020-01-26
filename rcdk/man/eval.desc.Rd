@@ -2,10 +2,24 @@
 % Please edit documentation in R/desc.R
 \name{eval.desc}
 \alias{eval.desc}
-\title{eval.desc}
+\title{Compute descriptor values for a set of molecules}
 \usage{
 eval.desc(molecules, which.desc, verbose = FALSE)
 }
+\arguments{
+\item{molecules}{A `list` of molecule objects}
+
+\item{which.desc}{A character vector listing descriptor class names}
+
+\item{verbose}{If `TRUE`, verbose output}
+}
+\value{
+A `data.frame` with molecules in the rows and descriptors in the columns. If
+a descriptor value cannot be computed for a molecule, `NA` is returned.
+}
 \description{
-eval.desc
+Compute descriptor values for a set of molecules
+}
+\author{
+Rajarshi Guha (\email{rajarshi.guha@gmail.com})
 }

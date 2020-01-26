@@ -81,6 +81,7 @@
 #' * protein
 #' * electronic
 #' @seealso \link{get.atomic.desc.names}
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @export
 get.desc.names <- function(type = "all") {
   if (type == 'all') return(.get.desc.all.classnames())
@@ -103,6 +104,7 @@ get.desc.names <- function(type = "all") {
 #' @return A character vector listing available descriptor categories. This can be 
 #' used in \link{get.descriptor.names}
 #' @seealso \link{get.descriptor.names}
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @export
 get.desc.categories <- function() {
   cats <- .jcall("org/guha/rcdk/descriptors/DescriptorUtilities", "[Ljava/lang/String;",
@@ -117,6 +119,7 @@ get.desc.categories <- function() {
 #' @param verbose If `TRUE`, verbose output
 #' @return A `data.frame` with molecules in the rows and descriptors in the columns. If
 #' a descriptor value cannot be computed for a molecule, `NA` is returned.
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @export
 eval.desc <- function(molecules, which.desc, verbose = FALSE) {
   if (class(molecules) != 'list') {
@@ -188,6 +191,7 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
 
 #' Get class names for atomic descriptors
 #' @return A character vector containing class names for atomic descriptors
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @export
 get.atomic.desc.names <- function() {
   if (type == 'all') return(.get.desc.all.classnames('atomic'))
@@ -198,9 +202,10 @@ get.atomic.desc.names <- function() {
 #' Compute descriptors for each atom in a molecule
 #' 
 #' @param molecule A molecule object
-#' @wparam hich.desc A character vector of atomic descriptor class names
+#' @param which.desc A character vector of atomic descriptor class names
 #' @return A `data.frame` with atoms in the rows and descriptors in the columns
 #' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @seealso \link{get.atomic.desc.names}
 eval.atomic.desc <- function(molecule, which.desc, verbose = FALSE) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
@@ -242,6 +247,7 @@ eval.atomic.desc <- function(molecule, which.desc, verbose = FALSE) {
 #' Compute TPSA for a molecule
 #' @param molecule A molecule object
 #' @return A double value representing the TPSA value
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @export
 get.tpsa <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
@@ -258,6 +264,7 @@ get.tpsa <- function(molecule) {
 #' @param molecule A molecule object
 #' @return A double value representing the ALogP value
 #' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 get.alogp <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object")
@@ -272,6 +279,7 @@ get.alogp <- function(molecule) {
 #' Compute XLogP for a molecule
 #' @param molecule A molecule object
 #' @return A double value representing the XLogP value
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @export
 get.xlogp <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
@@ -291,6 +299,7 @@ get.xlogp <- function(molecule) {
 #' @param molecule A molecule object
 #' @return A double value representing the volume
 #' @export
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 get.volume <- function(molecule) {
   if (attr(molecule, "jclass") != "org/openscience/cdk/interfaces/IAtomContainer") {
     stop("Must supply an IAtomContainer object")

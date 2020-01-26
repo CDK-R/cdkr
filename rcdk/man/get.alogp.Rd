@@ -2,10 +2,19 @@
 % Please edit documentation in R/desc.R
 \name{get.alogp}
 \alias{get.alogp}
-\title{get.alogp}
+\title{Compute ALogP for a molecule}
 \usage{
 get.alogp(molecule)
 }
+\arguments{
+\item{molecule}{A molecule object}
+}
+\value{
+A double value representing the ALogP value
+}
 \description{
-get.alogp
+Compute ALogP for a molecule
+}
+\author{
+Rajarshi Guha (\email{rajarshi.guha@gmail.com})
 }
