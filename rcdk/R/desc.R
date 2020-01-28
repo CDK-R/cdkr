@@ -105,8 +105,8 @@ get.desc.names <- function(type = "all") {
 #' List available descriptor categories
 #' 
 #' @return A character vector listing available descriptor categories. This can be 
-#' used in \link{get.descriptor.names}
-#' @seealso \link{get.descriptor.names}
+#' used in \link{get.desc.names}
+#' @seealso \link{get.desc.names}
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @export
 get.desc.categories <- function() {
