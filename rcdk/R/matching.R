@@ -1,5 +1,8 @@
 #' matches 
 #' 
+#' @param query Required. A SMARTSQuery
+#' @param target Required. The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @param return.matches Optional. Default \code{FALSE}
 #' @export
 matches <- function(query, target, return.matches=FALSE) {
   if (!is.list(target)) target <- list(target)

@@ -205,6 +205,9 @@ view.table <- function(molecules, dat, depictor = NULL) {
 
 #' view.image.2d
 #' 
+#' @param molecule The molecule to display Should be a `jobjRef` representing an `IAtomContainer`
+#' @param depictor Default \code{NULL}
+#' 
 #' @export
 view.image.2d <- function(molecule, depictor = NULL) {
   if (is.null(depictor))

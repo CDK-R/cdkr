@@ -1,5 +1,9 @@
 #' get.mcs
 #' 
+#' 
+#' @param mol1 Required. First molecule to compare. Should be a `jobjRef` representing an `IAtomContainer`
+#' @param mol2 Required. Second molecule to compare. Should be a `jobjRef` representing an `IAtomContainer`
+#' @param as.molecule Optional. Default \code{TRUE}.
 #' @export
 get.mcs <- function(mol1, mol2, as.molecule = TRUE) {
   if (as.molecule) {
