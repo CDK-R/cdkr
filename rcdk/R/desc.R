@@ -218,6 +218,7 @@ get.atomic.desc.names <- function(type = "all") {
 #' 
 #' @param molecule A molecule object
 #' @param which.desc A character vector of atomic descriptor class names
+#' @param verbose Optional. Default \code{FALSE}. Toggle verbosity.
 #' @return A `data.frame` with atoms in the rows and descriptors in the columns
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})

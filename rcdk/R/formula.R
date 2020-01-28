@@ -18,6 +18,8 @@ setClass("cdkFormula", representation(mass = "numeric",
 #' 
 #' obtain molecular formula from formula string
 #' 
+#' @param mf Required. Molecular formula
+#' @param charge Optional. Default \code{0}
 #' @export
 get.formula <- function(mf, charge=0) {
     
@@ -168,6 +170,15 @@ get.isotopes.pattern <- function(formula,minAbund=0.1){
 #' generate.formula.iter
 #' 
 #' Generate a list of possible formula objects given a mass and a mass tolerance.
+#' 
+#' @param mass
+#' @param window Optional. Default \code{0.01}
+#' @param elements Optional. Default \code{
+#'                  list(c('C', 0,50), c('H', 0,50), 
+#'                  c('N', 0,50), c('O', 0,50), c('S', 0,50))}
+#' @param validation Optional. Default \code{FALSE}
+#' @param charge Optional. Default \code{FALSE}
+#' @param as.string Optional. Default \code{FALSE}
 #' @export
 generate.formula.iter <- function(mass, window = 0.01,
                                   elements = list(
@@ -262,10 +273,19 @@ generate.formula.iter <- function(mass, window = 0.01,
 }
 #' generate.formula
 #' 
+#' @param mass
+#' @param window Optional. Default \code{0.01}
+#' @param elements Optional. Default \code{
+#'                  list(c('C', 0,50), c('H', 0,50), 
+#'                  c('N', 0,50), c('O', 0,50), c('S', 0,50))}
+#' @param validation Optional. Default \code{FALSE}
+#' @param charge Optional. Default \code{FALSE}
 #' @export
-generate.formula <- function(mass, window=0.01, 
+generate.formula <- function(mass, 
+                             window=0.01, 
                              elements=list(c("C",0,50),c("H",0,50),c("N",0,50),c("O",0,50),c("S",0,50)), 
-                             validation=FALSE, charge=0.0){
+                             validation=FALSE,
+                             charge=0.0){
     
     builder <- .cdkFormula.createChemObject();
     mfTool <- .jnew("org/openscience/cdk/formula/MassToFormulaTool",builder);
