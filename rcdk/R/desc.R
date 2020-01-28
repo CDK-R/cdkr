@@ -153,6 +153,7 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
                       error = function(e) return(NA))
     }, b=desc)
 
+
     vals <- lapply(descvals, .get.desc.values, nexpected = length(dnames))
     vals <- data.frame(do.call('rbind', vals))
     names(vals) <- dnames 
@@ -177,7 +178,9 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
       vals <- lapply(descvals, .get.desc.values, nexpected = length(dnames))
       vals <- data.frame(do.call('rbind', vals))
 
-      if (length(vals) == 1 && is.na(vals)) {
+      
+      if (length(vals) == 1 && any(is.na(vals))) {
+
         vals <- as.data.frame(matrix(NA, nrow=1, ncol=length(dnames)))
       }
       
