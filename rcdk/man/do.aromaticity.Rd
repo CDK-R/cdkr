@@ -10,5 +10,5 @@ do.aromaticity(mol)
 \item{mol}{The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`}
 }
 \description{
-detect aromoticity of an input compound
+detect aromaticity of an input compound
 }

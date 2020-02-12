@@ -289,7 +289,7 @@ get.bonds <- function(mol) {
 
 #' do.aromaticity
 #' 
-#' detect aromoticity of an input compound
+#' detect aromaticity of an input compound
 #' 
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
