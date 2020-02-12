@@ -52,6 +52,7 @@
 #'  length \code{2}.
 #'  
 #' @aliases Atoms
+#' @author Rajarshi Guha<rajarshi.guha@gmail.com>
 NULL
 
 ## An example of getting all the coordinates for a molecule
