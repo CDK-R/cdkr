@@ -4,11 +4,11 @@
 [![Build
 Status](https://api.travis-ci.org/CDK-R/cdkr.svg?branch=master)](https://travis-ci.org/CDK-R/cdkr)
 [![CRAN
-Version](https://www.r-pkg.org/badges/version/badger?color=green)](https://cran.r-project.org/package=rcdk)
+Version](https://www.r-pkg.org/badges/version/rcdk?color=green)](https://cran.r-project.org/package=rcdk)
 [![CRAN
-Downloads](http://cranlogs.r-pkg.org/badges/grand-total/badger?color=green)](https://cran.r-project.org/package=rcdk)
+Downloads](http://cranlogs.r-pkg.org/badges/grand-total/rcdk?color=green)](https://cran.r-project.org/package=rcdk)
 [![CRAN Downloads
-Monthyl](http://cranlogs.r-pkg.org/badges/last-month/badger?color=green)](https://cran.r-project.org/package=rcdk)
+Monthyl](http://cranlogs.r-pkg.org/badges/last-month/rcdk?color=green)](https://cran.r-project.org/package=rcdk)
 
 # rcdk: a chemistry library
 
