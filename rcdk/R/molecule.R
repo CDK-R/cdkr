@@ -39,5 +39,5 @@
 #' @seealso 
 #' \code{\link{get.atoms}}, \code{\link{do.typing}}
 #' @aliases Molecule
-#' @author Rajarshi Guha<rajarshi.guha@gmail.com>
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 NULL

@@ -27,5 +27,5 @@ A parallel effort to expand the Chemistry Development
 \code{\link{isvalie.formula}}
 }
 \author{
-Miguel Rojas-Cherto (<miguelrojasch@yahoo.es>)
+Miguel Rojas-Cherto (\email{miguelrojasch@yahoo.es})
 }

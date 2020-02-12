@@ -10,7 +10,7 @@
 #' @section Objects from the Class:
 #'   Objects can be created using new constructor and filled with a specific 
 #'   mass and window accuracy
-#' @author Miguel Rojas-Cherto (<miguelrojasch@yahoo.es>)
+#' @author Miguel Rojas-Cherto (\email{miguelrojasch@@yahoo.es})
 #' @references A parallel effort to expand the Chemistry Development 
 #'   Kit: \url{http://cdk.sourceforge.net}
 #' @seealso  

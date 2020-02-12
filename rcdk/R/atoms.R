@@ -51,7 +51,7 @@
 #'  length \code{2}.
 #'  
 #' @aliases Atoms
-#' @author Rajarshi Guha <rajarshi.guha@gmail.com>
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @docType package
 NULL
 

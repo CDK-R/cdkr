@@ -44,5 +44,5 @@ that the molecule has been typed beforehand.
 \code{\link{get.atoms}}, \code{\link{do.typing}}
 }
 \author{
-Rajarshi Guha<rajarshi.guha@gmail.com>
+Rajarshi Guha (\email{rajarshi.guha@gmail.com})
 }

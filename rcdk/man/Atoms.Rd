@@ -58,5 +58,5 @@ is.in.ring(atom)
 }
 
 \author{
-Rajarshi Guha <rajarshi.guha@gmail.com>
+Rajarshi Guha (\email{rajarshi.guha@gmail.com})
 }
