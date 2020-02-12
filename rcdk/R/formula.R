@@ -19,8 +19,8 @@
 #' \code{\link{get.isotopes.pattern}}
 #' \code{\link{isvalie.formula}}
 #' @docType class
-#' @alias cdkFormula-class
-#' @alias show,cdkFormula-method
+#' @aliases cdkFormula-class
+#' @aliases show,cdkFormula-method
 setClass("cdkFormula", representation(mass = "numeric",
                                       objectJ = "jobjRef",
                                       string = "character",
