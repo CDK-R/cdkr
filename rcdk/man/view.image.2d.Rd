@@ -6,6 +6,11 @@
 \usage{
 view.image.2d(molecule, depictor = NULL)
 }
+\arguments{
+\item{molecule}{The molecule to display Should be a `jobjRef` representing an `IAtomContainer`}
+
+\item{depictor}{Default \code{NULL}}
+}
 \description{
 view.image.2d
 }

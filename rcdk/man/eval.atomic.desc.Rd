@@ -10,6 +10,8 @@ eval.atomic.desc(molecule, which.desc, verbose = FALSE)
 \item{molecule}{A molecule object}
 
 \item{which.desc}{A character vector of atomic descriptor class names}
+
+\item{verbose}{Optional. Default \code{FALSE}. Toggle verbosity.}
 }
 \value{
 A `data.frame` with atoms in the rows and descriptors in the columns

@@ -6,6 +6,11 @@
 \usage{
 set.charge.formula(formula, charge = -1)
 }
+\arguments{
+\item{formula}{Required. Molecular formula}
+
+\item{charge}{Optional. Default \code{-1}}
+}
 \description{
 Set the charge to a cdkFormula function.
 }

@@ -13,6 +13,19 @@ generate.formula(
   charge = 0
 )
 }
+\arguments{
+\item{mass}{Required. Mass.}
+
+\item{window}{Optional. Default \code{0.01}}
+
+\item{elements}{Optional. Default \code{
+list(c('C', 0,50), c('H', 0,50), 
+c('N', 0,50), c('O', 0,50), c('S', 0,50))}}
+
+\item{validation}{Optional. Default \code{FALSE}}
+
+\item{charge}{Optional. Default \code{FALSE}}
+}
 \description{
 generate.formula
 }

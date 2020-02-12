@@ -6,6 +6,11 @@
 \usage{
 get.isotopes.pattern(formula, minAbund = 0.1)
 }
+\arguments{
+\item{formula}{Required. A CDK molecule formula}
+
+\item{minAbund}{Optional. Default \code{0.1}}
+}
 \description{
 Generate the isotope pattern given a formula class
 }

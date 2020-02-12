@@ -6,6 +6,11 @@
 \usage{
 isvalid.formula(formula, rule = c("nitrogen", "RDBE"))
 }
+\arguments{
+\item{formula}{Required. A CDK Formula}
+
+\item{rule}{Optional. Default \code{rule=c("nitrogen","RDBE")}}
+}
 \description{
 Validate a cdkFormula.
 }

@@ -2,7 +2,11 @@
 % Please edit documentation in R/atoms.R
 \name{get.point2d}
 \alias{get.point2d}
-\title{Get the 2D coordinates of the atom.}
+\title{Get the 2D coordinates of the atom.
+
+In case, coordinates are unavailable (e.g., molecule was read in from a 
+SMILES file) or have not been generated yet, `NA`'s are returned for the 
+X & Y coordinates.}
 \usage{
 get.point2d(atom)
 }
@@ -13,6 +17,8 @@ get.point2d(atom)
 A 2-element numeric vector representing the X & Y coordinates.
 }
 \description{
+Get the 2D coordinates of the atom.
+
 In case, coordinates are unavailable (e.g., molecule was read in from a 
 SMILES file) or have not been generated yet, `NA`'s are returned for the 
 X & Y coordinates.

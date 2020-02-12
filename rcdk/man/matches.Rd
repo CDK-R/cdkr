@@ -6,6 +6,13 @@
 \usage{
 matches(query, target, return.matches = FALSE)
 }
+\arguments{
+\item{query}{Required. A SMARTSQuery}
+
+\item{target}{Required. The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`}
+
+\item{return.matches}{Optional. Default \code{FALSE}}
+}
 \description{
 matches
 }

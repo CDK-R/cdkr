@@ -3,7 +3,11 @@
 \name{get.hydrogen.count}
 \alias{get.hydrogen.count}
 \alias{hydrogen}
-\title{Get the implicit hydrogen count for the atom.}
+\title{Get the implicit hydrogen count for the atom.
+
+This method returns the number of implicit H's on the atom. 
+Depending on where the molecule was read from this may be \code{NULL} or an integer
+greater than or equal to 0}
 \usage{
 get.hydrogen.count(atom)
 }
@@ -14,6 +18,8 @@ get.hydrogen.count(atom)
 An integer representing the hydrogen count
 }
 \description{
+Get the implicit hydrogen count for the atom.
+
 This method returns the number of implicit H's on the atom. 
 Depending on where the molecule was read from this may be \code{NULL} or an integer
 greater than or equal to 0

@@ -6,6 +6,13 @@
 \usage{
 get.mcs(mol1, mol2, as.molecule = TRUE)
 }
+\arguments{
+\item{mol1}{Required. First molecule to compare. Should be a `jobjRef` representing an `IAtomContainer`}
+
+\item{mol2}{Required. Second molecule to compare. Should be a `jobjRef` representing an `IAtomContainer`}
+
+\item{as.molecule}{Optional. Default \code{TRUE}.}
+}
 \description{
 get.mcs
 }

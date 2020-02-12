@@ -2,7 +2,11 @@
 % Please edit documentation in R/atoms.R
 \name{get.point3d}
 \alias{get.point3d}
-\title{Get the 3D coordinates of the atom.}
+\title{Get the 3D coordinates of the atom.
+
+In case, coordinates are unavailable (e.g., molecule was read in from a 
+SMILES file) or have not been generated yet, `NA`'s are returned for the 
+X, Y and Z coordinates.}
 \usage{
 get.point3d(atom)
 }
@@ -13,6 +17,8 @@ get.point3d(atom)
 A 3-element numeric vector representing the X, Y and Z coordinates.
 }
 \description{
+Get the 3D coordinates of the atom.
+
 In case, coordinates are unavailable (e.g., molecule was read in from a 
 SMILES file) or have not been generated yet, `NA`'s are returned for the 
 X, Y and Z coordinates.
