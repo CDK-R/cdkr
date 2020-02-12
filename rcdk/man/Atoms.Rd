@@ -4,20 +4,6 @@
 \name{Atoms}
 \alias{Atoms}
 \title{Operations on Atoms}
-\usage{
-get.symbol(atom)
-get.point3d(atom)
-get.point2d(atom)
-get.atomic.number(atom)
-get.hydrogen.count(atom)
-get.charge(atom)
-get.formal.charge(atom)
-get.connected.atoms(atom, mol)
-get.atom.index(atom, mol)
-is.aromatic(atom)
-is.aliphatic(atom)
-is.in.ring(atom)
-}
 \description{
 \code{\link{get.symbol}} returns the chemical symbol for an atom
 \code{\link{get.point3d}} returns the 3D coordinates of the atom
@@ -42,6 +28,22 @@ is.in.ring(atom)
             (starting from \code{0})
 \code{\link{get.connected.atoms}} returns a list of atoms that are connected to the specified atom
 }
+\section{Usage}{
+
+get.symbol(atom)
+get.point3d(atom)
+get.point2d(atom)
+get.atomic.number(atom)
+get.hydrogen.count(atom)
+get.charge(atom)
+get.formal.charge(atom)
+get.connected.atoms(atom, mol)
+get.atom.index(atom, mol)
+is.aromatic(atom)
+is.aliphatic(atom)
+is.in.ring(atom)
+}
+
 \section{Arguments}{
 
  atom A jobjRef representing an IAtom object
@@ -50,10 +52,10 @@ is.in.ring(atom)
 
 \section{Value}{
 
- In the case of \code{get.point3d} the return value is a 3-element vector 
+ In the case of \code{\link{get.point3d}} the return value is a 3-element vector 
  containingthe X, Y and Z co-ordinates of the atom.  If the atom does not 
  have 3D coordinates, it returns a vector of the form \code{c(NA,NA,NA)}.
- Similarly for \code{get.point2d}, in which case the return vector is of 
+ Similarly for \code{\link{get.point2d}}, in which case the return vector is of 
  length \code{2}.
 }
 

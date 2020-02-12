@@ -25,7 +25,7 @@
 #'             (starting from \code{0})
 #' \code{\link{get.connected.atoms}} returns a list of atoms that are connected to the specified atom
 #' 
-#' @usage
+#' @section Usage:
 #' get.symbol(atom)
 #' get.point3d(atom)
 #' get.point2d(atom)
@@ -39,18 +39,18 @@
 #' is.aliphatic(atom)
 #' is.in.ring(atom) 
 #' 
+#' 
 #' @section Arguments:
 #'  atom A jobjRef representing an IAtom object
 #'  mol  A jobjRef representing an IAtomContainer object
 #' 
 #' @section Value:
-#'  In the case of \code{get.point3d} the return value is a 3-element vector 
+#'  In the case of \code{\link{get.point3d}} the return value is a 3-element vector 
 #'  containingthe X, Y and Z co-ordinates of the atom.  If the atom does not 
 #'  have 3D coordinates, it returns a vector of the form \code{c(NA,NA,NA)}.
-#'  Similarly for \code{get.point2d}, in which case the return vector is of 
+#'  Similarly for \code{\link{get.point2d}}, in which case the return vector is of 
 #'  length \code{2}.
 #'  
-#' @aliases Atoms
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @docType package
 NULL

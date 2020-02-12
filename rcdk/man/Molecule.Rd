@@ -3,12 +3,6 @@
 \name{Molecule}
 \alias{Molecule}
 \title{Operations on molecules}
-\usage{
-get.exact.mass(molecule)
-get.natural.mass(molecule)
-convert.implicit.to.explicit(molecule)
-is.neutral(molecule)
-}
 \description{
 Various functions to perform operations on molecules.
 
@@ -27,9 +21,17 @@ from an MDL MOLfile that did not have hydrogens). In such cases,
 then convert them to explicit ones.  In addition, for such cases, make sure 
 that the molecule has been typed beforehand.
 }
+\section{Usage}{
+
+get.exact.mass(mol)
+get.natural.mass(mol)
+convert.implicit.to.explicit(mol)
+is.neutral(mol)
+}
+
 \section{Arguments}{
 
- molecule  A jobjRef representing an IAtomContainer or IMolecule objec
+ mol  A jobjRef representing an IAtomContainer or IMolecule object
 }
 
 \section{Value}{

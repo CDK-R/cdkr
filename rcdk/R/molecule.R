@@ -13,14 +13,14 @@
 #' \code{\link{is.neutral}} returns \code{TRUE} if all atoms in the molecule have
 #'     a formal charge of \code{0}, otherwise \code{FALSE}
 #' 
-#' @usage
-#' get.exact.mass(molecule)
-#' get.natural.mass(molecule)
-#' convert.implicit.to.explicit(molecule)
-#' is.neutral(molecule)
+#' @section Usage:
+#' get.exact.mass(mol)
+#' get.natural.mass(mol)
+#' convert.implicit.to.explicit(mol)
+#' is.neutral(mol)
 #' 
 #' @section Arguments:
-#'  molecule  A jobjRef representing an IAtomContainer or IMolecule objec
+#'  mol  A jobjRef representing an IAtomContainer or IMolecule object
 #' 
 #' @details 
 #' 
