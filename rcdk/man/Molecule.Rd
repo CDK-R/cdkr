@@ -14,7 +14,7 @@ Various functions to perform operations on molecules.
 
 \code{\link{get.exact.mass}} returns the exact mass of a molecule
 \code{\link{get.natural.mass}} returns the natural exact mass of a molecule
-\code{\link{convert.implicit.explicit}} converts implicit hydrogens to 
+\code{\link{convert.implicit.to.explicit}} converts implicit hydrogens to 
     explicit hydrogens. This function does not return any value but rather 
     modifies the molecule object passed to it 
 \code{\link{is.neutral}} returns \code{TRUE} if all atoms in the molecule have
@@ -34,7 +34,7 @@ that the molecule has been typed beforehand.
 
 \section{Value}{
 
- \code{\link{exact.mass}} returns a numeric 
+ \code{\link{get.exact.mass}} returns a numeric 
  \code{\link{get.natural.mass}} returns a numeric
  \code{\link{convert.implicit.to.explicit}} has no return value
  \code{\link{is.neutral}} returns a boolean.

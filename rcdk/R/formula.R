@@ -17,7 +17,7 @@
 #' \code{\link{get.formula}}
 #' \code{\link{set.charge.formula}}
 #' \code{\link{get.isotopes.pattern}}
-#' \code{\link{isvalie.formula}}
+#' \code{\link{isvalid.formula}}
 #' @docType class
 #' @aliases cdkFormula-class
 #' @aliases show,cdkFormula-method

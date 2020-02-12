@@ -40,7 +40,7 @@ is.in.ring(atom)
             \code{FALSE} otherwise
 \code{\link{get.atom.index}} eturns the index of the atom in the molecule
             (starting from \code{0})
-\code{\link{connected.atoms}} returns a list of atoms that are connected to the specified atom
+\code{\link{get.connected.atoms}} returns a list of atoms that are connected to the specified atom
 }
 \section{Arguments}{
 
