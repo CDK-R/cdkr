@@ -8,13 +8,13 @@ get.desc.categories()
 }
 \value{
 A character vector listing available descriptor categories. This can be 
-used in \link{get.descriptor.names}
+used in \link{get.desc.names}
 }
 \description{
 List available descriptor categories
 }
 \seealso{
-\link{get.descriptor.names}
+\link{get.desc.names}
 }
 \author{
 Rajarshi Guha (\email{rajarshi.guha@gmail.com})

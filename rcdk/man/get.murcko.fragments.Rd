@@ -4,8 +4,12 @@
 \alias{get.murcko.fragments}
 \title{Generate Bemis-Murcko Fragments}
 \usage{
-get.murcko.fragments(mols, min.frag.size = 6, as.smiles = TRUE,
-  single.framework = FALSE)
+get.murcko.fragments(
+  mols,
+  min.frag.size = 6,
+  as.smiles = TRUE,
+  single.framework = FALSE
+)
 }
 \arguments{
 \item{mols}{A list of `jobjRef` objects of Java class `IAtomContainer`}

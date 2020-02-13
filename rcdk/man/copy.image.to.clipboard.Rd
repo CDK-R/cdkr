@@ -6,6 +6,12 @@
 \usage{
 copy.image.to.clipboard(molecule, depictor = NULL)
 }
+\arguments{
+\item{molecule}{The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`}
+
+\item{depictor}{Optional. Default \code{NULL}. Depictor from \code{get.depictor}}
+}
 \description{
-copy.image.to.clipboard
+generate an image and make it available to the system
+clipboard.
 }

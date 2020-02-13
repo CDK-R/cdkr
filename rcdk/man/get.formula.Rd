@@ -2,9 +2,14 @@
 % Please edit documentation in R/formula.R
 \name{get.formula}
 \alias{get.formula}
-\title{get.formulaa}
+\title{get.formula}
 \usage{
 get.formula(mf, charge = 0)
+}
+\arguments{
+\item{mf}{Required. Molecular formula}
+
+\item{charge}{Optional. Default \code{0}}
 }
 \description{
 obtain molecular formula from formula string

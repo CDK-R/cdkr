@@ -2,7 +2,10 @@
 % Please edit documentation in R/atoms.R
 \name{is.in.ring}
 \alias{is.in.ring}
-\title{Tests whether an atom is in a ring.}
+\title{Tests whether an atom is in a ring.
+
+This assumes that the molecule containing the atom has been 
+appropriately configured.}
 \usage{
 is.in.ring(atom)
 }
@@ -13,6 +16,8 @@ is.in.ring(atom)
 `TRUE` is the atom is in a ring, `FALSE` otherwise
 }
 \description{
+Tests whether an atom is in a ring.
+
 This assumes that the molecule containing the atom has been 
 appropriately configured.
 }

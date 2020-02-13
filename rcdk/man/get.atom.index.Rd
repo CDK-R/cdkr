@@ -2,7 +2,10 @@
 % Please edit documentation in R/atoms.R
 \name{get.atom.index}
 \alias{get.atom.index}
-\title{Get the index of an atom in a molecule.}
+\title{Get the index of an atom in a molecule.
+
+Acces the index of an atom in the context of an IAtomContainer. 
+Indexing starts from 0. If the index is not known, -1 is returned.}
 \usage{
 get.atom.index(atom, mol)
 }
@@ -15,6 +18,8 @@ get.atom.index(atom, mol)
 An integer representing the atom index.
 }
 \description{
+Get the index of an atom in a molecule.
+
 Acces the index of an atom in the context of an IAtomContainer. 
 Indexing starts from 0. If the index is not known, -1 is returned.
 }

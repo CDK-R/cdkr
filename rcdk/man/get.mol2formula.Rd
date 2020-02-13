@@ -6,6 +6,11 @@
 \usage{
 get.mol2formula(molecule, charge = 0)
 }
+\arguments{
+\item{molecule}{The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`}
+
+\item{charge}{Optional. Default \code{0}}
+}
 \description{
 get.mol2formula
 }

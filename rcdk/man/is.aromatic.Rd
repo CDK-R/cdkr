@@ -2,7 +2,10 @@
 % Please edit documentation in R/atoms.R
 \name{is.aromatic}
 \alias{is.aromatic}
-\title{Tests whether an atom is aromatic.}
+\title{Tests whether an atom is aromatic.
+
+This assumes that the molecule containing the atom has been 
+appropriately configured.}
 \usage{
 is.aromatic(atom)
 }
@@ -13,6 +16,8 @@ is.aromatic(atom)
 `TRUE` is the atom is aromatic, `FALSE` otherwise
 }
 \description{
+Tests whether an atom is aromatic.
+
 This assumes that the molecule containing the atom has been 
 appropriately configured.
 }

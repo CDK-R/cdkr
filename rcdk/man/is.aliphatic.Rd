@@ -2,7 +2,10 @@
 % Please edit documentation in R/atoms.R
 \name{is.aliphatic}
 \alias{is.aliphatic}
-\title{Tests whether an atom is aliphatic.}
+\title{Tests whether an atom is aliphatic.
+
+This assumes that the molecule containing the atom has been 
+appropriately configured.}
 \usage{
 is.aliphatic(atom)
 }
@@ -13,6 +16,8 @@ is.aliphatic(atom)
 `TRUE` is the atom is aliphatic, `FALSE` otherwise
 }
 \description{
+Tests whether an atom is aliphatic.
+
 This assumes that the molecule containing the atom has been 
 appropriately configured.
 }

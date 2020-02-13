@@ -4,7 +4,17 @@
 \alias{get.atomic.desc.names}
 \title{Get class names for atomic descriptors}
 \usage{
-get.atomic.desc.names()
+get.atomic.desc.names(type = "all")
+}
+\arguments{
+\item{type}{A string indicating which class of descriptors to return. Specifying
+`"all"` will return class names for all molecular descriptors. Options include
+* topological
+* geometrical
+* hybrid
+* constitutional
+* protein
+* electronic}
 }
 \value{
 A character vector containing class names for atomic descriptors

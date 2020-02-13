@@ -1,3 +1,5 @@
+
+#' @keywords internal
 .get.desc.values <- function(dval, nexpected) {
   if (!inherits(dval, "jobjRef")) {
     if (is.null(dval) || is.na(dval)) return(NA)
@@ -35,6 +37,7 @@
 }
 
 
+#' @keywords internal
 .get.desc.engine <- function(type = 'molecular') {
   if (!(type %in% c('molecular', 'atomic', 'bond'))) {
     stop('type must bond, molecular or atomic')
@@ -102,8 +105,8 @@ get.desc.names <- function(type = "all") {
 #' List available descriptor categories
 #' 
 #' @return A character vector listing available descriptor categories. This can be 
-#' used in \link{get.descriptor.names}
-#' @seealso \link{get.descriptor.names}
+#' used in \link{get.desc.names}
+#' @seealso \link{get.desc.names}
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @export
 get.desc.categories <- function() {
@@ -150,6 +153,7 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
                       error = function(e) return(NA))
     }, b=desc)
 
+
     vals <- lapply(descvals, .get.desc.values, nexpected = length(dnames))
     vals <- data.frame(do.call('rbind', vals))
     names(vals) <- dnames 
@@ -174,7 +178,9 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
       vals <- lapply(descvals, .get.desc.values, nexpected = length(dnames))
       vals <- data.frame(do.call('rbind', vals))
 
-      if (length(vals) == 1 && is.na(vals)) {
+      
+      if (length(vals) == 1 && any(is.na(vals))) {
+
         vals <- as.data.frame(matrix(NA, nrow=1, ncol=length(dnames)))
       }
       
@@ -190,10 +196,19 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
 }
 
 #' Get class names for atomic descriptors
+#' 
+#' @param type A string indicating which class of descriptors to return. Specifying
+#' `"all"` will return class names for all molecular descriptors. Options include
+#' * topological
+#' * geometrical
+#' * hybrid
+#' * constitutional
+#' * protein
+#' * electronic
 #' @return A character vector containing class names for atomic descriptors
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @export
-get.atomic.desc.names <- function() {
+get.atomic.desc.names <- function(type = "all") {
   if (type == 'all') return(.get.desc.all.classnames('atomic'))
   return(.jcall("org/guha/rcdk/descriptors/DescriptorUtilities", "[Ljava/lang/String;",
                 "getDescriptorNamesByCategory", type))
@@ -203,6 +218,7 @@ get.atomic.desc.names <- function() {
 #' 
 #' @param molecule A molecule object
 #' @param which.desc A character vector of atomic descriptor class names
+#' @param verbose Optional. Default \code{FALSE}. Toggle verbosity.
 #' @return A `data.frame` with atoms in the rows and descriptors in the columns
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})

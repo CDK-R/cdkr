@@ -205,6 +205,9 @@ view.table <- function(molecules, dat, depictor = NULL) {
 
 #' view.image.2d
 #' 
+#' @param molecule The molecule to display Should be a `jobjRef` representing an `IAtomContainer`
+#' @param depictor Default \code{NULL}
+#' 
 #' @export
 view.image.2d <- function(molecule, depictor = NULL) {
   if (is.null(depictor))
@@ -218,6 +221,11 @@ view.image.2d <- function(molecule, depictor = NULL) {
 
 #' copy.image.to.clipboard
 #' 
+#' generate an image and make it available to the system
+#' clipboard.
+#' 
+#' @param molecule The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
+#' @param depictor Optional. Default \code{NULL}. Depictor from \code{get.depictor}
 #' @export
 copy.image.to.clipboard <-  function(molecule, depictor = NULL) {
   if (is.null(depictor))
