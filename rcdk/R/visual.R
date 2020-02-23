@@ -47,7 +47,18 @@
 
 #' get.depictor
 #' 
-#' return an RcdkDepictor
+#' return an RcdkDepictor.
+#' 
+#' @param width Default. \code{200}
+#' @param height Default. \code{200}
+#' @param zoom Default. \code{1.3}
+#' @param style Default. \code{cow}
+#' @param annotate Default. \code{off}
+#' @param abbr Default. \code{on}
+#' @param suppressh Default. \code{TRUE}
+#' @param showTitle Default. \code{FALSE}
+#' @param smaLimit Default. \code{100}
+#' @param sma Default. \code{NULL}
 #' 
 #' @export
 #' 
