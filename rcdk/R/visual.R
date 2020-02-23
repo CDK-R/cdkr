@@ -45,6 +45,23 @@
 ##   }
 ## }
 
+#' get.depictor
+#' 
+#' return an RcdkDepictor.
+#' 
+#' @param width Default. \code{200}
+#' @param height Default. \code{200}
+#' @param zoom Default. \code{1.3}
+#' @param style Default. \code{cow}
+#' @param annotate Default. \code{off}
+#' @param abbr Default. \code{on}
+#' @param suppressh Default. \code{TRUE}
+#' @param showTitle Default. \code{FALSE}
+#' @param smaLimit Default. \code{100}
+#' @param sma Default. \code{NULL}
+#' 
+#' @export
+#' 
 get.depictor <- function(width = 200, height = 200, zoom = 1.3, style = "cow", annotate = "off", abbr = "on",
                          suppressh = TRUE, showTitle = FALSE, smaLimit = 100, sma = NULL) {
   if (is.null(sma)) sma <- ""
