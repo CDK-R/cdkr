@@ -26,7 +26,7 @@ chemical information with the R environment.
 The [CDK](https://cdk.github.io) is a Java library for cheminformatics that supports a wide variety
 of cheminformatics functionality ranging from reading molecular file
 formats, performing ring perception and armaticity detection to fingerprint
-generation and molecular descriptors. The CDK website provides links to useful documentation as well as complete [Javadocs](https://cdk.github.io/cdk/2.0/docs/api/index.html?overview-summary.html)
+generation and molecular descriptors. The CDK website provides links to useful documentation as well as complete [Javadocs](https://cdk.github.io/cdk/2.3/docs/api/index.html?overview-summary.html)
 
 ## Getting started
 
@@ -136,7 +136,7 @@ unlist(lapply(mols, get.smiles))
 ```
 
  
- The [CDK](https://cdk.github.io) supports a number of _flavors_ when generating SMILES. For example, you can generate a SMILES with or without chirality information or generate SMILES in [Kekule form](https://www.chemguide.co.uk/basicorg/bonding/benzene1.html). The `smiles.flavors` generates an object that represents the various flavors desired for SMILES output. See the [SmiFlavor javadocs](https://cdk.github.io/cdk/2.0/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html) for the full list of possible flavors. Example usage is
+ The [CDK](https://cdk.github.io) supports a number of _flavors_ when generating SMILES. For example, you can generate a SMILES with or without chirality information or generate SMILES in [Kekule form](https://www.chemguide.co.uk/basicorg/bonding/benzene1.html). The `smiles.flavors` generates an object that represents the various flavors desired for SMILES output. See the [SmiFlavor javadocs](https://cdk.github.io/cdk/2.3/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html) for the full list of possible flavors. Example usage is
  
  ```{r}
 smiles <- c('CCC', 'c1ccccc1', 'CCc1ccccc1CC(C)(C)CC(=O)NC')
@@ -145,7 +145,7 @@ get.smiles(mols[[3]], smiles.flavors(c('UseAromaticSymbols')))
 get.smiles(mols[[3]], smiles.flavors(c('Generic','CxSmiles')))
 ```
 
-Using the [CxSmiles](https://www.chemaxon.com/marvin-archive/latest/help/formats/cxsmiles-doc.html) flavors allows the user to encode a variety of information in the SMILES string, such as 2D or 3D coordinates.
+Using the [CxSmiles](http://www.chemeddl.org/tools/marvin/help/formats/cxsmiles-doc.html) flavors allows the user to encode a variety of information in the SMILES string, such as 2D or 3D coordinates.
 
 ```{r}
 m <- parse.smiles('CCC')[[1]]
