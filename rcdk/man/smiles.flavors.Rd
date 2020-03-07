@@ -46,7 +46,7 @@ A numeric representing the bitwise `OR`` of the specified flavors
 \description{
 The CDK supports a variety of customizations for SMILES generation including
 the use of lower case symbols for aromatic compounds to the use of the ChemAxon
-\href{https://www.chemaxon.com/marvin-archive/latest/help/formats/cxsmiles-doc.html}{CxSmiles}
+\href{http://www.chemeddl.org/tools/marvin/help/formats/cxsmiles-doc.html}{CxSmiles}
 format. Each 'flavor' is represented by an integer and multiple
 customizations are bitwise OR'ed. This method accepts the names of one or
 more customizations and returns the bitwise OR of them.
