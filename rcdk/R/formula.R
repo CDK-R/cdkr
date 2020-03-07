@@ -560,7 +560,7 @@ get.isotope.pattern.generator <- function(minAbundance = NULL) {
 #' @return A numeric value between 0 and 1 indicating the similarity between the two patterns
 #' @seealso \code{\link{get.isotope.pattern.similarity}}
 #' @export
-#' @references \url{http://cdk.github.io/cdk/2.0/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html}
+#' @references \url{http://cdk.github.io/cdk/2.3/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html}
 #' @author Miguel Rojas Cherto
 compare.isotope.pattern <- function(iso1, iso2, ips = NULL) {
     cls <- unique(c(class(iso1), class(iso2)))

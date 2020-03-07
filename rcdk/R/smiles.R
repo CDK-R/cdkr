@@ -6,7 +6,7 @@
 #' format. Each 'flavor' is represented by an integer and multiple
 #' customizations are bitwise OR'ed. This method accepts the names of one or
 #' more customizations and returns the bitwise OR of them.
-#' See \href{https://cdk.github.io/cdk/2.0/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
+#' See \href{https://cdk.github.io/cdk/2.3/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
 #' for the list of flavors and what they mean.
 #'
 #' @param flavors A character vector of flavors. The default is \code{Generic} 
@@ -42,7 +42,7 @@
 #' @md
 #' @return A numeric representing the bitwise `OR`` of the specified flavors
 #' @seealso \code{\link{get.smiles}}
-#' @references \href{https://cdk.github.io/cdk/2.0/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
+#' @references \href{https://cdk.github.io/cdk/2.3/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
 #' @examples
 #' m <- parse.smiles('C1C=CCC1N(C)c1ccccc1')[[1]]
 #' get.smiles(m)

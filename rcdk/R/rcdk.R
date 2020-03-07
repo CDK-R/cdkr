@@ -14,7 +14,7 @@
 #' Note that this is a static object that is created at package load time, 
 #' and the same instance is returned whenever this function is called.
 #' 
-#' @return An instance of \href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}
+#' @return An instance of \href{http://cdk.github.io/cdk/2.3/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 get.chem.object.builder <- function() {
