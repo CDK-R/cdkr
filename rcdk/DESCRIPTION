@@ -22,6 +22,7 @@ Suggests:
 SystemRequirements: Java JDK 8 or higher
 License: LGPL
 LazyLoad: yes
+LazyData: true
 Description: Allows the user to access functionality in the
     'CDK', a Java framework for chemoinformatics. This allows the user to load
     molecules, evaluate fingerprints, calculate molecular descriptors and so on.
