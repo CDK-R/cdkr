@@ -44,7 +44,7 @@ formula <- get.mol2formula(molecule,charge=0)
 Note that the above formula object is a `CDKFormula-class`. This class
 contains some attributes that defines a molecular formula. For example,
 the mass, the charge, the isotopes, the character representation of the
-molecular formula and the [IMolecularFormula](https://cdk.github.io/cdk/2.0/docs/api/org/openscience/cdk/interfaces/IMolecularFormula.html) `jobjRef` object.
+molecular formula and the [IMolecularFormula](https://cdk.github.io/cdk/2.3/docs/api/org/openscience/cdk/interfaces/IMolecularFormula.html) `jobjRef` object.
 
 The molecular mass, charge and string representation for this formula are given by
 ```{r}

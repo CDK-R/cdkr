@@ -7,7 +7,7 @@
 get.chem.object.builder()
 }
 \value{
-An instance of \href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}
+An instance of \href{http://cdk.github.io/cdk/2.3/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}
 }
 \description{
 The CDK employs a builder design pattern to construct

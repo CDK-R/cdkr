@@ -64,7 +64,7 @@ test.mcs2 <- function() {
   lapply(mols, do.aromaticity)
   lapply(mols, do.typing) 
   mcs <- get.mcs(mols[[1]], mols[[2]], FALSE)
-  checkEquals("matrix", class(mcs))
+  checkTrue(inherits(mcs, "matrix"))
   checkEquals(9, nrow(mcs))
   checkEquals(2, ncol(mcs))
 }
