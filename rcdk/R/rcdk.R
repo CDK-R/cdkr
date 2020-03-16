@@ -75,6 +75,23 @@ get.chem.object.builder <- function() {
                         "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
                         "getInstance"), envir = .rcdk.GlobalEnv)
   assign("mfManipulator", .jnew("org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator"), envir = .rcdk.GlobalEnv)
+  
+  # Extract the bond order enums so we can return them without going through
+  # Java each time we want one
+  assign("BOND_ORDER_SINGLE", J("org.openscience.cdk.interfaces.IBond")$Order$SINGLE,
+         envir = .rcdk.GlobalEnv)
+  assign("BOND_ORDER_DOUBLE", J("org.openscience.cdk.interfaces.IBond")$Order$DOUBLE,
+         envir = .rcdk.GlobalEnv)
+  assign("BOND_ORDER_TRIPLE", J("org.openscience.cdk.interfaces.IBond")$Order$TRIPLE,
+         envir = .rcdk.GlobalEnv)
+  assign("BOND_ORDER_UNSET", J("org.openscience.cdk.interfaces.IBond")$Order$UNSET,
+         envir = .rcdk.GlobalEnv)
+  assign("BOND_ORDER_QUADRUPLE", J("org.openscience.cdk.interfaces.IBond")$Order$QUADRUPLE,
+         envir = .rcdk.GlobalEnv)
+  assign("BOND_ORDER_QUINTUPLE", J("org.openscience.cdk.interfaces.IBond")$Order$QUINTUPLE,
+         envir = .rcdk.GlobalEnv)
+  assign("BOND_ORDER_SEXTUPLE", J("org.openscience.cdk.interfaces.IBond")$Order$SEXTUPLE,
+         envir = .rcdk.GlobalEnv)
 }
 
 #' Get the current CDK version used in the package.

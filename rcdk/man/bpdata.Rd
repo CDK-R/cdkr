@@ -4,12 +4,14 @@
 \name{bpdata}
 \alias{bpdata}
 \title{Boiling Point Data}
-\format{A data frame with 277 rows and 2 columns.:
+\format{
+A data frame with 277 rows and 2 columns.:
 \describe{
   \item{SMILES}{Structure in SMILES format}
   \item{BP}{Boiling point in Kelvin}
   
-} The names of the molecules are used as the row names.}
+} The names of the molecules are used as the row names.
+}
 \usage{
 bpdata
 }

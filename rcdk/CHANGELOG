@@ -1,3 +1,11 @@
+2020-03-15 Rajarshi Guha
+
+  * Generate bond order enums and store in rcdk package env
+  
+  * Add a method to retrieve bond order enums
+  
+  * Add unit tests
+  
 2013-10-30  Guha  <guhar@HG-01881061-LM8.local>
 
 	* R/fingerprint.R (get.fingerprint): Updated to ensure we call
