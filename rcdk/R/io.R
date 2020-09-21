@@ -207,7 +207,7 @@ iload.molecules<- function(molfile, type = 'smi',
     mol <<- .jcall(sreader, "Ljava/lang/Object;", "next")
     mol <<- .jcast(mol, "org/openscience/cdk/interfaces/IAtomContainer")
     if (aromaticity) do.aromaticity(mol)
-    if (typing) do.typing(mol)
+    if (typing) set.atom.types(mol)
     if (isotopes) do.isotopes(mol)
     
     hasNext <<- NA    

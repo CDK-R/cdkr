@@ -22,7 +22,7 @@ is.subgraph <- function(query, target) {
   if (class(query) == 'character') {
     query <- parse.smiles(query)
     do.aromaticity(query)
-    do.typing(query)
+    set.atom.types(query)
   }
 
   if (!is.list(target)) target <- list(target)

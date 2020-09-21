@@ -244,7 +244,7 @@ get.total.formal.charge <- function(mol) {
 #' Ensure that the molecule has been typed beforehand.
 #' 
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
-#' @seealso \code{\link{get.hydrogen.count}}, \code{\link{remove.hydrogens}}, \code{\link{do.typing}}
+#' @seealso \code{\link{get.hydrogen.count}}, \code{\link{remove.hydrogens}}, \code{\link{set.atom.types}}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 convert.implicit.to.explicit <- function(mol) {
@@ -329,20 +329,6 @@ do.aromaticity <- function(mol) {
   aromaticity <- .jnew("org/openscience/cdk.aromaticity/Aromaticity",
                        model, cycles)
   .jcall(aromaticity, "Z", "apply", mol)
-}
-
-#' do.typing
-#' 
-#' configure atom typings.
-#' 
-#' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
-#' @export
-do.typing <- function(mol) {
-  if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
-    stop("molecule must be of class IAtomContainer")
-  
-  .jcall("org.openscience.cdk.tools.manipulator.AtomContainerManipulator",
-         "V", "percieveAtomTypesAndConfigureAtoms", mol)
 }
 
 #' do.isotopes

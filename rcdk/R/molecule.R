@@ -37,7 +37,7 @@
 #'  \code{\link{is.neutral}} returns a boolean.
 #'  
 #' @seealso 
-#' \code{\link{get.atoms}}, \code{\link{do.typing}}
+#' \code{\link{get.atoms}}, \code{\link{set.atom.types}}
 #' @aliases Molecule
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 NULL

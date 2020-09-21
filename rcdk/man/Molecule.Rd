@@ -43,7 +43,7 @@ is.neutral(mol)
 }
 
 \seealso{
-\code{\link{get.atoms}}, \code{\link{do.typing}}
+\code{\link{get.atoms}}, \code{\link{set.atom.types}}
 }
 \author{
 Rajarshi Guha (\email{rajarshi.guha@gmail.com})

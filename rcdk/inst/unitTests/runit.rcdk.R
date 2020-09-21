@@ -42,7 +42,7 @@ test.formula <- function() {
    checkEquals(f1@string, "C35H64N3O21P3S")
    m <- parse.smiles("C1(C(C(C(C(C1OP(=O)(O)OCC(COC(=O)CCCCCCCNC(=O)CCCCC2SCC3C2NC(=O)N3)OC(=O)CCCCCCC)O)OP(=O)(O)O)OP(=O)(O)O)O)O")[[1]]
    do.aromaticity(m)
-   do.typing(m)
+   set.atom.types(m)
    do.isotopes(m)
    convert.implicit.to.explicit(m)
    f2 <- get.mol2formula(m)
@@ -81,7 +81,7 @@ test.exact.natural.mass <- function() {
   #atrzine
   m <- parse.smiles(smiles[1])[[1]]
   do.aromaticity(m)
-  do.typing(m)
+  set.atom.types(m)
   do.isotopes(m)
   convert.implicit.to.explicit(m)
   # Dashboard ref mass: 215.093773, 215.69
@@ -91,7 +91,7 @@ test.exact.natural.mass <- function() {
   #deuterium on exchangeable locations
   m <- parse.smiles(smiles[2])[[1]]
   do.aromaticity(m)
-  do.typing(m)
+  set.atom.types(m)
   do.isotopes(m)
   convert.implicit.to.explicit(m)
   # Dashboard ref mass: 217.106327, 217.7
@@ -101,7 +101,7 @@ test.exact.natural.mass <- function() {
   #deuterium on fixed locations
   m <- parse.smiles(smiles[3])[[1]]
   do.aromaticity(m)
-  do.typing(m)
+  set.atom.types(m)
   do.isotopes(m)
   convert.implicit.to.explicit(m)
   # Dashboard ref mass: 220.125157, 220.72
@@ -111,7 +111,7 @@ test.exact.natural.mass <- function() {
   #15N-atrazine
   m <- parse.smiles(smiles[4])[[1]]
   do.aromaticity(m)
-  do.typing(m)
+  set.atom.types(m)
   do.isotopes(m)
   convert.implicit.to.explicit(m)
   # Dashboard ref mass: 216.090808, 216.68
@@ -121,7 +121,7 @@ test.exact.natural.mass <- function() {
   #pentabromophenol, DTXSID9022079 - tricky as lots of Br shifts pattern
   m <- parse.smiles(smiles[5])[[1]]
   do.aromaticity(m)
-  do.typing(m)
+  set.atom.types(m)
   do.isotopes(m)
   convert.implicit.to.explicit(m)
   # Dashboard ref mass: 483.59443, 488.593
@@ -131,7 +131,7 @@ test.exact.natural.mass <- function() {
   # Selenium-L-methionine, DTXSID8046824 - tricky as Se primary isotope not lowest mass
   m <- parse.smiles(smiles[6])[[1]]
   do.aromaticity(m)
-  do.typing(m)
+  set.atom.types(m)
   do.isotopes(m)
   convert.implicit.to.explicit(m)
   # Dashboard ref mass: 196.995501, 196.119

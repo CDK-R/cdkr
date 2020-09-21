@@ -48,7 +48,7 @@ test.fp.substructures.binary <- function() {
     # Check for aromatic ring
     smarts <- "a:1:a:a:a:a:a1"
     mol <- parse.smiles("C1=CC=CC(=C1)CCCC2=CC=CC=C2")[[1]]
-    do.typing(mol)
+    set.atom.types(mol)
     do.aromaticity(mol)
     fp <- get.fingerprint(mol, type="substructure", fp.mode="bit", 
                           substructure.pattern = smarts)
@@ -91,7 +91,7 @@ test.fp.substructures.count <- function() {
     # Check for aromatic ring
     smarts <- "a:1:a:a:a:a:a1"
     mol <- parse.smiles("C1=CC=CC(=C1)CCCC2=CC=CC=C2")[[1]]
-    do.typing(mol)
+    set.atom.types(mol)
     do.aromaticity(mol)
     fp <- get.fingerprint(mol, type="substructure", fp.mode="count", 
                           substructure.pattern = smarts)

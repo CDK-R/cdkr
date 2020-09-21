@@ -1,7 +1,7 @@
 test.frag1 <- function() {
   m <- parse.smiles("c1(ccc(cc1C)CCC(C(CCC)C2C(C2)CC)C3C=C(C=C3)CC)C")[[1]]
   do.aromaticity(m)  
-  do.typing(m)
+  set.atom.types(m)
   f <- get.murcko.fragments(m, as.smiles=TRUE, min.frag.size = 6, single.framework = TRUE)
   checkEquals(length(f), 1)
   checkEquals(length(f[[1]]$rings), 1)
@@ -14,7 +14,7 @@ test.frag2 <- function() {
                        'c1ccc(cc1)c2c(oc(n2)N(CCO)CCO)c3ccccc3',
                        'COc1ccc(cc1OCc2ccccc2)C(=S)N3CCOCC3'))
   lapply(ms, do.aromaticity)  
-  lapply(ms, do.typing)
+  lapply(ms, set.atom.types)
   f <- get.murcko.fragments(ms, as.smiles=TRUE, min.frag.size = 6, single.framework = TRUE)
   checkEquals(length(f), 3)
 
@@ -27,7 +27,7 @@ test.frag3 <- function() {
                        'c1ccc(cc1)c2c(oc(n2)N(CCO)CCO)c3ccccc3',
                        'COc1ccc(cc1OCc2ccccc2)C(=S)N3CCOCC3'))
   lapply(ms, do.aromaticity)  
-  lapply(ms, do.typing)
+  lapply(ms, set.atom.types)
   f <- get.murcko.fragments(ms, as.smiles=FALSE, min.frag.size = 6, single.framework = TRUE)
   checkEquals(length(f), 3)
 

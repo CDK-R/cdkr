@@ -18,7 +18,7 @@ newly added H's will not have any 2D or 3D coordinates associated with them.
 Ensure that the molecule has been typed beforehand.
 }
 \seealso{
-\code{\link{get.hydrogen.count}}, \code{\link{remove.hydrogens}}, \code{\link{do.typing}}
+\code{\link{get.hydrogen.count}}, \code{\link{remove.hydrogens}}, \code{\link{set.atom.types}}
 }
 \author{
 Rajarshi Guha (\email{rajarshi.guha@gmail.com})

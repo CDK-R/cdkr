@@ -3,7 +3,7 @@ test.is.aromatic <- function()
   m <- parse.smiles('c1ccccc1CC')[[1]]
   x <- unlist(lapply(get.atoms(m), is.aromatic))
   checkEquals(6, length(which(x)))
-  do.typing(m)
+  set.atom.types(m)
   do.aromaticity(m)
   x <- unlist(lapply(get.atoms(m), is.aromatic))
   checkEquals(6, length(which(x)))  

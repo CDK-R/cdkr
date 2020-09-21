@@ -41,7 +41,8 @@ get.connected.atoms(atom, mol)
 get.atom.index(atom, mol)
 is.aromatic(atom)
 is.aliphatic(atom)
-is.in.ring(atom)
+is.in.ring(atom) 
+set.atom.types(mol)
 }
 
 \section{Arguments}{
