@@ -1,3 +1,12 @@
+2020-09-23 Rajarshi Guha
+
+  * Updated @export annotation with function name to avoid interpretation as 
+  S3 method
+  
+  * Refactored do.typing to set.atom.types and updated to use J notation
+  
+  * Refactored methods to use the renamed function
+  
 2020-03-15 Rajarshi Guha
 
   * Generate bond order enums and store in rcdk package env
