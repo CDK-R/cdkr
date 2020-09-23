@@ -309,7 +309,7 @@ get.bonds <- function(mol) {
 #' detect aromaticity of an input compound
 #' 
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
-#' @export
+#' @export do.aromaticity
 do.aromaticity <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
@@ -336,7 +336,7 @@ do.aromaticity <- function(mol) {
 #' configure isotopes
 #' 
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
-#' @export
+#' @export do.isotopes
 do.isotopes <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")

@@ -18,11 +18,13 @@ This function returns a Java enum representing a
 bond order. This can be used to modify the order
 of pre-existing bonds
 }
-\author{
-Rajarshi Guha (\email{rajarshi.guha@gmail.com})
+\examples{
 \dontrun{
 m <- parse.smiles('CCN')[[1]]
 b <- get.bonds(m)[[1]]
 b$setOrder(get.bond.order("double"))
 }
+}
+\author{
+Rajarshi Guha (\email{rajarshi.guha@gmail.com})
 }

@@ -55,6 +55,7 @@ get.connected.atom <- function(bond, atom) {
 #' @return A \code{jObjRef} representing an `Order` enum object
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @examples 
 #' \dontrun{
 #' m <- parse.smiles('CCN')[[1]]
 #' b <- get.bonds(m)[[1]]
