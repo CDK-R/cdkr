@@ -1,3 +1,9 @@
+2020-12-21 Rajarshi Guha
+
+  * Updated handling of atomic descriptors to resolve a name mismatch bug
+  
+  * Added a test case for atomic descriptors (thanks to Francesca Di Cesare)
+  
 2020-09-23 Rajarshi Guha
 
   * Updated @export annotation with function name to avoid interpretation as 

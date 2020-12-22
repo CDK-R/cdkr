@@ -5,7 +5,9 @@
     if (is.null(dval) || is.na(dval)) return(NA)
   }
 
-  if (!is.null(.jcall(dval, "Ljava/lang/Exception;", "getException"))) {
+  exception <- .jcall(dval, "Ljava/lang/Exception;", "getException")
+  if (!is.null(exception)) {
+    warning(exception$getMessage())
     return(rep(NA, nexpected))
   }
   
@@ -245,14 +247,20 @@ eval.atomic.desc <- function(molecule, which.desc, verbose = FALSE) {
         }
         return(dval)
       })
-      vals <- lapply(descvals, .get.desc.values)
-      vals <- data.frame(do.call('rbind', vals))
-
+      
+      dnames <- NULL
       if (inherits(descvals[[1]], "jobjRef")) {
-        names(vals) <- .jcall(descvals[[1]], "[Ljava/lang/String;", "getNames")
+        dnames <- .jcall(descvals[[1]], "[Ljava/lang/String;", "getNames")
       } else {
-        names(vals) <- gsub('org.openscience.cdk.qsar.descriptors.atomic.', '', desc)
+        dnames <- gsub('org.openscience.cdk.qsar.descriptors.atomic.', '', desc)
       }
+      if (verbose) 
+        cat("\t", "computed", length(dnames), "descriptor values\n")
+      
+      vals <- lapply(descvals, .get.desc.values, nexpected=length(dnames))
+      vals <- data.frame(do.call('rbind', vals))
+      names(vals) <- dnames
+      
       dl[[counter]] <- vals
       counter <- counter + 1
     }
