@@ -18,7 +18,8 @@ Suggests:
     xtable,
     RUnit,
     knitr,
-    rmarkdown
+    rmarkdown,
+    devtools
 SystemRequirements: Java JDK 8 or higher
 License: LGPL
 LazyLoad: yes
