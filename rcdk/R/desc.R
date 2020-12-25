@@ -33,6 +33,9 @@
   } else if ("public double org.openscience.cdk.qsar.result.DoubleResult.doubleValue()" %in% methods) {
     result <- .jcast(result, "org/openscience/cdk/qsar/result/DoubleResult")    
     nval <- .jcall(result, "D", "doubleValue")    
+  } else if ("public boolean org.openscience.cdk.qsar.result.BooleanResult.booleanValue()" %in% methods) {
+    result <- .jcast(result, "org/openscience/cdk/qsar/result/BooleanResult")    
+    nval <- .jcall(result, "Z", "booleanValue")    
   }
 
   return(nval)
