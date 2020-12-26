@@ -1,0 +1,51 @@
+# For help debugging build failures open an issue on the RStudio community with the 'github-actions' tag.
+# https://community.rstudio.com/new-topic?category=Package%20development&tags=github-actions
+on:
+  push:
+    branches:
+      - main
+      - master
+      - ghactions
+  pull_request:
+    branches:
+      - main
+      - master
+      - ghactions
+
+name: R-CMD-check
+
+jobs:
+  R-CMD-check:
+    runs-on: macOS-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+          
+      - name: Build with Ant
+        run: |
+          cd  rcdkjar
+          ant clean jar
+          cd ../
+          
+      - name: Install dependencies
+        run: |
+          install.packages(c("remotes", "rcmdcheck"), repos = "http://cran.us.r-project.org")
+          remotes::install_deps("rcdk", dependencies = TRUE)
+        shell: Rscript {0}
+        
+      - uses: r-lib/actions/setup-r@v1
+      
+      - name: Install
+        run: devtools::install("rcdk")
+        shell: Rscript {0}
+        
+      - name: Check
+        run: rcmdcheck::rcmdcheck("rcdk", args = "--no-manual", error_on = "error")
+        shell: Rscript {0}
+        
+        

@@ -1,13 +1,12 @@
-library(devtools)
+#library(devtools)
 library(RUnit)
-load_all(".")
-.jinit(classpath=c("/Users/guha/src/cdkr/rcdk/inst/cont/rcdk.jar"))
+library(rcdk)
+#load_all(".")
+# .jinit(classpath=c("/Users/guha/src/cdkr/rcdk/inst/cont/rcdk.jar"))
 
 test.atom.descriptors.alanine <- function() {
-  alanine_file <- system.file("molfiles/alanine.sdf", packge="rcdk")
-  mols <- load.molecules(alanine_file, 
-                         typing=TRUE, aromaticity = TRUE,
-                         verbose=as.logical(TRUE))
+  alanine_file <- system.file("molfiles/alanine.sdf", package="rcdk")
+  mols <- load.molecules(molfiles=alanine_file,  typing=TRUE, aromaticity=TRUE, verbose=TRUE)
   adn <- get.atomic.desc.names()
   checkTrue(length(adn) > 0)
   
@@ -18,10 +17,11 @@ test.atom.descriptors.alanine <- function() {
 }
 
 test.atom.descriptors.rdf.glutamine <- function() {
-  glutamine_file <- system.file("molfiles/glutamine.sdf", packge="rcdk")
-  mol <- load.molecules(as.character("/Users/guha/Downloads/glutamine.sdf"), 
+  glutamine_file <- system.file("molfiles/glutamine.sdf", package="rcdk")
+  mol <- load.molecules(molfiles=glutamine_file,
                          typing=TRUE, aromaticity = TRUE,
                          verbose=as.logical(TRUE))[[1]]
+  glutamine_file <- mol
   adn <- get.atomic.desc.names()
   checkTrue(length(adn) > 0)
   
@@ -45,10 +45,8 @@ test.atom.descriptors.rdf.glutamine <- function() {
 }
 
 test.atom.descriptor.conjugated.pi.system <- function() {
-  glutamine_file <- system.file("molfiles/glutamine.sdf", packge="rcdk")
-  mol <- load.molecules(glutamine_file, 
-                        typing=TRUE, aromaticity = TRUE,
-                        verbose=as.logical(TRUE))[[1]]
+  glutamine_file <- system.file("molfiles/glutamine.sdf", package="rcdk")
+  mol <- load.molecules(molfiles=glutamine_file,typing=TRUE, aromaticity = TRUE, verbose=TRUE)[[1]]
   adn <- get.atomic.desc.names()
   checkTrue(length(adn) > 0)
   
@@ -57,10 +55,8 @@ test.atom.descriptor.conjugated.pi.system <- function() {
   checkTrue(ncol(dvals) == 2)
   checkTrue(all(!dvals[,1]))
   
-  alanine_file <- system.file("molfiles/alanine.sdf", packge="rcdk")
-  mol <- load.molecules(alanine_file, 
-                        typing=TRUE, aromaticity = TRUE,
-                        verbose=as.logical(TRUE))[[1]]
+  alanine_file <- system.file("molfiles/alanine.sdf", package="rcdk")
+  mol <- load.molecules(molfiles=alanine_file, typing=TRUE, aromaticity = TRUE, verbose=as.logical(TRUE))[[1]]
   adn <- get.atomic.desc.names()
   checkTrue(length(adn) > 0)
   

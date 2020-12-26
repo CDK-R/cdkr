@@ -15,7 +15,9 @@ knitr::opts_chunk$set(
 [![CRAN Version](https://www.r-pkg.org/badges/version/rcdk?color=green)](https://cran.r-project.org/package=rcdk)
 [![CRAN Downloads](http://cranlogs.r-pkg.org/badges/grand-total/rcdk?color=green)](https://cran.r-project.org/package=rcdk)
 [![CRAN Downloads Monthyl](http://cranlogs.r-pkg.org/badges/last-month/rcdk?color=green)](https://cran.r-project.org/package=rcdk)
+[![R-CMD-check](https://github.com/zachcp/cdkr/workflows/R-CMD-check/badge.svg)](https://github.com/zachcp/cdkr/actions)
 
+  
 # rcdk: a chemistry library
 
 The goal of cdkr is to provide easy access to [CDK](https://github.com/cdk/cdk) chemoinformatics library to combine the simplicity and power of R with CDK's powerful,
