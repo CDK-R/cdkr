@@ -1,7 +1,7 @@
-library(devtools)
-library(RUnit)
-load_all(".")
-.jinit(classpath=c("/Users/guha/src/cdkr/rcdk/inst/cont/rcdk.jar"))
+#library(devtools)
+#library(RUnit)
+#load_all(".")
+#.jinit(classpath=c("/Users/guha/src/cdkr/rcdk/inst/cont/rcdk.jar"))
 
 test.atom.descriptors.alanine <- function() {
   alanine_file <- system.file("molfiles/alanine.sdf", packge="rcdk")
