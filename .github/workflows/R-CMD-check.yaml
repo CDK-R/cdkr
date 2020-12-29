@@ -41,6 +41,15 @@ jobs:
         
       - uses: r-lib/actions/setup-r@v1
       
+      - uses: r-lib/actions/setup-pandoc@v1
+      - name: Cache R packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+
+
       - name: Install
         run: devtools::install("rcdk")
         shell: Rscript {0}
