@@ -34,7 +34,7 @@ jobs:
           
       - name: Install dependencies
         run: |
-          install.packages(c("remotes", "rcmdcheck"), repos = "http://cran.us.r-project.org")
+          install.packages(c("remotes", "rcmdcheck", "pkgdown"), repos = "http://cran.us.r-project.org")
           remotes::install_deps("rcdk", dependencies = TRUE)
         shell: Rscript {0}
         
@@ -48,4 +48,9 @@ jobs:
         run: rcmdcheck::rcmdcheck("rcdk", args = "--no-manual", error_on = "error")
         shell: Rscript {0}
         
+      - name: Deploy Website
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          Rscript -e 'pkgdown::deploy_to_branch(pkg="rcdk", branch="gh-pages", new_process = FALSE)'
         
