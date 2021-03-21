@@ -54,9 +54,13 @@ get.chem.object.builder <- function() {
     Sys.setenv("DYLD_LIBRARY_PATH"=sub("/usr/X11R6/lib","",dlp))
   }
 
+  Sys.setenv(NOAWT=1)
+  
   jar.rcdk <- paste(lib,pkg,"cont","rcdk.jar",sep=.Platform$file.sep)
   jar.png <- paste(lib,pkg,"cont","com.objectplanet.image.PngEncoder.jar",sep=.Platform$file.sep)
-  .jinit(classpath=c(jar.rcdk,jar.png))
+  .jinit(classpath=c(jar.rcdk,jar.png), parameters="-Djava.awt.headless=true")
+  
+  .jcall("java/lang/System", "S", "setProperty", "java.awt.headless", "true")
   
   # check Java Version 
   jv <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")

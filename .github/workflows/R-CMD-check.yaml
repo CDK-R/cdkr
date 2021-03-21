@@ -1,0 +1,65 @@
+# For help debugging build failures open an issue on the RStudio community with the 'github-actions' tag.
+# https://community.rstudio.com/new-topic?category=Package%20development&tags=github-actions
+on:
+  push:
+    branches:
+      - main
+      - master
+  pull_request:
+    branches:
+      - main
+      - master
+
+name: R-CMD-check
+
+jobs:
+  R-CMD-check:
+    runs-on: macOS-latest
+    env:
+      GITHUB_PAT: ${{ secrets.GITHUB_TOKEN }}
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up JDK 1.8
+        uses: actions/setup-java@v1
+        with:
+          java-version: 1.8
+          
+      - name: Build with Ant
+        run: |
+          cd  rcdkjar
+          ant clean jar
+          cd ../
+          
+      - name: Install dependencies
+        run: |
+          install.packages(c("remotes", "rcmdcheck"), repos = "http://cran.us.r-project.org")
+          install.packages("pkgdown", type = "binary", repos = "http://cran.us.r-project.org")
+          remotes::install_deps("rcdk", dependencies = TRUE)
+        shell: Rscript {0}
+        
+      - uses: r-lib/actions/setup-r@v1
+      
+      - uses: r-lib/actions/setup-pandoc@v1
+      
+      - name: Cache R packages
+        uses: actions/cache@v2
+        with:
+          path: ${{ env.R_LIBS_USER }}
+          key: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-${{ hashFiles('.github/depends.Rds') }}
+          restore-keys: ${{ runner.os }}-${{ hashFiles('.github/R-version') }}-1-
+
+
+      - name: Install
+        run: devtools::install("rcdk")
+        shell: Rscript {0}
+        
+      - name: Check
+        run: rcmdcheck::rcmdcheck("rcdk", args = "--no-manual", error_on = "error")
+        shell: Rscript {0}
+        
+      - name: Deploy Website
+        run: |
+          git config --local user.email "actions@github.com"
+          git config --local user.name "GitHub Actions"
+          Rscript -e 'pkgdown::deploy_to_branch(pkg="rcdk", branch="gh-pages", new_process = FALSE)'
+        

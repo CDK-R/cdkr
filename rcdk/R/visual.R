@@ -170,6 +170,16 @@ view.molecule.2d <- function(molecule, ncol = 4, width = 200, height = 200, depi
   }
 }
 
+#' view.table
+#' 
+#' Create a tabular view of a set of molecules (in 2D) and associated data columns
+#' 
+#' @param molecules A list of molecule objects (`jobjRef` representing an `IAtomContainer`)
+#' @param dat The \code{data.frame} associated with the molecules, one per row
+#' @param depictor Default \code{NULL}
+#' 
+#' @importFrom utils write.table
+#' @export 
 view.table <- function(molecules, dat, depictor = NULL) {
 
   if (!is.list(molecules)) {
