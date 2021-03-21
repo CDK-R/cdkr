@@ -53,6 +53,9 @@ get.murcko.fragments <- function(mols, min.frag.size = 6, as.smiles = TRUE, sing
 }
 
 #' @inherit get.murcko.fragments 
+#' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
+#' @seealso [get.murcko.fragments()]
+#' @export
 #' @return returns a list of length equal to the number of input molecules. Each
 #' element is a character vector of SMILES strings or a list of `jobjRef` objects.
 get.exhaustive.fragments <- function(mols, min.frag.size = 6, as.smiles = TRUE) {
