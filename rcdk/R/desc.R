@@ -5,17 +5,21 @@
     if (is.null(dval) || is.na(dval)) return(NA)
   }
 
-  exception <- .jcall(dval, "Ljava/lang/Exception;", "getException")
+  exception <- tryCatch({
+    .jcall(dval, "Ljava/lang/Exception;", "getException")},
+    error = function(e) {
+      e
+    })
   if (!is.null(exception)) {
     warning(exception$getMessage())
     return(rep(NA, nexpected))
   }
-  
+
   nval <- numeric()
   if (!inherits(dval,'jobjRef') && is.na(dval)) {
     return(NA)
   }
-  
+
   result <- .jcall(dval, "Lorg/openscience/cdk/qsar/result/IDescriptorResult;", "getValue")
   methods <- .jmethods(result)
 
@@ -24,18 +28,18 @@
     len <- .jcall(result, "I", "length")
     for (i in 1:len) nval[i] <- .jcall(result, "D", "get", as.integer(i-1))
   } else if ("public int org.openscience.cdk.qsar.result.IntegerArrayResult.get(int)" %in% methods) {
-    result <- .jcast(result, "org/openscience/cdk/qsar/result/IntegerArrayResult")    
+    result <- .jcast(result, "org/openscience/cdk/qsar/result/IntegerArrayResult")
     len <- .jcall(result, "I", "length")
-    for (i in 1:len) nval[i] <- .jcall(result, "I", "get", as.integer(i-1))    
+    for (i in 1:len) nval[i] <- .jcall(result, "I", "get", as.integer(i-1))
   }  else if ("public int org.openscience.cdk.qsar.result.IntegerResult.intValue()" %in% methods) {
-    result <- .jcast(result, "org/openscience/cdk/qsar/result/IntegerResult")    
+    result <- .jcast(result, "org/openscience/cdk/qsar/result/IntegerResult")
     nval <- .jcall(result, "I", "intValue")
   } else if ("public double org.openscience.cdk.qsar.result.DoubleResult.doubleValue()" %in% methods) {
-    result <- .jcast(result, "org/openscience/cdk/qsar/result/DoubleResult")    
-    nval <- .jcall(result, "D", "doubleValue")    
+    result <- .jcast(result, "org/openscience/cdk/qsar/result/DoubleResult")
+    nval <- .jcall(result, "D", "doubleValue")
   } else if ("public boolean org.openscience.cdk.qsar.result.BooleanResult.booleanValue()" %in% methods) {
-    result <- .jcast(result, "org/openscience/cdk/qsar/result/BooleanResult")    
-    nval <- .jcall(result, "Z", "booleanValue")    
+    result <- .jcast(result, "org/openscience/cdk/qsar/result/BooleanResult")
+    nval <- .jcall(result, "Z", "booleanValue")
   }
 
   return(nval)
@@ -50,9 +54,9 @@
   if (type == 'molecular') {
     interface <- J("org.openscience.cdk.qsar.IMolecularDescriptor")
   } else if (type == 'atomic') {
-    interface <- J("org.openscience.cdk.qsar.IAtomicDescriptor")    
+    interface <- J("org.openscience.cdk.qsar.IAtomicDescriptor")
   } else if (type == 'bond') {
-    interface <- J("org.openscience.cdk.qsar.IBondDescriptor")        
+    interface <- J("org.openscience.cdk.qsar.IBondDescriptor")
   }
   dklass <- interface@jobj
   dcob <- get.chem.object.builder()
@@ -79,7 +83,7 @@
 }
 
 #' Get descriptor class names
-#' 
+#'
 #' @param type A string indicating which class of descriptors to return. Specifying
 #' `"all"` will return class names for all molecular descriptors. Options include
 #' * topological
@@ -108,8 +112,8 @@ get.desc.names <- function(type = "all") {
 }
 
 #' List available descriptor categories
-#' 
-#' @return A character vector listing available descriptor categories. This can be 
+#'
+#' @return A character vector listing available descriptor categories. This can be
 #' used in \link{get.desc.names}
 #' @seealso \link{get.desc.names}
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
@@ -121,7 +125,7 @@ get.desc.categories <- function() {
 }
 
 #' Compute descriptor values for a set of molecules
-#' 
+#'
 #' @param molecules A `list` of molecule objects
 #' @param which.desc A character vector listing descriptor class names
 #' @param verbose If `TRUE`, verbose output
@@ -144,14 +148,14 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
   }
 
   dcob <- get.chem.object.builder()
-  
+
   if (length(which.desc) == 1) {
     desc <- .jnew(which.desc)
     .jcall(desc, "V", "initialise", dcob)
-    
+
     dnames <- .jcall(desc, "[Ljava/lang/String;", "getDescriptorNames")
     dnames <- gsub('-', '.', dnames)
-    
+
     descvals <- lapply(molecules, function(a,b) {
       val <- tryCatch({.jcall(b, "Lorg/openscience/cdk/qsar/DescriptorValue;", "calculate", a)},
                       warning = function(e) return(NA),
@@ -161,7 +165,7 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
 
     vals <- lapply(descvals, .get.desc.values, nexpected = length(dnames))
     vals <- data.frame(do.call('rbind', vals))
-    names(vals) <- dnames 
+    names(vals) <- dnames
     return(vals)
   } else {
     counter <- 1
@@ -172,7 +176,7 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
                          , "\n") }
       desc <- .jnew(desc)
       .jcall(desc, "V", "initialise", dcob)
-      
+
       dnames <- .jcall(desc, "[Ljava/lang/String;", "getDescriptorNames")
       dnames <- gsub('-', '.', dnames)
 
@@ -183,16 +187,16 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
       vals <- lapply(descvals, .get.desc.values, nexpected = length(dnames))
       vals <- data.frame(do.call('rbind', vals))
 
-      
+
       if (length(vals) == 1 && any(is.na(vals))) {
 
         vals <- as.data.frame(matrix(NA, nrow=1, ncol=length(dnames)))
       }
-      
+
       names(vals) <- dnames
       ## idx <- which(is.na(names(vals)))
       ## if (length(idx) > 0) vals <- vals[,-idx]
-      
+
       dl[[counter]] <- vals
       counter <- counter + 1
     }
@@ -201,7 +205,7 @@ eval.desc <- function(molecules, which.desc, verbose = FALSE) {
 }
 
 #' Get class names for atomic descriptors
-#' 
+#'
 #' @param type A string indicating which class of descriptors to return. Specifying
 #' `"all"` will return class names for all molecular descriptors. Options include
 #' * topological
@@ -220,7 +224,7 @@ get.atomic.desc.names <- function(type = "all") {
 }
 
 #' Compute descriptors for each atom in a molecule
-#' 
+#'
 #' @param molecule A molecule object
 #' @param which.desc A character vector of atomic descriptor class names
 #' @param verbose Optional. Default \code{FALSE}. Toggle verbosity.
@@ -250,20 +254,20 @@ eval.atomic.desc <- function(molecule, which.desc, verbose = FALSE) {
         }
         return(dval)
       })
-      
+
       dnames <- NULL
       if (inherits(descvals[[1]], "jobjRef")) {
         dnames <- .jcall(descvals[[1]], "[Ljava/lang/String;", "getNames")
       } else {
         dnames <- gsub('org.openscience.cdk.qsar.descriptors.atomic.', '', desc)
       }
-      if (verbose) 
+      if (verbose)
         cat("\t", "computed", length(dnames), "descriptor values\n")
-      
+
       vals <- lapply(descvals, .get.desc.values, nexpected=length(dnames))
       vals <- data.frame(do.call('rbind', vals))
       names(vals) <- dnames
-      
+
       dl[[counter]] <- vals
       counter <- counter + 1
     }
@@ -320,8 +324,8 @@ get.xlogp <- function(molecule) {
 }
 
 #' Compute volume of a molecule
-#' 
-#' This method does not require 3D coordinates. As a result its an 
+#'
+#' This method does not require 3D coordinates. As a result its an
 #' approximation
 #' @param molecule A molecule object
 #' @return A double value representing the volume
