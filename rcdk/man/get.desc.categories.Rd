@@ -7,7 +7,7 @@
 get.desc.categories()
 }
 \value{
-A character vector listing available descriptor categories. This can be 
+A character vector listing available descriptor categories. This can be
 used in \link{get.desc.names}
 }
 \description{
