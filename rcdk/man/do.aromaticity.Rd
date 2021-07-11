@@ -4,7 +4,7 @@
 \alias{do.aromaticity}
 \title{do.aromaticity}
 \usage{
-\method{do}{aromaticity}(mol)
+do.aromaticity(mol)
 }
 \arguments{
 \item{mol}{The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`}

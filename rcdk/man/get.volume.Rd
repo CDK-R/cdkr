@@ -13,7 +13,7 @@ get.volume(molecule)
 A double value representing the volume
 }
 \description{
-This method does not require 3D coordinates. As a result its an 
+This method does not require 3D coordinates. As a result its an
 approximation
 }
 \author{

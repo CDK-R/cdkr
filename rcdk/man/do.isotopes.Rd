@@ -4,7 +4,7 @@
 \alias{do.isotopes}
 \title{do.isotopes}
 \usage{
-\method{do}{isotopes}(mol)
+do.isotopes(mol)
 }
 \arguments{
 \item{mol}{The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`}
