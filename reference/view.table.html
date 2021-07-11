@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compute volume of a molecule — get.volume • rcdk</title>
+<title>view.table — view.table • rcdk</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,8 @@
 
 
 
-<meta property="og:title" content="Compute volume of a molecule — get.volume" />
-<meta property="og:description" content="This method does not require 3D coordinates. As a result its an
-approximation" />
+<meta property="og:title" content="view.table — view.table" />
+<meta property="og:description" content="Create a tabular view of a set of molecules (in 2D) and associated data columns" />
 
 
 
@@ -119,33 +118,34 @@ approximation" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Compute volume of a molecule</h1>
+    <h1>view.table</h1>
     
-    <div class="hidden name"><code>get.volume.Rd</code></div>
+    <div class="hidden name"><code>view.table.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This method does not require 3D coordinates. As a result its an
-approximation</p>
+    <p>Create a tabular view of a set of molecules (in 2D) and associated data columns</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get.volume</span><span class='op'>(</span><span class='va'>molecule</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>view.table</span><span class='op'>(</span><span class='va'>molecules</span>, <span class='va'>dat</span>, depictor <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>molecule</th>
-      <td><p>A molecule object</p></td>
+      <th>molecules</th>
+      <td><p>A list of molecule objects (`jobjRef` representing an `IAtomContainer`)</p></td>
+    </tr>
+    <tr>
+      <th>dat</th>
+      <td><p>The <code>data.frame</code> associated with the molecules, one per row</p></td>
+    </tr>
+    <tr>
+      <th>depictor</th>
+      <td><p>Default <code>NULL</code></p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A double value representing the volume</p>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
-
-    <p>Rajarshi Guha (<a href='mailto:rajarshi.guha@gmail.com'>rajarshi.guha@gmail.com</a>)</p>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">

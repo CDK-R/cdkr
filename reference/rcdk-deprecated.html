@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Compute volume of a molecule — get.volume • rcdk</title>
+<title>Deprecated functions in the rcdk package. — rcdk-deprecated • rcdk</title>
 
 
 <!-- jquery -->
@@ -39,9 +39,10 @@
 
 
 
-<meta property="og:title" content="Compute volume of a molecule — get.volume" />
-<meta property="og:description" content="This method does not require 3D coordinates. As a result its an
-approximation" />
+<meta property="og:title" content="Deprecated functions in the rcdk package. — rcdk-deprecated" />
+<meta property="og:description" content="These functions are provided for compatibility with older version of
+the phyloseq package.  They may eventually be completely
+removed." />
 
 
 
@@ -119,33 +120,47 @@ approximation" />
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Compute volume of a molecule</h1>
+    <h1>Deprecated functions in the rcdk package.</h1>
     
-    <div class="hidden name"><code>get.volume.Rd</code></div>
+    <div class="hidden name"><code>rcdk-deprecated.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>This method does not require 3D coordinates. As a result its an
-approximation</p>
+    <p>These functions are provided for compatibility with older version of
+the phyloseq package.  They may eventually be completely
+removed.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>get.volume</span><span class='op'>(</span><span class='va'>molecule</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>deprecated_rcdk_function</span><span class='op'>(</span><span class='va'>x</span>, <span class='va'>value</span>, <span class='va'>...</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>molecule</th>
-      <td><p>A molecule object</p></td>
+      <th>x</th>
+      <td><p>For assignment operators, the object that will undergo a replacement
+(object inside parenthesis).</p></td>
+    </tr>
+    <tr>
+      <th>value</th>
+      <td><p>For assignment operators, the value to replace with 
+(the right side of the assignment).</p></td>
+    </tr>
+    <tr>
+      <th>...</th>
+      <td><p>For functions other than assignment operators, 
+parameters to be passed to the modern version of the function (see table).</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
 
-    <p>A double value representing the volume</p>
-    <h2 class="hasAnchor" id="author"><a class="anchor" href="#author"></a>Author</h2>
+    
+<table class='table'>
+<tr><td><code>do.typing</code></td><td>now a synonym for <code><a href='set.atom.types.html'>set.atom.types</a></code></td></tr>
+</table>
 
-    <p>Rajarshi Guha (<a href='mailto:rajarshi.guha@gmail.com'>rajarshi.guha@gmail.com</a>)</p>
+
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
