@@ -9,7 +9,7 @@ get.mcs <- function(mol1, mol2, as.molecule = TRUE) {
   if (as.molecule) {
     return(.jcall("org.guha.rcdk.util.Misc",
            "Lorg/openscience/cdk/interfaces/IAtomContainer;",
-           "getMcsAsNewContainer", mol1, mol2))
+           "getMcsAsNewContainerUIT", mol1, mol2))
   } else {
     arr <- .jcall("org.guha.rcdk.util.Misc",
            "[[I",
