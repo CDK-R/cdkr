@@ -187,8 +187,8 @@ Once you have a depictor object, you can set individual properties using the `$`
 ```{r eval=FALSE}
 depictor <- get.depictor(style='cob', abbr='reagents', width=300, height=300)
 view.molecule.2d(mols[[5]], depictor=depictor)
-depictor$setStyle('cow')
-view.molecule.2d(mols[[5]], depictor=depictor)
+#depictor$setStyle('cow')
+#view.molecule.2d(mols[[5]], depictor=depictor)
 ```
 
 The method also allows you to highlight substructures using [SMARTS](https://en.wikipedia.org/wiki/Smiles_arbitrary_target_specification). This is useful in highlight commen substructures in a set of molecules
