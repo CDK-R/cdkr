@@ -138,7 +138,7 @@ unlist(lapply(mols, get.smiles))
  
  The [CDK](https://cdk.github.io) supports a number of _flavors_ when generating SMILES. For example, you can generate a SMILES with or without chirality information or generate SMILES in [Kekule form](https://www.chemguide.co.uk/basicorg/bonding/benzene1.html). The `smiles.flavors` generates an object that represents the various flavors desired for SMILES output. See the [SmiFlavor javadocs](https://cdk.github.io/cdk/2.3/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html) for the full list of possible flavors. Example usage is
  
- ```{r}
+```{r}
 smiles <- c('CCC', 'c1ccccc1', 'CCc1ccccc1CC(C)(C)CC(=O)NC')
 mols <- parse.smiles(smiles)
 get.smiles(mols[[3]], smiles.flavors(c('UseAromaticSymbols')))
