@@ -120,9 +120,7 @@ get.properties <- function(molecule) {
   keyIter <- .jcall(keySet, "Ljava/util/Iterator;", method="iterator")
   keys <- list()
   for (i in 1:size) {
-    # keys[[i]] <- J(keyIter, "next")
-    # keys[[i]] <-.jcall(keyIter, "Ljava/lang/Object;", method="next")
-
+    
     tempkey <- .jcall(keyIter, "Ljava/lang/Object;", method="next")
 
     if ('jobjRef' %in% class(tempkey))  {
