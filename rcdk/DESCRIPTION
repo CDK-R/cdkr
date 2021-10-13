@@ -1,5 +1,5 @@
 Package: rcdk
-Version: 3.5.3.2
+Version: 3.5.4
 Date: 2021-03-21
 Title: Interface to the 'CDK' Libraries
 Authors@R: c(person('Rajarshi', 'Guha', role=c('aut',"cph"), email='rajarshi.guha@gmail.com'),
@@ -28,6 +28,6 @@ Description: Allows the user to access functionality in the
     'CDK', a Java framework for chemoinformatics. This allows the user to load
     molecules, evaluate fingerprints, calculate molecular descriptors and so on.
     In addition, the 'CDK' API allows the user to view structures in 2D.
-RoxygenNote: 7.1.1
+RoxygenNote: 7.1.2
 VignetteBuilder: knitr
 Encoding: UTF-8
