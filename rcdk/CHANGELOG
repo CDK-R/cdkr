@@ -1,3 +1,8 @@
+2021-10-14
+   * Fix code to handle changes to JDK17. Notably, I needed to reduce the use of the J notation in a nubmer of places in favor of direct calls.
+   * formally deprecated `do.typing` in favor of `set.atom.types`
+   
+   
 2020-12-21 Rajarshi Guha
 
   * Updated handling of atomic descriptors to resolve a name mismatch bug
