@@ -92,7 +92,7 @@ mfSet
 ```
 It is important to know if an elemental formula is valid. The method `isvalid.formula`
 provides this function. Two constraints can be applied, the
-[nitrogen rule](https://en.wikipedia.org/wiki/Nitrogen_rule) and the  [RDBE rule](http://fiehnlab.ucdavis.edu/projects/seven-golden-rules/ring-double-bonds) (Ring Double Bond Equivalent).
+[nitrogen rule](https://en.wikipedia.org/wiki/Nitrogen_rule) and the  [RDBE rule](https://fiehnlab.ucdavis.edu/projects/seven-golden-rules/ring-double-bonds) (Ring Double Bond Equivalent).
 ```{r}
 formula <- get.formula('NH4', charge = 0)
 isvalid.formula(formula,rule=c("nitrogen","RDBE"))
