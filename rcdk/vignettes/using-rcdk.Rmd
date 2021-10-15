@@ -368,7 +368,7 @@ dim(descs)
 When a descriptor value cannot be computed, it's value is set to `NA`. This may happen if a descriptor requires 3D coordinates, but only 2D coordinates are available. In this case, we have manually selected descriptors such that there will be no undefined values.
 
 Given the ubiquity of certain descriptors, some of them are directly available
-via their own functions. Specifically, one can calculate [TPSA](https://www.ncbi.nlm.nih.gov/pubmed/19149561) (topological
+via their own functions. Specifically, one can calculate [TPSA](https://pubmed.ncbi.nlm.nih.gov/19149561/) (topological
 polar surface area), [AlogP](https://pubs.acs.org/doi/abs/10.1021/jp980230o) and [XlogP](http://www.compchemcons.com/xlogp/xlogp.html) without having to go through
 `eval.desc`. (Note that AlogP and XlogP assume that hydrogens are explicitly specified in the molecule. This may not be true if the molecules were obtained from SMILES)
 ```{r}
