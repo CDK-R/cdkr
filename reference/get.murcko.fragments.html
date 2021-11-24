@@ -72,7 +72,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rcdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.5.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.6.0</span>
       </span>
     </div>
 
@@ -180,10 +180,10 @@ time consuming.</p>
     <p>Rajarshi Guha (<a href='mailto:rajarshi.guha@gmail.com'>rajarshi.guha@gmail.com</a>)</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='va'>mol</span> <span class='op'>&lt;-</span> <span class='fu'><a href='parse.smiles.html'>parse.smiles</a></span><span class='op'>(</span><span class='st'>'c1ccc(cc1)CN(c2cc(ccc2[N+](=O)[O-])c3c(nc(nc3CC)N)N)C'</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span>
-<span class='va'>mf1</span> <span class='op'>&lt;-</span> <span class='fu'>get.murcko.fragments</span><span class='op'>(</span><span class='va'>mol</span>, as.smiles<span class='op'>=</span><span class='cn'>TRUE</span>, single.framework<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span>
-<span class='va'>mf1</span> <span class='op'>&lt;-</span> <span class='fu'>get.murcko.fragments</span><span class='op'>(</span><span class='va'>mol</span>, as.smiles<span class='op'>=</span><span class='cn'>TRUE</span>, single.framework<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span>
-</div></pre>
+    <pre class="examples"><span class='r-in'><span class='va'>mol</span> <span class='op'>&lt;-</span> <span class='fu'><a href='parse.smiles.html'>parse.smiles</a></span><span class='op'>(</span><span class='st'>'c1ccc(cc1)CN(c2cc(ccc2[N+](=O)[O-])c3c(nc(nc3CC)N)N)C'</span><span class='op'>)</span><span class='op'>[[</span><span class='fl'>1</span><span class='op'>]</span><span class='op'>]</span></span>
+<span class='r-in'><span class='va'>mf1</span> <span class='op'>&lt;-</span> <span class='fu'>get.murcko.fragments</span><span class='op'>(</span><span class='va'>mol</span>, as.smiles<span class='op'>=</span><span class='cn'>TRUE</span>, single.framework<span class='op'>=</span><span class='cn'>TRUE</span><span class='op'>)</span></span>
+<span class='r-in'><span class='va'>mf1</span> <span class='op'>&lt;-</span> <span class='fu'>get.murcko.fragments</span><span class='op'>(</span><span class='va'>mol</span>, as.smiles<span class='op'>=</span><span class='cn'>TRUE</span>, single.framework<span class='op'>=</span><span class='cn'>FALSE</span><span class='op'>)</span></span>
+</pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">

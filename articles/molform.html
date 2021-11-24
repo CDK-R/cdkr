@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">rcdk</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.5.3.2</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">3.6.0</span>
       </span>
     </div>
 
@@ -78,7 +78,7 @@
       <h1 data-toc-skip>Handling Molecular Formulae</h1>
                         <h4 class="author">Rajarshi Guha</h4>
             
-            <h4 class="date">2021-07-11</h4>
+            <h4 class="date">2021-11-24</h4>
       
       
       <div class="hidden name"><code>molform.Rmd</code></div>
@@ -123,8 +123,8 @@
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">formula</span><span class="op">@</span><span class="va">isotopes</span></code></pre></div>
 <pre><code>##      isoto number mass         
-## [1,] "N"   "1"    "14.003074"  
-## [2,] "H"   "3"    "1.007825032"</code></pre>
+## [1,] "H"   "3"    "1.007825032"
+## [2,] "N"   "1"    "14.003074"</code></pre>
 <p>Depending of the circumstances, you may want to change the charge of the molecular formula.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set.charge.formula.html">set.charge.formula</a></span><span class="op">(</span><span class="va">formula</span>, charge<span class="op">=</span><span class="fl">1</span><span class="op">)</span></code></pre></div>
@@ -155,7 +155,7 @@
 ## 
 ## [[3]]
 ## cdkFormula:  H18 , mass =  18.14085 , charge =  0</code></pre>
-<p>It is important to know if an elemental formula is valid. The method <code>isvalid.formula</code> provides this function. Two constraints can be applied, the <a href="https://en.wikipedia.org/wiki/Nitrogen_rule">nitrogen rule</a> and the <a href="http://fiehnlab.ucdavis.edu/projects/seven-golden-rules/ring-double-bonds">RDBE rule</a> (Ring Double Bond Equivalent).</p>
+<p>It is important to know if an elemental formula is valid. The method <code>isvalid.formula</code> provides this function. Two constraints can be applied, the <a href="https://en.wikipedia.org/wiki/Nitrogen_rule">nitrogen rule</a> and the <a href="https://fiehnlab.ucdavis.edu/projects/seven-golden-rules/ring-double-bonds">RDBE rule</a> (Ring Double Bond Equivalent).</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get.formula.html">get.formula</a></span><span class="op">(</span><span class="st">'NH4'</span>, charge <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>
 <span class="fu"><a href="../reference/isvalid.formula.html">isvalid.formula</a></span><span class="op">(</span><span class="va">formula</span>,rule<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"nitrogen"</span>,<span class="st">"RDBE"</span><span class="op">)</span><span class="op">)</span></code></pre></div>
