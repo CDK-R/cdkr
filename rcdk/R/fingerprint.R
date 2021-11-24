@@ -159,7 +159,14 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
     keyIter <- .jcall(keySet, "Ljava/util/Iterator;", method="iterator")
     keys <- list()
     for (i in 1:size) {
-      keys[[i]] <- J(keyIter, "next")
+
+      tempkey <- .jcall(keyIter, "Ljava/lang/Object;", method="next")
+
+      if ('jobjRef' %in% class(tempkey))  {
+        tempkey <- .jsimplify(tempkey)
+      }
+      keys[[i]] <- tempkey
+    
     }
 
     values <- list()

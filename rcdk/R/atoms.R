@@ -82,8 +82,15 @@ NULL
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 set.atom.types <- function(mol) {
-  acm <- J("org.openscience.cdk.tools.manipulator.AtomContainerManipulator")
-  acm$percieveAtomTypesAndConfigureAtoms(mol)  
+  
+    if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
+      stop("molecule must be of class IAtomContainer")
+    
+    .jcall("org.openscience.cdk.tools.manipulator.AtomContainerManipulator",
+           "V", "percieveAtomTypesAndConfigureAtoms", mol)
+    
+  # acm <- J("org.openscience.cdk.tools.manipulator.AtomContainerManipulator")
+  # acm$percieveAtomTypesAndConfigureAtoms(mol)  
 }
 
 #' @name get.point3d
