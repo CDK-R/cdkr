@@ -190,32 +190,39 @@ iload.molecules<- function(molfile, type = 'smi',
     sreader <- .jnew("org/openscience/cdk/io/iterator/IteratingSDFReader",.jcast(fr, "java/io/Reader"), dcob)
     .jcall(sreader, "V", "setSkip", skip)
   }
-  hasNext <- NA
+  hasNextFlag <- NA
   mol <- NA
-  molr <- NA
   
   hasNx <- function() {
-    hasNext <<- .jcall(sreader, "Z", "hasNext", check=TRUE)
-    if (!hasNext) {
+    hasNextFlag <<- .jcall(sreader, "Z", "hasNext", check=TRUE)
+    if (!hasNextFlag) {
       .jcall(sreader, "V", "close")      
       mol <<- NA
     }
-    return(hasNext)
+    return(hasNextFlag)
   }
   
   nextEl <- function() {
-    mol <<- .jcall(sreader, "Ljava/lang/Object;", "next", check=TRUE)
+    mol <<- .jcall(sreader, "Ljava/lang/Object;", "next", check=FALSE)
+    
+    ## we check for an exception because when using foreach hasNx() will
+    ## not be called so we have to check for the end of the Java iterator 
+    ## here - ideally we should check for a NoSuchElementException as
+    ## the Java iterator could fail for other reasons than the end of the file
+    if (!is.null(e<-.jgetEx())) {
+      stop('StopIteration')
+    }
     mol <<- .jcast(mol, "org/openscience/cdk/interfaces/IAtomContainer")
     if (aromaticity) do.aromaticity(mol)
     if (typing) set.atom.types(mol)
     if (isotopes) do.isotopes(mol)
     
-    hasNext <<- NA    
+    hasNextFlag <<- NA    
     return(mol)
   }
   
   obj <- list(nextElem = nextEl, hasNext = hasNx)
   class(obj) <- c("ihasNext", "iload.molecules", "abstractiter", "iter")
-  obj
+  return(obj)
 }
 
