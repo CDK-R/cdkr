@@ -195,7 +195,7 @@ iload.molecules<- function(molfile, type = 'smi',
   molr <- NA
   
   hasNx <- function() {
-    hasNext <<- .jcall(sreader, "Z", "hasNext")
+    hasNext <<- .jcall(sreader, "Z", "hasNext", check=TRUE)
     if (!hasNext) {
       .jcall(sreader, "V", "close")      
       mol <<- NA
@@ -204,7 +204,7 @@ iload.molecules<- function(molfile, type = 'smi',
   }
   
   nextEl <- function() {
-    mol <<- .jcall(sreader, "Ljava/lang/Object;", "next")
+    mol <<- .jcall(sreader, "Ljava/lang/Object;", "next", check=TRUE)
     mol <<- .jcast(mol, "org/openscience/cdk/interfaces/IAtomContainer")
     if (aromaticity) do.aromaticity(mol)
     if (typing) set.atom.types(mol)
@@ -215,7 +215,7 @@ iload.molecules<- function(molfile, type = 'smi',
   }
   
   obj <- list(nextElem = nextEl, hasNext = hasNx)
-  class(obj) <- c("iload.molecules", "abstractiter", "iter")
+  class(obj) <- c("ihasNext", "iload.molecules", "abstractiter", "iter")
   obj
 }
 
