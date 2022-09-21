@@ -329,7 +329,6 @@ public class RcdkDepictor {
     }
 
     private void abbreviate(IReaction rxn, String mode, String annotate) {
-        // Multimap<IAtomContainer, Sgroup> sgroupmap = ArrayListMultimap.create();
         Map<IAtomContainer, ArrayList<Sgroup>> sgroupmap = new HashMap<>();;
         
         switch (mode.toLowerCase()) {
@@ -339,10 +338,8 @@ public class RcdkDepictor {
                 for (IAtomContainer mol : rxn.getReactants().atomContainers()) {
                     contractHydrates(mol);
                     Set<IAtom> atoms = new HashSet<>();
-                    // java.util.List<Sgroup> newSgroups = new ArrayList<>();
                     for (Sgroup sgroup : abbreviations.generate(mol)) {
                         if (add(atoms, sgroup.getAtoms()))
-                            // newSgroups.add(sgroup);
                             sgroupmap.computeIfAbsent(mol, k -> new ArrayList<Sgroup>()).add(sgroup);
                     }
                     
@@ -351,13 +348,10 @@ public class RcdkDepictor {
                 for (IAtomContainer mol : rxn.getProducts().atomContainers()) {
                     contractHydrates(mol);
                     Set<IAtom> atoms = new HashSet<>();
-                    // java.util.List<Sgroup> newSgroups = new ArrayList<>();
                     for (Sgroup sgroup : abbreviations.generate(mol)) {
                         if (add(atoms, sgroup.getAtoms()))
                             sgroupmap.computeIfAbsent(mol, k -> new ArrayList<Sgroup>()).add(sgroup);
-                            // newSgroups.add(sgroup);
                     }
-                    // sgroupmap.putAll(mol, newSgroups);
                 }
                 for (IAtomContainer mol : rxn.getAgents().atomContainers()) {
                     contractHydrates(mol);
