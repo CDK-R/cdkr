@@ -38,12 +38,11 @@ set.property <- function(molecule, key, value) {
   } else if (is.double(value)) {
     value <-.jcall('org/guha/rcdk/util/Misc', 'V', 'setProperty',
                    molecule, as.character(key), as.double(value))
-  } else if (class(value) == 'jobjRef') {
+  } else if (is(value, 'jobjRef')) {
     value <-.jcall('org/guha/rcdk/util/Misc', 'V', 'setProperty',
                    molecule, as.character(key),
                    .jcast(value, 'java/lang/Object'))
-  }
-  
+  } 
 }
 
 #' Get a property value of the molecule.

@@ -113,7 +113,7 @@ view.molecule.2d <- function(molecule, ncol = 4, width = 200, height = 200, depi
   }
 
   ## if we got a file name, lets load all the molecules
-  if (class(molecule) == 'character') {
+  if (is(molecule, 'character')) {
     molecule <- load.molecules(molecule)
     if (length(molecule) == 1) molecule <- molecule[[1]]
   }

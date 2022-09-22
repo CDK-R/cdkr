@@ -15,7 +15,7 @@ for each property. If no properties have been defined, an empty list.
 }
 \description{
 In this context a property is a value associated with a key and stored
-with the molecule. This methd returns a list of all the properties of 
+with the molecule. This method returns a list of all the properties of 
 a molecule. The names of the list are set to the property names.
 }
 \examples{

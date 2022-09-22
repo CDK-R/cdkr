@@ -54,7 +54,7 @@ set.atom.types(mol)
 \section{Value}{
 
  In the case of \code{\link{get.point3d}} the return value is a 3-element vector 
- containingthe X, Y and Z co-ordinates of the atom.  If the atom does not 
+ containing the X, Y and Z co-ordinates of the atom.  If the atom does not 
  have 3D coordinates, it returns a vector of the form \code{c(NA,NA,NA)}.
  Similarly for \code{\link{get.point2d}}, in which case the return vector is of 
  length \code{2}.

@@ -104,7 +104,7 @@ load.molecules <- function(molfiles=NA, aromaticity = TRUE,
                                   method='curl',
                                   mode='wb', quiet=!verbose),
                     silent=verbose)
-      if (class(status) == 'try-error') {
+      if (is(status, 'try-error')) {
         molfiles[idx] <- NA
         cat("Can't get ", url, '\n')
       } else {
