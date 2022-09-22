@@ -25,7 +25,7 @@ chemical information with the R environment.
 
 The [CDK](https://cdk.github.io) is a Java library for cheminformatics that supports a wide variety
 of cheminformatics functionality ranging from reading molecular file
-formats, performing ring perception and armaticity detection to fingerprint
+formats, performing ring perception and aromaticity detection to fingerprint
 generation and molecular descriptors. The CDK website provides links to useful documentation as well as complete [Javadocs](https://cdk.github.io/cdk/2.3/docs/api/index.html?overview-summary.html)
 
 ## Getting started
@@ -320,7 +320,7 @@ matches(query, mols)
 
 ## Molecular Descriptors
 
-A key requirement for the predictive modeling of molecular properties and activities are [molecular descriptors](https://en.wikipedia.org/wiki/Molecular_descriptor) - numerical charaterizations of the molecular structure.  The [CDK](https://cdk.github.io/) implements a variety of molecular descriptors, categorized into topological, constitutional, geometric, electronic and hybrid. It is possible to evaluate all available descriptors at one go, or evaluate individual descriptors.
+A key requirement for the predictive modeling of molecular properties and activities are [molecular descriptors](https://en.wikipedia.org/wiki/Molecular_descriptor) - numerical characterizations of the molecular structure.  The [CDK](https://cdk.github.io/) implements a variety of molecular descriptors, categorized into topological, constitutional, geometric, electronic and hybrid. It is possible to evaluate all available descriptors at one go, or evaluate individual descriptors.
 
 First, we can take a look at the available descriptor categories.
 ```{r}
@@ -396,7 +396,7 @@ descs <- descs[, -unique(r2[,2])]
 Note that the above correlation reduction step is pretty crude and there
 are better ways to do it. Given the reduced descriptor matrix, we can
 perform feature selection (say using [leaps](https://CRAN.R-project.org/package=leaps), [caret](https://CRAN.R-project.org/package=caret) or a [GA](https://CRAN.R-project.org/package=GenAlgo) to identify a suitable
-subset of descriptors. Given that we selected the descriptors by hand, we can skip this section, and directly build the model and generate a plot of predicte versus observed BP. (Note that this is a toy example and is not an example of good QSAR practice!)
+subset of descriptors. Given that we selected the descriptors by hand, we can skip this section, and directly build the model and generate a plot of predicted versus observed BP. (Note that this is a toy example and is not an example of good QSAR practice!)
 ```{r}
 model <- lm(BP ~ khs.sCH3 + khs.sF + apol + nHBDon, data.frame(bpdata, descs))
 summary(model)

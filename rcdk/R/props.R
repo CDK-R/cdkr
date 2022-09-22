@@ -92,7 +92,7 @@ get.property <- function(molecule, key) {
 #' Get all properties associated with a molecule.
 #' 
 #' In this context a property is a value associated with a key and stored
-#' with the molecule. This methd returns a list of all the properties of 
+#' with the molecule. This method returns a list of all the properties of 
 #' a molecule. The names of the list are set to the property names.
 #' 
 #' @param molecule The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
