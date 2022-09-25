@@ -134,7 +134,7 @@ get.desc.categories <- function() {
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @export
 eval.desc <- function(molecules, which.desc, verbose = FALSE) {
-  if (class(molecules) != 'list') {
+  if (!is(molecules, 'list')) {
     jclassAttr <- attr(molecules, "jclass")
     if (jclassAttr != "org/openscience/cdk/interfaces/IAtomContainer") {
       stop("Must provide a list of molecule objects or a single molecule object")
