@@ -1,3 +1,8 @@
+# v3.7
+
+- update to rcdklibs >-2.8
+
+
 # v3.5.1
 
 - minor update to make bond order enums available when setting the order of pre-exisitng bonds
