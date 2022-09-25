@@ -2,7 +2,7 @@
 % Please edit documentation in R/atoms.R
 \name{get.atomic.number}
 \alias{get.atomic.number}
-\title{Get the atomic number of the atom.}
+\title{get.atomic.number}
 \usage{
 get.atomic.number(atom)
 }

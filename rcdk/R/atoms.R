@@ -71,8 +71,9 @@ NULL
   return(atom)
 }
 
-#' @name set.atom.types
-#' @title Set the CDK atom types for all atoms in the molecule
+#' set.atom.types
+#' 
+#' Set the CDK atom types for all atoms in the molecule.
 #' 
 #' Calling this method will overwrite any pre-existing type information. 
 #' Currently there is no way to choose other atom typing schemes
@@ -93,8 +94,9 @@ set.atom.types <- function(mol) {
   # acm$percieveAtomTypesAndConfigureAtoms(mol)  
 }
 
-#' @name get.point3d
-#' @title Get the 3D coordinates of the atom.
+#' get.point3d
+#' 
+#' Get the 3D coordinates of the atom.
 #' 
 #' In case, coordinates are unavailable (e.g., molecule was read in from a 
 #' SMILES file) or have not been generated yet, `NA`'s are returned for the 
@@ -121,8 +123,9 @@ get.point3d <- function(atom) {
   }
 }
 
-#' @name get.point2d
-#' @title Get the 2D coordinates of the atom.
+#' get.point2d
+#' 
+#' Get the 2D coordinates of the atom.
 #' 
 #' In case, coordinates are unavailable (e.g., molecule was read in from a 
 #' SMILES file) or have not been generated yet, `NA`'s are returned for the 
@@ -148,10 +151,10 @@ get.point2d <- function(atom) {
   }
 }
 
-#' @name get.symbol
-#' @title Get the atomic symbol of the atom.
+#' get.symbol
 #' 
 #' Get the atomic symbol of the atom.
+#' 
 #' 
 #' @param atom The atom to query
 #' @return A character representing the atomic symbol
@@ -162,8 +165,9 @@ get.symbol <- function(atom) {
   .jcall(atom, "S", "getSymbol")
 }
 
-#' @name get.atomic.number
-#' @title Get the atomic number of the atom.
+#' get.atomic.number
+#' 
+#' Get the atomic number of the atom.
 #' 
 #' @param atom The atom to query
 #' @return An integer representing the atomic number
@@ -174,8 +178,9 @@ get.atomic.number <- function(atom) {
   .jcall(.jcall(atom, "Ljava/lang/Integer;", "getAtomicNumber"), "I", "intValue")
 }
 
-#' @name get.charge
-#' @title Get the charge on the atom.
+#' get.charge
+#' 
+#' Get the charge on the atom.
 #' 
 #' This method returns the partial charge on the atom. If charges have not been set the
 #' return value is \code{NULL}, otherwise the appropriate charge.
@@ -193,8 +198,9 @@ get.charge <- function(atom) {
   else return(ch)
 }
 
-#' @name get.formal.charge
-#' @title Get the formal charge on the atom.
+#' get.formal.charge
+#' 
+#' Get the formal charge on the atom.
 #' 
 #' By default the formal charge will be 0 (i.e., \code{NULL} is never returned).
 #' 
@@ -210,8 +216,9 @@ get.formal.charge <- function(atom) {
   else return(ch)  
 }
 
-#' @name get.hydrogen.count
-#' @title Get the implicit hydrogen count for the atom.
+#' get.hydrogen.count
+#' 
+#' Get the implicit hydrogen count for the atom.
 #' 
 #' This method returns the number of implicit H's on the atom. 
 #' Depending on where the molecule was read from this may be \code{NULL} or an integer
@@ -227,8 +234,9 @@ get.hydrogen.count <- function(atom) {
   .jcall(.jcall(atom, "Ljava/lang/Integer;", "getImplicitHydrogenCount"), "I", "intValue")
 }
 
-#' @name is.aromatic
-#' @title Tests whether an atom is aromatic.
+#' is.aromatic
+#' 
+#' Tests whether an atom is aromatic.
 #' 
 #' This assumes that the molecule containing the atom has been 
 #' appropriately configured.
@@ -244,8 +252,9 @@ is.aromatic <- function(atom) {
   .jcall(atom, "Z", "getFlag", as.integer(flag.idx))
 }
 
-#' @name is.aliphatic
-#' @title Tests whether an atom is aliphatic.
+#' is.aliphatic
+#' 
+#' Tests whether an atom is aliphatic.
 #' 
 #' This assumes that the molecule containing the atom has been 
 #' appropriately configured.
@@ -261,8 +270,9 @@ is.aliphatic <- function(atom) {
   .jcall(atom, "Z", "getFlag", as.integer(flag.idx))
 }
 
-#' @name is.in.ring
-#' @title Tests whether an atom is in a ring.
+#' is.in.ring
+#' 
+#' Tests whether an atom is in a ring.
 #' 
 #' This assumes that the molecule containing the atom has been 
 #' appropriately configured.
@@ -278,8 +288,9 @@ is.in.ring <- function(atom) {
   .jcall(atom, "Z", "getFlag", as.integer(flag.idx))
 }
 
-#' @name get.connected.atoms
-#' @title Get atoms connected to the specified atom
+#' get.connected.atoms
+#' 
+#' Get atoms connected to the specified atom
 #' 
 #' Returns a `list`` of atoms that are connected to the specified atom.
 #' @param atom The atom object
@@ -301,8 +312,9 @@ get.connected.atoms <- function(atom, mol) {
   return(ret)
 }
 
-#' @name get.atom.index
-#' @title Get the index of an atom in a molecule.
+#' get.atom.index
+#' 
+#' Get the index of an atom in a molecule.
 #' 
 #' Acces the index of an atom in the context of an IAtomContainer. 
 #' Indexing starts from 0. If the index is not known, -1 is returned.

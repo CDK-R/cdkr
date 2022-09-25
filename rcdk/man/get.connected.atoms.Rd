@@ -2,9 +2,7 @@
 % Please edit documentation in R/atoms.R
 \name{get.connected.atoms}
 \alias{get.connected.atoms}
-\title{Get atoms connected to the specified atom
-
-Returns a `list`` of atoms that are connected to the specified atom.}
+\title{get.connected.atoms}
 \usage{
 get.connected.atoms(atom, mol)
 }
@@ -19,7 +17,8 @@ connected to the specified atom
 }
 \description{
 Get atoms connected to the specified atom
-
+}
+\details{
 Returns a `list`` of atoms that are connected to the specified atom.
 }
 \author{

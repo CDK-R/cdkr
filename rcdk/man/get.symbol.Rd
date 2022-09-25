@@ -2,9 +2,7 @@
 % Please edit documentation in R/atoms.R
 \name{get.symbol}
 \alias{get.symbol}
-\title{Get the atomic symbol of the atom.
-
-Get the atomic symbol of the atom.}
+\title{get.symbol}
 \usage{
 get.symbol(atom)
 }
@@ -15,8 +13,6 @@ get.symbol(atom)
 A character representing the atomic symbol
 }
 \description{
-Get the atomic symbol of the atom.
-
 Get the atomic symbol of the atom.
 }
 \author{
