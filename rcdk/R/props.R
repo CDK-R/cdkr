@@ -38,12 +38,11 @@ set.property <- function(molecule, key, value) {
   } else if (is.double(value)) {
     value <-.jcall('org/guha/rcdk/util/Misc', 'V', 'setProperty',
                    molecule, as.character(key), as.double(value))
-  } else if (class(value) == 'jobjRef') {
+  } else if (is(value, 'jobjRef')) {
     value <-.jcall('org/guha/rcdk/util/Misc', 'V', 'setProperty',
                    molecule, as.character(key),
                    .jcast(value, 'java/lang/Object'))
-  }
-  
+  } 
 }
 
 #' Get a property value of the molecule.
@@ -92,7 +91,7 @@ get.property <- function(molecule, key) {
 #' Get all properties associated with a molecule.
 #' 
 #' In this context a property is a value associated with a key and stored
-#' with the molecule. This methd returns a list of all the properties of 
+#' with the molecule. This method returns a list of all the properties of 
 #' a molecule. The names of the list are set to the property names.
 #' 
 #' @param molecule The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`

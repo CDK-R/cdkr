@@ -2,10 +2,7 @@
 % Please edit documentation in R/atoms.R
 \name{get.charge}
 \alias{get.charge}
-\title{Get the charge on the atom.
-
-This method returns the partial charge on the atom. If charges have not been set the
-return value is \code{NULL}, otherwise the appropriate charge.}
+\title{get.charge}
 \usage{
 get.charge(atom)
 }
@@ -18,7 +15,8 @@ An numeric representing the partial charge. If charges have not been set,
 }
 \description{
 Get the charge on the atom.
-
+}
+\details{
 This method returns the partial charge on the atom. If charges have not been set the
 return value is \code{NULL}, otherwise the appropriate charge.
 }

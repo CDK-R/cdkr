@@ -19,7 +19,7 @@ get.mcs <- function(mol1, mol2, as.molecule = TRUE) {
 }
 
 is.subgraph <- function(query, target) {
-  if (class(query) == 'character') {
+  if (is(query, 'character')) {
     query <- parse.smiles(query)
     do.aromaticity(query)
     set.atom.types(query)

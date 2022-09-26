@@ -2,10 +2,7 @@
 % Please edit documentation in R/atoms.R
 \name{set.atom.types}
 \alias{set.atom.types}
-\title{Set the CDK atom types for all atoms in the molecule
-
-Calling this method will overwrite any pre-existing type information. 
-Currently there is no way to choose other atom typing schemes}
+\title{set.atom.types}
 \usage{
 set.atom.types(mol)
 }
@@ -16,8 +13,9 @@ set.atom.types(mol)
 Nothing is returned, the molecule is modified in place
 }
 \description{
-Set the CDK atom types for all atoms in the molecule
-
+Set the CDK atom types for all atoms in the molecule.
+}
+\details{
 Calling this method will overwrite any pre-existing type information. 
 Currently there is no way to choose other atom typing schemes
 }

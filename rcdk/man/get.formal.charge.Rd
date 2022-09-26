@@ -2,9 +2,7 @@
 % Please edit documentation in R/atoms.R
 \name{get.formal.charge}
 \alias{get.formal.charge}
-\title{Get the formal charge on the atom.
-
-By default the formal charge will be 0 (i.e., \code{NULL} is never returned).}
+\title{get.formal.charge}
 \usage{
 get.formal.charge(atom)
 }
@@ -16,7 +14,8 @@ An integer representing the formal charge
 }
 \description{
 Get the formal charge on the atom.
-
+}
+\details{
 By default the formal charge will be 0 (i.e., \code{NULL} is never returned).
 }
 \seealso{

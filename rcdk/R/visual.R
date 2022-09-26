@@ -93,9 +93,7 @@ get.depictor <- function(width = 200, height = 200, zoom = 1.3, style = "cow", a
 #' @export 
 view.molecule.2d <- function(molecule, ncol = 4, width = 200, height = 200, depictor = NULL) {
   
-  if (class(molecule) != 'character' &&
-      class(molecule) != 'list' &&
-      class(molecule) != 'jobjRef') {
+  if (!class(molecule) %in% c('character', 'list', 'jobjRef')) {
     stop("Must supply a filename, single molecule object or list of molecule objects")
   }
 
@@ -113,12 +111,12 @@ view.molecule.2d <- function(molecule, ncol = 4, width = 200, height = 200, depi
   }
 
   ## if we got a file name, lets load all the molecules
-  if (class(molecule) == 'character') {
+  if (is(molecule, 'character')) {
     molecule <- load.molecules(molecule)
     if (length(molecule) == 1) molecule <- molecule[[1]]
   }
 
-  if (class(molecule) != 'list') { ## single molecule
+  if (!is(molecule, 'list')) { ## single molecule
     if (attr(molecule, "jclass") != 'org/openscience/cdk/interfaces/IAtomContainer') {
       stop("Supplied object should be a Java reference to an IAtomContainer")
     }

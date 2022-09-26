@@ -1,7 +1,5 @@
 package org.guha.rcdk.view;
 
-import com.google.common.collect.ArrayListMultimap;
-import com.google.common.collect.Multimap;
 import org.openscience.cdk.CDKConstants;
 import org.openscience.cdk.depict.Abbreviations;
 import org.openscience.cdk.depict.Depiction;
@@ -331,7 +329,8 @@ public class RcdkDepictor {
     }
 
     private void abbreviate(IReaction rxn, String mode, String annotate) {
-        Multimap<IAtomContainer, Sgroup> sgroupmap = ArrayListMultimap.create();
+        Map<IAtomContainer, ArrayList<Sgroup>> sgroupmap = new HashMap<>();;
+        
         switch (mode.toLowerCase()) {
             case "true":
             case "on":
@@ -339,22 +338,20 @@ public class RcdkDepictor {
                 for (IAtomContainer mol : rxn.getReactants().atomContainers()) {
                     contractHydrates(mol);
                     Set<IAtom> atoms = new HashSet<>();
-                    java.util.List<Sgroup> newSgroups = new ArrayList<>();
                     for (Sgroup sgroup : abbreviations.generate(mol)) {
                         if (add(atoms, sgroup.getAtoms()))
-                            newSgroups.add(sgroup);
+                            sgroupmap.computeIfAbsent(mol, k -> new ArrayList<Sgroup>()).add(sgroup);
                     }
-                    sgroupmap.putAll(mol, newSgroups);
+                    
+                    
                 }
                 for (IAtomContainer mol : rxn.getProducts().atomContainers()) {
                     contractHydrates(mol);
                     Set<IAtom> atoms = new HashSet<>();
-                    java.util.List<Sgroup> newSgroups = new ArrayList<>();
                     for (Sgroup sgroup : abbreviations.generate(mol)) {
                         if (add(atoms, sgroup.getAtoms()))
-                            newSgroups.add(sgroup);
+                            sgroupmap.computeIfAbsent(mol, k -> new ArrayList<Sgroup>()).add(sgroup);
                     }
-                    sgroupmap.putAll(mol, newSgroups);
                 }
                 for (IAtomContainer mol : rxn.getAgents().atomContainers()) {
                     contractHydrates(mol);
@@ -377,9 +374,11 @@ public class RcdkDepictor {
         }
 
         Set<String> include = new HashSet<>();
-        for (Map.Entry<IAtomContainer, Sgroup> e : sgroupmap.entries()) {
-            final IAtomContainer mol = e.getKey();
-            final Sgroup abbrv = e.getValue();
+        
+        sgroupmap.forEach( (mol, valcoll) -> {
+          
+          valcoll.forEach( (abbrv) -> {
+            
             int numAtoms = mol.getAtomCount();
             if (abbrv.getBonds().isEmpty()) {
                 include.add(abbrv.getSubscript());
@@ -390,9 +389,11 @@ public class RcdkDepictor {
                     include.add(abbrv.getSubscript());
                 }
             }
-        }
+          });
+        });
+          
 
-        for (Map.Entry<IAtomContainer, Collection<Sgroup>> e : sgroupmap.asMap().entrySet()) {
+        for (Map.Entry<IAtomContainer, ArrayList<Sgroup>> e : sgroupmap.entrySet()) {
             final IAtomContainer mol = e.getKey();
 
             java.util.List<Sgroup> sgroups = mol.getProperty(CDKConstants.CTAB_SGROUPS);

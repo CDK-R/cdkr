@@ -110,7 +110,7 @@ get.mol2formula <- function(molecule, charge=0) {
 #' @param charge Optional. Default \code{-1}
 #' @export
 set.charge.formula <- function(formula,charge = -1) {
-    if (class(formula) != "cdkFormula")
+    if (!is(formula, "cdkFormula"))
         stop("Supplied object should be a cdkFormula Class")
     
     molecularFormula <- formula@objectJ;
@@ -134,7 +134,7 @@ set.charge.formula <- function(formula,charge = -1) {
 #' @export
 isvalid.formula <- function(formula,rule=c("nitrogen","RDBE")){
     
-    if (class(formula) != "cdkFormula")
+    if (!is(formula, "cdkFormula"))
         stop("Supplied object should be a cdkFormula Class")
     
     molecularFormula <- formula@objectJ;
@@ -171,7 +171,7 @@ isvalid.formula <- function(formula,rule=c("nitrogen","RDBE")){
 #' @export
 get.isotopes.pattern <- function(formula,minAbund=0.1){
     
-    if (class(formula) != "cdkFormula")
+    if (!is(formula, "cdkFormula"))
         stop("Supplied object should be a cdkFormula Class")
     
     molecularFormula <- formula@objectJ;
@@ -379,11 +379,15 @@ generate.formula <- function(mass,
                       .jcast(ruleList,"java/util/List"),
                       ruleG)
     
+    
     ## Setting the rules int FormulaTools
     .jcall(mfTool,"V","setRestrictions",.jcast(ruleList,"java/util/List"));
     
+    
+    
     mfSet <- .jcall(mfTool,"Lorg/openscience/cdk/interfaces/IMolecularFormulaSet;",
                     "generate",mass);
+    
     if (is.null(mfSet))
         return(list())
 
