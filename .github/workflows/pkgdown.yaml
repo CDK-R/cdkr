@@ -30,7 +30,8 @@ jobs:
 
       - uses: r-lib/actions/setup-r-dependencies@v2
         with:
-          extra-packages: any::pkgdown, local::rcdk
+          extra-packages: any::pkgdown, local::.
+          working-directory: rcdk
           needs: website
 
       - name: Build site
