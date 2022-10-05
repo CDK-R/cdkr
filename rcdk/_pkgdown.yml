@@ -1,4 +1,100 @@
-url: ~
+url: https://cdk-r.github.io/cdkr/
+
 template:
   bootstrap: 5
+
+
+reference:
+- title: rCDK Functions
+
+
+- subtitle: Rows
+  desc: >
+    Verbs that principally operate on rows.
+  contents:
+  - Atoms
+  - Molecule
+  - bpdata
+  - cdk.version
+  - cdkFormula-class
+  - compare.isotope.pattern
+  - convert.implicit.to.explicit
+  - copy.image.to.clipboard
+  - do.aromaticity
+  - do.isotopes
+  - eval.atomic.desc
+  - eval.desc
+  - generate.2d.coordinates
+  - generate.formula
+  - generate.formula.iter
+  - get.adjacency.matrix
+  - get.alogp
+  - get.atom.count
+  - get.atom.index
+  - get.atomic.desc.names
+  - get.atomic.number
+  - get.atoms
+  - get.bond.order
+  - get.bonds
+  - get.charge
+  - get.chem.object.builder
+  - get.connected.atom
+  - get.connected.atoms
+  - get.connection.matrix
+  - get.depictor
+  - get.desc.categories
+  - get.desc.names
+  - get.element.types
+  - get.exact.mass
+  - get.exhaustive.fragments
+  - get.fingerprint
+  - get.formal.charge
+  - get.formula
+  - get.hydrogen.count
+  - get.isotope.pattern.generator
+  - get.isotope.pattern.similarity
+  - get.isotopes.pattern
+  - get.largest.component
+  - get.mcs
+  - get.mol2formula
+  - get.murcko.fragments
+  - get.natural.mass
+  - get.point2d
+  - get.point3d
+  - get.properties
+  - get.property
+  - get.smiles
+  - get.smiles.parser
+  - get.stereo.types
+  - get.stereocenters
+  - get.symbol
+  - get.title
+  - get.total.charge
+  - get.total.formal.charge
+  - get.total.hydrogen.count
+  - get.tpsa
+  - get.volume
+  - get.xlogp
+  - iload.molecules
+  - is.aliphatic
+  - is.aromatic
+  - is.connected
+  - is.in.ring
+  - is.neutral
+  - isvalid.formula
+  - load.molecules
+  - match-SMARTS
+  - parse.smiles
+  - rcdk-deprecated
+  - remove.hydrogens
+  - remove.property
+  - set.atom.types
+  - set.charge.formula
+  - set.property
+  - set.title
+  - smiles.flavors
+  - view.image.2d
+  - view.molecule.2d
+  - view.table
+  - write.molecules
 
