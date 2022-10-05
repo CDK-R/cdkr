@@ -4,6 +4,7 @@
 #' @param target Required. The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @param return.matches Optional. Default \code{FALSE}
 #' @export
+#' @aliases match-SMARTS
 matches <- function(query, target, return.matches=FALSE) {
   if (!is.list(target)) target <- list(target)
   if (!all(unlist(lapply(target, class)) == 'jobjRef'))

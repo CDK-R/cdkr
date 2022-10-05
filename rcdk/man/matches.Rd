@@ -2,6 +2,7 @@
 % Please edit documentation in R/matching.R
 \name{matches}
 \alias{matches}
+\alias{match-SMARTS}
 \title{matches}
 \usage{
 matches(query, target, return.matches = FALSE)

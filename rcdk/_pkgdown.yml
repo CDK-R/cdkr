@@ -1,1 +1,118 @@
-destination: docs
+url: https://cdk-r.github.io/cdkr/
+
+template:
+  bootstrap: 5
+
+
+reference:
+- title: rCDK Functions
+
+
+
+- subtitle: rCDK Data and Docs
+  desc: >
+    Available Datasets or Documentation
+  contents:
+  - bpdata
+  - Atoms
+  - Molecule
+
+
+- subtitle: rCDK IO Functions
+  desc: >
+    Functions to Load Data
+  contents:
+  - copy.image.to.clipboard
+  - iload.molecules
+  - load.molecules
+  - parse.smiles
+  - write.molecules
+  
+
+- subtitle: Core Functions
+  desc: >
+    For acting on Atoms, Molecules, ad Formula
+  contents:
+  - compare.isotope.pattern
+  - convert.implicit.to.explicit
+  - do.aromaticity
+  - do.isotopes
+  - eval.atomic.desc
+  - eval.desc
+  - generate.2d.coordinates
+  - generate.formula
+  - generate.formula.iter
+  - get.adjacency.matrix
+  - get.alogp
+  - get.atom.count
+  - get.atom.index
+  - get.atomic.desc.names
+  - get.atomic.number
+  - get.atoms
+  - get.bond.order
+  - get.bonds
+  - get.charge
+  - get.chem.object.builder
+  - get.connected.atom
+  - get.connected.atoms
+  - get.connection.matrix
+  - get.depictor
+  - get.desc.categories
+  - get.desc.names
+  - get.element.types
+  - get.exact.mass
+  - get.exhaustive.fragments
+  - get.fingerprint
+  - get.formal.charge
+  - get.formula
+  - get.hydrogen.count
+  - get.isotope.pattern.generator
+  - get.isotope.pattern.similarity
+  - get.isotopes.pattern
+  - get.largest.component
+  - get.mcs
+  - get.mol2formula
+  - get.murcko.fragments
+  - get.natural.mass
+  - get.point2d
+  - get.point3d
+  - get.properties
+  - get.property
+  - get.smiles
+  - get.smiles.parser
+  - get.stereo.types
+  - get.stereocenters
+  - get.symbol
+  - get.title
+  - get.total.charge
+  - get.total.formal.charge
+  - get.total.hydrogen.count
+  - get.tpsa
+  - get.volume
+  - get.xlogp
+  - is.aliphatic
+  - is.aromatic
+  - is.connected
+  - is.in.ring
+  - is.neutral
+  - isvalid.formula
+  - match-SMARTS
+  - remove.hydrogens
+  - remove.property
+  - set.atom.types
+  - set.charge.formula
+  - set.property
+  - set.title
+  - smiles.flavors
+  - view.image.2d
+  - view.molecule.2d
+  - view.table
+
+
+- subtitle: Package Function
+  desc: >
+    Mostly for Development
+  contents:
+  - cdk.version
+  - cdkFormula-class
+  - rcdk-deprecated
