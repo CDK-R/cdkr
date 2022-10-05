@@ -8,18 +8,33 @@ reference:
 - title: rCDK Functions
 
 
-- subtitle: Rows
+
+- subtitle: rCDK Data and Docs
   desc: >
-    Verbs that principally operate on rows.
+    Available Datasets or Documentation
   contents:
+  - bpdata
   - Atoms
   - Molecule
-  - bpdata
-  - cdk.version
-  - cdkFormula-class
+
+
+- subtitle: rCDK IO Functions
+  desc: >
+    Functions to Load Data
+  contents:
+  - copy.image.to.clipboard
+  - iload.molecules
+  - load.molecules
+  - parse.smiles
+  - write.molecules
+  
+
+- subtitle: Core Functions
+  desc: >
+    For acting on Atoms, Molecules, ad Formula
+  contents:
   - compare.isotope.pattern
   - convert.implicit.to.explicit
-  - copy.image.to.clipboard
   - do.aromaticity
   - do.isotopes
   - eval.atomic.desc
@@ -75,17 +90,13 @@ reference:
   - get.tpsa
   - get.volume
   - get.xlogp
-  - iload.molecules
   - is.aliphatic
   - is.aromatic
   - is.connected
   - is.in.ring
   - is.neutral
   - isvalid.formula
-  - load.molecules
   - match-SMARTS
-  - parse.smiles
-  - rcdk-deprecated
   - remove.hydrogens
   - remove.property
   - set.atom.types
@@ -96,5 +107,12 @@ reference:
   - view.image.2d
   - view.molecule.2d
   - view.table
-  - write.molecules
 
+
+- subtitle: Package Function
+  desc: >
+    Mostly for Development
+  contents:
+  - cdk.version
+  - cdkFormula-class
+  - rcdk-deprecated
