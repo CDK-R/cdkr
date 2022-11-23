@@ -62,12 +62,14 @@
 
 
 
-<script src="molform_files/accessible-code-block-0.0.1/empty-anchor.js"></script><div class="row">
+
+<div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
       <img src="" class="logo" alt=""><h1>Handling Molecular Formulae</h1>
-                        <h4 data-toc-skip class="author">Rajarshi Guha</h4>
+                        <h4 data-toc-skip class="author">Rajarshi
+Guha</h4>
             
-            <h4 data-toc-skip class="date">2022-10-05</h4>
+            <h4 data-toc-skip class="date">2022-11-23</h4>
       
       
       <div class="d-none name"><code>molform.Rmd</code></div>
@@ -81,12 +83,26 @@
 <div class="section level3">
 <h3 id="introduction">Introduction<a class="anchor" aria-label="anchor" href="#introduction"></a>
 </h3>
-<p>The molecular formula is the simplest way to characterize a molecular compound. It specifies the actual number of atoms of each element contained in the molecule. A molecular formula is represented by the chemical symbol of each constituent element. If a molecule contains more than one atom for a particular element, the quantity is shown as subscript after the chemical symbol. Otherwise, the number of neutrons (atomic mass) that an atom is composed can differ. This different type of atoms are known as isotopes. The number of nuclei is represented as superscripted prefix previous to the chemical element. Generally it is not added when the isotope that characterizes the element is the most occurrence in nature, e.g., <span class="math inline">\(C_4H_{11}O^2D\)</span>.</p>
+<p>The molecular formula is the simplest way to characterize a molecular
+compound. It specifies the actual number of atoms of each element
+contained in the molecule. A molecular formula is represented by the
+chemical symbol of each constituent element. If a molecule contains more
+than one atom for a particular element, the quantity is shown as
+subscript after the chemical symbol. Otherwise, the number of neutrons
+(atomic mass) that an atom is composed can differ. This different type
+of atoms are known as isotopes. The number of nuclei is represented as
+superscripted prefix previous to the chemical element. Generally it is
+not added when the isotope that characterizes the element is the most
+occurrence in nature, e.g., <span class="math inline">\(C_4H_{11}O^2D\)</span>.</p>
 </div>
 <div class="section level3">
 <h3 id="parsing-a-molecule-to-a-molecular-formula">Parsing a Molecule To a Molecular Formula<a class="anchor" aria-label="anchor" href="#parsing-a-molecule-to-a-molecular-formula"></a>
 </h3>
-<p>Front a molecule, defined as conjunct of atoms helding together by chemical bonds, we can simplify it taking only the information about the atoms. The <code>rcdk</code> package provides a parser to translate molecules to molecular formlulas, the <code>get.mol2formula</code> function.</p>
+<p>Front a molecule, defined as conjunct of atoms helding together by
+chemical bonds, we can simplify it taking only the information about the
+atoms. The <code>rcdk</code> package provides a parser to translate
+molecules to molecular formlulas, the <code>get.mol2formula</code>
+function.</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">rcdk</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Loading required package: rcdklibs</span></span></code></pre>
@@ -96,8 +112,14 @@
 <span><span class="va">molecule</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/parse.smiles.html">parse.smiles</a></span><span class="op">(</span><span class="st">'N'</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span>
 <span><span class="fu"><a href="../reference/convert.implicit.to.explicit.html">convert.implicit.to.explicit</a></span><span class="op">(</span><span class="va">molecule</span><span class="op">)</span></span>
 <span><span class="va">formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get.mol2formula.html">get.mol2formula</a></span><span class="op">(</span><span class="va">molecule</span>,charge<span class="op">=</span><span class="fl">0</span><span class="op">)</span></span></code></pre></div>
-<p>Note that the above formula object is a <code>CDKFormula-class</code>. This class contains some attributes that defines a molecular formula. For example, the mass, the charge, the isotopes, the character representation of the molecular formula and the <a href="https://cdk.github.io/cdk/2.3/docs/api/org/openscience/cdk/interfaces/IMolecularFormula.html" class="external-link">IMolecularFormula</a> <code>jobjRef</code> object.</p>
-<p>The molecular mass, charge and string representation for this formula are given by</p>
+<p>Note that the above formula object is a
+<code>CDKFormula-class</code>. This class contains some attributes that
+defines a molecular formula. For example, the mass, the charge, the
+isotopes, the character representation of the molecular formula and the
+<a href="https://cdk.github.io/cdk/2.3/docs/api/org/openscience/cdk/interfaces/IMolecularFormula.html" class="external-link">IMolecularFormula</a>
+<code>jobjRef</code> object.</p>
+<p>The molecular mass, charge and string representation for this formula
+are given by</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">formula</span><span class="op">@</span><span class="va">mass</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] 17.02655</span></span></code></pre>
@@ -107,20 +129,27 @@
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">formula</span><span class="op">@</span><span class="va">string</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] "H3N"</span></span></code></pre>
-<p>The isotopes for this formula. It is formed from three attributes. <code>isoto</code> (the symbol expression of the isotope), <code>number</code> (number of atoms for this isotope) and <code>mass</code> (exact mass of this isotope).</p>
+<p>The isotopes for this formula. It is formed from three attributes.
+<code>isoto</code> (the symbol expression of the isotope),
+<code>number</code> (number of atoms for this isotope) and
+<code>mass</code> (exact mass of this isotope).</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">formula</span><span class="op">@</span><span class="va">isotopes</span></span></code></pre></div>
 <pre><code><span><span class="co">##      isoto number mass         </span></span>
 <span><span class="co">## [1,] "H"   "3"    "1.007825032"</span></span>
 <span><span class="co">## [2,] "N"   "1"    "14.003074"</span></span></code></pre>
-<p>Depending of the circumstances, you may want to change the charge of the molecular formula.</p>
+<p>Depending of the circumstances, you may want to change the charge of
+the molecular formula.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/set.charge.formula.html">set.charge.formula</a></span><span class="op">(</span><span class="va">formula</span>, charge<span class="op">=</span><span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="initializing-a-formula-from-the-symbol-expression">Initializing a Formula from the Symbol Expression<a class="anchor" aria-label="anchor" href="#initializing-a-formula-from-the-symbol-expression"></a>
 </h3>
-<p>Other way to create a <code>cdkFormula</code> is from the symbol expression. Thus, setting the characters of the elemental formula, the function <code>get.formula</code> parses it to an object of <code>cdkFormula-class</code>.</p>
+<p>Other way to create a <code>cdkFormula</code> is from the symbol
+expression. Thus, setting the characters of the elemental formula, the
+function <code>get.formula</code> parses it to an object of
+<code>cdkFormula-class</code>.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get.formula.html">get.formula</a></span><span class="op">(</span><span class="st">'NH4'</span>, charge <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="va">formula</span></span></code></pre></div>
@@ -129,7 +158,15 @@
 <div class="section level3">
 <h3 id="generating-molecular-formula">Generating Molecular Formula<a class="anchor" aria-label="anchor" href="#generating-molecular-formula"></a>
 </h3>
-<p>Mass spectrometry is an essential and reliable technique to determine the molecular mass of compounds. Conversely, one can use the measured mass to identify the compound via its elemental formula. One of the limitations of the method is the precision and accuracy of the instrumentation. As a result, rather than specify exact masses, we specify tolerances or ranges of possible mass, resulting in multiple candidate formulae for a given mass window. The <code>generate.formula</code> function returns a list of formulae which have a given mass (within an error window)</p>
+<p>Mass spectrometry is an essential and reliable technique to determine
+the molecular mass of compounds. Conversely, one can use the measured
+mass to identify the compound via its elemental formula. One of the
+limitations of the method is the precision and accuracy of the
+instrumentation. As a result, rather than specify exact masses, we
+specify tolerances or ranges of possible mass, resulting in multiple
+candidate formulae for a given mass window. The
+<code>generate.formula</code> function returns a list of formulae which
+have a given mass (within an error window)</p>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mfSet</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/generate.formula.html">generate.formula</a></span><span class="op">(</span><span class="fl">18.03383</span>, window<span class="op">=</span><span class="fl">1</span>,</span>
 <span>    elements<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C"</span>,<span class="fl">0</span>,<span class="fl">50</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"H"</span>,<span class="fl">0</span>,<span class="fl">50</span><span class="op">)</span>,<span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"N"</span>,<span class="fl">0</span>,<span class="fl">50</span><span class="op">)</span><span class="op">)</span>,</span>
@@ -143,18 +180,33 @@
 <span><span class="co">## </span></span>
 <span><span class="co">## [[3]]</span></span>
 <span><span class="co">## cdkFormula:  H18 , mass =  18.14085 , charge =  0</span></span></code></pre>
-<p>It is important to know if an elemental formula is valid. The method <code>isvalid.formula</code> provides this function. Two constraints can be applied, the <a href="https://en.wikipedia.org/wiki/Nitrogen_rule" class="external-link">nitrogen rule</a> and the <a href="https://fiehnlab.ucdavis.edu/projects/seven-golden-rules/ring-double-bonds" class="external-link">RDBE rule</a> (Ring Double Bond Equivalent).</p>
+<p>It is important to know if an elemental formula is valid. The method
+<code>isvalid.formula</code> provides this function. Two constraints can
+be applied, the <a href="https://en.wikipedia.org/wiki/Nitrogen_rule" class="external-link">nitrogen rule</a> and
+the <a href="https://fiehnlab.ucdavis.edu/projects/seven-golden-rules/ring-double-bonds" class="external-link">RDBE
+rule</a> (Ring Double Bond Equivalent).</p>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get.formula.html">get.formula</a></span><span class="op">(</span><span class="st">'NH4'</span>, charge <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/isvalid.formula.html">isvalid.formula</a></span><span class="op">(</span><span class="va">formula</span>,rule<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"nitrogen"</span>,<span class="st">"RDBE"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] FALSE</span></span></code></pre>
-<p>We can observe that the ammonium is only valid if it is defined with charge of +1.</p>
+<p>We can observe that the ammonium is only valid if it is defined with
+charge of +1.</p>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get.formula.html">get.formula</a></span><span class="op">(</span><span class="st">'NH4'</span>, charge <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="fu"><a href="../reference/isvalid.formula.html">isvalid.formula</a></span><span class="op">(</span><span class="va">formula</span>,rule<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"nitrogen"</span>,<span class="st">"RDBE"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## [1] TRUE</span></span></code></pre>
-<p>The <code>generate.formula</code> method can perform these validation tests during formula generation by setting <code>validation=TRUE</code>. However, this can significantly slow down the process of genersating formulae, especially with larger mass windows. When the default of <code>FALSE</code> is used, nonsensical formulae may be generated, and it’s up to the user to filter them out.</p>
-<p>In contrast, the <code>generate.formula.iter</code> method employs the Round Robin formula generation algorithm, which is significantly faster than the default method. In contrast to <code>generate/formula</code>, this method returns an iterator which allows you to process large formula sets without excessive memory usage.</p>
+<p>The <code>generate.formula</code> method can perform these validation
+tests during formula generation by setting <code>validation=TRUE</code>.
+However, this can significantly slow down the process of genersating
+formulae, especially with larger mass windows. When the default of
+<code>FALSE</code> is used, nonsensical formulae may be generated, and
+it’s up to the user to filter them out.</p>
+<p>In contrast, the <code>generate.formula.iter</code> method employs
+the Round Robin formula generation algorithm, which is significantly
+faster than the default method. In contrast to
+<code>generate/formula</code>, this method returns an iterator which
+allows you to process large formula sets without excessive memory
+usage.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">mit</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/generate.formula.iter.html">generate.formula.iter</a></span><span class="op">(</span><span class="fl">100</span>, charge<span class="op">=</span><span class="fl">0</span>, window<span class="op">=</span><span class="fl">0.1</span>,</span>
 <span>                             elements<span class="op">=</span><span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"C"</span>,<span class="fl">0</span>,<span class="fl">50</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"H"</span>,<span class="fl">0</span>,<span class="fl">50</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"N"</span>,<span class="fl">0</span>,<span class="fl">50</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
@@ -169,12 +221,19 @@
 <span><span class="co">## [1] "[12]C2[1]H6[14]N5"</span></span>
 <span><span class="co">## [1] "[12]C[1]H4[14]N6"</span></span>
 <span><span class="co">## [1] "[1]H2[14]N7"</span></span></code></pre>
-<p>Note that by default, this function will not check for validity of the generated formulae.</p>
+<p>Note that by default, this function will not check for validity of
+the generated formulae.</p>
 </div>
 <div class="section level3">
 <h3 id="calculating-isotope-pattern">Calculating Isotope Pattern<a class="anchor" aria-label="anchor" href="#calculating-isotope-pattern"></a>
 </h3>
-<p>Due to the measurement errors in medium resolution spectrometry, a given error window can result in a massive number of candidate formulae. The isotope pattern of ions obtained experimentally can be compared with the theoretical ones. The best match is reflected as the most probable elemental formula. <code>rcdk</code> provides the function <code>get.isotope.pattern</code> which predicts the theoretical isotope pattern given a formula.</p>
+<p>Due to the measurement errors in medium resolution spectrometry, a
+given error window can result in a massive number of candidate formulae.
+The isotope pattern of ions obtained experimentally can be compared with
+the theoretical ones. The best match is reflected as the most probable
+elemental formula. <code>rcdk</code> provides the function
+<code>get.isotope.pattern</code> which predicts the theoretical isotope
+pattern given a formula.</p>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">formula</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get.formula.html">get.formula</a></span><span class="op">(</span><span class="st">'CHCl3'</span>, charge <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">isotopes</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/get.isotopes.pattern.html">get.isotopes.pattern</a></span><span class="op">(</span><span class="va">formula</span>,minAbund<span class="op">=</span><span class="fl">0.1</span><span class="op">)</span></span>
@@ -183,7 +242,10 @@
 <span><span class="co">## [1,] 117.9144 1.0000000</span></span>
 <span><span class="co">## [2,] 119.9114 0.9598733</span></span>
 <span><span class="co">## [3,] 121.9085 0.3071189</span></span></code></pre>
-<p>In this example we generate a formula for a possible compound with a charge (<span class="math inline">\(z \approx 0\)</span>) containing the standard elements C, H, and Cl. The isotope pattern can be visually inspected, as shown below.</p>
+<p>In this example we generate a formula for a possible compound with a
+charge (<span class="math inline">\(z \approx 0\)</span>) containing the
+standard elements C, H, and Cl. The isotope pattern can be visually
+inspected, as shown below.</p>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">isotopes</span>, type<span class="op">=</span><span class="st">"h"</span>, xlab<span class="op">=</span><span class="st">"m/z"</span>, ylab<span class="op">=</span><span class="st">"Intensity"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="molform_files/figure-html/unnamed-chunk-11-1.png" width="700"></p>
