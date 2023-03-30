@@ -43,7 +43,7 @@ public class MoleculeImage {
         SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
         IAtomContainer mol = sp.parseSmiles("c1ccccc1CC(=O)C1COCNC1");
 
-        RcdkDepictor depictor = new RcdkDepictor(300, 300, 1.3, "cow", "off", "reagents", true, false, 100, "");
+        RcdkDepictor depictor = new RcdkDepictor(300, 300, 1.3, "cow", "off", "reagents", true, false, 100, "", false);
         MoleculeImage mi = new MoleculeImage(mol, depictor);
         byte[] bytes = mi.getBytes(300, 300, "png");
         FileOutputStream fos = new FileOutputStream("test.png");

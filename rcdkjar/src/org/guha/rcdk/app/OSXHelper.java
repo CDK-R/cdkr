@@ -49,13 +49,14 @@ public class OSXHelper {
         boolean showTitle = args[9].equals("TRUE") ? true : false;
         int smaLimit = Integer.parseInt(args[10]);
         String sma = args[11];
+        boolean fillToFit = args[12].equals("TRUE") ? true : false;
 
         depictor = new RcdkDepictor(width, height, zoom, style, annotate, abbr,
-                suppressh, showTitle, smaLimit, sma);
+                suppressh, showTitle, smaLimit, sma, fillToFit);
 
         int ncol = -1;
-        if (args.length == 13)
-            ncol = Integer.parseInt(args[12]);
+        if (args.length == 14)
+            ncol = Integer.parseInt(args[13]);
 
         if (smiles != null && !smiles.equals("")) {
             OSXHelper helper = new OSXHelper();

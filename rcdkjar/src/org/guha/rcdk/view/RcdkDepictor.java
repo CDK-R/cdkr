@@ -41,6 +41,7 @@ public class RcdkDepictor {
     boolean showTitle = false;
     int smaLimit = 100;
     String sma = "";
+    boolean fillToFit = false;
 
     private final IChemObjectBuilder builder = SilentChemObjectBuilder.getInstance();
     private final DepictionGenerator generator = new DepictionGenerator();
@@ -50,11 +51,12 @@ public class RcdkDepictor {
 
 
     public RcdkDepictor(int width, int height) throws IOException {
-        this(width, height, 1.3, "cow", "off", "on", true, false, 100, "");
+        this(width, height, 1.3, "cow", "off", "on", true, false, 100, "", false);
     }
 
     public RcdkDepictor(int width, int height, double zoom, String style, String annotate, String abbr,
-                        boolean suppressh, boolean showTitle, int smaLimit, String sma) throws IOException {
+                        boolean suppressh, boolean showTitle, int smaLimit, String sma,
+                        boolean fillToFit) throws IOException {
         this.width = width;
         this.height = height;
         this.zoom = zoom;
@@ -65,6 +67,7 @@ public class RcdkDepictor {
         this.showTitle = showTitle;
         this.smaLimit = smaLimit;
         this.sma = sma;
+        this.fillToFit = fillToFit;
 
         boolean alignRxnMap = true;
         String fmt = "PNG";
@@ -176,6 +179,14 @@ public class RcdkDepictor {
         this.sma = sma;
     }
 
+    public boolean getFillToFit() {
+        return fillToFit;
+    }
+
+    public void setFillToFit(boolean fillToFit) {
+        this.fillToFit = fillToFit;
+    }
+
     public BufferedImage getImage(IAtomContainer atomContainer) throws CDKException {
         return generate(atomContainer).toImg();
     }
@@ -282,6 +293,9 @@ public class RcdkDepictor {
             else
                 myGenerator = myGenerator.withMolTitle();
         }
+        
+        if (fillToFit)
+            myGenerator = myGenerator.withFillToFit();
 
         final Depiction depiction = isRxn ? myGenerator.depict(rxn)
                 : isRgp ? myGenerator.depict(mols, mols.size(), 1)

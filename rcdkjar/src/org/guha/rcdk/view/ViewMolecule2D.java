@@ -24,7 +24,7 @@ public class ViewMolecule2D extends JFrame {
     }
 
     public ViewMolecule2D(IAtomContainer molecule, int width, int height) throws Exception {
-        this(molecule, new RcdkDepictor(width, height, 1.3, "cow", "off", "reagents", true, false, 100, ""));
+        this(molecule, new RcdkDepictor(width, height, 1.3, "cow", "off", "reagents", true, false, 100, "", false));
     }
 
     public ViewMolecule2D(IAtomContainer molecule, RcdkDepictor depictor) throws Exception {
