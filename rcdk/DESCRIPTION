@@ -20,7 +20,6 @@ Suggests:
     knitr,
     rmarkdown,
     devtools
-SystemRequirements: Java JDK 8 or higher
 License: LGPL
 LazyLoad: yes
 LazyData: true
