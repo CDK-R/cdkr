@@ -56,7 +56,7 @@ public class MoleculeCell extends JPanel {
         SmilesParser sp = new SmilesParser(DefaultChemObjectBuilder.getInstance());
 //        IAtomContainer container = sp.parseSmiles("C1CN2CCN(CCCN(CCN(C1)Cc1ccccn1)CC2)C");
         IAtomContainer container = sp.parseSmiles("[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].[Na+].CCCCc1ccc(CO[C@H]2O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](OS(=O)(=O)[O-])[C@@H]2O[C@H]3O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](O[C@H]4O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](O[C@H]5O[C@H](COS(=O)(=O)[O-])[C@@H](OS(=O)(=O)[O-])[C@H](OS(=O)(=O)[O-])[C@@H]5OS(=O)(=O)[O-])[C@@H]4OS(=O)(=O)[O-])[C@@H]3OS(=O)(=O)[O-])cc1 ");
-        RcdkDepictor depictor = new RcdkDepictor(300, 300, 1.3, "cow", "off", "reagents", true, false, 100, "");
+        RcdkDepictor depictor = new RcdkDepictor(300, 300, 1.3, "cow", "off", "reagents", true, false, 100, "", false);
         MoleculeCell mcell = new MoleculeCell(container, depictor);
         JFrame frame = new JFrame("Molecule Cell");
         frame.getContentPane().add(mcell);

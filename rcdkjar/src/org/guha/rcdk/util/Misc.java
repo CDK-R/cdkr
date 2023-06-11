@@ -303,7 +303,7 @@ public class Misc {
      * @throws IOException
      */
     public static RcdkDepictor getDefaultDepictor() throws IOException {
-        return new RcdkDepictor(300, 300, 1.3, "cow", "off", "on", true, false, 100, "");
+        return new RcdkDepictor(300, 300, 1.3, "cow", "off", "on", true, false, 100, "", false);
     }
 
     /**
