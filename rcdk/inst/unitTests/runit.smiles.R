@@ -7,7 +7,7 @@ test.get.smiles <- function()
 
 test.get.smiles2 <- function() {
   m1 <- parse.smiles("CCCNCC")[[1]]
-  m2 <- parse.smiles("CNCCS")[[1]]
+  m2 <- parse.smiles("CCNCCS")[[1]]
   mcs <- get.mcs(m1, m2)
-  checkEquals("[CH2]NCC", get.smiles(mcs, smiles.flavors(c('Unique'))))
+  checkEquals("[CH2]CNCC", get.smiles(mcs, smiles.flavors(c('Unique'))))
 }
