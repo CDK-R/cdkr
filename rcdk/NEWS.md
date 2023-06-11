@@ -1,3 +1,7 @@
+# rcdk 3.8.0
+
+* Change DEXCRIPTION in accordance with CRAN rules about JDKs
+
 # rcdk 3.7.0
 
 * Update rCDK to work with rcdklibs 2.8
