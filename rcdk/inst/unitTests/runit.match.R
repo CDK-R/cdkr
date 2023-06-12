@@ -46,7 +46,7 @@ test.mcs1 <- function() {
   lapply(mols, do.aromaticity)
   lapply(mols, set.atom.types) 
   mcs <- get.mcs(mols[[1]], mols[[2]], TRUE)
-  checkEquals("org.openscience.cdk.AtomContainer2", .jclass(mcs))
+  checkEquals("org.openscience.cdk.silent.AtomContainer2", .jclass(mcs))
   checkEquals(9, get.atom.count(mcs))
 }
 
@@ -55,7 +55,7 @@ test.mcs3 <- function() {
   lapply(mols, do.aromaticity)
   lapply(mols, set.atom.types) 
   mcs <- get.mcs(mols[[1]], mols[[2]], TRUE)
-  checkEquals("org.openscience.cdk.AtomContainer2", .jclass(mcs))
+  checkEquals("org.openscience.cdk.silent.AtomContainer2", .jclass(mcs))
   checkEquals(21, get.atom.count(mcs))
 }
 
