@@ -1,6 +1,6 @@
 # rcdk 3.8.0
 
-* Change DEXCRIPTION in accordance with CRAN rules about JDKs
+* Change DESCRIPTION in accordance with CRAN rules about JDKs
 
 # rcdk 3.7.0
 
