@@ -1,6 +1,7 @@
 # rcdk 3.8.0
 
 * Change DESCRIPTION in accordance with CRAN rules about JDKs
+* Fix System Requirements line
 
 # rcdk 3.7.0
 
