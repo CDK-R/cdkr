@@ -3,6 +3,7 @@
 * Change DESCRIPTION in accordance with CRAN rules about JDKs
 * Fix System Requirements line
 
+
 # rcdk 3.7.0
 
 * Update rCDK to work with rcdklibs 2.8
