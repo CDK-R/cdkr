@@ -1,5 +1,6 @@
 citHeader("To cite rcdk in publications use:")
-bibentry(entry = "article",
+bibentry(
+  bibtype = "article",
 	author = c(person(given="Rajarshi",family="Guha", email="rajarshi.guha@gmail.com")),
 	journal = "Journal of Statistical Software",
 	number = 6,
