@@ -12,7 +12,7 @@
 #'   mass and window accuracy
 #' @author Miguel Rojas-Cherto (\email{miguelrojasch@@yahoo.es})
 #' @references A parallel effort to expand the Chemistry Development 
-#'   Kit: \url{http://cdk.sourceforge.net}
+#'   Kit: \url{https://cdk.github.io/}
 #' @seealso  
 #' \code{\link{get.formula}}
 #' \code{\link{set.charge.formula}}

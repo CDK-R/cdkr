@@ -18,7 +18,7 @@ This class handles molecular formulae. It provides extra
 
 \references{
 A parallel effort to expand the Chemistry Development 
-  Kit: \url{http://cdk.sourceforge.net}
+  Kit: \url{https://cdk.github.io/}
 }
 \seealso{
 \code{\link{get.formula}}

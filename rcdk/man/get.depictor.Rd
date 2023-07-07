@@ -14,7 +14,8 @@ get.depictor(
   suppressh = TRUE,
   showTitle = FALSE,
   smaLimit = 100,
-  sma = NULL
+  sma = NULL,
+  fillToFit = FALSE
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ get.depictor(
 \item{smaLimit}{Default. \code{100}}
 
 \item{sma}{Default. \code{NULL}}
+
+\item{fillToFit}{Defailt. \code{FALSE}}
 }
 \description{
 return an RcdkDepictor.
