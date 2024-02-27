@@ -2,14 +2,6 @@ url: https://cdk-r.github.io/cdkr/
 
 home:
   title: Interact with the Chemistry Development Kit
-  sidebar:
-    structure: [links, license, community, citation, authors, dev]
-
-navbar:
-  structure:
-    left:  [intro, reference, articles, tutorials, news]
-    right: [search, github]
-
 
 template:
   bootstrap: 5
