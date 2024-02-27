@@ -2,9 +2,13 @@ Package: rcdk
 Version: 3.9.0
 Date: 2024-02-20
 Title: Interface to the 'CDK' Libraries
-Authors@R: c(person('Rajarshi', 'Guha', role=c('aut',"cph"), email='rajarshi.guha@gmail.com'),
-             person('Zachary', 'Charlop-Powers', role=c('cre'), email='zach.charlop.powers@gmail.com'),
-             person('Emma', 'Schymanski', role=c('ctb'), email='schymane@gmail.com'))
+Authors@R: c(
+  person('Rajarshi', 'Guha', ,'rajarshi.guha@gmail.com', role=c('aut',"cph"),
+    comment = c(ORCID = "0000-0001-7403-8819")),
+  person('Zachary', 'Charlop-Powers', ,'zach.charlop.powers@gmail.com',role=c('cre'), 
+      comment = c(ORCID = "0000-0001-8816-4680")),
+  person('Emma', 'Schymanski', ,'schymane@gmail.com', role=c('ctb'), 
+      comment = c(ORCID = "0000-0001-6868-8145")))
 Depends:
     rcdklibs (>= 2.9)
 Imports:

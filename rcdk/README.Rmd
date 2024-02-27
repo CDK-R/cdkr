@@ -20,7 +20,8 @@ knitr::opts_chunk$set(
 [![Codecov test coverage](https://codecov.io/gh/r-lib/rcdk/branch/main/graph/badge.svg)](https://app.codecov.io/gh/CDK-R/cdkr?branch=main)
 <!-- badges: end -->
 
-pkgdown is designed to make it quick and easy to build a website for your package. You can see pkgdown in action at <https://pkgdown.r-lib.org>: this is the output of pkgdown applied to the latest version of pkgdown. Learn more in `vignette("pkgdown")` or `?build_site`.
+Allows the user to access functionality in the `CDK`, a Java framework for chemoinformatics. This allows the user to load molecules, evaluate fingerprints, calculate molecular descriptors and so on. In addition, the 'CDK' API allows the user to view structures in 2D.
+
 
 ## Installation
 
