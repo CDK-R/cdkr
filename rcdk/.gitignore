@@ -1,2 +1,6 @@
 inst/doc
 docs
+revdep/
+.RData
+.Rhistory
+.Rproj
