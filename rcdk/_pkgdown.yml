@@ -2,11 +2,14 @@ url: https://cdk-r.github.io/cdkr/
 
 template:
   bootstrap: 5
+  bslib:
+  primary: "#0054AD"
+  border-radius: 0.5rem
+  btn-border-radius: 0.25rem
 
 
 reference:
 - title: rCDK Functions
-
 
 
 - subtitle: rCDK Data and Docs
