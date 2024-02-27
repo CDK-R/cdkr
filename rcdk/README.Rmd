@@ -32,29 +32,5 @@ install.packages("rcdk")
 ```
 :::
 
-::: .rcdk-devel
-```{r, eval = FALSE}
-# Install development version from GitHub
-# install.packages("pak")
-pak::pak("r-lib/rcdk")
-```
-:::
-
-## Usage
-
-Get started with [usethis](https://usethis.r-lib.org/):
-
-```{r, eval = FALSE}
-# Run once to configure your package to use pkgdown
-usethis::use_pkgdown()
-```
-
-Then use pkgdown to build your website:
-
-```{r, eval = FALSE}
-pkgdown::build_site()
-```
-
-This generates a `docs/` directory containing a website. Your `README.md` becomes the homepage, documentation in `man/` generates a function reference, and vignettes will be rendered into `articles/`. Read `vignette("pkgdown")` for more details, and to learn how to deploy your site to GitHub pages.
 
 

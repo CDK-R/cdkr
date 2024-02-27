@@ -25,6 +25,7 @@ Suggests:
     rmarkdown,
     devtools
 License: LGPL
+URL: https://github.com/CDK-R/cdkr
 LazyLoad: yes
 LazyData: true
 Description: Allows the user to access functionality in the
