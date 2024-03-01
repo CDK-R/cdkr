@@ -23,7 +23,8 @@ Suggests:
     RUnit,
     knitr,
     rmarkdown,
-    devtools
+    devtools,
+    depict
 License: LGPL
 URL: https://github.com/CDK-R/cdkr
 LazyLoad: yes

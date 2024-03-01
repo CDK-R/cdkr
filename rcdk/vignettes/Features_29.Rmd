@@ -1,0 +1,110 @@
+---
+title: "Performance Notes"
+author: "Zaachary Charlop-Powers"
+date: "`r Sys.Date()`"
+output: 
+  rmarkdown::html_vignette:
+    toc: true	
+vignette: >
+  %\VignetteIndexEntry{Performance Notes}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+# CDK 2.9 Release Notes Vignettes
+
+[CDK 2.9 Release Notes](https://github.com/cdk/cdk/releases/tag/cdk-2.9)
+
+[rJava](https://rforge.net/rJava/docs/reference/index.html)
+
+
+## RXN Arrows
+
+https://github.com/cdk/cdk/pull/927
+
+```{r setup, message=FALSE}
+
+library(rcdklibs)
+library(depict)
+
+
+# Java Imports
+sp <- J('org.openscience.cdk.smiles.SmilesParser')
+silentchemobject <- J("org.openscience.cdk.silent.SilentChemObjectBuilder")
+smiles_parser <- new(sp, silentchemobject$getInstance())
+ReactionManipulator <- J('org.openscience.cdk.tools.manipulator.ReactionManipulator')
+IReaction <- J('org.openscience.cdk.interfaces.IReaction')
+dg <- .jnew('org.openscience.cdk.depict.DepictionGenerator')
+
+to_svg <- function(grd) {
+  svg_str <- grd$toSvgStr()
+  svg_list <- strsplit(svg_str, "\n")[[1]]
+  paste(svg_list[3:length(svg_list)], collapse="\n")
+}
+
+
+abbreviations <- .jnew('org.openscience.cdk.depict.Abbreviations')
+abbreviations$add("[Al+3].[Cl-].[Cl-].[Cl-] AlCl3")
+abbreviations$add("ClCCl DCM")
+abbreviations$setContractToSingleLabel(TRUE)
+
+```
+
+
+```{r results='asis'}
+
+rxn <- smiles_parser$parseReactionSmiles("[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][cH:13][cH:14][cH:15]1.[CH2:3]([CH2:4][C:5](=[O:6])Cl)[CH2:2][Cl:1]>[Al+3].[Cl-].[Cl-].[Cl-].C(Cl)Cl>[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][c:13]([cH:14][cH:15]1)[C:5](=[O:6])[CH2:4][CH2:3][CH2:2][Cl:1] |f:2.3.4.5| Friedel-Crafts acylation [3.10.1]")
+
+# note `as.list`
+for (mol in as.list(ReactionManipulator$getAllAtomContainers(rxn))) {
+ abbreviations$apply(mol) 
+}
+
+rxn$setDirection(IReaction$Direction$NO_GO)
+svg  <- depiction() |> depict(rxn)
+to_svg(svg)
+
+```
+
+
+
+```{r results='asis'}
+rxn <- smiles_parser$parseReactionSmiles("[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][cH:13][cH:14][cH:15]1.[CH2:3]([CH2:4][C:5](=[O:6])Cl)[CH2:2][Cl:1]>[Al+3].[Cl-].[Cl-].[Cl-].C(Cl)Cl>[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][c:13]([cH:14][cH:15]1)[C:5](=[O:6])[CH2:4][CH2:3][CH2:2][Cl:1] |f:2.3.4.5| Friedel-Crafts acylation [3.10.1]")
+
+for (mol in as.list(ReactionManipulator$getAllAtomContainers(rxn))) {
+ abbreviations$apply(mol) 
+}
+
+rxn$setDirection(IReaction$Direction$RETRO_SYNTHETIC)
+svg  <- depiction() |> depict(rxn)
+to_svg(svg)
+
+```
+
+
+```{r results='asis'}
+rxn <- smiles_parser$parseReactionSmiles("[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][cH:13][cH:14][cH:15]1.[CH2:3]([CH2:4][C:5](=[O:6])Cl)[CH2:2][Cl:1]>[Al+3].[Cl-].[Cl-].[Cl-].C(Cl)Cl>[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][c:13]([cH:14][cH:15]1)[C:5](=[O:6])[CH2:4][CH2:3][CH2:2][Cl:1] |f:2.3.4.5| Friedel-Crafts acylation [3.10.1]")
+
+for (mol in as.list(ReactionManipulator$getAllAtomContainers(rxn))) {
+ abbreviations$apply(mol) 
+}
+
+rxn$setDirection(IReaction$Direction$BIDIRECTIONAL)
+svg  <- depiction() |> depict(rxn)
+to_svg(svg)
+
+```
+
+```{r results='asis'}
+rxn <- smiles_parser$parseReactionSmiles("c1c(Cl)cccc1[N-][N+]#N>>c1c(Cl)cccc1N=[N+]=[N-]")
+
+
+for (mol in as.list(ReactionManipulator$getAllAtomContainers(rxn))) {
+ abbreviations$apply(mol) 
+}
+
+rxn$setDirection(IReaction$Direction$RESONANCE)
+svg  <- depiction() |> depict(rxn)
+to_svg(svg)
+```
