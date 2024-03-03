@@ -1,3 +1,7 @@
+# rcdk 3.9.0
+
+* Update rCDK to work with rcdklibs 2.9
+
 # rcdk 3.8.0
 
 * Change DESCRIPTION in accordance with CRAN rules about JDKs

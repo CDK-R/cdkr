@@ -2,6 +2,7 @@
 % Please edit documentation in R/deprecated_functions.R
 \docType{package}
 \name{rcdk-deprecated}
+\alias{-package}
 \alias{rcdk-deprecated}
 \alias{deprecated_rcdk_function}
 \alias{do.typing}

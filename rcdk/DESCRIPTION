@@ -1,12 +1,16 @@
 Package: rcdk
-Version: 3.8.1
-Date: 2023-06-25
+Version: 3.9.0
+Date: 2024-03-02
 Title: Interface to the 'CDK' Libraries
-Authors@R: c(person('Rajarshi', 'Guha', role=c('aut',"cph"), email='rajarshi.guha@gmail.com'),
-             person('Zachary', 'Charlop-Powers', role=c('cre'), email='zach.charlop.powers@gmail.com'),
-             person('Emma', 'Schymanski', role=c('ctb'), email='schymane@gmail.com'))
+Authors@R: c(
+  person('Rajarshi', 'Guha', ,'rajarshi.guha@gmail.com', role=c('aut',"cph"),
+    comment = c(ORCID = "0000-0001-7403-8819")),
+  person('Zachary', 'Charlop-Powers', ,'zach.charlop.powers@gmail.com',role=c('cre'), 
+      comment = c(ORCID = "0000-0001-8816-4680")),
+  person('Emma', 'Schymanski', ,'schymane@gmail.com', role=c('ctb'), 
+      comment = c(ORCID = "0000-0001-6868-8145")))
 Depends:
-    rcdklibs (>= 2.8)
+    rcdklibs (>= 2.9)
 Imports:
     fingerprint,
     rJava,
@@ -19,8 +23,10 @@ Suggests:
     RUnit,
     knitr,
     rmarkdown,
-    devtools
+    devtools,
+    depict
 License: LGPL
+URL: https://github.com/CDK-R/cdkr
 LazyLoad: yes
 LazyData: true
 SystemRequirements: Java (>= 8)
@@ -29,6 +35,7 @@ Description: Allows the user to access functionality in the
     'CDK', a Java framework for chemoinformatics. This allows the user to load
     molecules, evaluate fingerprints, calculate molecular descriptors and so on.
     In addition, the 'CDK' API allows the user to view structures in 2D.
-RoxygenNote: 7.2.3
+RoxygenNote: 7.3.1
 VignetteBuilder: knitr
 Encoding: UTF-8
+Remotes: CDK-R/depict

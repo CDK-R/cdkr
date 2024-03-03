@@ -53,7 +53,7 @@
 #'  length \code{2}.
 #'  
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
-#' @docType package
+#' @aliases rcdk-package
 NULL
 
 ## An example of getting all the coordinates for a molecule

@@ -9,6 +9,7 @@ Version](https://www.r-pkg.org/badges/version/rcdk?color=green)](https://cran.r-
 Downloads](http://cranlogs.r-pkg.org/badges/grand-total/rcdk?color=green)](https://cran.r-project.org/package=rcdk)
 [![CRAN Downloads
 Monthyl](http://cranlogs.r-pkg.org/badges/last-month/rcdk?color=green)](https://cran.r-project.org/package=rcdk)
+[![R-CMD-check](https://github.com/zachcp/cdkr/workflows/R-CMD-check/badge.svg)](https://github.com/zachcp/cdkr/actions)
 
 # rcdk: a chemistry library
 
@@ -36,25 +37,23 @@ install_github("https://github.com/CDK-R/cdkr", subdir="rcdk")
 Information on building and devloping the CDKR package is available in
 teh Otherwise if you prefer the command line
 
-``` 
-    cd /tmp/
-    git clone git@github.com:CDK-R/rcdklibs.git
-    R CMD INSTALL rcdklibs
-    git clone git@github.com:CDK-R/cdkr.git
-    cd cdkr/rcdkjar
-    ant clean jar
-    cd ../
-    R CMD INSTALL rcdk
-```
+        cd /tmp/
+        git clone git@github.com:CDK-R/rcdklibs.git
+        R CMD INSTALL rcdklibs
+        git clone git@github.com:CDK-R/cdkr.git
+        cd cdkr/rcdkjar
+        ant clean jar
+        cd ../
+        R CMD INSTALL rcdk
 
 Before performing the install, you should have the following
 dependencies installed:
 
-  - rJava
-  - fingerprint
-  - png
-  - RUnit
-  - Java JDK \>= 1.8
+- rJava
+- fingerprint
+- png
+- RUnit
+- Java JDK \>= 1.8
 
 For the png package, I have tested
 [png-0.1-7](http://www.rforge.net/png/files/)
@@ -86,7 +85,7 @@ You can try the following:
     # set the java version
     R CMD javareconf  # or ....
     sudo R CMD javareconf
-    
+
     # re install fromfrom R
     install.packages('rJava', type="source")
 

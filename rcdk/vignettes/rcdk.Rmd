@@ -2,6 +2,20 @@
 title: "Using the CDK from R"
 author: "Rajarshi Guha"
 date: "`r Sys.Date()`"
+description: >
+  Learn how to get started with the basics of pkgdown.
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Using the CDK from R}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+---
+title: "Using the CDK from R"
+author: "Rajarshi Guha"
+date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
     toc: true

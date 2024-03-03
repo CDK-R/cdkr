@@ -1,12 +1,22 @@
 url: https://cdk-r.github.io/cdkr/
 
+home:
+  title: Interact with the Chemistry Development Kit
+
+
 template:
   bootstrap: 5
+  bslib:
+    primary: "#0054AD"
+    border-radius: 0.5rem
+    btn-border-radius: 0.25rem
+
+development:
+  mode: auto
 
 
 reference:
 - title: rCDK Functions
-
 
 
 - subtitle: rCDK Data and Docs
