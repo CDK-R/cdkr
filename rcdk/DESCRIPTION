@@ -10,7 +10,7 @@ Authors@R: c(
   person('Emma', 'Schymanski', ,'schymane@gmail.com', role=c('ctb'), 
       comment = c(ORCID = "0000-0001-6868-8145")))
 Depends:
-    rcdklibs (>= 2.9)
+    rcdklibs (>= 2.8)
 Imports:
     fingerprint,
     rJava,
@@ -38,3 +38,4 @@ Description: Allows the user to access functionality in the
 RoxygenNote: 7.3.1
 VignetteBuilder: knitr
 Encoding: UTF-8
+Remotes: CDK-R/depict
