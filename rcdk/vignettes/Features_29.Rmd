@@ -1,12 +1,12 @@
 ---
-title: "Features 29"
+title: "Features 2.9"
 author: "Zachary Charlop-Powers"
 date: "`r Sys.Date()`"
 output: 
   rmarkdown::html_vignette:
     toc: true	
 vignette: >
-  %\VignetteIndexEntry{Performance Notes}
+  %\VignetteIndexEntry{Features 2.9}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -132,10 +132,12 @@ to_svg(svg)
 
 ### Maygen
 
+<WIP>
+
 ```{r}
 
 maygen_cls    <- J('org.openscience.cdk.structgen.maygen.Maygen')
-smioutout_cls <- J('org.openscience.cdk.structgen.maygen.SmiOutputConsumer')
+#smioutout_cls <- J('org.openscience.cdk.structgen.maygen.SmiOutputConsumer')
 silentchemobject <- J("org.openscience.cdk.silent.SilentChemObjectBuilder")
 smigen_cls    <- J('org.openscience.cdk.smiles.SmilesGenerator')
 smigen <- .jnew('org.openscience.cdk.smiles.SmilesGenerator')
