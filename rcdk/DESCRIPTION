@@ -10,7 +10,7 @@ Authors@R: c(
   person('Emma', 'Schymanski', ,'schymane@gmail.com', role=c('ctb'), 
       comment = c(ORCID = "0000-0001-6868-8145")))
 Depends:
-    rcdklibs (>= 2.8)
+    rcdklibs (>= 2.9)
 Imports:
     fingerprint,
     rJava,
