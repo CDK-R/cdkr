@@ -1,11 +1,12 @@
-pandoc: 2.19.2
+pandoc: 3.1.11
 pkgdown: 2.0.7
 pkgdown_sha: ~
 articles:
+  Features_29: Features_29.html
   PerformanceNotes: PerformanceNotes.html
   molform: molform.html
-  using-rcdk: using-rcdk.html
-last_built: 2024-01-08T21:44Z
+  rcdk: rcdk.html
+last_built: 2024-03-04T02:00Z
 urls:
   reference: https://cdk-r.github.io/cdkr/reference
   article: https://cdk-r.github.io/cdkr/articles
