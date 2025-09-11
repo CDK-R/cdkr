@@ -32,21 +32,21 @@ atomic properties into account into account
 \item pubchem - 881 bit fingerprints defined by PubChem
 \item kr - 4860 bit fingerprint defined by Klekota and Roth
 \item shortestpath - A fingerprint based on the shortest paths between pairs of atoms and takes into account ring systems, charges etc.
-\item signature - A feature,count type of fingerprint, similar in nature to circular fingerprints, but based on the signature 
+\item signature - A feature,count type of fingerprint, similar in nature to circular fingerprints, but based on the signature
 descriptor
 \item circular - An implementation of the ECFP6 (default) fingerprint. Other circular types can be chosen by modifying the \code{circular.type} parameter.
 \item substructure - Fingerprint based on list of SMARTS pattern. By default a set of functional groups is tested.
 }}
 
 \item{fp.mode}{The style of fingerprint. Specifying "`bit`" will return a binary fingerprint,
-"`raw`" returns the the original representation (usually sequence of integers) and 
+"`raw`" returns the the original representation (usually sequence of integers) and
 "`count`" returns the fingerprint as a sequence of counts.}
 
 \item{depth}{The search depth. This argument is ignored for the
 `pubchem`, `maccs`, `kr` and `estate` fingerprints}
 
-\item{size}{The final length of the fingerprint. 
-This argument is ignored for the `pubchem`, `maccs`, `kr`, `signature`, `circular` and 
+\item{size}{The final length of the fingerprint.
+This argument is ignored for the `pubchem`, `maccs`, `kr`, `signature`, `circular` and
 `estate` fingerprints}
 
 \item{substructure.pattern}{List of characters containing the SMARTS pattern to match. If the an empty list is provided (default) than the functional groups substructures (default in CDK) are used.}
@@ -56,7 +56,7 @@ This argument is ignored for the `pubchem`, `maccs`, `kr`, `signature`, `circula
 \item{verbose}{Verbose output if \code{TRUE}}
 }
 \value{
-an S4 object of class \code{\link{fingerprint-class}} or \code{\link{featvec-class}}, 
+an S4 object of class \code{\link[fingerprint]{fingerprint-class}} or \code{\link[fingerprint]{featvec-class}},
 which can be manipulated with the fingerprint package.
 }
 \description{
@@ -88,7 +88,7 @@ smarts <- c("c1ccccc1", "[CX4H3][#6]", "[CX2]#[CX2]")
 fps <- get.fingerprint(mol1, type='substructure', fp.mode='count',
     substructure.pattern=smarts)
 
-## get ECFP0 count fingerprints 
+## get ECFP0 count fingerprints
 mol2 <- parse.smiles("C1=CC=CC(=C1)CCCC2=CC=CC=C2")[[1]]
 fps <- get.fingerprint(mol2, type='circular', fp.mode='count', circular.type='ECFP0')
 }
