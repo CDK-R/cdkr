@@ -1,6 +1,6 @@
-# rcdk 3.9.0
+# rcdk 3.8.2
 
-* Update rCDK to work with rcdklibs 2.9
+* Update rCDK to work with rcdklibs 2.11
 
 # rcdk 3.8.0
 
