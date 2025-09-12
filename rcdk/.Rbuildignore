@@ -6,3 +6,4 @@
 ^pkgdown$
 ^revdep$
 README.Rmd
+vignettes/Features_29.Rmd
