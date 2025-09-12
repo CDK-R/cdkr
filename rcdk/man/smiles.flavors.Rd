@@ -46,11 +46,11 @@ A numeric representing the bitwise `OR`` of the specified flavors
 \description{
 The CDK supports a variety of customizations for SMILES generation including
 the use of lower case symbols for aromatic compounds to the use of the ChemAxon
-\href{http://butane.chem.uiuc.edu/jsmoore/marvin/help/formats/cxsmiles-doc.html}{CxSmiles}
+\href{https://docs.chemaxon.com/display/docs/formats_chemaxon-extended-smiles-and-smarts-cxsmiles-and-cxsmarts.md}{CxSmiles}
 format. Each 'flavor' is represented by an integer and multiple
 customizations are bitwise OR'ed. This method accepts the names of one or
 more customizations and returns the bitwise OR of them.
-See \href{https://cdk.github.io/cdk/2.3/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
+See \href{https://cdk.github.io/cdk/2.10/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
 for the list of flavors and what they mean.
 }
 \examples{
@@ -64,7 +64,7 @@ get.smiles(m,flavor = smiles.flavors(c("CxSmiles","UseAromaticSymbols")))
 
 }
 \references{
-\href{https://cdk.github.io/cdk/2.3/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
+\href{https://cdk.github.io/cdk/2.10/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
 }
 \seealso{
 \code{\link{get.smiles}}

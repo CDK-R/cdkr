@@ -40,4 +40,3 @@ Description: Allows the user to access functionality in the
 RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 Encoding: UTF-8
-Remotes: CDK-R/depict

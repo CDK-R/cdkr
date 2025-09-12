@@ -7,7 +7,7 @@
 get.chem.object.builder()
 }
 \value{
-An instance of \href{https://cdk.github.io/cdk/2.5/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}
+An instance of \href{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}
 }
 \description{
 The CDK employs a builder design pattern to construct
@@ -19,7 +19,7 @@ a builder object when directly working with the CDK API via
 `rJava`.
 }
 \details{
-This method returns an instance of the \href{https://cdk.github.io/cdk/2.5/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}. 
+This method returns an instance of the \href{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}. 
 Note that this is a static object that is created at package load time, 
 and the same instance is returned whenever this function is called.
 }

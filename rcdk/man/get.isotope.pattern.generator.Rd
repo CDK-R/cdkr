@@ -18,7 +18,7 @@ minimum abundance specified. This object can be used to generate all combinatori
 chemical isotopes given a structure.
 }
 \references{
-\url{http://cdk.github.io/cdk/1.5/docs/api/org/openscience/cdk/formula/IsotopePatternGenerator.html}
+\url{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/formula/IsotopePatternGenerator.html}
 }
 \author{
 Miguel Rojas Cherto

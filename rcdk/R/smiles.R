@@ -2,11 +2,11 @@
 #'
 #' The CDK supports a variety of customizations for SMILES generation including
 #' the use of lower case symbols for aromatic compounds to the use of the ChemAxon
-#' \href{http://butane.chem.uiuc.edu/jsmoore/marvin/help/formats/cxsmiles-doc.html}{CxSmiles}
+#' \href{https://docs.chemaxon.com/display/docs/formats_chemaxon-extended-smiles-and-smarts-cxsmiles-and-cxsmarts.md}{CxSmiles}
 #' format. Each 'flavor' is represented by an integer and multiple
 #' customizations are bitwise OR'ed. This method accepts the names of one or
 #' more customizations and returns the bitwise OR of them.
-#' See \href{https://cdk.github.io/cdk/2.3/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
+#' See \href{https://cdk.github.io/cdk/2.10/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
 #' for the list of flavors and what they mean.
 #'
 #' @param flavors A character vector of flavors. The default is \code{Generic} 
@@ -42,7 +42,7 @@
 #' @md
 #' @return A numeric representing the bitwise `OR`` of the specified flavors
 #' @seealso \code{\link{get.smiles}}
-#' @references \href{https://cdk.github.io/cdk/2.3/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
+#' @references \href{https://cdk.github.io/cdk/2.10/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html}{CDK documentation}
 #' @examples
 #' m <- parse.smiles('C1C=CCC1N(C)c1ccccc1')[[1]]
 #' get.smiles(m)
@@ -96,7 +96,7 @@ smiles.flavors <- function(flavors = c('Generic')) {
 #' The function will generate a SMILES representation of an
 #' `IAtomContainer` object. The default parameters of the CDK SMILES
 #' generator are used. This can mean that for large ring systems the
-#' method may fail. See CDK \href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/smiles/SmilesGenerator.html}{Javadocs}
+#' method may fail. See CDK \href{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/smiles/SmilesGenerator.html}{Javadocs}
 #' for more information
 #' @param molecule The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @param flavor The type of SMILES to generate. See \code{\link{smiles.flavors}}. Default is `Generic`
@@ -106,7 +106,7 @@ smiles.flavors <- function(flavors = c('Generic')) {
 #' @seealso \code{\link{parse.smiles}}, \code{\link{smiles.flavors}}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
-#' @references \href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/smiles/SmilesGenerator.html}{SmilesGenerator} 
+#' @references \href{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/smiles/SmilesGenerator.html}{SmilesGenerator} 
 #' @examples 
 #' m <- parse.smiles('C1C=CCC1N(C)c1ccccc1')[[1]]
 #' get.smiles(m)
@@ -127,7 +127,7 @@ get.smiles <- function(molecule, flavor = smiles.flavors(c('Generic')), smigen =
 #' to instantiate a new parser for each call
 #' 
 #' @return A `jobjRef` object corresponding to the CDK 
-#' \href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/smiles/SmilesParser.html}{SmilesParser} class
+#' \href{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/smiles/SmilesParser.html}{SmilesParser} class
 #' @seealso \code{\link{get.smiles}}, \code{\link{parse.smiles}}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
