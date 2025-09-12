@@ -5,11 +5,11 @@ Title: Interface to the 'CDK' Libraries
 Authors@R: c(
   person('Rajarshi', 'Guha', ,'rajarshi.guha@gmail.com', role=c('aut',"cph"),
     comment = c(ORCID = "0000-0001-7403-8819")),
-  person('Zachary', 'Charlop-Powers', ,'zach.charlop.powers@gmail.com',role=c('cre'), 
+  person('Zachary', 'Charlop-Powers', ,'zach.charlop.powers@gmail.com',role=c('cre'),
       comment = c(ORCID = "0000-0001-8816-4680")),
-  person('Emma', 'Schymanski', ,'schymane@gmail.com', role=c('ctb'), 
+  person('Emma', 'Schymanski', ,'schymane@gmail.com', role=c('ctb'),
       comment = c(ORCID = "0000-0001-6868-8145")),
-  person('Egon', 'Willighagen', ,'egon.willighagen@maastrichtuniversity.nl', role=c('ctb'), 
+  person('Egon', 'Willighagen', ,'egon.willighagen@maastrichtuniversity.nl', role=c('ctb'),
       comment = c(ORCID = "0000-0001-7542-0286")))
 Depends:
     rcdklibs (>= 2.9)
@@ -25,8 +25,7 @@ Suggests:
     RUnit,
     knitr,
     rmarkdown,
-    devtools,
-    depict
+    devtools
 License: LGPL
 URL: https://github.com/CDK-R/cdkr
 LazyLoad: yes
