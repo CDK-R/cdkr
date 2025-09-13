@@ -159,7 +159,7 @@ get.smiles(mols[[3]], smiles.flavors(c('UseAromaticSymbols')))
 get.smiles(mols[[3]], smiles.flavors(c('Generic','CxSmiles')))
 ```
 
-Using the [CxSmiles](http://butane.chem.uiuc.edu/jsmoore/marvin/help/formats/cxsmiles-doc.html) flavors allows the user to encode a variety of information in the SMILES string, such as 2D or 3D coordinates.
+Using the [CxSmiles](https://docs.chemaxon.com/display/docs/formats_chemaxon-extended-smiles-and-smarts-cxsmiles-and-cxsmarts.md) flavors allows the user to encode a variety of information in the SMILES string, such as 2D or 3D coordinates.
 
 ```{r}
 m <- parse.smiles('CCC')[[1]]
