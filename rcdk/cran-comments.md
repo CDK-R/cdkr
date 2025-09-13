@@ -1,5 +1,6 @@
 ## General Comments
 
+- 3rd resubmission. Fixed the final URL issue. More long test avoidance on CRAN/linux
 - 2nd resubmission. The URL issue seems to be related to CACHE; I've slimmed the Unit tests to fit in time.
 - resubmission with a number of small URL fixes
 - submission of rcdk 3.8.2
