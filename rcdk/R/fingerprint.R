@@ -40,15 +40,13 @@
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 #' @examples
 #' ## get some molecules
-#' sp <- get.smiles.parser()
-#' smiles <- c('CCC', 'CCN', 'CCN(C)(C)', 'c1ccccc1Cc1ccccc1','C1CCC1CC(CN(C)(C))CC(=O)CC')
+#' smiles <- c('CCC', 'CCN')
 #' mols <- parse.smiles(smiles)
 #'
-#' ## get a single fingerprint using the standard
-#' ## (hashed, path based) fingerprinter
-#' fp <- get.fingerprint(mols[[1]])
+#' ## get a single fingerprint using MACCS (fast)
+#' fp <- get.fingerprint(mols[[1]], type='maccs')
 #'
-#' ## get MACCS keys for all the molecules
+#' ## get MACCS keys for both molecules
 #' fps <- lapply(mols, get.fingerprint, type='maccs')
 #'
 #' ## get Signature fingerprint
