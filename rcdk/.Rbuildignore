@@ -7,3 +7,5 @@
 ^revdep$
 README.Rmd
 vignettes/Features_29.Rmd
+^doc$
+^Meta$
