@@ -3,17 +3,10 @@ test.fp <- function() {
     fp <- get.fingerprint(mol, type='maccs')
     checkTrue(length(fp@bits) > 0)
 
-    # Skip slow tests during CRAN check (use multiple detection methods)
-    is_cran_check <- Sys.getenv("_R_CHECK_PACKAGE_NAME_", "") != "" ||
-                     Sys.getenv("_R_CHECK_TIMINGS_", "") != "" ||
-                     identical(Sys.getenv("NOT_CRAN"), "false")
-
-    if (!is_cran_check) {
-        fp <- get.fingerprint(mol, type='kr')
-        checkTrue(length(fp@bits) > 0)
-        fp <- get.fingerprint(mol, type='shortestpath')
-        checkTrue(length(fp@bits) > 0)
-    }
+    fp <- get.fingerprint(mol, type='kr')
+    checkTrue(length(fp@bits) > 0)
+    fp <- get.fingerprint(mol, type='shortestpath')
+    checkTrue(length(fp@bits) > 0)
 }
 
 # Substructure test are inspired by the test for the substructure fingerprints in CDK
