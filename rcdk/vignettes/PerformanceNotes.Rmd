@@ -13,7 +13,7 @@ vignette: >
 
 ## rCDK Performance
 
-In September 2022, of this year, [Stepehn Neumann](https://gist.github.com/sneumann)
+In September 2022, of this year, [Stephen Neumann](https://gist.github.com/sneumann)
 [created a benchmark](https://gist.github.com/sneumann/959a6d205ea4ac73eaf1393da0ec0673) for moecular weight calculation that he [announced on twitter](https://x.com/sneumannoffice/status/1570070283083710465?s=20&t=RqJR3Bbh-DEcbCf2tWUEBQ) showing that rCDK had dismal performance relative to other tools in the R ecosystem. Something seemed a bit off so I looked into the code.
 
 What I discovered is that the mass spec calculations were mediated by R classes instead of accessing the underlying Java code directly and if you write a function that does

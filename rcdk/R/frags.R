@@ -22,7 +22,7 @@
 #' `frameworks`. Each of these elements is either a character vector of SMILES strings or a list of
 #' `IAtomContainer` objects.
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
-#' @seealso [get.exhuastive.fragments()]
+#' @seealso [get.exhaustive.fragments()]
 #' @export
 #' @examples 
 #' mol <- parse.smiles('c1ccc(cc1)CN(c2cc(ccc2[N+](=O)[O-])c3c(nc(nc3CC)N)N)C')[[1]]

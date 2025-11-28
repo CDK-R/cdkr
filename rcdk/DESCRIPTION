@@ -33,7 +33,7 @@ LazyData: true
 SystemRequirements: Java (>= 8)
 BugReports: https://github.com/CDK-R/cdkr/issues
 Description: Allows the user to access functionality in the
-    'CDK', a Java framework for chemoinformatics. This allows the user to load
+    'CDK', a Java framework for cheminformatics. This allows the user to load
     molecules, evaluate fingerprints, calculate molecular descriptors and so on.
     In addition, the 'CDK' API allows the user to view structures in 2D.
 RoxygenNote: 7.3.3

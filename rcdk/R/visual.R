@@ -83,7 +83,7 @@ get.depictor <- function(width = 200, height = 200, zoom = 1.3, style = "cow", a
 #' view.molecule.2d
 #' 
 #' Create a 2D depiction of a molecule. If there are more than
-#' one molecules supplied, return a grid woth \code{ncol} columns,.
+#' one molecules supplied, return a grid with \code{ncol} columns,.
 #' 
 #' @param molecule The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @param ncol Default \code{4}
