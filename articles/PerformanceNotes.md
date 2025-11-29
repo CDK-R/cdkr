@@ -1,0 +1,186 @@
+# Performance Notes
+
+## rCDK Performance
+
+In September 2022, of this year, [Stepehn
+Neumann](https://gist.github.com/sneumann) [created a
+benchmark](https://gist.github.com/sneumann/959a6d205ea4ac73eaf1393da0ec0673)
+for moecular weight calculation that he [announced on
+twitter](https://twitter.com/sneumannoffice/status/1570070283083710465?s=20&t=RqJR3Bbh-DEcbCf2tWUEBQ)
+showing that rCDK had dismal performance relative to other tools in the
+R ecosystem. Something seemed a bit off so I looked into the code.
+
+What I discovered is that the mass spec calculations were mediated by R
+classes instead of accessing the underlying Java code directly and if
+you write a function that does that you get a speedup, and if you avoid
+reflection by creating static calls then you get a really fast function.
+
+This is a good example of how to think about using Java from within R
+where the use of the helper rJava functions, `J` and `$` allow you to
+prototype code and benefit from reflection so you can code sort of like
+you would in R. Then, if you need performance, you can tighten down the
+code a bit by making the calls static. You can see that progression in
+the code below which is accompanied by the outputs from those
+benchmarks.
+
+``` sh
+will give (2/3) runtime in µs:
+   21 OrgMassSpecR 
+  163 MetaboCoreUtils
+  197 enviPat 
+  545 Rdisop 
+  645 CHNOSZ 
+ 4863 ChemmineR 
+22510 rcdk
+```
+
+<https://gist.github.com/sneumann/959a6d205ea4ac73eaf1393da0ec0673> \##
+Benchmark
+
+``` r
+# Bioconductor Packages. Use BiocManager::install()
+#   Rdisop MetaboCoreUtils ChemmineR ChemmineOB enviPat
+
+library(plyr)
+library(CHNOSZ)
+library(enviPat)
+library(MetaboCoreUtils)
+library(rcdk)
+library(ChemmineR)
+library(OrgMassSpecR)
+library(Rdisop)
+#library(ChemmineOB)
+
+data(isotopes)
+
+# original
+# https://github.com/CDK-R/cdkr/blob/master/rcdk/R/formula.R
+# get.formula <- function(mf, charge=0) {
+#   
+#   manipulator <- get("mfManipulator", envir = .rcdk.GlobalEnv)
+#   if(!is.character(mf)) {
+#     stop("Must supply a Formula string");
+#   }else{
+#     dcob <- .cdkFormula.createChemObject()
+#     molecularformula <- .cdkFormula.createFormulaObject()
+#     molecularFormula <- .jcall(manipulator,
+#                                "Lorg/openscience/cdk/interfaces/IMolecularFormula;",
+#                                "getMolecularFormula",
+#                                mf,
+#                                .jcast(molecularformula,.IMolecularFormula),
+#                                TRUE);
+#   }
+#   
+#   D <- new(J("java/lang/Integer"), as.integer(charge))
+#   .jcall(molecularFormula,"V","setCharge",D);
+#   object <- .cdkFormula.createObject(.jcast(molecularFormula,.IMolecularFormula));
+#   return(object);
+# }
+
+
+mfManipulator    <- J("org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator")
+silentchemobject <- J("org.openscience.cdk.silent.SilentChemObjectBuilder")
+
+
+#' Rewrite the formual object and directly access Java
+#'
+get.formula2 <- function(mf) {
+  
+  formula <- mfManipulator$getMolecularFormula(
+    "C2H3", 
+    silentchemobject$getInstance())
+  
+  mfManipulator$getMass(formula)
+  
+}
+
+#' Add type hints
+#'
+get.formula3 <- function(mf) {
+  builderinstance <- .jcall(
+      silentchemobject,
+     "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
+     "getInstance")
+                       
+  formula  <- .jcall(
+      mfManipulator,
+     "Lorg/openscience/cdk/interfaces/IMolecularFormula;",
+     "getMolecularFormula",
+      mf,
+      builderinstance);
+
+  mfManipulator$getMass(formula)
+  
+}
+
+
+#' Add type hints
+#'
+get.formula4 <- function(mf) {
+  builderinstance <- .jcall(
+      silentchemobject,
+      "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
+      "getInstance")
+
+  formula  <- .jcall(
+      mfManipulator,
+     "Lorg/openscience/cdk/interfaces/IMolecularFormula;",
+     "getMolecularFormula",
+     mf,
+     builderinstance);
+
+  .jcall(
+      mfManipulator,
+      "D",
+      "getMass",
+     formula)
+}
+
+
+
+benchmark <- microbenchmark::microbenchmark(
+  MetaboCoreUtils = MetaboCoreUtils::calculateMass("C2H6O"),
+  rcdk = rcdk::get.formula("C2H6O", charge = 0)@mass,
+  rcdk2 = get.formula2("C2H6O"),
+  rcdk3 = get.formula3("C2H6O"),
+  rcdk4 = get.formula4("C2H6O"),
+  Rdisop = Rdisop::getMolecule("C2H6O")$exactmass,
+  ChemmineR = ChemmineR::exactMassOB(ChemmineR::smiles2sdf("CCO")),
+  OrgMassSpecR = OrgMassSpecR::MonoisotopicMass(formula = OrgMassSpecR::ListFormula("C2H6O)"), charge = 0),
+  
+  CHNOSZ = CHNOSZ::mass("C2H6O"),
+  enviPat = enviPat::isopattern(isotopes, "C2H6O", charge=FALSE, verbose=FALSE)[[1]][1,1]
+  , times=1000L)
+
+
+masses <- c(
+  MetaboCoreUtils=MetaboCoreUtils::calculateMass("C2H6O"),
+  rcdk=rcdk::get.formula("C2H6O", charge = 0)@mass,
+  Rdisop=Rdisop::getMolecule("C2H6O")$exactmass,
+  #ChemmineR=ChemmineR::exactMassOB(ChemmineR::smiles2sdf("CCO")),
+  OrgMassSpecR=OrgMassSpecR::MonoisotopicMass(formula = OrgMassSpecR::ListFormula("C2H6O)"), charge = 0),
+  CHNOSZ=CHNOSZ::mass("C2H6O"),
+  enviPat=enviPat::isopattern(isotopes, "C2H6O", charge=FALSE, verbose=FALSE)[[1]][1,1]
+)
+
+options(digits=10)
+t(t(sort(masses)))
+summary(benchmark)[order(summary(benchmark)[,"median"]) , ]
+clipr::write_clip(as.data.frame(summary(benchmark)[order(summary(benchmark)[,"median"]) , ] ))
+```
+
+## Results
+
+``` shell
+              expr       min         lq         mean     median         uq
+1  MetaboCoreUtils    69.479   122.8465   154.049427   139.6495   156.2700
+10         enviPat    83.250   143.0935   170.429197   160.5360   179.6570
+5            rcdk4   175.889   228.8605   324.182735   271.2955   327.7135
+8     OrgMassSpecR   249.287   333.3135   392.479869   357.6665   401.5585
+6           Rdisop   382.417   459.8790   538.068697   490.1505   557.9975
+9           CHNOSZ   355.145   510.2910   588.186951   555.9165   632.2060
+4            rcdk3   781.987  1004.7160  1294.507318  1133.3415  1339.4695
+3            rcdk2  2078.465  2392.4950  2920.601088  2612.8025  2931.5465
+7        ChemmineR  3227.320  3790.0455  4808.783873  4044.1410  4465.1000
+2             rcdk 14823.815 16456.7715 19088.569430 17485.0800 19468.7195
+```

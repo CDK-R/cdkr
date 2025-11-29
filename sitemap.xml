@@ -1,288 +1,98 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/404.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/articles/Features_29.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/articles/PerformanceNotes.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/articles/index.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/articles/molform.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/articles/rcdk.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/authors.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/index.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/news/index.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/Atoms.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/Molecule.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/bpdata.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/cdk.version.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/cdkFormula-class.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/compare.isotope.pattern.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/convert.implicit.to.explicit.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/copy.image.to.clipboard.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/do.aromaticity.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/do.isotopes.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/eval.atomic.desc.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/eval.desc.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/generate.2d.coordinates.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/generate.formula.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/generate.formula.iter.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.adjacency.matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.alogp.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.atom.count.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.atom.index.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.atomic.desc.names.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.atomic.number.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.atoms.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.bond.order.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.bonds.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.charge.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.chem.object.builder.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.connected.atom.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.connected.atoms.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.connection.matrix.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.depictor.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.desc.categories.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.desc.names.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.element.types.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.exact.mass.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.exhaustive.fragments.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.fingerprint.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.formal.charge.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.formula.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.hydrogen.count.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.isotope.pattern.generator.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.isotope.pattern.similarity.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.isotopes.pattern.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.largest.component.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.mcs.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.mol2formula.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.murcko.fragments.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.natural.mass.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.point2d.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.point3d.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.properties.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.property.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.smiles.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.smiles.parser.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.stereo.types.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.stereocenters.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.symbol.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.title.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.total.charge.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.total.formal.charge.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.total.hydrogen.count.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.tpsa.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.volume.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/get.xlogp.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/iload.molecules.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/is.aliphatic.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/is.aromatic.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/is.connected.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/is.in.ring.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/is.neutral.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/isvalid.formula.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/load.molecules.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/matches.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/parse.smiles.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/rcdk-deprecated.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/remove.hydrogens.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/remove.property.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/set.atom.types.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/set.charge.formula.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/set.property.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/set.title.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/smiles.flavors.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/view.image.2d.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/view.molecule.2d.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/view.table.html</loc>
-  </url>
-  <url>
-    <loc>https://cdk-r.github.io/cdkr/reference/write.molecules.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>https://cdk-r.github.io/cdkr/404.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/articles/Features_29.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/articles/PerformanceNotes.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/articles/index.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/articles/molform.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/articles/rcdk.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/authors.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/index.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/news/index.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/Atoms.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/Molecule.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/bpdata.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/cdk.version.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/cdkFormula-class.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/compare.isotope.pattern.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/convert.implicit.to.explicit.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/copy.image.to.clipboard.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/do.aromaticity.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/do.isotopes.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/eval.atomic.desc.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/eval.desc.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/generate.2d.coordinates.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/generate.formula.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/generate.formula.iter.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.adjacency.matrix.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.alogp.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.atom.count.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.atom.index.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.atomic.desc.names.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.atomic.number.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.atoms.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.bond.order.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.bonds.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.charge.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.chem.object.builder.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.connected.atom.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.connected.atoms.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.connection.matrix.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.depictor.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.desc.categories.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.desc.names.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.element.types.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.exact.mass.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.exhaustive.fragments.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.fingerprint.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.formal.charge.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.formula.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.hydrogen.count.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.isotope.pattern.generator.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.isotope.pattern.similarity.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.isotopes.pattern.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.largest.component.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.mcs.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.mol2formula.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.murcko.fragments.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.natural.mass.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.point2d.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.point3d.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.properties.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.property.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.smiles.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.smiles.parser.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.stereo.types.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.stereocenters.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.symbol.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.title.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.total.charge.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.total.formal.charge.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.total.hydrogen.count.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.tpsa.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.volume.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/get.xlogp.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/iload.molecules.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/index.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/is.aliphatic.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/is.aromatic.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/is.connected.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/is.in.ring.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/is.neutral.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/isvalid.formula.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/load.molecules.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/matches.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/parse.smiles.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/rcdk-deprecated.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/remove.hydrogens.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/remove.property.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/set.atom.types.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/set.charge.formula.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/set.property.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/set.title.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/smiles.flavors.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/view.image.2d.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/view.molecule.2d.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/view.table.html</loc></url>
+<url><loc>https://cdk-r.github.io/cdkr/reference/write.molecules.html</loc></url>
 </urlset>
+
