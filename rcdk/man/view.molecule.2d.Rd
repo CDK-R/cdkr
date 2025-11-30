@@ -25,5 +25,5 @@ view.molecule.2d(
 }
 \description{
 Create a 2D depiction of a molecule. If there are more than
-one molecules supplied, return a grid woth \code{ncol} columns,.
+one molecules supplied, return a grid with \code{ncol} columns,.
 }

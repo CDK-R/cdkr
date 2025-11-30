@@ -13,7 +13,7 @@ convert.implicit.to.explicit(mol)
 In some cases, a molecule may not have any hydrogens (such as when read
 in from an MDL MOL file that did not have hydrogens or SMILES with no
 explicit hydrogens). In such cases, this method
-will add implicit hydrogens and then convert them to explicit ones. The 
+will add implicit hydrogens and then convert them to explicit ones. The
 newly added H's will not have any 2D or 3D coordinates associated with them.
 Ensure that the molecule has been typed beforehand.
 }

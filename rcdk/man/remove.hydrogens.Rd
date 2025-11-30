@@ -13,8 +13,8 @@ remove.hydrogens(mol)
 A copy of the original molecule, with explicit hydrogens removed
 }
 \description{
-Create an copy of the original structure with explicit hydrogens removed. 
-Stereochemistry is updated but up and down bonds in a depiction may need 
+Create an copy of the original structure with explicit hydrogens removed.
+Stereochemistry is updated but up and down bonds in a depiction may need
 to be recalculated. This can also be useful for descriptor calculations.
 }
 \seealso{

@@ -13,10 +13,10 @@ is.connected(mol)
 `TRUE` if molecule is complete, `FALSE` otherwise
 }
 \description{
-A single molecule will be represented as a 
-\href{https://en.wikipedia.org/wiki/Complete_graph}{complete} graph. 
-In some cases, such as for molecules in salt form, or after certain 
-operations such as bond splits, the molecular graph may contained 
+A single molecule will be represented as a
+\href{https://en.wikipedia.org/wiki/Complete_graph}{complete} graph.
+In some cases, such as for molecules in salt form, or after certain
+operations such as bond splits, the molecular graph may contained
 \href{http://mathworld.wolfram.com/DisconnectedGraph.html}{disconnected components}.
 This method can be used to tested whether the molecule is complete (i.e. fully
 connected).

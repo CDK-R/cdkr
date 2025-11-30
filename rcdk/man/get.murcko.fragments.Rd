@@ -47,7 +47,7 @@ mf1 <- get.murcko.fragments(mol, as.smiles=TRUE, single.framework=TRUE)
 mf1 <- get.murcko.fragments(mol, as.smiles=TRUE, single.framework=FALSE)
 }
 \seealso{
-[get.exhuastive.fragments()]
+[get.exhaustive.fragments()]
 }
 \author{
 Rajarshi Guha (\email{rajarshi.guha@gmail.com})

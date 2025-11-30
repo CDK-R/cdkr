@@ -59,22 +59,45 @@ get.chem.object.builder <- function() {
   jar.rcdk <- paste(lib,pkg,"cont","rcdk.jar",sep=.Platform$file.sep)
   jar.png <- paste(lib,pkg,"cont","com.objectplanet.image.PngEncoder.jar",sep=.Platform$file.sep)
 
-  # Detect if we're running in CRAN check or test environment
+  # Detect if we're running in R CMD check environment
   # If so, limit JVM to single-threaded execution to avoid parallel processing NOTE
+  # Only use definitive _R_CHECK_ variables that are only set during R CMD check
   is_check_env <- Sys.getenv("_R_CHECK_PACKAGE_NAME_", "") != "" ||
-                  Sys.getenv("_R_CHECK_TIMINGS_", "") != "" ||
-                  Sys.getenv("RCMDCHECK") != "" ||
-                  identical(Sys.getenv("NOT_CRAN"), "false")
+                  Sys.getenv("_R_CHECK_TIMINGS_", "") != ""
+
+  # Set environment variables BEFORE initializing JVM to limit threading
+  if (is_check_env) {
+    Sys.setenv("OMP_NUM_THREADS" = "1")
+    Sys.setenv("OPENBLAS_NUM_THREADS" = "1")
+    Sys.setenv("MKL_NUM_THREADS" = "1")
+    Sys.setenv("VECLIB_MAXIMUM_THREADS" = "1")
+    Sys.setenv("NUMEXPR_NUM_THREADS" = "1")
+  }
 
   jvm_params <- "-Djava.awt.headless=true"
   if (is_check_env) {
     # Limit to single thread during CRAN checks to avoid "CPU time > elapsed time" NOTE
-    jvm_params <- c(jvm_params, "-XX:ActiveProcessorCount=1")
+    # Use multiple parameters for maximum compatibility across JVM versions
+    jvm_params <- c(jvm_params,
+                    "-XX:ActiveProcessorCount=1",
+                    "-XX:ParallelGCThreads=1",
+                    "-XX:ConcGCThreads=1",
+                    "-XX:-UseConcMarkSweepGC",
+                    "-XX:-UseParallelGC",
+                    "-XX:+UseSerialGC",
+                    "-Djava.util.concurrent.ForkJoinPool.common.parallelism=1")
   }
 
   .jinit(classpath=c(jar.rcdk,jar.png), parameters=jvm_params)
 
   .jcall("java/lang/System", "S", "setProperty", "java.awt.headless", "true")
+
+  # Additional runtime thread limiting for CRAN checks
+  if (is_check_env) {
+    # Set ForkJoinPool parallelism at runtime (in case JVM param didn't work)
+    .jcall("java/lang/System", "S", "setProperty",
+           "java.util.concurrent.ForkJoinPool.common.parallelism", "1")
+  }
 
   # check Java Version
   jv <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
