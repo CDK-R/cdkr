@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rcdk</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.9.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.8.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +67,7 @@
                         <h4 data-toc-skip class="author">Zachary
 Charlop-Powers</h4>
             
-            <h4 data-toc-skip class="date">2025-11-29</h4>
+            <h4 data-toc-skip class="date">2025-11-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/CDK-R/cdkr/blob/master/vignettes/Features_29.Rmd" class="external-link"><code>vignettes/Features_29.Rmd</code></a></small>
       <div class="d-none name"><code>Features_29.Rmd</code></div>
@@ -86,7 +86,15 @@ Release Notes</a></p>
 </h3>
 <p><a href="https://github.com/cdk/cdk/pull/927" class="external-link uri">https://github.com/cdk/cdk/pull/927</a></p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cdk-r.github.io/rcdklibs/" class="external-link">rcdklibs</a></span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># Install depict from GitHub if not available</span></span>
+<span><span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"depict"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>  <span class="kw">if</span> <span class="op">(</span><span class="op">!</span><span class="fu"><a href="https://rdrr.io/r/base/ns-load.html" class="external-link">requireNamespace</a></span><span class="op">(</span><span class="st">"remotes"</span>, quietly <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
+<span>    <span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"remotes"</span><span class="op">)</span></span>
+<span>  <span class="op">}</span></span>
+<span>  <span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"CDK-R/depict"</span><span class="op">)</span></span>
+<span><span class="op">}</span></span>
+<span></span>
+<span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cdk-r.github.io/rcdklibs/" class="external-link">rcdklibs</a></span><span class="op">)</span></span>
 <span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://cdk-r.github.io/depict/" class="external-link">depict</a></span><span class="op">)</span></span>
 <span></span>
 <span></span>
@@ -118,7 +126,7 @@ Release Notes</a></p>
 <span></span>
 <span><span class="co"># note `as.list`</span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">mol</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">ReactionManipulator</span><span class="op">$</span><span class="fu">getAllAtomContainers</span><span class="op">(</span><span class="va">rxn</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span> <span class="va">abbreviations</span><span class="op">$</span><span class="fu">apply</span><span class="op">(</span><span class="va">mol</span><span class="op">)</span> </span>
+<span> <span class="va">abbreviations</span><span class="op">$</span><span class="fu">apply</span><span class="op">(</span><span class="va">mol</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">rxn</span><span class="op">$</span><span class="fu">setDirection</span><span class="op">(</span><span class="va">IReaction</span><span class="op">$</span><span class="va">Direction</span><span class="op">$</span><span class="va">NO_GO</span><span class="op">)</span></span>
@@ -131,7 +139,7 @@ by the Chemistry Development Kit (<a href="http://github.com/cdk" class="externa
 <code class="sourceCode R"><span><span class="va">rxn</span> <span class="op">&lt;-</span> <span class="va">smiles_parser</span><span class="op">$</span><span class="fu">parseReactionSmiles</span><span class="op">(</span><span class="st">"[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][cH:13][cH:14][cH:15]1.[CH2:3]([CH2:4][C:5](=[O:6])Cl)[CH2:2][Cl:1]&gt;[Al+3].[Cl-].[Cl-].[Cl-].C(Cl)Cl&gt;[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][c:13]([cH:14][cH:15]1)[C:5](=[O:6])[CH2:4][CH2:3][CH2:2][Cl:1] |f:2.3.4.5| Friedel-Crafts acylation [3.10.1]"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">mol</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">ReactionManipulator</span><span class="op">$</span><span class="fu">getAllAtomContainers</span><span class="op">(</span><span class="va">rxn</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span> <span class="va">abbreviations</span><span class="op">$</span><span class="fu">apply</span><span class="op">(</span><span class="va">mol</span><span class="op">)</span> </span>
+<span> <span class="va">abbreviations</span><span class="op">$</span><span class="fu">apply</span><span class="op">(</span><span class="va">mol</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">rxn</span><span class="op">$</span><span class="fu">setDirection</span><span class="op">(</span><span class="va">IReaction</span><span class="op">$</span><span class="va">Direction</span><span class="op">$</span><span class="va">RETRO_SYNTHETIC</span><span class="op">)</span></span>
@@ -144,7 +152,7 @@ by the Chemistry Development Kit (<a href="http://github.com/cdk" class="externa
 <code class="sourceCode R"><span><span class="va">rxn</span> <span class="op">&lt;-</span> <span class="va">smiles_parser</span><span class="op">$</span><span class="fu">parseReactionSmiles</span><span class="op">(</span><span class="st">"[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][cH:13][cH:14][cH:15]1.[CH2:3]([CH2:4][C:5](=[O:6])Cl)[CH2:2][Cl:1]&gt;[Al+3].[Cl-].[Cl-].[Cl-].C(Cl)Cl&gt;[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][c:13]([cH:14][cH:15]1)[C:5](=[O:6])[CH2:4][CH2:3][CH2:2][Cl:1] |f:2.3.4.5| Friedel-Crafts acylation [3.10.1]"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">mol</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">ReactionManipulator</span><span class="op">$</span><span class="fu">getAllAtomContainers</span><span class="op">(</span><span class="va">rxn</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span> <span class="va">abbreviations</span><span class="op">$</span><span class="fu">apply</span><span class="op">(</span><span class="va">mol</span><span class="op">)</span> </span>
+<span> <span class="va">abbreviations</span><span class="op">$</span><span class="fu">apply</span><span class="op">(</span><span class="va">mol</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">rxn</span><span class="op">$</span><span class="fu">setDirection</span><span class="op">(</span><span class="va">IReaction</span><span class="op">$</span><span class="va">Direction</span><span class="op">$</span><span class="va">BIDIRECTIONAL</span><span class="op">)</span></span>
@@ -158,7 +166,7 @@ by the Chemistry Development Kit (<a href="http://github.com/cdk" class="externa
 <span></span>
 <span></span>
 <span><span class="kw">for</span> <span class="op">(</span><span class="va">mol</span> <span class="kw">in</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">as.list</a></span><span class="op">(</span><span class="va">ReactionManipulator</span><span class="op">$</span><span class="fu">getAllAtomContainers</span><span class="op">(</span><span class="va">rxn</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">{</span></span>
-<span> <span class="va">abbreviations</span><span class="op">$</span><span class="fu">apply</span><span class="op">(</span><span class="va">mol</span><span class="op">)</span> </span>
+<span> <span class="va">abbreviations</span><span class="op">$</span><span class="fu">apply</span><span class="op">(</span><span class="va">mol</span><span class="op">)</span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="va">rxn</span><span class="op">$</span><span class="fu">setDirection</span><span class="op">(</span><span class="va">IReaction</span><span class="op">$</span><span class="va">Direction</span><span class="op">$</span><span class="va">RESONANCE</span><span class="op">)</span></span>
@@ -216,13 +224,13 @@ by the Chemistry Development Kit (<a href="http://github.com/cdk" class="externa
 <span><span class="co"># StringWriter sw = new StringWriter();</span></span>
 <span><span class="co"># SdfOutputConsumer consumer = new SdfOutputConsumer(sw);</span></span>
 <span><span class="co"># consumer.setCoordinates(true);</span></span>
-<span>        </span>
+<span></span>
 <span><span class="co"># maygen.setConsumer(mol -&gt; {</span></span>
 <span><span class="co">#              try {</span></span>
 <span><span class="co">#                  System.out.println(smigen.create(mol));</span></span>
 <span><span class="co">#              } catch (CDKException ignore) { }</span></span>
 <span><span class="co">#          });</span></span>
-<span><span class="co"># </span></span>
+<span><span class="co">#</span></span>
 <span><span class="co"># int count = maygen.getCount(); // number of structures generated</span></span></code></pre></div>
 </div>
 </div>

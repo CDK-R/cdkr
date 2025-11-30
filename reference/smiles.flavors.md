@@ -3,11 +3,11 @@
 The CDK supports a variety of customizations for SMILES generation
 including the use of lower case symbols for aromatic compounds to the
 use of the ChemAxon
-[CxSmiles](http://butane.chem.uiuc.edu/jsmoore/marvin/help/formats/cxsmiles-doc.md)
+[CxSmiles](https://docs.chemaxon.com/display/docs/formats_chemaxon-extended-smiles-and-smarts-cxsmiles-and-cxsmarts.md)
 format. Each 'flavor' is represented by an integer and multiple
 customizations are bitwise OR'ed. This method accepts the names of one
 or more customizations and returns the bitwise OR of them. See [CDK
-documentation](https://cdk.github.io/cdk/2.3/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html)
+documentation](https://cdk.github.io/cdk/2.10/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html)
 for the list of flavors and what they mean.
 
 ## Usage
@@ -85,7 +85,7 @@ A numeric representing the bitwise \`OR“ of the specified flavors
 ## References
 
 [CDK
-documentation](https://cdk.github.io/cdk/2.3/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html)
+documentation](https://cdk.github.io/cdk/2.10/docs/api/index.html?org/openscience/cdk/smiles/SmiFlavor.html)
 
 ## See also
 

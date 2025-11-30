@@ -56,7 +56,7 @@ bonds) can become time consuming.
 
 ## See also
 
-\[get.exhuastive.fragments()\]
+\[get.exhaustive.fragments()\]
 
 ## Author
 

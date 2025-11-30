@@ -1,8 +1,8 @@
 # Changelog
 
-## rcdk 3.9.0
+## rcdk 3.8.2
 
-- Update rCDK to work with rcdklibs 2.9
+- Update rCDK to work with rcdklibs 2.11
 
 ## rcdk 3.8.0
 
@@ -22,7 +22,7 @@ CRAN release: 2022-09-26
 CRAN release: 2021-10-17
 
 - Fix code to handle changes to JDK17. Notably, I needed to reduce the
-  use of the J notation in a nubmer of places in favor of direct calls.
+  use of the J notation in a number of places in favor of direct calls.
 - formally deprecated `do.typing` in favor of `set.atom.types`
 - Updated handling of atomic descriptors to resolve a name mismatch bug
 - Added a test case for atomic descriptors (thanks to Francesca Di
@@ -41,7 +41,7 @@ CRAN release: 2021-10-17
 
 CRAN release: 2020-03-11
 
-- update to RCDKlibs 2.3. This changes uderlying AtomContainer defualt
+- update to RCDKlibs 2.3. This changes underlying AtomContainer default
   to Atomcontainer2 and also has new support for mass spec mass
   functions. On the rcdk side we have moved to a tidyverse documentation
   and build system.

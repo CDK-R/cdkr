@@ -17,7 +17,7 @@ get.smiles.parser()
 ## Value
 
 A \`jobjRef\` object corresponding to the CDK
-[SmilesParser](http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/smiles/SmilesParser.md)
+[SmilesParser](https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/smiles/SmilesParser.html)
 class
 
 ## See also

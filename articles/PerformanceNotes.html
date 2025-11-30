@@ -25,7 +25,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">rcdk</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.9.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.8.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -67,7 +67,7 @@
                         <h4 data-toc-skip class="author">Zaachary
 Charlop-Powers</h4>
             
-            <h4 data-toc-skip class="date">2025-11-29</h4>
+            <h4 data-toc-skip class="date">2025-11-30</h4>
       
       <small class="dont-index">Source: <a href="https://github.com/CDK-R/cdkr/blob/master/vignettes/PerformanceNotes.Rmd" class="external-link"><code>vignettes/PerformanceNotes.Rmd</code></a></small>
       <div class="d-none name"><code>PerformanceNotes.Rmd</code></div>
@@ -78,8 +78,8 @@ Charlop-Powers</h4>
 <div class="section level2">
 <h2 id="rcdk-performance">rCDK Performance<a class="anchor" aria-label="anchor" href="#rcdk-performance"></a>
 </h2>
-<p>In September 2022, of this year, <a href="https://gist.github.com/sneumann" class="external-link">Stepehn Neumann</a> <a href="https://gist.github.com/sneumann/959a6d205ea4ac73eaf1393da0ec0673" class="external-link">created
-a benchmark</a> for moecular weight calculation that he <a href="https://twitter.com/sneumannoffice/status/1570070283083710465?s=20&amp;t=RqJR3Bbh-DEcbCf2tWUEBQ" class="external-link">announced
+<p>In September 2022, of this year, <a href="https://gist.github.com/sneumann" class="external-link">Steffen Neumann</a> <a href="https://gist.github.com/sneumann/959a6d205ea4ac73eaf1393da0ec0673" class="external-link">created
+a benchmark</a> for moecular weight calculation that he <a href="https://x.com/sneumannoffice/status/1570070283083710465?s=20&amp;t=RqJR3Bbh-DEcbCf2tWUEBQ" class="external-link">announced
 on twitter</a> showing that rCDK had dismal performance relative to
 other tools in the R ecosystem. Something seemed a bit off so I looked
 into the code.</p>
@@ -96,12 +96,12 @@ performance, you can tighten down the code a bit by making the calls
 static. You can see that progression in the code below which is
 accompanied by the outputs from those benchmarks.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode sh"><code class="sourceCode bash"><span id="cb1-1"><a href="#cb1-1" tabindex="-1"></a><span class="ex">will</span> give <span class="er">(</span><span class="ex">2/3</span><span class="kw">)</span> <span class="ex">runtime</span> in µs:</span>
-<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>   <span class="ex">21</span> OrgMassSpecR </span>
+<span id="cb1-2"><a href="#cb1-2" tabindex="-1"></a>   <span class="ex">21</span> OrgMassSpecR</span>
 <span id="cb1-3"><a href="#cb1-3" tabindex="-1"></a>  <span class="ex">163</span> MetaboCoreUtils</span>
-<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="ex">197</span> enviPat </span>
-<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="ex">545</span> Rdisop </span>
-<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="ex">645</span> CHNOSZ </span>
-<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a> <span class="ex">4863</span> ChemmineR </span>
+<span id="cb1-4"><a href="#cb1-4" tabindex="-1"></a>  <span class="ex">197</span> enviPat</span>
+<span id="cb1-5"><a href="#cb1-5" tabindex="-1"></a>  <span class="ex">545</span> Rdisop</span>
+<span id="cb1-6"><a href="#cb1-6" tabindex="-1"></a>  <span class="ex">645</span> CHNOSZ</span>
+<span id="cb1-7"><a href="#cb1-7" tabindex="-1"></a> <span class="ex">4863</span> ChemmineR</span>
 <span id="cb1-8"><a href="#cb1-8" tabindex="-1"></a><span class="ex">22510</span> rcdk</span></code></pre></div>
 <p><a href="https://gist.github.com/sneumann/959a6d205ea4ac73eaf1393da0ec0673" class="external-link uri">https://gist.github.com/sneumann/959a6d205ea4ac73eaf1393da0ec0673</a>
 ## Benchmark</p>
@@ -124,7 +124,7 @@ accompanied by the outputs from those benchmarks.</p>
 <span><span class="co"># original</span></span>
 <span><span class="co"># https://github.com/CDK-R/cdkr/blob/master/rcdk/R/formula.R</span></span>
 <span><span class="co"># get.formula &lt;- function(mf, charge=0) {</span></span>
-<span><span class="co">#   </span></span>
+<span><span class="co">#</span></span>
 <span><span class="co">#   manipulator &lt;- get("mfManipulator", envir = .rcdk.GlobalEnv)</span></span>
 <span><span class="co">#   if(!is.character(mf)) {</span></span>
 <span><span class="co">#     stop("Must supply a Formula string");</span></span>
@@ -138,7 +138,7 @@ accompanied by the outputs from those benchmarks.</p>
 <span><span class="co">#                                .jcast(molecularformula,.IMolecularFormula),</span></span>
 <span><span class="co">#                                TRUE);</span></span>
 <span><span class="co">#   }</span></span>
-<span><span class="co">#   </span></span>
+<span><span class="co">#</span></span>
 <span><span class="co">#   D &lt;- new(J("java/lang/Integer"), as.integer(charge))</span></span>
 <span><span class="co">#   .jcall(molecularFormula,"V","setCharge",D);</span></span>
 <span><span class="co">#   object &lt;- .cdkFormula.createObject(.jcast(molecularFormula,.IMolecularFormula));</span></span>
@@ -153,13 +153,13 @@ accompanied by the outputs from those benchmarks.</p>
 <span><span class="co">#' Rewrite the formual object and directly access Java</span></span>
 <span><span class="co">#'</span></span>
 <span><span class="va">get.formula2</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">mf</span><span class="op">)</span> <span class="op">{</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="va">formula</span> <span class="op">&lt;-</span> <span class="va">mfManipulator</span><span class="op">$</span><span class="fu">getMolecularFormula</span><span class="op">(</span></span>
-<span>    <span class="st">"C2H3"</span>, </span>
+<span>    <span class="st">"C2H3"</span>,</span>
 <span>    <span class="va">silentchemobject</span><span class="op">$</span><span class="fu">getInstance</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span>  <span class="va">mfManipulator</span><span class="op">$</span><span class="fu">getMass</span><span class="op">(</span><span class="va">formula</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span><span class="co">#' Add type hints</span></span>
@@ -169,7 +169,7 @@ accompanied by the outputs from those benchmarks.</p>
 <span>      <span class="va">silentchemobject</span>,</span>
 <span>     <span class="st">"Lorg/openscience/cdk/interfaces/IChemObjectBuilder;"</span>,</span>
 <span>     <span class="st">"getInstance"</span><span class="op">)</span></span>
-<span>                       </span>
+<span></span>
 <span>  <span class="va">formula</span>  <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/pkg/rJava/man/jcall.html" class="external-link">.jcall</a></span><span class="op">(</span></span>
 <span>      <span class="va">mfManipulator</span>,</span>
 <span>     <span class="st">"Lorg/openscience/cdk/interfaces/IMolecularFormula;"</span>,</span>
@@ -178,7 +178,7 @@ accompanied by the outputs from those benchmarks.</p>
 <span>      <span class="va">builderinstance</span><span class="op">)</span>;</span>
 <span></span>
 <span>  <span class="va">mfManipulator</span><span class="op">$</span><span class="fu">getMass</span><span class="op">(</span><span class="va">formula</span><span class="op">)</span></span>
-<span>  </span>
+<span></span>
 <span><span class="op">}</span></span>
 <span></span>
 <span></span>
@@ -215,7 +215,7 @@ accompanied by the outputs from those benchmarks.</p>
 <span>  Rdisop <span class="op">=</span> <span class="fu">Rdisop</span><span class="fu">::</span><span class="fu">getMolecule</span><span class="op">(</span><span class="st">"C2H6O"</span><span class="op">)</span><span class="op">$</span><span class="va">exactmass</span>,</span>
 <span>  ChemmineR <span class="op">=</span> <span class="fu">ChemmineR</span><span class="fu">::</span><span class="fu">exactMassOB</span><span class="op">(</span><span class="fu">ChemmineR</span><span class="fu">::</span><span class="fu">smiles2sdf</span><span class="op">(</span><span class="st">"CCO"</span><span class="op">)</span><span class="op">)</span>,</span>
 <span>  OrgMassSpecR <span class="op">=</span> <span class="fu">OrgMassSpecR</span><span class="fu">::</span><span class="fu">MonoisotopicMass</span><span class="op">(</span>formula <span class="op">=</span> <span class="fu">OrgMassSpecR</span><span class="fu">::</span><span class="fu">ListFormula</span><span class="op">(</span><span class="st">"C2H6O)"</span><span class="op">)</span>, charge <span class="op">=</span> <span class="fl">0</span><span class="op">)</span>,</span>
-<span>  </span>
+<span></span>
 <span>  CHNOSZ <span class="op">=</span> <span class="fu">CHNOSZ</span><span class="fu">::</span><span class="fu">mass</span><span class="op">(</span><span class="st">"C2H6O"</span><span class="op">)</span>,</span>
 <span>  enviPat <span class="op">=</span> <span class="fu">enviPat</span><span class="fu">::</span><span class="fu">isopattern</span><span class="op">(</span><span class="va">isotopes</span>, <span class="st">"C2H6O"</span>, charge<span class="op">=</span><span class="cn">FALSE</span>, verbose<span class="op">=</span><span class="cn">FALSE</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">[</span><span class="fl">1</span>,<span class="fl">1</span><span class="op">]</span></span>
 <span>  , times<span class="op">=</span><span class="fl">1000L</span><span class="op">)</span></span>

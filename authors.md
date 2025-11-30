@@ -11,6 +11,9 @@
 - **Emma Schymanski**. Contributor.
   [](https://orcid.org/0000-0001-6868-8145)
 
+- **Egon Willighagen**. Contributor.
+  [](https://orcid.org/0000-0001-7542-0286)
+
 ## Citation
 
 Source:

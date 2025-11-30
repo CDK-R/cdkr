@@ -80,7 +80,7 @@ processed using methods from the `rcdk` or
 [rJava](https://CRAN.R-project.org/package=rJava) packages.
 
 However, since it loads all the molecules from the specified file into a
-list, large files can lead to out of memory errors. In such a situtation
+list, large files can lead to out of memory errors. In such a situation
 it is preferable to iterate over the file, one structure at a time.
 Currently this behavior is supported for SDF and SMILES files. An
 example of such a usage for a large SD file would be
@@ -132,9 +132,10 @@ SMILES or SDF. To write molecules to a disk file in SDF format.
 write.molecules(mols, filename='mymols.sdf')
 ```
 
-By default, if mols is a list of multiple molecules, all of them will be
-written to a single SDF file. If this is not desired, you can write each
-on to individual files (which are prefixed by the value of filename):
+By default, if `mols` is a list of multiple molecules, all of them will
+be written to a single SDF file. If this is not desired, you can write
+each on to individual files (which are prefixed by the value of
+filename):
 
 ``` r
  write.molecules(mols, filename='mymols.sdf', together=FALSE)
@@ -183,7 +184,7 @@ get.smiles(mols[[3]], smiles.flavors(c('Generic','CxSmiles')))
     ## [1] "CCC1=CC=CC=C1CC(C)(C)CC(=O)NC"
 
 Using the
-[CxSmiles](http://butane.chem.uiuc.edu/jsmoore/marvin/help/formats/cxsmiles-doc.md)
+[CxSmiles](https://docs.chemaxon.com/display/docs/formats_chemaxon-extended-smiles-and-smarts-cxsmiles-and-cxsmarts.md)
 flavors allows the user to encode a variety of information in the SMILES
 string, such as 2D or 3D coordinates.
 
@@ -259,7 +260,7 @@ view.molecule.2d(mols[[5]], depictor=depictor)
 
 The method also allows you to highlight substructures using
 [SMARTS](https://en.wikipedia.org/wiki/Smiles_arbitrary_target_specification).
-This is useful in highlight commen substructures in a set of molecules
+This is useful in highlight common substructures in a set of molecules
 
 ``` r
 depictor <- get.depictor(style='cob', abbr='reagents', sma='N(C)(C)')

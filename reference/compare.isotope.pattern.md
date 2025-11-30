@@ -33,7 +33,7 @@ two patterns
 
 ## References
 
-[http://cdk.github.io/cdk/2.3/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html](http://cdk.github.io/cdk/2.3/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.md)
+<https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html>
 
 ## See also
 

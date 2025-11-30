@@ -99,8 +99,10 @@ get.fingerprint(
 
 ## Value
 
-an S4 object of class `fingerprint-class` or `featvec-class`, which can
-be manipulated with the fingerprint package.
+an S4 object of class
+[`fingerprint-class`](https://rdrr.io/pkg/fingerprint/man/fingerprint.html)
+or [`featvec-class`](https://rdrr.io/pkg/fingerprint/man/featvec.html),
+which can be manipulated with the fingerprint package.
 
 ## Author
 
@@ -110,15 +112,13 @@ Rajarshi Guha (<rajarshi.guha@gmail.com>)
 
 ``` r
 ## get some molecules
-sp <- get.smiles.parser()
-smiles <- c('CCC', 'CCN', 'CCN(C)(C)', 'c1ccccc1Cc1ccccc1','C1CCC1CC(CN(C)(C))CC(=O)CC')
+smiles <- c('CCC', 'CCN')
 mols <- parse.smiles(smiles)
 
-## get a single fingerprint using the standard
-## (hashed, path based) fingerprinter
-fp <- get.fingerprint(mols[[1]])
+## get a single fingerprint using MACCS (fast)
+fp <- get.fingerprint(mols[[1]], type='maccs')
 
-## get MACCS keys for all the molecules
+## get MACCS keys for both molecules
 fps <- lapply(mols, get.fingerprint, type='maccs')
 
 ## get Signature fingerprint
@@ -133,7 +133,7 @@ smarts <- c("c1ccccc1", "[CX4H3][#6]", "[CX2]#[CX2]")
 fps <- get.fingerprint(mol1, type='substructure', fp.mode='count',
     substructure.pattern=smarts)
 
-## get ECFP0 count fingerprints 
+## get ECFP0 count fingerprints
 mol2 <- parse.smiles("C1=CC=CC(=C1)CCCC2=CC=CC=C2")[[1]]
 fps <- get.fingerprint(mol2, type='circular', fp.mode='count', circular.type='ECFP0')
 ```

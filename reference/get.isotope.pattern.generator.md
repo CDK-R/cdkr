@@ -22,7 +22,7 @@ A `jobjRef` corresponding to an instance of `IsotopePatternGenerator`
 
 ## References
 
-[http://cdk.github.io/cdk/1.5/docs/api/org/openscience/cdk/formula/IsotopePatternGenerator.html](http://cdk.github.io/cdk/1.5/docs/api/org/openscience/cdk/formula/IsotopePatternGenerator.md)
+<https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/formula/IsotopePatternGenerator.html>
 
 ## Author
 

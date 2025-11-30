@@ -11,6 +11,14 @@
 <https://github.com/cdk/cdk/pull/927>
 
 ``` r
+# Install depict from GitHub if not available
+if (!requireNamespace("depict", quietly = TRUE)) {
+  if (!requireNamespace("remotes", quietly = TRUE)) {
+    install.packages("remotes")
+  }
+  remotes::install_github("CDK-R/depict")
+}
+
 library(rcdklibs)
 library(depict)
 
@@ -51,7 +59,7 @@ rxn <- smiles_parser$parseReactionSmiles("[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][c
 
 # note `as.list`
 for (mol in as.list(ReactionManipulator$getAllAtomContainers(rxn))) {
- abbreviations$apply(mol) 
+ abbreviations$apply(mol)
 }
 
 rxn$setDirection(IReaction$Direction$NO_GO)
@@ -66,7 +74,7 @@ to_svg(svg)
 rxn <- smiles_parser$parseReactionSmiles("[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][cH:13][cH:14][cH:15]1.[CH2:3]([CH2:4][C:5](=[O:6])Cl)[CH2:2][Cl:1]>[Al+3].[Cl-].[Cl-].[Cl-].C(Cl)Cl>[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][c:13]([cH:14][cH:15]1)[C:5](=[O:6])[CH2:4][CH2:3][CH2:2][Cl:1] |f:2.3.4.5| Friedel-Crafts acylation [3.10.1]")
 
 for (mol in as.list(ReactionManipulator$getAllAtomContainers(rxn))) {
- abbreviations$apply(mol) 
+ abbreviations$apply(mol)
 }
 
 rxn$setDirection(IReaction$Direction$RETRO_SYNTHETIC)
@@ -81,7 +89,7 @@ to_svg(svg)
 rxn <- smiles_parser$parseReactionSmiles("[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][cH:13][cH:14][cH:15]1.[CH2:3]([CH2:4][C:5](=[O:6])Cl)[CH2:2][Cl:1]>[Al+3].[Cl-].[Cl-].[Cl-].C(Cl)Cl>[CH3:9][CH:8]([CH3:10])[c:7]1[cH:11][cH:12][c:13]([cH:14][cH:15]1)[C:5](=[O:6])[CH2:4][CH2:3][CH2:2][Cl:1] |f:2.3.4.5| Friedel-Crafts acylation [3.10.1]")
 
 for (mol in as.list(ReactionManipulator$getAllAtomContainers(rxn))) {
- abbreviations$apply(mol) 
+ abbreviations$apply(mol)
 }
 
 rxn$setDirection(IReaction$Direction$BIDIRECTIONAL)
@@ -97,7 +105,7 @@ rxn <- smiles_parser$parseReactionSmiles("c1c(Cl)cccc1[N-][N+]#N>>c1c(Cl)cccc1N=
 
 
 for (mol in as.list(ReactionManipulator$getAllAtomContainers(rxn))) {
- abbreviations$apply(mol) 
+ abbreviations$apply(mol)
 }
 
 rxn$setDirection(IReaction$Direction$RESONANCE)
@@ -156,12 +164,12 @@ maygen$setFormula("C3Cl2H4")
 # StringWriter sw = new StringWriter();
 # SdfOutputConsumer consumer = new SdfOutputConsumer(sw);
 # consumer.setCoordinates(true);
-        
+
 # maygen.setConsumer(mol -> {
 #              try {
 #                  System.out.println(smigen.create(mol));
 #              } catch (CDKException ignore) { }
 #          });
-# 
+#
 # int count = maygen.getCount(); // number of structures generated
 ```

@@ -2,11 +2,11 @@
 
 ## rCDK Performance
 
-In September 2022, of this year, [Stepehn
+In September 2022, of this year, [Steffen
 Neumann](https://gist.github.com/sneumann) [created a
 benchmark](https://gist.github.com/sneumann/959a6d205ea4ac73eaf1393da0ec0673)
 for moecular weight calculation that he [announced on
-twitter](https://twitter.com/sneumannoffice/status/1570070283083710465?s=20&t=RqJR3Bbh-DEcbCf2tWUEBQ)
+twitter](https://x.com/sneumannoffice/status/1570070283083710465?s=20&t=RqJR3Bbh-DEcbCf2tWUEBQ)
 showing that rCDK had dismal performance relative to other tools in the
 R ecosystem. Something seemed a bit off so I looked into the code.
 
@@ -25,12 +25,12 @@ benchmarks.
 
 ``` sh
 will give (2/3) runtime in µs:
-   21 OrgMassSpecR 
+   21 OrgMassSpecR
   163 MetaboCoreUtils
-  197 enviPat 
-  545 Rdisop 
-  645 CHNOSZ 
- 4863 ChemmineR 
+  197 enviPat
+  545 Rdisop
+  645 CHNOSZ
+ 4863 ChemmineR
 22510 rcdk
 ```
 
@@ -56,7 +56,7 @@ data(isotopes)
 # original
 # https://github.com/CDK-R/cdkr/blob/master/rcdk/R/formula.R
 # get.formula <- function(mf, charge=0) {
-#   
+#
 #   manipulator <- get("mfManipulator", envir = .rcdk.GlobalEnv)
 #   if(!is.character(mf)) {
 #     stop("Must supply a Formula string");
@@ -70,7 +70,7 @@ data(isotopes)
 #                                .jcast(molecularformula,.IMolecularFormula),
 #                                TRUE);
 #   }
-#   
+#
 #   D <- new(J("java/lang/Integer"), as.integer(charge))
 #   .jcall(molecularFormula,"V","setCharge",D);
 #   object <- .cdkFormula.createObject(.jcast(molecularFormula,.IMolecularFormula));
@@ -85,13 +85,13 @@ silentchemobject <- J("org.openscience.cdk.silent.SilentChemObjectBuilder")
 #' Rewrite the formual object and directly access Java
 #'
 get.formula2 <- function(mf) {
-  
+
   formula <- mfManipulator$getMolecularFormula(
-    "C2H3", 
+    "C2H3",
     silentchemobject$getInstance())
-  
+
   mfManipulator$getMass(formula)
-  
+
 }
 
 #' Add type hints
@@ -101,7 +101,7 @@ get.formula3 <- function(mf) {
       silentchemobject,
      "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
      "getInstance")
-                       
+
   formula  <- .jcall(
       mfManipulator,
      "Lorg/openscience/cdk/interfaces/IMolecularFormula;",
@@ -110,7 +110,7 @@ get.formula3 <- function(mf) {
       builderinstance);
 
   mfManipulator$getMass(formula)
-  
+
 }
 
 
@@ -147,7 +147,7 @@ benchmark <- microbenchmark::microbenchmark(
   Rdisop = Rdisop::getMolecule("C2H6O")$exactmass,
   ChemmineR = ChemmineR::exactMassOB(ChemmineR::smiles2sdf("CCO")),
   OrgMassSpecR = OrgMassSpecR::MonoisotopicMass(formula = OrgMassSpecR::ListFormula("C2H6O)"), charge = 0),
-  
+
   CHNOSZ = CHNOSZ::mass("C2H6O"),
   enviPat = enviPat::isopattern(isotopes, "C2H6O", charge=FALSE, verbose=FALSE)[[1]][1,1]
   , times=1000L)

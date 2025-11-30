@@ -4,7 +4,7 @@ The function will generate a SMILES representation of an
 \`IAtomContainer\` object. The default parameters of the CDK SMILES
 generator are used. This can mean that for large ring systems the method
 may fail. See CDK
-[Javadocs](http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/smiles/SmilesGenerator.md)
+[Javadocs](https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/smiles/SmilesGenerator.html)
 for more information
 
 ## Usage
@@ -37,7 +37,7 @@ A character string containing the generated SMILES
 
 ## References
 
-[SmilesGenerator](http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/smiles/SmilesGenerator.md)
+[SmilesGenerator](https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/smiles/SmilesGenerator.html)
 
 ## See also
 

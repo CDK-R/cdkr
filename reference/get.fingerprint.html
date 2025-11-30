@@ -9,7 +9,7 @@ the input molecule."><meta property="og:image" content="https://cdk-r.github.io/
 
     <a class="navbar-brand me-2" href="../index.html">rcdk</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.9.0</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="Released version">3.8.2</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -119,7 +119,7 @@ This argument is ignored for the `pubchem`, `maccs`, `kr`, `signature`, `circula
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>an S4 object of class <code>fingerprint-class</code> or <code>featvec-class</code>,
+    <p>an S4 object of class <code><a href="https://rdrr.io/pkg/fingerprint/man/fingerprint.html" class="external-link">fingerprint-class</a></code> or <code><a href="https://rdrr.io/pkg/fingerprint/man/featvec.html" class="external-link">featvec-class</a></code>,
 which can be manipulated with the fingerprint package.</p>
     </div>
     <div class="section level2">
@@ -130,15 +130,13 @@ which can be manipulated with the fingerprint package.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co">## get some molecules</span></span></span>
-<span class="r-in"><span><span class="va">sp</span> <span class="op">&lt;-</span> <span class="fu"><a href="get.smiles.parser.html">get.smiles.parser</a></span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">smiles</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'CCC'</span>, <span class="st">'CCN'</span>, <span class="st">'CCN(C)(C)'</span>, <span class="st">'c1ccccc1Cc1ccccc1'</span>,<span class="st">'C1CCC1CC(CN(C)(C))CC(=O)CC'</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">smiles</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">'CCC'</span>, <span class="st">'CCN'</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">mols</span> <span class="op">&lt;-</span> <span class="fu"><a href="parse.smiles.html">parse.smiles</a></span><span class="op">(</span><span class="va">smiles</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## get a single fingerprint using the standard</span></span></span>
-<span class="r-in"><span><span class="co">## (hashed, path based) fingerprinter</span></span></span>
-<span class="r-in"><span><span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu">get.fingerprint</span><span class="op">(</span><span class="va">mols</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="co">## get a single fingerprint using MACCS (fast)</span></span></span>
+<span class="r-in"><span><span class="va">fp</span> <span class="op">&lt;-</span> <span class="fu">get.fingerprint</span><span class="op">(</span><span class="va">mols</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span>, type<span class="op">=</span><span class="st">'maccs'</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## get MACCS keys for all the molecules</span></span></span>
+<span class="r-in"><span><span class="co">## get MACCS keys for both molecules</span></span></span>
 <span class="r-in"><span><span class="va">fps</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/lapply.html" class="external-link">lapply</a></span><span class="op">(</span><span class="va">mols</span>, <span class="va">get.fingerprint</span>, type<span class="op">=</span><span class="st">'maccs'</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co">## get Signature fingerprint</span></span></span>
@@ -153,7 +151,7 @@ which can be manipulated with the fingerprint package.</p>
 <span class="r-in"><span><span class="va">fps</span> <span class="op">&lt;-</span> <span class="fu">get.fingerprint</span><span class="op">(</span><span class="va">mol1</span>, type<span class="op">=</span><span class="st">'substructure'</span>, fp.mode<span class="op">=</span><span class="st">'count'</span>,</span></span>
 <span class="r-in"><span>    substructure.pattern<span class="op">=</span><span class="va">smarts</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co">## get ECFP0 count fingerprints </span></span></span>
+<span class="r-in"><span><span class="co">## get ECFP0 count fingerprints</span></span></span>
 <span class="r-in"><span><span class="va">mol2</span> <span class="op">&lt;-</span> <span class="fu"><a href="parse.smiles.html">parse.smiles</a></span><span class="op">(</span><span class="st">"C1=CC=CC(=C1)CCCC2=CC=CC=C2"</span><span class="op">)</span><span class="op">[[</span><span class="fl">1</span><span class="op">]</span><span class="op">]</span></span></span>
 <span class="r-in"><span><span class="va">fps</span> <span class="op">&lt;-</span> <span class="fu">get.fingerprint</span><span class="op">(</span><span class="va">mol2</span>, type<span class="op">=</span><span class="st">'circular'</span>, fp.mode<span class="op">=</span><span class="st">'count'</span>, circular.type<span class="op">=</span><span class="st">'ECFP0'</span><span class="op">)</span></span></span>
 </code></pre></div>

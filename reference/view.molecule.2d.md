@@ -1,7 +1,7 @@
 # view.molecule.2d
 
 Create a 2D depiction of a molecule. If there are more than one
-molecules supplied, return a grid woth `ncol` columns,.
+molecules supplied, return a grid with `ncol` columns,.
 
 ## Usage
 

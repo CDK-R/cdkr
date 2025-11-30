@@ -16,12 +16,12 @@ get.chem.object.builder()
 ## Value
 
 An instance of
-[SilentChemObjectBuilder](https://cdk.github.io/cdk/2.5/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html)
+[SilentChemObjectBuilder](https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html)
 
 ## Details
 
 This method returns an instance of the
-[SilentChemObjectBuilder](https://cdk.github.io/cdk/2.5/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html).
+[SilentChemObjectBuilder](https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html).
 Note that this is a static object that is created at package load time,
 and the same instance is returned whenever this function is called.
 
