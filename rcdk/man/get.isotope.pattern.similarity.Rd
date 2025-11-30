@@ -18,7 +18,7 @@ class which can be used to compute similarity scores between pairs of
 isotope abundance patterns.
 }
 \references{
-\url{http://cdk.github.io/cdk/1.5/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html}
+\url{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html}
 }
 \seealso{
 \code{\link{compare.isotope.pattern}}

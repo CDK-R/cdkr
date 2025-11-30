@@ -1,20 +1,20 @@
 .packageName <- "rcdk"
 
 #' Get the default chemical object builder.
-#' 
+#'
 #' The CDK employs a builder design pattern to construct
 #' instances of new chemical objects (e.g., atoms, bonds, parsers
-#' and so on). Many methods require an instance of a builder 
+#' and so on). Many methods require an instance of a builder
 #' object to function. While most functions in this package handle
 #' this internally, it is useful to be able to get an instance of
 #' a builder object when directly working with the CDK API via
 #' `rJava`.
-#' 
-#' This method returns an instance of the \href{https://cdk.github.io/cdk/2.5/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}. 
-#' Note that this is a static object that is created at package load time, 
+#'
+#' This method returns an instance of the \href{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}.
+#' Note that this is a static object that is created at package load time,
 #' and the same instance is returned whenever this function is called.
-#' 
-#' @return An instance of \href{https://cdk.github.io/cdk/2.5/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}
+#'
+#' @return An instance of \href{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/silent/SilentChemObjectBuilder.html}{SilentChemObjectBuilder}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
 get.chem.object.builder <- function() {
@@ -55,14 +55,51 @@ get.chem.object.builder <- function() {
   }
 
   Sys.setenv(NOAWT=1)
-  
+
   jar.rcdk <- paste(lib,pkg,"cont","rcdk.jar",sep=.Platform$file.sep)
   jar.png <- paste(lib,pkg,"cont","com.objectplanet.image.PngEncoder.jar",sep=.Platform$file.sep)
-  .jinit(classpath=c(jar.rcdk,jar.png), parameters="-Djava.awt.headless=true")
-  
+
+  # Detect if we're running in R CMD check environment
+  # If so, limit JVM to single-threaded execution to avoid parallel processing NOTE
+  # Only use definitive _R_CHECK_ variables that are only set during R CMD check
+  is_check_env <- Sys.getenv("_R_CHECK_PACKAGE_NAME_", "") != "" ||
+                  Sys.getenv("_R_CHECK_TIMINGS_", "") != ""
+
+  # Set environment variables BEFORE initializing JVM to limit threading
+  if (is_check_env) {
+    Sys.setenv("OMP_NUM_THREADS" = "1")
+    Sys.setenv("OPENBLAS_NUM_THREADS" = "1")
+    Sys.setenv("MKL_NUM_THREADS" = "1")
+    Sys.setenv("VECLIB_MAXIMUM_THREADS" = "1")
+    Sys.setenv("NUMEXPR_NUM_THREADS" = "1")
+  }
+
+  jvm_params <- "-Djava.awt.headless=true"
+  if (is_check_env) {
+    # Limit to single thread during CRAN checks to avoid "CPU time > elapsed time" NOTE
+    # Use multiple parameters for maximum compatibility across JVM versions
+    jvm_params <- c(jvm_params,
+                    "-XX:ActiveProcessorCount=1",
+                    "-XX:ParallelGCThreads=1",
+                    "-XX:ConcGCThreads=1",
+                    "-XX:-UseConcMarkSweepGC",
+                    "-XX:-UseParallelGC",
+                    "-XX:+UseSerialGC",
+                    "-Djava.util.concurrent.ForkJoinPool.common.parallelism=1")
+  }
+
+  .jinit(classpath=c(jar.rcdk,jar.png), parameters=jvm_params)
+
   .jcall("java/lang/System", "S", "setProperty", "java.awt.headless", "true")
-  
-  # check Java Version 
+
+  # Additional runtime thread limiting for CRAN checks
+  if (is_check_env) {
+    # Set ForkJoinPool parallelism at runtime (in case JVM param didn't work)
+    .jcall("java/lang/System", "S", "setProperty",
+           "java.util.concurrent.ForkJoinPool.common.parallelism", "1")
+  }
+
+  # check Java Version
   jv <- .jcall("java/lang/System", "S", "getProperty", "java.runtime.version")
   if(substr(jv, 1L, 2L) == "1.") {
     jvn <- as.numeric(paste0(strsplit(jv, "[.]")[[1L]][1:2], collapse = "."))
@@ -79,7 +116,7 @@ get.chem.object.builder <- function() {
                         "Lorg/openscience/cdk/interfaces/IChemObjectBuilder;",
                         "getInstance"), envir = .rcdk.GlobalEnv)
   assign("mfManipulator", .jnew("org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator"), envir = .rcdk.GlobalEnv)
-  
+
   # Extract the bond order enums so we can return them without going through
   # Java each time we want one
   assign("BOND_ORDER_SINGLE", J("org.openscience.cdk.interfaces.IBond")$Order$SINGLE,
@@ -99,7 +136,7 @@ get.chem.object.builder <- function() {
 }
 
 #' Get the current CDK version used in the package.
-#' 
+#'
 #' @return Returns a character containing the version of the CDK used in this package
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
@@ -108,11 +145,11 @@ cdk.version <- function() {
 }
 
 #' Remove explicit hydrogens.
-#' 
-#' Create an copy of the original structure with explicit hydrogens removed. 
-#' Stereochemistry is updated but up and down bonds in a depiction may need 
+#'
+#' Create an copy of the original structure with explicit hydrogens removed.
+#' Stereochemistry is updated but up and down bonds in a depiction may need
 #' to be recalculated. This can also be useful for descriptor calculations.
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @return A copy of the original molecule, with explicit hydrogens removed
 #' @seealso \code{\link{get.hydrogen.count}}, \code{\link{get.total.hydrogen.count}}
@@ -129,12 +166,12 @@ remove.hydrogens <- function(mol) {
 }
 
 #' Get total number of implicit hydrogens in the molecule.
-#' 
-#' Counts the number of hydrogens on the provided molecule. As this method 
-#' will sum all implicit hydrogens on each atom it is important to ensure 
-#' the molecule has already been configured (and thus each atom has an 
-#' implicit hydrogen count). 
-#' 
+#'
+#' Counts the number of hydrogens on the provided molecule. As this method
+#' will sum all implicit hydrogens on each atom it is important to ensure
+#' the molecule has already been configured (and thus each atom has an
+#' implicit hydrogen count).
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @return An integer representing the total number of implicit hydrogens
 #' @seealso \code{\link{get.hydrogen.count}}, \code{\link{remove.hydrogens}}
@@ -150,40 +187,40 @@ get.total.hydrogen.count <- function(mol) {
 }
 
 #' get.exact.mass
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 get.exact.mass <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  
-  
+
+
   formulaJ <- .jcall('org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator',
                      "Lorg/openscience/cdk/interfaces/IMolecularFormula;",
                      "getMolecularFormula",
                      mol,
                      use.true.class=FALSE);
-  
-  
+
+
   ret <- .jcall('org/openscience/cdk/tools/manipulator/MolecularFormulaManipulator',
                 'D',
                 'getTotalExactMass',
                 formulaJ,
                 check=FALSE)
-  
+
   ex <- .jgetEx(clear=TRUE)
-  
-  
+
+
   if (is.null(ex)) return(ret)
   else{
     print(ex)
     stop("Couldn't get exact mass. Maybe you have not performed aromaticity, atom type or isotope configuration?")
   }
 }
-  
+
 
 #' get.natural.mass
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 get.natural.mass <- function(mol) {
@@ -199,17 +236,17 @@ get.natural.mass <- function(mol) {
   else{
     print(ex)
     stop("Couldn't get natural mass. Maybe you have not performed aromaticity, atom type or isotope configuration?")
-  }  
+  }
 }
 
 #' get.total.charge
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 get.total.charge <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  
+
   ## check to see if we have partial charges
   atoms <- get.atoms(mol)
   pcharges <- unlist(lapply(atoms, get.charge))
@@ -226,7 +263,7 @@ get.total.charge <- function(mol) {
 }
 
 #' get.total.formal.charge
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export
 get.total.formal.charge <- function(mol) {
@@ -239,14 +276,14 @@ get.total.formal.charge <- function(mol) {
 }
 
 #' Convert implicit hydrogens to explicit.
-#' 
+#'
 #' In some cases, a molecule may not have any hydrogens (such as when read
 #' in from an MDL MOL file that did not have hydrogens or SMILES with no
 #' explicit hydrogens). In such cases, this method
-#' will add implicit hydrogens and then convert them to explicit ones. The 
+#' will add implicit hydrogens and then convert them to explicit ones. The
 #' newly added H's will not have any 2D or 3D coordinates associated with them.
 #' Ensure that the molecule has been typed beforehand.
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @seealso \code{\link{get.hydrogen.count}}, \code{\link{remove.hydrogens}}, \code{\link{set.atom.types}}
 #' @export
@@ -267,8 +304,8 @@ convert.implicit.to.explicit <- function(mol) {
 
 
 #' Get the atoms from a molecule or bond.
-#' 
-#' @param object A `jobjRef` representing either a molecule (`IAtomContainer`) or 
+#'
+#' @param object A `jobjRef` representing either a molecule (`IAtomContainer`) or
 #' bond (`IBond`) object.
 #' @return A list of `jobjRef` representing the `IAtom` objects in the molecule or bond
 #' @seealso \code{\link{get.bonds}}, \code{\link{get.connected.atoms}}
@@ -277,7 +314,7 @@ convert.implicit.to.explicit <- function(mol) {
 get.atoms <- function(object) {
   if (is.null(attr(object, 'jclass')))
     stop("object must be of class IAtomContainer or IObject or IBond")
-  
+
   if (attr(object, 'jclass') != "org/openscience/cdk/interfaces/IAtomContainer" &&
       attr(object, 'jclass') != "org/openscience/cdk/interfaces/IObject" &&
       attr(object, 'jclass') != "org/openscience/cdk/interfaces/IBond")
@@ -291,7 +328,7 @@ get.atoms <- function(object) {
 }
 
 #' Get the bonds in a molecule.
-#' 
+#'
 #' @param mol A `jobjRef` representing the molecule (`IAtomContainer`) object.
 #' @return A list of `jobjRef` representing the bonds (`IBond`) objects in the molecule
 #' @seealso \code{\link{get.atoms}}, \code{\link{get.connected.atoms}}
@@ -300,7 +337,7 @@ get.atoms <- function(object) {
 get.bonds <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  
+
   nbond <- .jcall(mol, "I", "getBondCount")
   bonds <- list()
   for (i in 0:(nbond-1))
@@ -309,25 +346,25 @@ get.bonds <- function(mol) {
 }
 
 #' do.aromaticity
-#' 
+#'
 #' detect aromaticity of an input compound
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export do.aromaticity
 do.aromaticity <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  
+
   model <- .jcall("org/openscience/cdk/aromaticity/ElectronDonation",
                   "Lorg/openscience/cdk/aromaticity/ElectronDonation;",
                   "daylight")
-  cycles.all <- .jcall("org/openscience/cdk/graph/Cycles", 
+  cycles.all <- .jcall("org/openscience/cdk/graph/Cycles",
                       "Lorg/openscience/cdk/graph/CycleFinder;",
                       "all")
-  cycles.6 <- .jcall("org.openscience.cdk.graph.Cycles", 
+  cycles.6 <- .jcall("org.openscience.cdk.graph.Cycles",
                     "Lorg/openscience/cdk/graph/CycleFinder;",
                     "all", as.integer(6))
-  cycles <- .jcall("org.openscience.cdk.graph.Cycles", 
+  cycles <- .jcall("org.openscience.cdk.graph.Cycles",
                   "Lorg/openscience/cdk/graph/CycleFinder;",
                   "or", cycles.all, cycles.6)
   aromaticity <- .jnew("org/openscience/cdk.aromaticity/Aromaticity",
@@ -336,9 +373,9 @@ do.aromaticity <- function(mol) {
 }
 
 #' do.isotopes
-#' 
+#'
 #' configure isotopes
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @export do.isotopes
 do.isotopes <- function(mol) {
@@ -351,9 +388,9 @@ do.isotopes <- function(mol) {
 }
 
 #' Tests whether the molecule is neutral.
-#' 
+#'
 #' The test checks whether all atoms in the molecule have a formal charge of 0.
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @return `TRUE` if molecule is neutral, `FALSE` otherwise
 #' @aliases charge
@@ -362,60 +399,60 @@ do.isotopes <- function(mol) {
 is.neutral <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  
+
   atoms <- get.atoms(mol)
   fc <- unlist(lapply(atoms, get.formal.charge))
   return(all(fc == 0))
 }
 
 #' Tests whether the molecule is fully connected.
-#' 
-#' A single molecule will be represented as a 
-#' \href{https://en.wikipedia.org/wiki/Complete_graph}{complete} graph. 
-#' In some cases, such as for molecules in salt form, or after certain 
-#' operations such as bond splits, the molecular graph may contained 
+#'
+#' A single molecule will be represented as a
+#' \href{https://en.wikipedia.org/wiki/Complete_graph}{complete} graph.
+#' In some cases, such as for molecules in salt form, or after certain
+#' operations such as bond splits, the molecular graph may contained
 #' \href{http://mathworld.wolfram.com/DisconnectedGraph.html}{disconnected components}.
 #' This method can be used to tested whether the molecule is complete (i.e. fully
 #' connected).
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @return `TRUE` if molecule is complete, `FALSE` otherwise
 #' @seealso \code{\link{get.largest.component}}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
-#' @examples 
+#' @examples
 #' m <- parse.smiles("CC.CCCCCC.CCCC")[[1]]
 #' is.connected(m)
 is.connected <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  
+
   .jcall("org.openscience.cdk.graph.ConnectivityChecker",
          "Z", "isConnected", mol)
 }
 
 #' Gets the largest component in a disconnected molecular graph.
-#' 
-#' A molecule may be represented as a 
+#'
+#' A molecule may be represented as a
 #' \href{http://mathworld.wolfram.com/DisconnectedGraph.html}{disconnected graph}, such as
 #' when read in as a salt form. This method will return the larges connected component
-#' or if there is only a single component (i.e., the molecular graph is 
+#' or if there is only a single component (i.e., the molecular graph is
 #' \href{https://en.wikipedia.org/wiki/Complete_graph}{complete} or fully connected), that
 #' component is returned.
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @return The largest component as an `IAtomContainer` object or else the input molecule itself
 #' @seealso \code{\link{is.connected}}
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
-#' @examples 
+#' @examples
 #' m <- parse.smiles("CC.CCCCCC.CCCC")[[1]]
 #' largest <- get.largest.component(m)
 #' length(get.atoms(largest)) == 6
 get.largest.component <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  
+
   isConnected <- .jcall("org.openscience.cdk.graph.ConnectivityChecker",
                         "Z", "isConnected", mol)
   if (isConnected) return(mol)
@@ -440,7 +477,7 @@ get.largest.component <- function(mol) {
 }
 
 #' Get the number of atoms in the molecule.
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @return An integer representing the number of atoms in the molecule
 #' @export
@@ -452,10 +489,10 @@ get.atom.count <- function(mol) {
 }
 
 #' Get the title of the molecule.
-#' 
+#'
 #' Some molecules may not have a title (such as when parsing in a SMILES
 #' with not title).
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @return A character string with the title, `NA` is no title is specified
 #' @seealso \code{\link{set.title}}
@@ -468,7 +505,7 @@ get.title <- function(mol) {
 }
 
 #' Set the title of the molecule.
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @param title The title of the molecule as a character string. This will overwrite
 #' any pre-existing title. The default value is an empty string.
@@ -482,17 +519,17 @@ set.title <- function(mol, title = "") {
 }
 
 #' Generate 2D coordinates for a molecule.
-#' 
+#'
 #' Some file formats such as SMILES do not support 2D (or 3D) coordinates
 #' for the atoms. Other formats such as SD or MOL have support for coordinates
-#' but may not include them. This method will generate reasonable 2D coordinates 
+#' but may not include them. This method will generate reasonable 2D coordinates
 #' based purely on connectivity information, overwriting
-#' any existing coordinates if present. 
-#' 
+#' any existing coordinates if present.
+#'
 #' Note that when depicting a molecule (\code{\link{view.molecule.2d}}), 2D coordinates
 #' are generated, but since it does not modify the input molecule, we do not have access
 #' to the generated coordinates.
-#' 
+#'
 #' @param mol The molecule to query. Should be a `jobjRef` representing an `IAtomContainer`
 #' @return The input molecule, with 2D coordinates added
 #' @seealso \code{\link{get.point2d}}, \code{\link{view.molecule.2d}}
@@ -501,7 +538,7 @@ set.title <- function(mol, title = "") {
 generate.2d.coordinates <- function(mol) {
   if (!.check.class(mol, "org/openscience/cdk/interfaces/IAtomContainer"))
     stop("molecule must be of class IAtomContainer")
-  
+
   .jcall('org/guha/rcdk/util/Misc', 'Lorg/openscience/cdk/interfaces/IAtomContainer;',
          'getMoleculeWithCoordinates', mol)
 }

@@ -528,7 +528,7 @@ generate.formula <- function(mass,
 #' @param tol The tolerance
 #' @return A \code{jobjRef} corresponding to an instance of \code{IsotopePatternSimilarity}
 #' @seealso \code{\link{compare.isotope.pattern}}
-#' @references \url{http://cdk.github.io/cdk/1.5/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html}
+#' @references \url{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html}
 #' @author Miguel Rojas Cherto
 get.isotope.pattern.similarity <- function(tol = NULL) {
     ips <- .jnew("org/openscience/cdk/formula/IsotopePatternSimilarity")
@@ -544,7 +544,7 @@ get.isotope.pattern.similarity <- function(tol = NULL) {
 #'
 #' @param minAbundance The minimum abundance
 #' @return A \code{jobjRef} corresponding to an instance of \code{IsotopePatternGenerator}
-#' @references \url{http://cdk.github.io/cdk/1.5/docs/api/org/openscience/cdk/formula/IsotopePatternGenerator.html}
+#' @references \url{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/formula/IsotopePatternGenerator.html}
 #' @author Miguel Rojas Cherto
 get.isotope.pattern.generator <- function(minAbundance = NULL) {
     if (is.null(minAbundance))
@@ -564,7 +564,7 @@ get.isotope.pattern.generator <- function(minAbundance = NULL) {
 #' @return A numeric value between 0 and 1 indicating the similarity between the two patterns
 #' @seealso \code{\link{get.isotope.pattern.similarity}}
 #' @export
-#' @references \url{http://cdk.github.io/cdk/2.3/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html}
+#' @references \url{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/formula/IsotopePatternSimilarity.html}
 #' @author Miguel Rojas Cherto
 compare.isotope.pattern <- function(iso1, iso2, ips = NULL) {
     cls <- unique(c(class(iso1), class(iso2)))

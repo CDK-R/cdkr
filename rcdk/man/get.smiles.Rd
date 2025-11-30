@@ -21,7 +21,7 @@ A character string containing the generated SMILES
 The function will generate a SMILES representation of an
 `IAtomContainer` object. The default parameters of the CDK SMILES
 generator are used. This can mean that for large ring systems the
-method may fail. See CDK \href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/smiles/SmilesGenerator.html}{Javadocs}
+method may fail. See CDK \href{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/smiles/SmilesGenerator.html}{Javadocs}
 for more information
 }
 \examples{
@@ -30,7 +30,7 @@ get.smiles(m)
 get.smiles(m, smiles.flavors(c('Generic','UseAromaticSymbols')))
 }
 \references{
-\href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/smiles/SmilesGenerator.html}{SmilesGenerator}
+\href{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/smiles/SmilesGenerator.html}{SmilesGenerator}
 }
 \seealso{
 \code{\link{parse.smiles}}, \code{\link{smiles.flavors}}

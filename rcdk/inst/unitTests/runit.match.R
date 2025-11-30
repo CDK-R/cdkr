@@ -42,27 +42,39 @@ test.match4 <- function()
 
 
 test.mcs1 <- function() {
+  # Skip on CRAN - MCS algorithms are computationally intensive and trigger multi-threading
+  if (Sys.getenv("_R_CHECK_PACKAGE_NAME_", "") != "" || Sys.getenv("_R_CHECK_TIMINGS_", "") != "") {
+    return(TRUE)
+  }
   mols <- parse.smiles(c("NCc1ccccc1OC(=N)CCN", "c1ccccc1OC(=N)"))
   lapply(mols, do.aromaticity)
-  lapply(mols, set.atom.types) 
+  lapply(mols, set.atom.types)
   mcs <- get.mcs(mols[[1]], mols[[2]], TRUE)
-  checkEquals("org.openscience.cdk.silent.AtomContainer2", .jclass(mcs))
+  checkTrue(.jclass(mcs) %in% c("org.openscience.cdk.silent.AtomContainer", "org.openscience.cdk.silent.AtomContainer2"))
   checkEquals(9, get.atom.count(mcs))
 }
 
 test.mcs3 <- function() {
+  # Skip on CRAN - MCS algorithms are computationally intensive and trigger multi-threading
+  if (Sys.getenv("_R_CHECK_PACKAGE_NAME_", "") != "" || Sys.getenv("_R_CHECK_TIMINGS_", "") != "") {
+    return(TRUE)
+  }
   mols <- parse.smiles(c("c1cccc(COC(=O)NC(CC(C)C)C(=O)NC(CCc2ccccc2)C(=O)COC)c1", "c1cccc(COC(=O)NC(CC(C)C)C(=O)NCC#N)c1"))
   lapply(mols, do.aromaticity)
-  lapply(mols, set.atom.types) 
+  lapply(mols, set.atom.types)
   mcs <- get.mcs(mols[[1]], mols[[2]], TRUE)
-  checkEquals("org.openscience.cdk.silent.AtomContainer2", .jclass(mcs))
+  checkTrue(.jclass(mcs) %in% c("org.openscience.cdk.silent.AtomContainer", "org.openscience.cdk.silent.AtomContainer2"))
   checkEquals(21, get.atom.count(mcs))
 }
 
 test.mcs2 <- function() {
+  # Skip on CRAN - MCS algorithms are computationally intensive and trigger multi-threading
+  if (Sys.getenv("_R_CHECK_PACKAGE_NAME_", "") != "" || Sys.getenv("_R_CHECK_TIMINGS_", "") != "") {
+    return(TRUE)
+  }
   mols <- parse.smiles(c("NCc1ccccc1OC(=N)CCN", "c1ccccc1OC(=N)"))
   lapply(mols, do.aromaticity)
-  lapply(mols, set.atom.types) 
+  lapply(mols, set.atom.types)
   mcs <- get.mcs(mols[[1]], mols[[2]], FALSE)
   checkTrue(inherits(mcs, "matrix"))
   checkEquals(9, nrow(mcs))

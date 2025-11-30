@@ -1,8 +1,8 @@
 #' Generate molecular fingerprints
-#' 
+#'
 #' `get.fingerprint` returns a `fingerprint` object representing molecular fingerprint of
 #' the input molecule.
-#' 
+#'
 #' @param molecule A \code{jobjRef} object to an \code{IAtomContaine}
 #' @param type The type of fingerprint. Possible values are:
 #'   \itemize{
@@ -18,52 +18,50 @@
 #' \item pubchem - 881 bit fingerprints defined by PubChem
 #' \item kr - 4860 bit fingerprint defined by Klekota and Roth
 #' \item shortestpath - A fingerprint based on the shortest paths between pairs of atoms and takes into account ring systems, charges etc.
-#' \item signature - A feature,count type of fingerprint, similar in nature to circular fingerprints, but based on the signature 
+#' \item signature - A feature,count type of fingerprint, similar in nature to circular fingerprints, but based on the signature
 #' descriptor
 #' \item circular - An implementation of the ECFP6 (default) fingerprint. Other circular types can be chosen by modifying the \code{circular.type} parameter.
 #' \item substructure - Fingerprint based on list of SMARTS pattern. By default a set of functional groups is tested.
 #' }
 #' @param fp.mode The style of fingerprint. Specifying "`bit`" will return a binary fingerprint,
-#' "`raw`" returns the the original representation (usually sequence of integers) and 
+#' "`raw`" returns the the original representation (usually sequence of integers) and
 #' "`count`" returns the fingerprint as a sequence of counts.
 #' @param depth The search depth. This argument is ignored for the
 #' `pubchem`, `maccs`, `kr` and `estate` fingerprints
-#' @param size The final length of the fingerprint. 
-#' This argument is ignored for the `pubchem`, `maccs`, `kr`, `signature`, `circular` and 
+#' @param size The final length of the fingerprint.
+#' This argument is ignored for the `pubchem`, `maccs`, `kr`, `signature`, `circular` and
 #' `estate` fingerprints
 #' @param substructure.pattern List of characters containing the SMARTS pattern to match. If the an empty list is provided (default) than the functional groups substructures (default in CDK) are used.
 #' @param circular.type Name of the circular fingerprint type that should be computed given as string. Possible values are: 'ECFP0', 'ECFP2', 'ECFP4', 'ECFP6' (default), 'FCFP0', 'FCFP2', 'FCFP4' and 'FCFP6'.
 #' @param verbose Verbose output if \code{TRUE}
-#' @return an S4 object of class \code{\link{fingerprint-class}} or \code{\link{featvec-class}}, 
+#' @return an S4 object of class \code{\link[fingerprint]{fingerprint-class}} or \code{\link[fingerprint]{featvec-class}},
 #' which can be manipulated with the fingerprint package.
 #' @export
 #' @author Rajarshi Guha (\email{rajarshi.guha@@gmail.com})
-#' @examples 
+#' @examples
 #' ## get some molecules
-#' sp <- get.smiles.parser()
-#' smiles <- c('CCC', 'CCN', 'CCN(C)(C)', 'c1ccccc1Cc1ccccc1','C1CCC1CC(CN(C)(C))CC(=O)CC')
+#' smiles <- c('CCC', 'CCN')
 #' mols <- parse.smiles(smiles)
-#' 
-#' ## get a single fingerprint using the standard
-#' ## (hashed, path based) fingerprinter
-#' fp <- get.fingerprint(mols[[1]])
-#' 
-#' ## get MACCS keys for all the molecules
+#'
+#' ## get a single fingerprint using MACCS (fast)
+#' fp <- get.fingerprint(mols[[1]], type='maccs')
+#'
+#' ## get MACCS keys for both molecules
 #' fps <- lapply(mols, get.fingerprint, type='maccs')
-#' 
+#'
 #' ## get Signature fingerprint
 #' ## feature, count fingerprinter
 #' fps <- lapply(mols, get.fingerprint, type='signature', fp.mode='raw')
 #' ## get Substructure fingerprint for functional group fragments
 #' fps <- lapply(mols, get.fingerprint, type='substructure')
-#' 
+#'
 #' ## get Substructure count fingerprint for user defined fragments
 #' mol1 <- parse.smiles("c1ccccc1CCC")[[1]]
 #' smarts <- c("c1ccccc1", "[CX4H3][#6]", "[CX2]#[CX2]")
 #' fps <- get.fingerprint(mol1, type='substructure', fp.mode='count',
 #'     substructure.pattern=smarts)
-#' 
-#' ## get ECFP0 count fingerprints 
+#'
+#' ## get ECFP0 count fingerprints
 #' mol2 <- parse.smiles("C1=CC=CC(=C1)CCCC2=CC=CC=C2")[[1]]
 #' fps <- get.fingerprint(mol2, type='circular', fp.mode='count', circular.type='ECFP0')
 get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=6, size=1024, substructure.pattern=character(), circular.type = "ECFP6", verbose=FALSE) {
@@ -75,17 +73,17 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
 
   mode(size) <- 'integer'
   mode(depth) <- 'integer'
-  
+
   # Determine integer ID for the circular fingerprint given its desired type.
-  # This allows us to use also ECFP4, ... 
+  # This allows us to use also ECFP4, ...
   if (type == 'circular') {
-        circular.type.id <- switch(circular.type, 
+        circular.type.id <- switch(circular.type,
              ECFP0 = 1, ECFP2 = 2, ECFP4 = 3, ECFP6 = 4,
              FCFP0 = 5, FCFP2 = 6, FCFP4 = 7, FCFP6 = 8,
              NULL)
-        
+
         if (is.null(circular.type.id)) stop(paste('Invalid circular fingerprint type: ', circular.type))
-        
+
         mode(circular.type.id) <- 'integer'
   }
 
@@ -103,8 +101,8 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
            shortestpath = .jnew('org/openscience/cdk/fingerprint/ShortestPathFingerprinter', size),
            signature = .jnew('org/openscience/cdk/fingerprint/SignatureFingerprinter', depth),
            circular = .jnew('org/openscience/cdk/fingerprint/CircularFingerprinter', circular.type.id),
-           substructure = 
-               if (length(substructure.pattern) == 0) 
+           substructure =
+               if (length(substructure.pattern) == 0)
                    # Loads the default group substructures
                    { .jnew('org/openscience/cdk/fingerprint/SubstructureFingerprinter') }
                else
@@ -125,11 +123,11 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
   } else if (fp.mode == 'count') {
     jfp <- .jcall(fingerprinter,
                   "Lorg/openscience/cdk/fingerprint/ICountFingerprint;",
-                  "getCountFingerprint", molecule, check=FALSE)    
+                  "getCountFingerprint", molecule, check=FALSE)
   }
-  
+
   e <- .jgetEx()
-  if (.jcheck(silent=TRUE)) { 
+  if (.jcheck(silent=TRUE)) {
     if (verbose) print(e)
     return(NULL)
   }
@@ -139,7 +137,7 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
 
   if (fp.mode == 'bit') {
     bitset <- .jcall(jfp, "Ljava/util/BitSet;", "asBitSet")
-    
+
     if (type == 'maccs') nbit <- 166
     else if (type == 'estate') nbit <- 79
     else if (type == 'pubchem') nbit <- 881
@@ -147,7 +145,7 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
     else if (type == 'substructure') nbit <- .jcall(fingerprinter, "I", "getSize")
     else if (type == 'circular') nbit <- .jcall(fingerprinter, "I", "getSize")
     else nbit <- size
-    
+
     bitset <- .jcall(bitset, "S", "toString")
     s <- gsub('[{}]','', bitset)
     s <- strsplit(s, split=',')[[1]]
@@ -166,7 +164,7 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
         tempkey <- .jsimplify(tempkey)
       }
       keys[[i]] <- tempkey
-    
+
     }
 
     values <- list()

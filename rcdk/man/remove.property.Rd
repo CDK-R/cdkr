@@ -13,7 +13,7 @@ remove.property(molecule, key)
 }
 \description{
 In this context a property is a value associated with a key and stored
-with the molecule. This methd will remove the property defined by the key.
+with the molecule. This method will remove the property defined by the key.
 If there is such key, a warning is raised.
 }
 \examples{

@@ -6,3 +6,5 @@ revdep/
 .Rproj
 *.Rmd
 *.png
+/doc/
+/Meta/

@@ -7,7 +7,7 @@
 get.atoms(object)
 }
 \arguments{
-\item{object}{A `jobjRef` representing either a molecule (`IAtomContainer`) or 
+\item{object}{A `jobjRef` representing either a molecule (`IAtomContainer`) or
 bond (`IBond`) object.}
 }
 \value{

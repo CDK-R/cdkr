@@ -13,10 +13,10 @@ get.largest.component(mol)
 The largest component as an `IAtomContainer` object or else the input molecule itself
 }
 \description{
-A molecule may be represented as a 
+A molecule may be represented as a
 \href{http://mathworld.wolfram.com/DisconnectedGraph.html}{disconnected graph}, such as
 when read in as a salt form. This method will return the larges connected component
-or if there is only a single component (i.e., the molecular graph is 
+or if there is only a single component (i.e., the molecular graph is
 \href{https://en.wikipedia.org/wiki/Complete_graph}{complete} or fully connected), that
 component is returned.
 }

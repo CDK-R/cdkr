@@ -15,7 +15,7 @@ The input molecule, with 2D coordinates added
 \description{
 Some file formats such as SMILES do not support 2D (or 3D) coordinates
 for the atoms. Other formats such as SD or MOL have support for coordinates
-but may not include them. This method will generate reasonable 2D coordinates 
+but may not include them. This method will generate reasonable 2D coordinates
 based purely on connectivity information, overwriting
 any existing coordinates if present.
 }

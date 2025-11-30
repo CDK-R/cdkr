@@ -13,9 +13,9 @@ get.total.hydrogen.count(mol)
 An integer representing the total number of implicit hydrogens
 }
 \description{
-Counts the number of hydrogens on the provided molecule. As this method 
-will sum all implicit hydrogens on each atom it is important to ensure 
-the molecule has already been configured (and thus each atom has an 
+Counts the number of hydrogens on the provided molecule. As this method
+will sum all implicit hydrogens on each atom it is important to ensure
+the molecule has already been configured (and thus each atom has an
 implicit hydrogen count).
 }
 \seealso{

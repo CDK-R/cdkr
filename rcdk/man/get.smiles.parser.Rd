@@ -8,7 +8,7 @@ get.smiles.parser()
 }
 \value{
 A `jobjRef` object corresponding to the CDK 
-\href{http://cdk.github.io/cdk/2.2/docs/api/org/openscience/cdk/smiles/SmilesParser.html}{SmilesParser} class
+\href{https://cdk.github.io/cdk/2.10/docs/api/org/openscience/cdk/smiles/SmilesParser.html}{SmilesParser} class
 }
 \description{
 This function returns a reference to a SMILES parser
