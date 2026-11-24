@@ -1,0 +1,17 @@
+--- a/R/RxnSimHelper.R
++++ b/R/RxnSimHelper.R
+@@ -789,6 +789,14 @@
+ }
+ 
+ .calcDistance <- function (fpA, fpB, sim.method) {
++  # A valid CDK fingerprint can be empty (e.g. [H+]). For set-based
++  # Tanimoto/Jaccard, use identity similarity for two empty sets.
++  # Do not mask undefined values from other metrics.
++  if (sim.method[[1]] %in% c('tanimoto', 'jaccard') &&
++      is(fpA, 'fingerprint') && is(fpB, 'fingerprint') &&
++      length(fpA@bits) == 0L && length(fpB@bits) == 0L) {
++    return(1)
++  }
+   if (sim.method[[1]] == 'jaccard-count') {
+     .JaccardCount(fpA, fpB)
+   } else if (sim.method[[1]] == 'tanimoto-count') {
