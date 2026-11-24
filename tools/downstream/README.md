@@ -49,6 +49,19 @@ model-training descriptors; that is not silently bundled into this patch.
 All 15 assertions in the focused `getCDs` tests pass with both dependency
 stacks on the local JDK 27.
 
+## Completed package-check results
+
+Both patched packages also completed
+`R CMD check --no-manual --no-build-vignettes` against both dependency stacks:
+all four checks report zero errors, warnings, and notes.
+
+FastRet's internal testthat summary is 146 passes, zero failures, one warning,
+and six skips on each stack. Five skips are CRAN-disabled tests; the sixth
+requires the unavailable optional `caret` package. The internal test warning
+does not appear as an R CMD check warning and occurs on both stacks.
+These checks used `_R_CHECK_FORCE_SUGGESTS_=false`, matching revdepcheck.
+They do not validate Java 8/17 runtimes or other operating systems.
+
 ## Reproduction and broader checks
 
 Patched source trees used locally are under `.release/patches/`. With their
