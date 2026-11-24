@@ -1,3 +1,8 @@
+# rcdk (development)
+
+* Require rcdklibs 2.14.1 (currently available from GitHub).
+
+
 # rcdk 3.9.0
 
 * Update rCDK to work with rcdklibs 2.9

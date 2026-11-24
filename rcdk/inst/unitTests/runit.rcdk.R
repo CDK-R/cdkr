@@ -51,8 +51,8 @@ test.formula <- function() {
 
 test.desc.cats <- function() {
   cats <- get.desc.categories()
-  print(cats)
-  checkEquals(6, length(cats))
+  checkEquals(sort(c("protein", "hybrid", "constitutional", "topological",
+                     "electronic", "geometrical")), sort(cats))
 }
 
 test.desc.names <- function() {
