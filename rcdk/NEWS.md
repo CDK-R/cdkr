@@ -1,6 +1,8 @@
 # rcdk (development)
 
 * Require rcdklibs 2.14.1 (currently available from GitHub).
+* Explicitly retain hydrogen hashing for standard, extended, graph, and
+  hybridization fingerprints after CDK changed its default.
 
 
 # rcdk 3.9.0

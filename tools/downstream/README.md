@@ -4,6 +4,11 @@ These patches target the CRAN source releases FastRet 1.5.2 and RxnSim 1.0.4.
 They are proposals for the downstream maintainers, not changes to rcdk's
 chemistry behavior, and have not been submitted to those maintainers.
 
+The release candidate now fixes the RxnSim failure in rcdk itself by explicitly
+retaining hydrogen hashing. Unpatched RxnSim 1.0.4 passes with that fix.
+The RxnSim patch below is retained as an investigated alternative, not a
+required downstream change for this release.
+
 Apply to unpacked source packages:
 
 ```sh
@@ -36,8 +41,11 @@ rcdklibs 2.14.1 on the local JDK 27.
 ## FastRet
 
 The failing test equates a shipped historical descriptor cache with fresh
-computations under whichever CDK is installed. The upgrade changes some
-numeric values and missing-value representations. The proposed test-only
+computations under whichever CDK is installed. The upgrade changes MW and
+ATSm1 through ATSm5 in the five-molecule fixture. The cached geomShape NA
+versus fresh NaN difference occurs on both stacks and is not newly introduced.
+Descriptor class and selected column counts and order are unchanged.
+The proposed test-only
 patch compares the uncached path with a direct current calculation instead.
 Existing cache round-trip, duplicate, and parallel-path assertions remain.
 
@@ -48,6 +56,10 @@ model-training descriptors; that is not silently bundled into this patch.
 
 All 15 assertions in the focused `getCDs` tests pass with both dependency
 stacks on the local JDK 27.
+
+See [FastRet-cache-design.md](FastRet-cache-design.md) for the production cache
+and model-provenance considerations. Zach will coordinate with the FastRet
+authors before release; no production cache/model migration is implemented here.
 
 ## Completed package-check results
 

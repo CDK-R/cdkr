@@ -8,6 +8,32 @@ test.fp <- function() {
     checkTrue(length(fp@bits) > 0)
 }
 
+test.fp.explicit.hydrogens <- function() {
+    proton <- parse.smiles("[H+]")[[1]]
+    classes <- c(standard = "Fingerprinter", extended = "ExtendedFingerprinter",
+                 graph = "GraphOnlyFingerprinter",
+                 hybridization = "HybridizationFingerprinter")
+    for (type in names(classes)) {
+        # Check the legacy proton fingerprint and finite self-similarity.
+        fp <- get.fingerprint(proton, type = type)
+        checkTrue(length(fp@bits) > 0)
+        checkEquals(1, fingerprint::distance(fp, fp, method = "tanimoto"))
+
+        # Verify the R wrapper matches Java with explicit hydrogen hashing.
+        mol <- parse.smiles("[H]C([H])([H])C")[[1]]
+        jfp <- .jnew(paste0("org/openscience/cdk/fingerprint/", classes[[type]]),
+                     as.integer(1024), as.integer(6))
+        .jcall(jfp, "V", "setHashExplicitHydrogens", TRUE)
+        bits <- .jcall(jfp, "Lorg/openscience/cdk/fingerprint/IBitFingerprint;",
+                       "getBitFingerprint", mol)
+        bits <- .jcall(bits, "Ljava/util/BitSet;", "asBitSet")
+        bits <- .jcall(bits, "S", "toString")
+        expected <- as.numeric(strsplit(gsub("[{}]", "", bits), ",")[[1]]) + 1
+        checkEquals(expected, get.fingerprint(mol, type = type)@bits)
+    }
+    checkEquals(847, get.fingerprint(proton, type = "extended")@bits)
+}
+
 # Substructure test are inspired by the test for the substructure fingerprints in CDK
 test.fp.substructures.binary <- function() {
     # Default patterns: functional groups

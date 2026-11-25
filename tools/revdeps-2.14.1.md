@@ -6,6 +6,14 @@ All 12 direct reverse dependencies completed paired checks. Ten have no new
 problems; FastRet and RxnSim introduce one check error each. No installation
 failures or timeouts were reported. This is not yet release clearance.
 
+These are the initial run's results, before the hydrogen-hashing fix.
+With that fix, a subsequent `R CMD check --no-manual` of rcdk and
+`R CMD check --no-manual --no-build-vignettes` of unpatched RxnSim 1.0.4
+both report zero errors, warnings, and notes on the same local JDK 27.
+The full 12-package matrix has not been repeated after this change.
+FastRet remains a downstream coordination item; see
+`downstream/FastRet-cache-design.md`.
+
 ## Scope and environment
 
 - Run date: 2026-11-24.
@@ -47,12 +55,14 @@ Individual package tests may skip optional/CRAN-disabled work.
 ## FastRet: descriptor fixture/cache mismatch
 
 `test-getCDs.R:22` compares cached descriptor values with freshly calculated
-ones. Candidate output differs in missing-value representation (`NA` versus
-`NaN`) and small numerical changes. The test summary is 146 passes, one
+ones. Subsequent diagnosis isolated the new numerical changes in the five
+fixture molecules to MW and ATSm1 through ATSm5. The cached geomShape NA
+versus fresh NaN difference exists on both stacks, not just the candidate.
+Descriptor counts and ordering are unchanged. The test summary is 146 passes, one
 failure, one warning, five skips. The failure is absent with the baseline.
 
-These observations do not yet isolate whether the differences come from
-CDK, the R interface, or their interaction. Do not simply loosen the
+Upstream mass descriptors switched from getNaturalMass to Isotopes.average.
+Do not simply loosen the
 downstream assertion without identifying the changed descriptors and checking
 the intended numerical and missing-value semantics.
 
@@ -65,14 +75,13 @@ Error in if (straight >= cross) { :
   missing value where TRUE/FALSE needed
 ```
 
-The printed reactions include a standalone `[H+]` product. This is a lead
-for investigating empty/degenerate fingerprints or missing similarity values,
-not an established root cause. The baseline completes the examples.
-
-Prioritize a minimal reproduction of this error, inspect the fingerprints
-and similarity operands, and determine the correct behavior before adding a
-compatibility fix. A blanket `NA`-to-zero substitution could hide a real
-chemistry or fingerprinting issue.
+The root cause was CDK's changed default excluding explicit hydrogens from
+path fingerprints. `[H+]` therefore became an empty fingerprint, and
+empty/empty Tanimoto returned NaN. Explicitly setting
+setHashExplicitHydrogens(true) in rcdk restores the historical hydrogen
+inclusion for standard, extended, graph, and hybridization fingerprints.
+The unpatched downstream package now passes its check; no blanket NA-to-zero
+substitution or downstream RxnSim patch is needed for this failure.
 
 ## Local evidence
 

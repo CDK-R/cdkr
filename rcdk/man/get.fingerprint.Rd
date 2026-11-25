@@ -62,6 +62,9 @@ which can be manipulated with the fingerprint package.
 \description{
 `get.fingerprint` returns a `fingerprint` object representing molecular fingerprint of
 the input molecule.
+Explicit hydrogen atoms are included in the `standard`, `extended`, `graph`,
+and `hybridization` fingerprints, preserving rcdk's historical behavior.
+This does not add hydrogens to the molecule or freeze other CDK algorithm changes.
 }
 \examples{
 ## get some molecules

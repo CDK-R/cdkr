@@ -2,6 +2,9 @@
 #' 
 #' `get.fingerprint` returns a `fingerprint` object representing molecular fingerprint of
 #' the input molecule.
+#' Explicit hydrogen atoms are included in the `standard`, `extended`, `graph`,
+#' and `hybridization` fingerprints, preserving rcdk's historical behavior.
+#' This does not add hydrogens to the molecule or freeze other CDK algorithm changes.
 #' 
 #' @param molecule A \code{jobjRef} object to an \code{IAtomContaine}
 #' @param type The type of fingerprint. Possible values are:
@@ -112,6 +115,12 @@ get.fingerprint <- function(molecule, type = 'standard', fp.mode = 'bit', depth=
                    { .jnew('org/openscience/cdk/fingerprint/SubstructureFingerprinter', .jarray(substructure.pattern)) },
            )
   if (is.null(fingerprinter)) stop("Invalid fingerprint type specified")
+
+  # CDK now excludes explicit hydrogens by default. Preserve the historical
+  # rcdk behavior for path-based fingerprinters, including the extended wrapper.
+  if (type %in% c("standard", "extended", "graph", "hybridization")) {
+    .jcall(fingerprinter, "V", "setHashExplicitHydrogens", TRUE)
+  }
 
   jfp <- NA
   if (fp.mode == 'bit') {
